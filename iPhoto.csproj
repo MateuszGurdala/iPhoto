@@ -1,0 +1,145 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\TestImages\IMG_20190814_140617.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_141306.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_141429.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_141443.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_141527.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_141551.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_141800.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_141826.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_141848.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_141936.jpg" />
+    <None Remove="Data\TestImages\IMG_20190814_185012.jpg" />
+    <None Remove="Data\TestImages\IMG_20190815_021255.jpg" />
+    <None Remove="Data\TestImages\IMG_20190815_021850.jpg" />
+    <None Remove="Data\TestImages\IMG_20190815_130021.jpg" />
+    <None Remove="Data\TestImages\IMG_20190815_181255.jpg" />
+    <None Remove="Data\TestImages\IMG_20190816_212831.jpg" />
+    <None Remove="Data\TestImages\IMG_20190816_233525.jpg" />
+    <None Remove="Data\TestImages\IMG_20190818_000956.jpg" />
+    <None Remove="Data\TestImages\IMG_20190818_090300.jpg" />
+    <None Remove="Data\TestImages\IMG_20190821_224622.jpg" />
+    <None Remove="Data\TestImages\IMG_20190826_125118.jpg" />
+    <None Remove="Data\TestImages\IMG_20190826_131454.jpg" />
+    <None Remove="Data\TestImages\IMG_20190919_210252.jpg" />
+    <None Remove="Data\TestImages\IMG_20191004_144725.jpg" />
+    <None Remove="Data\TestImages\IMG_20200729_203254.jpg" />
+    <None Remove="Data\TestImages\test.jpg" />
+    <None Remove="Graphics\Icons\Search.png" />
+    <None Remove="Graphics\UtilityIcons\Exit.png" />
+    <None Remove="Graphics\UtilityIcons\Maximize.png" />
+    <None Remove="Graphics\UtilityIcons\Minimize.png" />
+    <None Remove="Graphics\UtilityIcons\Resize.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Graphics\Icons\Account.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Data\TestImages\IMG_20190814_140617.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_141306.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_141429.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_141443.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_141527.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_141551.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_141800.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_141826.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_141848.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_141936.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190814_185012.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190815_021255.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190815_021850.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190815_130021.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190815_181255.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190816_212831.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190816_233525.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190818_000956.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190818_090300.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190821_224622.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190826_125118.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190826_131454.jpg" />
+    <Resource Include="Data\TestImages\IMG_20190919_210252.jpg" />
+    <Resource Include="Data\TestImages\IMG_20191004_144725.jpg" />
+    <Resource Include="Data\TestImages\IMG_20200729_203254.jpg" />
+    <Resource Include="Data\TestImages\test.jpg" />
+    <Resource Include="Graphics\Icons\Add.png" />
+    <Resource Include="Graphics\Icons\ExtendMenu.png" />
+    <Resource Include="Graphics\Icons\Refresh.png" />
+    <Resource Include="Graphics\Icons\Search.png" />
+    <Resource Include="Graphics\Icons\Sort.png" />
+    <Resource Include="Graphics\Icons\Albums.png" />
+    <Resource Include="Graphics\Icons\Extend.png" />
+    <Resource Include="Graphics\Icons\Hide.png" />
+    <Resource Include="Graphics\Icons\Home.png" />
+    <Resource Include="Graphics\Icons\Settings.png" />
+    <Resource Include="Graphics\UtilityIcons\Exit.png" />
+    <Resource Include="Graphics\UtilityIcons\Maximize.png" />
+    <Resource Include="Graphics\UtilityIcons\Minimize.png" />
+    <Resource Include="Graphics\UtilityIcons\Resize.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ResourceDictionaries\BaseStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ResourceDictionaries\ColorResources.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AccountView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AlbumsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\HomePageView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SearchPage\PhotoSearchOptionsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SearchPage\PhotoSearchResultOptionsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SearchPage\PhotoSearchResultView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SearchPage\SearchView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SideMenuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UserControls\CustomButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SearchPage\PhotoPreviewWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UserControls\RoundedIcon.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UserControls\SideMenuButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UserControls\TextBoxWithTitle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ChromeButtonsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,67 @@
+﻿<Window x:Class="iPhoto.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:iPhoto"
+        xmlns:vs="clr-namespace:iPhoto.Views"
+        xmlns:vms="clr-namespace:iPhoto.ViewModels"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Topmost="False"
+        Height="810"
+        Width="1440"
+        MinHeight="810"
+        MinWidth="1440"
+        Title="MainWindow">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="34" />
+    </WindowChrome.WindowChrome>
+
+    <Grid>
+        <!--Side Menu-->
+        <vs:SideMenuView x:Name="sideMenu"
+                         Width="100"
+                         Panel.ZIndex="1"
+                         HorizontalAlignment="Left" />
+        <!--Main Grid-->
+        <Grid Background="{StaticResource PastelWhiteGradient}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="34" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+                <DataTemplate DataType="{x:Type vms:HomePageViewModel}">
+                    <vs:HomePageView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vms:SearchViewModel}">
+                    <vs:SearchView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vms:AlbumsViewModel}">
+                    <vs:AlbumsView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vms:AccountViewModel}">
+                    <vs:AccountView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vms:SettingsViewModel}">
+                    <vs:SettingsView />
+                </DataTemplate>
+            </Grid.Resources>
+
+            <!--Minimize/Resize/Maximize/Close Buttons-->
+            <vs:ChromeButtonsView Grid.Column="1" />
+
+            <ContentControl Content="{Binding MainViewModel}"
+                            Grid.Row="1"
+                            Grid.Column="1" />
+        </Grid>
+    </Grid>
+</Window>

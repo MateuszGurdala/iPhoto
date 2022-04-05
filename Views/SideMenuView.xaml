@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="iPhoto.Views.SideMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
+             mc:Ignorable="d"
+             d:DesignHeight="810"
+             d:DesignWidth="300">
+    <Grid Background="{StaticResource DarkLightGreenGradient}">
+        <uc:SideMenuButton VerticalAlignment="Top"
+                           Margin="0, 34, 0, 0"
+                           Text="Extend"
+                           Image="{Binding ExtendImage}"
+                           Command="{Binding ExtendCommand}" />
+
+        <StackPanel VerticalAlignment="Center">
+            <uc:SideMenuButton Text="Home"
+                               Image="../../Graphics/Icons/Home.png"
+                               Command="{Binding NavigateCommand}"
+                               Parameter="{Binding HomeParameter}"/>
+            <uc:SideMenuButton Text="Search"
+                               Image="../../Graphics/Icons/Search.png"
+                               Command="{Binding NavigateCommand}"
+                               Parameter="{Binding SearchParameter}"/>
+            <uc:SideMenuButton Text="Albums"
+                               Image="../../Graphics/Icons/Albums.png"
+                               Command="{Binding NavigateCommand}" 
+                               Parameter="{Binding AlbumsParameter}"/>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Bottom">
+            <uc:SideMenuButton Text="Account"
+                               Image="../../Graphics/Icons/Account.png"
+                               Command="{Binding NavigateCommand}"
+                               Parameter="{Binding AccountParameter}"/>
+            <uc:SideMenuButton Text="Settings"
+                               Image="../../Graphics/Icons/Settings.png"
+                               Command="{Binding NavigateCommand}"
+                               Parameter="{Binding SettingsParameter}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
