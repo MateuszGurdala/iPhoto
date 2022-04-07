@@ -11,7 +11,6 @@ namespace iPhoto.ViewModels
     {
         public ICommand SearchCommand { get; }
         public ICommand ExtendSearchMenuCommand { get; }
-        public ICommand LoseFocusCommand { get; }
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
         public SearchViewModel()
         {

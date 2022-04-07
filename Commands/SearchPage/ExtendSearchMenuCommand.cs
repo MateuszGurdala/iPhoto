@@ -9,7 +9,7 @@ namespace iPhoto.Commands
         private const int _minWidth = 30;
         private const int _maxWidth = 280;
         private const int _rate = 10;
-        private ColumnDefinition _columnDefinition;
+        private ColumnDefinition? _columnDefinition;
 
         public override void Execute(object parameter)
         {
