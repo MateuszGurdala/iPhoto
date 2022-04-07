@@ -74,19 +74,19 @@
                     HorizontalAlignment="Right">
 
             <Button Command="{Binding Minimize}">
-                <Image Source="../Graphics/UtilityIcons/Minimize.png" />
+                <Image Source="../Graphics/ChromeButtons/Minimize.png" />
             </Button>
 
             <Button Command="{Binding Resize}">
-                <Image Source="../Graphics/UtilityIcons/Resize.png" />
+                <Image Source="../Graphics/ChromeButtons/Resize.png" />
             </Button>
 
             <Button Command="{Binding Fullscreen}">
-                <Image Source="../Graphics/UtilityIcons/Maximize.png" />
+                <Image Source="../Graphics/ChromeButtons/Maximize.png" />
             </Button>
 
             <Button Command="{Binding CloseApp}">
-                <Image Source="../Graphics/UtilityIcons/Exit.png" />
+                <Image Source="../Graphics/ChromeButtons/Exit.png" />
             </Button>
         </StackPanel>
     </Grid>
