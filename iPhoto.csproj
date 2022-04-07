@@ -5,6 +5,9 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <StartupObject>iPhoto.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,6 +42,10 @@
     <None Remove="Graphics\ChromeButtons\Maximize.png" />
     <None Remove="Graphics\ChromeButtons\Minimize.png" />
     <None Remove="Graphics\ChromeButtons\Resize.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
