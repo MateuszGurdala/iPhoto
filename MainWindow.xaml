@@ -14,7 +14,7 @@
         Width="1440"
         MinHeight="810"
         MinWidth="1440"
-        Title="MainWindow">
+        Title="iPhoto">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="34" />
