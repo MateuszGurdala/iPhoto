@@ -12,7 +12,12 @@
             Foreground="{x:Null}"
             BorderBrush="{x:Null}"
             Command="{Binding Command, ElementName=root}"
-            CommandParameter="{Binding Parameter, ElementName=root}">
+            CommandParameter="{Binding Parameter, ElementName=root}"
+            Click="Button_Click"
+            MouseEnter="Button_MouseEnter"
+            MouseLeave="Button_MouseLeave">
+        
+            
         <Button.Background>
             <LinearGradientBrush x:Name="gradient"
                                  EndPoint="0, 0.5"
@@ -65,7 +70,9 @@
                   Height="100">
                 <Image Width="60"
                        Height="60"
-                       Source="{Binding Image, ElementName=root}" />
+                       Source="{Binding Image, ElementName=root}" 
+                       Name="ButtonImage">
+                </Image>
             </Grid>
             <!--Text-->
             <Grid Width="165"
