@@ -3,11 +3,14 @@ using iPhoto.UtilityClasses;
 using iPhoto.Views;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Controls;
+using iPhoto.Views.UserControls;
 
 namespace iPhoto.ViewModels
 {
     public class SideMenuViewModel : ViewModelBase
     {
+        
         private BitmapImage _extendImage;
         public BitmapImage ExtendImage
         {
@@ -22,6 +25,14 @@ namespace iPhoto.ViewModels
             }
         }
 
+        private Button _lastClicked;
+
+        public Button LastClicked
+        {
+            get { return _lastClicked; }
+            set { _lastClicked = value; }
+        }
+
         public BitmapImage ExtendImageSource { get; } =
             DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Extend.png", 100);
         public BitmapImage HideImageSource { get; } = 
@@ -29,6 +40,7 @@ namespace iPhoto.ViewModels
         //Commands
         public ICommand ExtendCommand { get; set; }
         public ICommand NavigateCommand { get; set; }
+        public ICommand LastClickedCommand { get; set; }
         //Navigate Parameters
         public string HomeParameter { get; } = "Home";
         public string SearchParameter { get; } = "Search";
@@ -36,10 +48,12 @@ namespace iPhoto.ViewModels
         public string AccountParameter { get; } = "Account";
         public string SettingsParameter { get; } = "Settings";
 
-        public SideMenuViewModel(SideMenuView sideMenu)
+        public SideMenuViewModel(SideMenuView sideMenu, SideMenuButton[] buttonList)
         {
             ExtendCommand = new ExtendSideMenuCommand(sideMenu, this);
             ExtendImage = ExtendImageSource;
+            LastClickedCommand = new LastClickedCommand(buttonList);
+            
         }
     }
 }

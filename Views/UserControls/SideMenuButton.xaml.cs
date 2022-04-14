@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 
@@ -13,7 +14,14 @@ namespace iPhoto.Views.UserControls
     {
         private Storyboard menuStoryboard;
         private Storyboard menuStoryboard2;
-        private Image lastClicked;
+        private bool _lastClicked = false;
+        private LinearGradientBrush _gradientBrush;
+        public bool LastClicked
+        {
+            get { return _lastClicked; }
+            set { _lastClicked = value; }
+        }
+
         public string Image
         {
             get { return (string)GetValue(ImageProperty); }
@@ -46,50 +54,100 @@ namespace iPhoto.Views.UserControls
         public static readonly DependencyProperty ParameterProperty =
             DependencyProperty.Register("Parameter", typeof(object), typeof(SideMenuButton));
 
+
         public SideMenuButton()
         {
             InitializeComponent();
+            _gradientBrush = InitializeGradient();
         }
 
-        // K 10.04.22
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private LinearGradientBrush InitializeGradient()
         {
-            DoubleAnimation resizeButtonAnimation = new DoubleAnimation();
-            menuStoryboard2 = new Storyboard();
-            menuStoryboard2.Children.Add(resizeButtonAnimation);      
-            if (lastClicked == null)
+            GradientStop stop1 = new GradientStop(Colors.LightGreen, 0.0);
+            GradientStop stop2 = new GradientStop(Colors.Transparent, 1);
+            LinearGradientBrush gradientBrush = new LinearGradientBrush
             {
-                lastClicked = (Image)(sender as Button).FindName("ButtonImage");
-                resizeButtonAnimation.From = 60;
-                resizeButtonAnimation.To = 100;
-                Storyboard.SetTarget(resizeButtonAnimation, lastClicked);
-                Storyboard.SetTargetProperty(resizeButtonAnimation, new PropertyPath(Button.HeightProperty));
-                resizeButtonAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-                menuStoryboard2.Begin();
-            }
-            else if (lastClicked != (Image)(sender as Button).FindName("ButtonImage"))
-            {
-            resizeButtonAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
-            resizeButtonAnimation.From = 80;
-            resizeButtonAnimation.To = 60;
-            Storyboard.SetTarget(resizeButtonAnimation, lastClicked);
-            Storyboard.SetTargetProperty(resizeButtonAnimation, new PropertyPath(Button.HeightProperty));
-            menuStoryboard2.Begin();
-            lastClicked = (Image)(sender as Button).FindName("ButtonImage");
-            resizeButtonAnimation.From = 60;
-            resizeButtonAnimation.To = 80;
-            resizeButtonAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-            Storyboard.SetTarget(resizeButtonAnimation, lastClicked);
-            Storyboard.SetTargetProperty(resizeButtonAnimation, new PropertyPath(Button.HeightProperty));
-            menuStoryboard2.Begin();
-            }
+                StartPoint = new Point(0, 0.5),
+                EndPoint = new Point(0, 0.5),
+                GradientStops = { stop1, stop2 }
+            };
+            MenuButton.Background = gradientBrush;
+            return gradientBrush;
         }
 
+        // K 13.04.22 , 14.04.22
+        /// <summary>
+        ///  Method <m> AnimateClicked </m> enables gradient on button
+        /// </summary>
+        public void AnimateClicked()
+        {
+            GradientEnter();
+            menuStoryboard.Stop();
+            //TODO
+            // may be useful to implement other animations in same time such as image color change
+            /*            DoubleAnimation resizeButtonAnimation = new DoubleAnimation(); 
+                        menuStoryboard2 = new Storyboard();
+                        menuStoryboard2.Children.Add(resizeButtonAnimation);
+                        resizeButtonAnimation.From = 60;
+                        resizeButtonAnimation.To = 100;
+                        Storyboard.SetTarget(resizeButtonAnimation, ButtonImage);
+                        Storyboard.SetTargetProperty(resizeButtonAnimation, new PropertyPath(Button.HeightProperty));
+                        resizeButtonAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(200));
+                        menuStoryboard2.Begin();*/
+        }
+        /// <summary>
+        ///  Method <m> AnimateUnclicked </m> disables gradient on button
+        /// </summary>
+        public void AnimateUnclicked()
+        {
+            GradientLeave();
+            // may be useful to implement other animations in same time
+            /*            DoubleAnimation resizeButtonAnimation = new DoubleAnimation();
+                        menuStoryboard2 = new Storyboard();
+                        menuStoryboard2.Children.Add(resizeButtonAnimation);
+                        resizeButtonAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
+                        resizeButtonAnimation.From = 100;
+                        resizeButtonAnimation.To = 60;
+                        Storyboard.SetTarget(resizeButtonAnimation, ButtonImage);
+                        Storyboard.SetTargetProperty(resizeButtonAnimation, new PropertyPath(Button.HeightProperty));
+                        menuStoryboard2.Begin();*/
+        }
+        // K 14.04.22
+        /// <summary>
+        /// Method <m> GradientEnter </m> animates gradient on button
+        /// </summary>
+        private void GradientEnter()
+        {
+            PointAnimationUsingKeyFrames gradientAnimation = new PointAnimationUsingKeyFrames();           
+            gradientAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(400));
+            gradientAnimation.KeyFrames.Add(
+                new LinearPointKeyFrame(
+                    new Point(3, 0.5),
+                    KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)))
+                    );
+            MenuButton.Background.BeginAnimation(LinearGradientBrush.EndPointProperty, gradientAnimation);
+        }
+        /// <summary>
+        /// Method <m> GradientLeave </m> animates removing of gradient on button
+        /// </summary>
+        private void GradientLeave()
+        {
+            PointAnimationUsingKeyFrames gradientAnimation = new PointAnimationUsingKeyFrames();
+            gradientAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(200));
+            gradientAnimation.KeyFrames.Add(
+                new LinearPointKeyFrame(
+                    new Point(0, 0.5),
+                    KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)))
+                    );
+            MenuButton.Background.BeginAnimation(LinearGradientBrush.EndPointProperty, gradientAnimation);
+        }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (lastClicked != (Image)(sender as Button).FindName("ButtonImage"))
+            if (!LastClicked)
             {
+                GradientEnter();
                 menuStoryboard = new Storyboard
                 {
                     RepeatBehavior = RepeatBehavior.Forever
@@ -117,6 +175,10 @@ namespace iPhoto.Views.UserControls
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
             menuStoryboard.Stop();
+            if (!LastClicked)
+            {
+                GradientLeave();
+            }
         }
     }
 }

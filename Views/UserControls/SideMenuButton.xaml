@@ -7,18 +7,19 @@
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
-    <Button Height="100"
+    
+    <Button Name="MenuButton"
+            Height="100"
             Width="265"
             Foreground="{x:Null}"
             BorderBrush="{x:Null}"
             Command="{Binding Command, ElementName=root}"
             CommandParameter="{Binding Parameter, ElementName=root}"
-            Click="Button_Click"
             MouseEnter="Button_MouseEnter"
             MouseLeave="Button_MouseLeave">
-        
-            
-        <Button.Background>
+
+
+        <!--<Button.Background>
             <LinearGradientBrush x:Name="gradient"
                                  EndPoint="0, 0.5"
                                  StartPoint="0, 0.5">
@@ -27,14 +28,14 @@
                 <GradientStop Color="Transparent"
                               Offset="1" />
             </LinearGradientBrush>
-        </Button.Background>
-
-        <Button.Triggers>
-            <!--Mouse Enter Animation-->
+        </Button.Background> -->
+        <!--<Button.Triggers>
+            
+            
             <EventTrigger RoutedEvent="MouseEnter">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard>
+                        <Storyboard Name="EnableGradient">
                             <PointAnimationUsingKeyFrames Storyboard.TargetProperty="EndPoint"
                                                           Storyboard.TargetName="gradient"
                                                           Duration="0:0:0.2">
@@ -46,11 +47,11 @@
                 </EventTrigger.Actions>
             </EventTrigger>
 
-            <!--Mouse Leave Animation-->
+            
             <EventTrigger RoutedEvent="MouseLeave">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard>
+                        <Storyboard Name="DisableGradient">
                             <PointAnimationUsingKeyFrames Storyboard.TargetProperty="EndPoint"
                                                           Storyboard.TargetName="gradient"
                                                           Duration="0:0:0.1">
@@ -61,7 +62,7 @@
                     </BeginStoryboard>
                 </EventTrigger.Actions>
             </EventTrigger>
-        </Button.Triggers>
+        </Button.Triggers> -->
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Left">
