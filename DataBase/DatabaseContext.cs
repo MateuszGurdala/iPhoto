@@ -16,7 +16,7 @@ namespace iPhoto.DataBase
         public DatabaseContext()
         {
             string path = DataHandler.GetDatabaseDirectory();
-            DbPath = Path.Join(path, "DemoDB.db");
+            DbPath = Path.Join(path, "Database.db");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
