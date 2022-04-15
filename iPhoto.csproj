@@ -49,11 +49,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Graphics\Icons\Account.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Data\TestImages\IMG_20190814_140617.jpg" />
     <Resource Include="Data\TestImages\IMG_20190814_141306.jpg" />
     <Resource Include="Data\TestImages\IMG_20190814_141429.jpg" />
     <Resource Include="Data\TestImages\IMG_20190814_141443.jpg" />
@@ -63,7 +66,6 @@
     <Resource Include="Data\TestImages\IMG_20190814_141826.jpg" />
     <Resource Include="Data\TestImages\IMG_20190814_141848.jpg" />
     <Resource Include="Data\TestImages\IMG_20190814_141936.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190814_185012.jpg" />
     <Resource Include="Data\TestImages\IMG_20190815_021255.jpg" />
     <Resource Include="Data\TestImages\IMG_20190815_021850.jpg" />
     <Resource Include="Data\TestImages\IMG_20190815_130021.jpg" />
@@ -147,6 +149,10 @@
     <Page Update="Views\ChromeButtonsView.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataBase\Images\" />
   </ItemGroup>
 
 </Project>

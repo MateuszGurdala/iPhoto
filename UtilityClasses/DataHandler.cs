@@ -31,6 +31,10 @@ namespace iPhoto.UtilityClasses
         {
             return GetProjectDirectoryPath() + "\\Data\\TestImages";
         }
+        public static string GetDatabaseDirectory()
+        {
+            return GetProjectDirectoryPath() + "\\DataBase";
+        }
         public static BitmapImage LoadBitmapImage(string path, double decodePixelWidth)
         {
             BitmapImage image = new BitmapImage();
