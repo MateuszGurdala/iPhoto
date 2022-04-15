@@ -1,5 +1,6 @@
 ﻿using iPhoto.Commands;
 using System.Windows;
+using iPhoto.DataBase;
 
 namespace iPhoto.ViewModels
 {
@@ -26,10 +27,11 @@ namespace iPhoto.ViewModels
         public SettingsViewModel SettingsViewModel { get; }
         public HomePageViewModel HomePageViewModel { get; }
 
-        public MainWindowViewModel(Window mainWindow)
+        public MainWindowViewModel(Window mainWindow, DatabaseHandler database)
         {
             HomePageViewModel = new HomePageViewModel();
-            SearchViewModel = new SearchViewModel();
+            //MG 15.04 added db handler class
+            SearchViewModel = new SearchViewModel(database);
             AlbumsViewModel = new AlbumsViewModel();
             AccountViewModel = new AccountViewModel();
             SettingsViewModel = new SettingsViewModel();

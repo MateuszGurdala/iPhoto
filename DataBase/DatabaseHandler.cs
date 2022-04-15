@@ -19,6 +19,9 @@ namespace iPhoto.DataBase
             Images = new List<Image>();
             Photos = new List<Photo>();
             Places = new List<Place>();
+
+            //Delete if loading all data immediately is unnecessary
+            LoadAllData();
         }
 
         public void LoadAlbums()
