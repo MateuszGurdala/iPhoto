@@ -1,4 +1,5 @@
 ﻿using iPhoto.ViewModels;
+using iPhoto.Views.UserControls;
 using System.Windows.Controls;
 
 namespace iPhoto.Views
@@ -8,7 +9,8 @@ namespace iPhoto.Views
         public SideMenuView()
         {
             InitializeComponent();
-            DataContext = new SideMenuViewModel(this);
+            SideMenuButton[] ButtonsList = { HomeButton, SearchButton, SearchButton, AccountButton, SettingsButton, AlbumButton };
+            DataContext = new SideMenuViewModel(this, ButtonsList);
         }
     }
 }

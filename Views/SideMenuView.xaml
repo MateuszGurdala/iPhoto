@@ -4,40 +4,100 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+             xmlns:viewmodels="clr-namespace:iPhoto.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:SideMenuViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="810"
              d:DesignWidth="300">
     <Grid Background="{StaticResource DarkLightGreenGradient}">
-        <uc:SideMenuButton VerticalAlignment="Top"
+
+        <uc:SideMenuButton 
+                           VerticalAlignment="Top"
                            Margin="0, 34, 0, 0"
                            Text="Extend"
                            Image="{Binding ExtendImage}"
-                           Command="{Binding ExtendCommand}" />
+                           Command="{Binding ExtendCommand}">
+
+        </uc:SideMenuButton>
 
         <StackPanel VerticalAlignment="Center">
-            <uc:SideMenuButton Text="Home"
+            <uc:SideMenuButton x:Name="HomeButton"
+                               Text="Home"
                                Image="../../Graphics/Icons/Home.png"
-                               Command="{Binding NavigateCommand}"
-                               Parameter="{Binding HomeParameter}"/>
-            <uc:SideMenuButton Text="Search"
+                                >
+                
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
+                                               CommandParameter="{Binding HomeParameter}"/>
+                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}" 
+                                               CommandParameter="{Binding ElementName=HomeButton}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </uc:SideMenuButton>
+            <uc:SideMenuButton x:Name="SearchButton"
+                               Text="Search"
                                Image="../../Graphics/Icons/Search.png"
-                               Command="{Binding NavigateCommand}"
-                               Parameter="{Binding SearchParameter}"/>
-            <uc:SideMenuButton Text="Albums"
+                               >
+                
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
+                                               CommandParameter="{Binding SearchParameter}"/>
+                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}" 
+                                               CommandParameter="{Binding ElementName=SearchButton}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </uc:SideMenuButton>
+            <uc:SideMenuButton x:Name="AlbumButton"
+                               Text="Albums"
                                Image="../../Graphics/Icons/Albums.png"
-                               Command="{Binding NavigateCommand}" 
-                               Parameter="{Binding AlbumsParameter}"/>
+                               >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
+                                               CommandParameter="{Binding AlbumsParameter}"/>
+                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}"
+                                               CommandParameter="{Binding ElementName=AlbumButton}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </uc:SideMenuButton>
         </StackPanel>
 
         <StackPanel VerticalAlignment="Bottom">
-            <uc:SideMenuButton Text="Account"
+            <uc:SideMenuButton x:Name="AccountButton"
+                               Text="Account"
                                Image="../../Graphics/Icons/Account.png"
-                               Command="{Binding NavigateCommand}"
-                               Parameter="{Binding AccountParameter}"/>
-            <uc:SideMenuButton Text="Settings"
+                               >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
+                                               CommandParameter="{Binding AccountParameter}"/>
+                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}"
+                                               CommandParameter="{Binding ElementName=AccountButton}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </uc:SideMenuButton>
+            <uc:SideMenuButton 
+                               x:Name="SettingsButton"
+                               Text="Settings"
                                Image="../../Graphics/Icons/Settings.png"
                                Command="{Binding NavigateCommand}"
-                               Parameter="{Binding SettingsParameter}"/>
+                               Parameter="{Binding SettingsParameter}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
+                                               CommandParameter="{Binding SettingsParameter}"/>
+                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}"
+                                               CommandParameter="{Binding ElementName=SettingsButton}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </uc:SideMenuButton>
         </StackPanel>
     </Grid>
 </UserControl>
