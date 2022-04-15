@@ -7,5 +7,6 @@ public class AlbumEntity
     public int PhotoCount { get; set; }
     public string Tags { get; set; }
     public string CreationDate { get; set; }
+    public bool IsLocal { get; set; }
     public PhotoEntity PhotoEntity { get; set; }
 }

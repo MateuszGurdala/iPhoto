@@ -123,7 +123,7 @@ namespace iPhoto.DataBase
         }
 
         //Adding new records
-        public void AddAlbum(string name, int count, List<string>? tags, DateTime? date)
+        public void AddAlbum(string name, int count, List<string>? tags, DateTime? date, bool isLocal)
         {
             var id = Albums.Count == 0 ? 0 : Albums.OrderByDescending(e => e.Id).FirstOrDefault()!.Id;
 
@@ -132,7 +132,7 @@ namespace iPhoto.DataBase
                 throw new InvalidDataException("Album with that name already exists.");
             }
 
-            var album = new Album(id + 1, name, count, tags, date);
+            var album = new Album(id + 1, name, count, tags, date, isLocal);
             Albums.Add(album);
 
             using var db = new DatabaseContext();
@@ -258,7 +258,7 @@ namespace iPhoto.DataBase
             db.SaveChanges();
         }
         //Updating Records
-        public void UpdateAlbum(int id, string? name, int? count, List<string>? tags, DateTime? date)
+        public void UpdateAlbum(int id, string? name, int? count, List<string>? tags, DateTime? date, bool? isLocal)
         {
             var album = Albums.FirstOrDefault(e => e.Id == id);
 
@@ -271,6 +271,7 @@ namespace iPhoto.DataBase
             album.PhotoCount = count ?? album.PhotoCount;
             album.Tags = tags!;
             album.CreationDate = date ?? album.CreationDate;
+            album.IsLocal = isLocal ?? album.IsLocal;
         }
         public void UpdateImage(int id, string? source, int? width, int? height, double? size)
         {

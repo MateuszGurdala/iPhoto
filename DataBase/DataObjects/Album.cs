@@ -37,13 +37,18 @@ namespace iPhoto.DataBase
             get => DateTime.Parse(_albumEntity.CreationDate);
             set => _albumEntity.CreationDate = value.ToString();
         }
+        public bool IsLocal
+        {
+            get => _albumEntity.IsLocal;
+            set => _albumEntity.IsLocal = value;
+        }
 
 
         public Album(AlbumEntity albumEntity)
         {
             _albumEntity = albumEntity;
         }
-        public Album(int id, string name, int count, List<string>? tags, DateTime? date)
+        public Album(int id, string name, int count, List<string>? tags, DateTime? date, bool isLocal)
         {
             if (count < 0)
             {
@@ -56,6 +61,8 @@ namespace iPhoto.DataBase
             PhotoCount = count;
             Tags = tags ?? new List<string>() {"#none"};
             CreationDate = date ?? DateTime.Now.Date;
+            IsLocal = isLocal;
+
         }
 
         private List<string> ParseTags(string tags)
