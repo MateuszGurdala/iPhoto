@@ -13,19 +13,19 @@ namespace iPhoto.UtilityClasses
         }
         private static string GetProjectDirectoryPath()
         {
-            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location).Split('\\');
-            int lenght = 0;
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!.Split('\\');
+            int length = 0;
 
             for (int i = 0; i < path.Length; i++)
             {
-                lenght += 1;
+                length += 1;
                 if (path[i] == "iPhoto")
                 {
                     break;
                 }
             }
 
-            return String.Join("\\", path, 0, lenght);
+            return String.Join("\\", path, 0, length);
         }
         public static string GetTestImagesDirectory()
         {
@@ -34,6 +34,10 @@ namespace iPhoto.UtilityClasses
         public static string GetDatabaseDirectory()
         {
             return GetProjectDirectoryPath() + "\\DataBase";
+        }
+        public static string GetDatabaseImageDirectory()
+        {
+            return GetProjectDirectoryPath() + "\\DataBase\\Images";
         }
         public static BitmapImage LoadBitmapImage(string path, double decodePixelWidth)
         {

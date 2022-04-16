@@ -32,11 +32,11 @@ namespace iPhoto.Commands
         {
             var photoUris = Directory.GetFiles(DataHandler.GetTestImagesDirectory());
 
-            foreach (var uri in photoUris)
-            {
-                _searchResults.Add(new PhotoSearchResultViewModel(uri, _searchResults));
-                await Task.Delay(1);
-            }
+            //foreach (var uri in photoUris)
+            //{
+            //    _searchResults.Add(new PhotoSearchResultViewModel(uri, _searchResults));
+            //    await Task.Delay(1);
+            //}
         }
     }
 }

@@ -27,11 +27,11 @@ namespace iPhoto.ViewModels
         public SettingsViewModel SettingsViewModel { get; }
         public HomePageViewModel HomePageViewModel { get; }
 
+        //MG 15.04 added db handler class
         public MainWindowViewModel(Window mainWindow, DatabaseHandler database)
         {
             HomePageViewModel = new HomePageViewModel();
-            //MG 15.04 added db handler class
-            SearchViewModel = new SearchViewModel(database);
+            SearchViewModel = new SearchViewModel(database);    //MG 15.04
             AlbumsViewModel = new AlbumsViewModel();
             AccountViewModel = new AccountViewModel();
             SettingsViewModel = new SettingsViewModel();

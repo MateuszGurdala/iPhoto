@@ -2,11 +2,12 @@
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using iPhoto.Commands;
+using iPhoto.DataBase;
 using iPhoto.Models;
 
 namespace iPhoto.ViewModels
 {
-    public class PhotoSearchResultViewModel: ViewModelBase
+    public class PhotoSearchResultViewModel : ViewModelBase
     {
         public readonly PhotoSearchResultModel PhotoData;
         public BitmapImage ImagePreviewSource { get; }
@@ -26,18 +27,18 @@ namespace iPhoto.ViewModels
             }
         }
 
-        public PhotoSearchResultViewModel(string uri, ObservableCollection<PhotoSearchResultViewModel> searchResults)
+        //MG 16.04 implemented handling database data format 
+        public PhotoSearchResultViewModel(Photo photoData, Image imageData, Album albumData, Place placeData, ObservableCollection<PhotoSearchResultViewModel> searchResults)
         {
-            PhotoData = new PhotoSearchResultModel(uri);
+            PhotoData = new PhotoSearchResultModel(photoData, imageData, albumData, placeData);
 
+            PreviewPhotoCommand = new PreviewPhotoCommand();
             ClickSearchResultCommand = new ClickSearchResultCommand(searchResults);
             ClickSearchResultOptionsCommand = new ClickSearchResultOptionsCommand();
-            PreviewPhotoCommand = new PreviewPhotoCommand();
 
             ImagePreviewSource = PhotoData.PreviewImage;
             PhotoTitle = PhotoData.Title;
             IsClicked = false;
-
         }
     }
 }

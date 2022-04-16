@@ -14,17 +14,24 @@
        MouseLeave="AnimateLeave">
     <Popup.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="Width" Value="200" />
-            <Setter Property="Height" Value="40" />
-            <Setter Property="FontSize" Value="22" />
-            <Setter Property="Foreground" Value="{StaticResource PastelWhiteGradient}" />
-            <Setter Property="TextAlignment" Value="Left" />
-            <Setter Property="Padding" Value="5, 0, 0, 5" />
-            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Width"
+                    Value="200" />
+            <Setter Property="Height"
+                    Value="40" />
+            <Setter Property="FontSize"
+                    Value="22" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource PastelWhiteGradient}" />
+            <Setter Property="TextAlignment"
+                    Value="Left" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
+            <Setter Property="Padding"
+                    Value="5, 0, 0, 5" />
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="{StaticResource PastelWhite}" 
-                                     Opacity="0"/>
+                    <SolidColorBrush Color="{StaticResource PastelWhite}"
+                                     Opacity="0" />
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
@@ -36,7 +43,7 @@
                                 <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Background).(SolidColorBrush.Opacity)"
                                                  From="0"
                                                  To="0.5"
-                                                 Duration="0:0:0.2"/>
+                                                 Duration="0:0:0.2" />
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger.Actions>
@@ -61,7 +68,8 @@
           Height="240"
           Background="{StaticResource DarkLightGreenGradient}">
         <StackPanel Orientation="Vertical">
-            <TextBlock Text="Preview" />
+            <TextBlock Text="Preview" 
+                       PreviewMouseLeftButtonUp="Preview"/>
             <TextBlock Text="Open" />
             <TextBlock Text="Add To Album" />
             <TextBlock Text="Show Details" />

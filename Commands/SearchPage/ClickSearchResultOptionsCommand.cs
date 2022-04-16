@@ -7,8 +7,9 @@ namespace iPhoto.Commands
     {
         public override void Execute(object parameter)
         {
-            (parameter as PhotoSearchResultViewModel).ClickSearchResultCommand.Execute(parameter);
-            var popup = new PhotoSearchResultOptionsView();
+            var viewModel = parameter as PhotoSearchResultViewModel;
+            viewModel!.ClickSearchResultCommand.Execute(parameter);
+            var popup = new PhotoSearchResultOptionsView(viewModel);
         }
     }
 }

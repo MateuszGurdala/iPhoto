@@ -22,7 +22,45 @@ namespace iPhoto.DataBase
 
             //Delete if loading all data immediately is unnecessary
             LoadAllData();
+            //MG 16.04
+            CreateBaseAlbum();
+            CreateBasePlace();
+            AddTestPhotos();
+            //~MG 16.04
         }
+
+        //MG 16.04
+        private void CreateBaseAlbum()
+        {
+            if (Albums.FirstOrDefault(e => e.Id == 1) == null)
+            {
+                AddAlbum("OtherPhotos", 0, null, null, true);
+            }
+        }
+        private void CreateBasePlace()
+        {
+            if (Places.FirstOrDefault(e => e.Id == 1) == null)
+            {
+                AddPlace("NoPlace", null, null);
+            }
+        }
+        private void AddTestPhotos()
+        {
+            var image = Images.FirstOrDefault(e => e.Source == "test.jpg");
+            if (image == null)
+            {
+                AddImage("test.jpg", 1000, 1000, 2.5);
+            }
+
+            image = Images.FirstOrDefault(e => e.Source == "test.jpg");
+
+            if (Photos.FirstOrDefault(e => e.Title == "Test") == null)
+            {
+                AddPhoto("Test", null, null, null, null, image!.Id);
+            }
+
+        }
+        //~MG 16.04
 
         public void LoadAlbums()
         {
@@ -255,7 +293,7 @@ namespace iPhoto.DataBase
             }
 
             Photos.Remove(photo);
-            
+
             using var db = new DatabaseContext();
             db.PhotoEntities.Remove(photo.GetEntity());
             db.SaveChanges();
