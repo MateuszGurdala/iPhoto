@@ -117,7 +117,7 @@ namespace iPhoto.Views.UserControls
         /// <summary>
         /// Method <m> GradientEnter </m> animates gradient on button
         /// </summary>
-        private void GradientEnter()
+        public void GradientEnter() //MG 16.04 made public
         {
             PointAnimationUsingKeyFrames gradientAnimation = new PointAnimationUsingKeyFrames();           
             gradientAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(400));
@@ -147,7 +147,7 @@ namespace iPhoto.Views.UserControls
         {
             if (!LastClicked)
             {
-                GradientEnter();
+                //GradientEnter();  MG 16.04
                 menuStoryboard = new Storyboard
                 {
                     RepeatBehavior = RepeatBehavior.Forever

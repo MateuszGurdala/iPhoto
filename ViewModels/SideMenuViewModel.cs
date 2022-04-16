@@ -53,7 +53,6 @@ namespace iPhoto.ViewModels
             ExtendCommand = new ExtendSideMenuCommand(sideMenu, this);
             ExtendImage = ExtendImageSource;
             LastClickedCommand = new LastClickedCommand(buttonList);
-            
         }
     }
 }
