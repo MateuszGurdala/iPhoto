@@ -96,7 +96,6 @@
                                                CommandParameter="{Binding ElementName=SettingsButton}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-
             </uc:SideMenuButton>
         </StackPanel>
     </Grid>

@@ -11,6 +11,9 @@ namespace iPhoto.Views
             InitializeComponent();
             SideMenuButton[] ButtonsList = { HomeButton, SearchButton, SearchButton, AccountButton, SettingsButton, AlbumButton };
             DataContext = new SideMenuViewModel(this, ButtonsList);
+            //MG 16.04 made home button clicked on startup
+            HomeButton.LastClicked = true;
+            HomeButton.GradientEnter();
         }
     }
 }
