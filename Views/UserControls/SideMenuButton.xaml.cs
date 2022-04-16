@@ -143,7 +143,7 @@ namespace iPhoto.Views.UserControls
             MenuButton.Background.BeginAnimation(LinearGradientBrush.EndPointProperty, gradientAnimation);
         }
 
-        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        public void Button_MouseEnter(object sender, MouseEventArgs e) //MG 16.04 made public
         {
             if (!LastClicked)
             {

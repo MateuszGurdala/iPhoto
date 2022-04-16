@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using iPhoto.DataBase;
 using iPhoto.ViewModels;
+using iPhoto.Views;
 
 namespace iPhoto
 {
@@ -17,10 +18,11 @@ namespace iPhoto
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            _databaseHandler = new DatabaseHandler();   //MG 15.04
-            //_navigationStore.CurrentViewModel = null;
             MainWindow = new MainWindow();
+            _databaseHandler = new DatabaseHandler();   //MG 15.04
             MainWindow.DataContext = new MainWindowViewModel(MainWindow, _databaseHandler); //MG 15.04
+
+            //_navigationStore.CurrentViewModel = null;
             // MainWindow.DataContext = new MainWindowViewModel(_navigationStore);
             MainWindow.Show();
             base.OnStartup(e);

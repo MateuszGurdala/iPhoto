@@ -61,6 +61,30 @@
                         </BeginStoryboard>
                     </EventTrigger.Actions>
                 </EventTrigger>
+                <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(TextBlock.Background).(SolidColorBrush.Color)"
+                                                 From="{StaticResource PastelWhite}"
+                                                 To="{StaticResource DarkGreen}"
+                                                 Duration="0:0:0.1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(TextBlock.Background).(SolidColorBrush.Color)"
+                                                From="{StaticResource DarkGreen}"
+                                                To="{StaticResource PastelWhite}"
+                                                Duration="0:0:0.1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
             </Style.Triggers>
         </Style>
     </Popup.Resources>
@@ -70,8 +94,8 @@
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Preview" 
                        PreviewMouseLeftButtonUp="Preview"/>
-            <TextBlock Text="Open" />
-            <TextBlock Text="Add To Album" />
+            <TextBlock Text="PhotoViewer" />
+            <TextBlock Text="Move To Album" />
             <TextBlock Text="Show Details" />
             <TextBlock Text="Rename" />
             <TextBlock Text="Delete" />

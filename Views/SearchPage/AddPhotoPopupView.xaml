@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="iPhoto.Views.SearchPage.AddPhotoPopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:iPhoto.Views.SearchPage"
+             xmlns:userControls="clr-namespace:iPhoto.Views.UserControls"
+             mc:Ignorable="d"
+             Width="960"
+             Height="540">
+    <Border Background="{StaticResource DarkLightGreenGradient}"
+            CornerRadius="40">
+        <Border Background="{StaticResource PastelWhiteGradient}"
+                CornerRadius="40"
+                Margin="5">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Height"
+                                Value="36" />
+                        <Setter Property="FontSize"
+                                Value="32" />
+                        <Setter Property="FontWeight"
+                                Value="DemiBold" />
+                        <Setter Property="HorizontalAlignment"
+                                Value="Left" />
+                        <Setter Property="Margin"
+                                Value="0, 10, 0, 5" />
+                        <Setter Property="Foreground"
+                                Value="{StaticResource DarkLightGreenGradient}" />
+                    </Style>
+
+                    <Style TargetType="userControls:TextBoxWithTitle">
+                        <Setter Property="Height"
+                                Value="34" />
+                        <Setter Property="HorizontalAlignment"
+                                Value="Left" />
+                        <Setter Property="FontSize"
+                                Value="28" />
+                        <Setter Property="VerticalAlignment"
+                                Value="Center" />
+                        <Setter Property="BorderThickness"
+                                Value="0" />
+                        <Setter Property="FontWeight"
+                                Value="DemiBold" />
+                        <Setter Property="Margin"
+                                Value="20, 0,0 ,0" />
+                    </Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Orientation"
+                                Value="Horizontal" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="450" />
+                </Grid.ColumnDefinitions>
+                <Image Source="../../DataBase/Images/test.jpg"
+                       Stretch="Uniform"
+                       Margin="10" />
+
+                <userControls:RoundedIcon Margin="15"
+                                          Grid.Column="1"
+                                          Height="300"
+                                          VerticalAlignment="Top">
+                    <StackPanel Orientation="Vertical"
+                                Margin="10">
+                        <StackPanel>
+                            <TextBlock Text="Title" />
+                            <userControls:TextBoxWithTitle TextWidth="300"
+                                                           EntryText="Default" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Album" />
+                            <userControls:TextBoxWithTitle TextWidth="265"
+                                                           EntryText="OtherPhotos" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Tags"
+                                       Height="42" />
+                            <userControls:TextBoxWithTitle TextWidth="295"
+                                                           EntryText="#none" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Creation Date" />
+                            <userControls:TextBoxWithTitle TextWidth="160"
+                                                           EntryText="Now" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Place Taken" />
+                            <userControls:TextBoxWithTitle TextWidth="190"
+                                                           EntryText="NoPlace" />
+                        </StackPanel>
+                    </StackPanel>
+                </userControls:RoundedIcon>
+
+                <StackPanel Grid.Column="1"
+                            VerticalAlignment="Bottom"
+                            Margin="20, 0, 20, 50">
+                    <userControls:CustomButton Width="260"
+                                               Height="100"
+                                               CornerRadius="20"
+                                               ImageSource="../../Graphics/Icons/Checked.png"/>
+                    <userControls:CustomButton Width="100"
+                                               Height="100"
+                                               Margin="50, 0, 0, 0"
+                                               CornerRadius="20"
+                                               ImageSource="../../Graphics/Icons/Delete.png"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Border>
+</UserControl>

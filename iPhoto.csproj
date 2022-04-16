@@ -38,6 +38,9 @@
     <None Remove="Data\TestImages\IMG_20191004_144725.jpg" />
     <None Remove="Data\TestImages\IMG_20200729_203254.jpg" />
     <None Remove="Data\TestImages\test.jpg" />
+    <None Remove="Graphics\Icons\AddPhoto.png" />
+    <None Remove="Graphics\Icons\Checked.png" />
+    <None Remove="Graphics\Icons\Delete.png" />
     <None Remove="Graphics\Icons\Search.png" />
     <None Remove="Graphics\ChromeButtons\Exit.png" />
     <None Remove="Graphics\ChromeButtons\Maximize.png" />
@@ -89,6 +92,9 @@
     <Resource Include="Data\TestImages\IMG_20200729_203254.jpg" />
     <Resource Include="Data\TestImages\test.jpg" />
     <Resource Include="Graphics\Icons\Add.png" />
+    <Resource Include="Graphics\Icons\AddPhoto.png" />
+    <Resource Include="Graphics\Icons\Checked.png" />
+    <Resource Include="Graphics\Icons\Delete.png" />
     <Resource Include="Graphics\Icons\ExtendMenu.png" />
     <Resource Include="Graphics\Icons\Refresh.png" />
     <Resource Include="Graphics\Icons\Search.png" />

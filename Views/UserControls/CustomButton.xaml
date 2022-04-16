@@ -11,8 +11,7 @@
              PreviewMouseLeftButtonUp="ButtonUp"
              MouseEnter="OnMouseEnter"
              MouseLeave="OnMouseLeave">
-        <Button Name="Button"
-                Background="Transparent"
+        <Button Background="Transparent"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Command="{Binding Command, ElementName=Root}"
@@ -37,7 +36,7 @@
                         Grid.RowSpan="3"
                         Grid.ColumnSpan="3" />
                 <Image Source="{Binding ImageSource, ElementName=Root}"
-                       Stretch="Fill"
+                       Stretch="Uniform"
                        Grid.Column="1"
                        Grid.Row="1" />
             </Grid>

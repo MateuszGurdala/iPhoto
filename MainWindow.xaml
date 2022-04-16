@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:iPhoto"
         xmlns:vs="clr-namespace:iPhoto.Views"
         xmlns:vms="clr-namespace:iPhoto.ViewModels"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         WindowStyle="None"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
@@ -20,6 +21,13 @@
         <WindowChrome CaptionHeight="34" />
     </WindowChrome.WindowChrome>
 
+    <Window.Resources>
+        <x:Array Type="system:Int32"
+                 x:Key="ResizeDimensions">
+            <system:Int32>1440</system:Int32>
+            <system:Int32>810</system:Int32>
+        </x:Array>
+    </Window.Resources>
     <Grid>
         <!--Side Menu-->
         <vs:SideMenuView x:Name="sideMenu"
@@ -57,7 +65,8 @@
             </Grid.Resources>
 
             <!--Minimize/Resize/Maximize/Close Buttons-->
-            <vs:ChromeButtonsView Grid.Column="1" />
+            <vs:ChromeButtonsView Grid.Column="1"
+                ResizeDimensions="{StaticResource ResizeDimensions}" />
 
             <ContentControl Content="{Binding MainViewModel}"
                             Grid.Row="1"

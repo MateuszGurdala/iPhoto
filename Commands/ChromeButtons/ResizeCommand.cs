@@ -1,10 +1,4 @@
-﻿using iPhoto.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace iPhoto.Commands
 {
@@ -12,11 +6,12 @@ namespace iPhoto.Commands
     {
         public override void Execute(object parameter)
         {
+            var dimensions = parameter as int[];
             Application.Current.MainWindow.WindowState = WindowState.Normal;
-            Application.Current.MainWindow.Height = 810;
-            Application.Current.MainWindow.Width = 1440;
-            Application.Current.MainWindow.Left = 240;
-            Application.Current.MainWindow.Top = 135;
+            Application.Current.MainWindow.Height = dimensions[1];
+            Application.Current.MainWindow.Width = dimensions[0];
+            Application.Current.MainWindow.Left = (1920 - dimensions[0]) / 2;
+            Application.Current.MainWindow.Top = (1080 - dimensions[1]) / 2;
         }
     }
 }
