@@ -44,9 +44,9 @@ namespace iPhoto.ViewModels
         {
             _mainWindow = mainWindow as MainWindow;
 
-            var sideMenuDataContext = _mainWindow.sideMenu.DataContext as SideMenuViewModel;
+            var sideMenuDataContext = _mainWindow!.sideMenu.DataContext as SideMenuViewModel;
 
-            sideMenuDataContext.NavigateCommand = new NavigateCommand(this);
+            sideMenuDataContext!.NavigateCommand = new NavigateCommand(this);
         }
     }
 }

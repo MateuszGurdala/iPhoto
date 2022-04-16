@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using iPhoto.DataBase;
-using iPhoto.UtilityClasses;
 using iPhoto.ViewModels;
 
 namespace iPhoto
@@ -9,7 +7,7 @@ namespace iPhoto
     public partial class App : Application
     {
         //MG 15.04  Added db handler class
-        private DatabaseHandler _databaseHandler;
+        private DatabaseHandler? _databaseHandler;
 
         /*private readonly NavigationStore _navigationStore;
         public App()
