@@ -30,6 +30,11 @@ namespace iPhoto.Commands
                         _mainWindowViewModel.MainViewModel = _mainWindowViewModel.AlbumsViewModel;
                         break;
                     }
+                case "Places":
+                {
+                    _mainWindowViewModel.MainViewModel = _mainWindowViewModel.PlacesViewModel;
+                    break;
+                }
                 case "Account":
                     {
                         _mainWindowViewModel.MainViewModel = _mainWindowViewModel.AccountViewModel;

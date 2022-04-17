@@ -56,6 +56,9 @@
                 <DataTemplate DataType="{x:Type vms:AlbumsViewModel}">
                     <vs:AlbumsView />
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type vms:PlacesViewModel}">
+                    <vs:PlacesView />
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type vms:AccountViewModel}">
                     <vs:AccountView />
                 </DataTemplate>

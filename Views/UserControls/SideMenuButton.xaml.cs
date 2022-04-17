@@ -13,7 +13,7 @@ namespace iPhoto.Views.UserControls
     public partial class SideMenuButton : UserControl
     {
         private Storyboard menuStoryboard;
-        private Storyboard menuStoryboard2;
+        //private Storyboard menuStoryboard2;   18.04 wkurwiało mnie
         private bool _lastClicked = false;
         private LinearGradientBrush _gradientBrush;
         public bool LastClicked

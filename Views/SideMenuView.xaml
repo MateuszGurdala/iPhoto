@@ -12,20 +12,19 @@
              d:DesignWidth="300">
     <Grid Background="{StaticResource DarkLightGreenGradient}">
 
+        <!--MG 18.04 Commented - probably useless
         <uc:SideMenuButton 
                            VerticalAlignment="Top"
                            Margin="0, 34, 0, 0"
                            Text="Extend"
                            Image="{Binding ExtendImage}"
-                           Command="{Binding ExtendCommand}">
+                           Command="{Binding ExtendCommand}"/>-->
 
-        </uc:SideMenuButton>
-
-        <StackPanel VerticalAlignment="Center">
+        <StackPanel VerticalAlignment="Top"
+                    Margin="0, 100, 0, 0">
             <uc:SideMenuButton x:Name="HomeButton"
                                Text="Home"
-                               Image="../../Graphics/Icons/Home.png"
-                                >
+                               Image="../../Graphics/Icons/Home.png">
                 
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -63,7 +62,18 @@
                                                CommandParameter="{Binding ElementName=AlbumButton}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-
+            </uc:SideMenuButton>
+            <uc:SideMenuButton x:Name="PlacesButton"
+                               Text="Places"
+                               Image="../../Graphics/Icons/Place.png">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                               CommandParameter="{Binding PlacesParameter}" />
+                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}"
+                                               CommandParameter="{Binding ElementName=PlacesButton}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </uc:SideMenuButton>
         </StackPanel>
 

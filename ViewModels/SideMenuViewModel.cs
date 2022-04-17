@@ -45,6 +45,7 @@ namespace iPhoto.ViewModels
         public string HomeParameter { get; } = "Home";
         public string SearchParameter { get; } = "Search";
         public string AlbumsParameter { get; } = "Albums";
+        public string PlacesParameter { get; } = "Places";
         public string AccountParameter { get; } = "Account";
         public string SettingsParameter { get; } = "Settings";
 
