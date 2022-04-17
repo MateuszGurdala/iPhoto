@@ -1,0 +1,73 @@
+﻿<Window x:Class="iPhoto.Views.PhotoViewerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:iPhoto.Views"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:userControls="clr-namespace:iPhoto.Views.UserControls"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowState="Maximized"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Topmost="False"
+        Height="1080"
+        Width="1920"
+        MinHeight="810"
+        MinWidth="1000"
+        Title="PhotoViewerView">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="34" />
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <x:Array Type="system:Int32"
+                 x:Key="ResizeDimensions">
+            <system:Int32>1440</system:Int32>
+            <system:Int32>810</system:Int32>
+        </x:Array>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource PastelWhiteGradient}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--Minimize/Resize/Maximize/Close Buttons-->
+        <local:ChromeButtonsView Grid.ColumnSpan="5"
+                                 ResizeDimensions="{StaticResource ResizeDimensions}" />
+
+        <!--<userControls:CustomButton  Grid.Row="1"
+                                    ImageSource="../../Graphics/Icons/Hide.png"
+                                    VerticalAlignment="Center"
+                                    Width="60"
+                                    Height="60"
+                                    CornerRadius="12"/>
+
+        <userControls:CustomButton  Grid.Row="1"
+                                    Grid.Column="2"
+                                    ImageSource="../../Graphics/Icons/Extend.png"
+                                    VerticalAlignment="Center"
+                                    Width="60"
+                                    Height="60"
+                                    CornerRadius="12" />-->
+
+
+        <!--<Border Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Background="{StaticResource DarkLightGreenGradient}"
+                CornerRadius="20"
+                Margin="20, 0, 20, 20">
+            <Border Background="{StaticResource PastelWhiteGradient}"
+                    Margin="5"
+                    CornerRadius="20">
+                <Image Margin="15"
+                       Source="../../Data/TestImages/test.jpg"
+                       Stretch="Uniform" />
+            </Border>
+        </Border>-->
+    </Grid>
+</Window>

@@ -10,19 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using iPhoto.ViewModels.SearchPage;
-using iPhoto.Views.SearchPage;
 
 namespace iPhoto.Views
 {
     /// <summary>
-    /// Interaction logic for HomePageView.xaml
+    /// Interaction logic for PhotoViewerView.xaml
     /// </summary>
-    public partial class HomePageView : UserControl
+    public partial class PhotoViewerView : Window
     {
-        public HomePageView()
+        public PhotoViewerView()
         {
             InitializeComponent();
         }

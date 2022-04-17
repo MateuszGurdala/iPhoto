@@ -8,6 +8,5 @@
              mc:Ignorable="d" 
              d:DesignHeight="810" d:DesignWidth="1440">
     <Grid>
-        <searchPage:AddPhotoPopupView/>
     </Grid>
 </UserControl>
