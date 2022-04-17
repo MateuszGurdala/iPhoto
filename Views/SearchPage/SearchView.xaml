@@ -43,7 +43,8 @@
                     Margin="0, 5, 30, 10">
             <!--Add Photos Button-->
             <uc:CustomButton  ImageSource="../../Graphics/Icons/AddPhoto.png"
-                              Margin="10, 0, 0, 0" />
+                              Margin="10, 0, 0, 0"
+                              Command="{Binding AddPhotoCommand}"/>
             <!--Sort Button-->
             <uc:CustomButton  ImageSource="../../Graphics/Icons/Sort.png"
                               Margin="10, 0, 0, 0" />

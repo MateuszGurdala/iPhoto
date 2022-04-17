@@ -212,7 +212,7 @@ namespace iPhoto.DataBase
             db.PlaceEntities.Add(place.GetEntity());
             db.SaveChanges();
         }
-        public void AddPhoto(string title, int? albumId, List<string>? tags, DateTime? date, int? placeId, int imageId)
+        public void AddPhoto(string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId)
         {
             var id = Photos.Count == 0 ? 0 : Photos.OrderByDescending(e => e.Id).FirstOrDefault()!.Id;
 

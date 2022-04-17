@@ -1,29 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls.Primitives;
+using iPhoto.ViewModels.SearchPage;
 
 namespace iPhoto.Views.SearchPage
 {
-    /// <summary>
-    /// Interaction logic for AddPhotoPopupView.xaml
-    /// </summary>
-    public partial class AddPhotoPopupView : UserControl
+    public partial class AddPhotoPopupView : Popup
     {
-        public AddPhotoPopupView()
+        public AddPhotoPopupView(AddPhotoPopupViewModel dataContext)
         {
             InitializeComponent();
+            DataContext = dataContext;
+            dataContext.ParentView = this;
         }
     }
 }

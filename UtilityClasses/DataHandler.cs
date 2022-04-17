@@ -39,13 +39,17 @@ namespace iPhoto.UtilityClasses
         {
             return GetProjectDirectoryPath() + "\\DataBase\\Images";
         }
-        public static BitmapImage LoadBitmapImage(string path, double decodePixelWidth)
+        public static BitmapImage LoadBitmapImage(string path, double? decodePixelWidth)
         {
             BitmapImage image = new BitmapImage();
 
             image.BeginInit();
             image.UriSource = new Uri(path);
-            image.DecodePixelWidth = (int)decodePixelWidth;
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            if (decodePixelWidth != null)
+            {
+                image.DecodePixelWidth = (int)decodePixelWidth;
+            }
             image.EndInit();
 
             image.Freeze();

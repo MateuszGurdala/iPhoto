@@ -66,6 +66,16 @@ dotnet_diagnostic.IDE0008.severity = none
 
 # CS8767: Dopuszczanie wartości null dla typów referencyjnych w typie parametru nie jest zgodne z niejawnie zaimplementowaną składową (prawdopodobnie z powodu atrybutów dopuszczania wartości null).
 dotnet_diagnostic.CS8767.severity = none
+csharp_indent_labels = one_less_than_current
+csharp_using_directive_placement = outside_namespace:silent
+csharp_style_expression_bodied_methods = false:silent
+csharp_style_expression_bodied_constructors = false:silent
+csharp_style_expression_bodied_operators = false:silent
+csharp_style_expression_bodied_properties = true:silent
+csharp_style_expression_bodied_indexers = true:silent
+csharp_style_expression_bodied_accessors = true:silent
+csharp_style_expression_bodied_lambdas = true:silent
+csharp_style_expression_bodied_local_functions = false:silent
 
 [*.vb]
 #### Style nazewnictwa ####
@@ -126,3 +136,13 @@ dotnet_style_qualification_for_property = false:silent
 dotnet_style_qualification_for_method = false:silent
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 dotnet_style_qualification_for_event = false:silent
+tab_width = 4
+indent_size = 4
+end_of_line = crlf
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
+dotnet_style_prefer_auto_properties = true:silent
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
