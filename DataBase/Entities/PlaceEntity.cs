@@ -1,4 +1,6 @@
-﻿namespace iPhoto.DataBase;
+﻿using System.Collections.Generic;
+
+namespace iPhoto.DataBase;
 
 public class PlaceEntity
 {
@@ -6,5 +8,5 @@ public class PlaceEntity
     public string Name { get; set; }
     public double? Latitude { get; set; }
     public double? Longitude { get; set; }
-    public PhotoEntity PhotoEntity { get; set; }
+    public List<PhotoEntity> PhotoEntities { get; set; }
 }

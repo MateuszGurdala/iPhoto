@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace iPhoto.DataBase
 {
@@ -55,27 +52,25 @@ namespace iPhoto.DataBase
         {
             _photoEntity = photoEntity;
         }
-        public Photo(int id, string title, int? albumId, List<string>? tags, DateTime? date, int? placeId, int imageId)
+        public Photo(int id, string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId)
         {
             _photoEntity = new PhotoEntity();
             Id = id;
             Title = title;
             AlbumId = albumId ?? 1; //Default "OtherPhotos" album Id
-            Tags = tags ?? new List<string>() {"#none"};
+            Tags = tags == null ? new List<string>() { "#none" } : ParseTags(tags)!;
             DateTaken = date ?? DateTime.Now;
             PlaceId = placeId ?? 1; //Default "No place" place Id
             ImageId = imageId;
         }
-
-        private List<string> ParseTags(string tags)
+        private List<string>? ParseTags(string tags)
         {
             var list = new List<string>();
             var tagsParsed = tags.Split('#');
-            foreach (var tag in tagsParsed)
+            for (int i = 1; i < tagsParsed.Length; i++)
             {
-                list.Add('#' + tag);
+                list.Add('#' + tagsParsed[i]);
             }
-
             return list;
         }
         public PhotoEntity GetEntity()

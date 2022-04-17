@@ -1,4 +1,6 @@
-﻿namespace iPhoto.DataBase;
+﻿using System.Collections.Generic;
+
+namespace iPhoto.DataBase;
 
 public class AlbumEntity
 {
@@ -8,5 +10,5 @@ public class AlbumEntity
     public string Tags { get; set; }
     public string CreationDate { get; set; }
     public bool IsLocal { get; set; }
-    public PhotoEntity PhotoEntity { get; set; }
+    public List<PhotoEntity> PhotoEntities { get; set; }
 }

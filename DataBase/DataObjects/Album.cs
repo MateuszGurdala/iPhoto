@@ -62,16 +62,15 @@ namespace iPhoto.DataBase
             Tags = tags ?? new List<string>() {"#none"};
             CreationDate = date ?? DateTime.Now.Date;
             IsLocal = isLocal;
-
         }
 
         private List<string> ParseTags(string tags)
         {
             var list = new List<string>();
             var tagsParsed = tags.Split('#');
-            foreach (var tag in tagsParsed)
+            for (int i = 1; i < tagsParsed.Length; i++)
             {
-                list.Add('#' + tag);
+                list.Add('#' + tagsParsed[i]);
             }
 
             return list;
