@@ -98,7 +98,8 @@
             <TextBlock Text="Move To Album" />
             <TextBlock Text="Show Details" />
             <TextBlock Text="Rename" />
-            <TextBlock Text="Delete" />
+            <TextBlock Text="Delete"
+                       PreviewMouseLeftButtonUp="Delete" />
         </StackPanel>
     </Grid>
 </Popup>

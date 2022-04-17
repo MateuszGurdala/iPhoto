@@ -20,12 +20,20 @@ namespace iPhoto.UtilityClasses
         public AddPhotoPopupView Popup;
 
         //Image
-        private String _fileName;
+        private string _fileName;
         private int _width;
         private int _height;
         private double _size;
 
-        public PhotoAdder(DatabaseHandler databaseHandler, String fileName)
+        //Photo
+        private string _title;
+        private string? _rawTags;
+        private DateTime? _dateCreated;
+        private int? _albumId;
+        private int? _placeId;
+        private int _imageId;
+
+        public PhotoAdder(DatabaseHandler databaseHandler, string fileName)
         {
             _databaseHandler = databaseHandler;
             _fullPath = fileName;
@@ -55,33 +63,17 @@ namespace iPhoto.UtilityClasses
         }
         public async void AddPhoto(string title, string album, string rawTags, string creationDateString, string placeTaken)
         {
-            DateTime? creationDate = creationDateString == "Today" ? null : DateTime.Parse(creationDateString);
-            int? albumId;
-            string? tags = rawTags == "#none" ? null : rawTags;
-
-            CheckData(title, album, tags, creationDateString, placeTaken);
-
-            var placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
-
-            if (album == "OtherPhotos")
-            {
-                albumId = null;
-            }
-            else
-            {
-                albumId = _databaseHandler.Albums.First(e => e.Name == album).Id;
-            }
+            CheckData(title, album, rawTags, creationDateString, placeTaken);
+            ParseData(title, album, rawTags, creationDateString, placeTaken);
 
             await Task.Run(() =>
             {
                 _databaseHandler.AddImage(_fileName, _width, _height, _size);
-                var imageId = _databaseHandler.Images.First(e => e.Source == _fileName).Id;
-                _databaseHandler.AddPhoto(title, albumId, rawTags, creationDate, placeId, imageId);
+                _imageId = _databaseHandler.Images.First(e => e.Source == _fileName).Id;
+                _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _imageId);
                 MoveFileToDatabaseDirectory();
             });
-
             Popup.IsOpen = false;
-
         }
         private void CheckData(string title, string album, string? tags, string creationDateString, string placeTaken)
         {
@@ -102,9 +94,17 @@ namespace iPhoto.UtilityClasses
                 throw new InvalidDataException("Invalid tags format.");
             }
         }
+        private void ParseData(string title, string album, string rawTags, string creationDateString, string placeTaken)
+        {
+            _rawTags = rawTags == "#none" ? null : rawTags;
+            _dateCreated = creationDateString == "Today" ? null : DateTime.Parse(creationDateString);
+            _title = title == "Default" ? GenerateDefaultTitle() : title;
+            _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
+            _albumId = album == "OtherPhotos" ? null : _databaseHandler.Albums.First(e => e.Name == album).Id;
+        }
         private void MoveFileToDatabaseDirectory()
         {
-            File.Move(_fullPath, DataHandler.GetDatabaseImageDirectory() + "\\" + _fileName);
+            File.Copy(_fullPath, DataHandler.GetDatabaseImageDirectory() + "\\" + _fileName);
         }
         private bool IsFileLocked(FileInfo file)
         {
@@ -124,6 +124,18 @@ namespace iPhoto.UtilityClasses
 
             //file is not locked
             return false;
+        }
+        private string GenerateDefaultTitle()
+        {
+            var title = DateTime.Now.Date.ToShortDateString() + "photo";
+            var number = 0;
+            while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+            {
+                number += 1;
+                title = DateTime.Now.Date.ToShortDateString() + "photo" + number;
+            }
+
+            return title;
         }
     }
 }

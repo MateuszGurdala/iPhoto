@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using iPhoto.DataBase;
 using iPhoto.Models;
-using iPhoto.UtilityClasses;
 using iPhoto.ViewModels;
 using iPhoto.Views;
 
@@ -11,32 +11,35 @@ namespace iPhoto.Commands
     public class SearchCommand : CommandBase
     {
         private readonly ObservableCollection<PhotoSearchResultViewModel> _searchResults;
-
-        public SearchCommand(ObservableCollection<PhotoSearchResultViewModel> searchResults)
+        private readonly DatabaseHandler _databaseHandler;
+        public SearchCommand(DatabaseHandler databaseHandler, ObservableCollection<PhotoSearchResultViewModel> searchResults)
         {
+            _databaseHandler = databaseHandler;
             _searchResults = searchResults;
         }
         public override void Execute(object parameter)
         {
             var photoSearchOptions = parameter as PhotoSearchOptionsView;
-            var searchData = new SearchData(photoSearchOptions);
+            var searchData = new SearchData(photoSearchOptions!);
 
             _searchResults.Clear();
 
-            if (searchData.Title == "#TEST")
+            if (searchData.Title == "%ALL")
             {
-                SearchTestImages();
+                SearchAllPhotos();
             }
         }
-        private async void SearchTestImages()
+        //MG 17.04 
+        private async void SearchAllPhotos()
         {
-            var photoUris = Directory.GetFiles(DataHandler.GetTestImagesDirectory());
-
-            //foreach (var uri in photoUris)
-            //{
-            //    _searchResults.Add(new PhotoSearchResultViewModel(uri, _searchResults));
-            //    await Task.Delay(1);
-            //}
+            foreach (var photo in _databaseHandler.Photos)
+            {
+                var image = _databaseHandler.Images.First(e => e.Id == photo.ImageId);
+                var album = _databaseHandler.Albums.First(e => e.Id == photo.AlbumId);
+                var place = _databaseHandler.Places.First(e => e.Id == photo.PlaceId);
+                _searchResults.Add(new PhotoSearchResultViewModel(photo, image, album, place, _searchResults));
+                await Task.Delay(10);
+            }
         }
     }
 }

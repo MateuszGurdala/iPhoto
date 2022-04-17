@@ -4,6 +4,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using iPhoto.Commands;
+using iPhoto.Commands.SearchPage;
 using iPhoto.ViewModels;
 
 namespace iPhoto.Views
@@ -15,19 +16,22 @@ namespace iPhoto.Views
         private const double _maxWidth = 160;
         private const int _duration = 150;
         public PhotoSearchResultViewModel ViewModel { get; set; }
-        public ICommand PreviewCommand { get;}
-        public ICommand OpenCommand { get;}
-        public ICommand AddToAlbumCommand { get;}
-        public ICommand ShowDetailsCommand { get;}
-        public ICommand RenameCommand { get;}
-        public ICommand DeleteCommand { get;}
+        public ICommand PreviewCommand { get; }
+        public ICommand OpenCommand { get; }
+        public ICommand AddToAlbumCommand { get; }
+        public ICommand ShowDetailsCommand { get; }
+        public ICommand RenameCommand { get; }
+        public ICommand DeleteCommand { get; }
 
         public PhotoSearchResultOptionsView(PhotoSearchResultViewModel viewModel)
         {
             InitializeComponent();
             ViewModel = viewModel;
+
             PreviewCommand = new PreviewPhotoCommand();
+            DeleteCommand = new DeletePhotoCommand();
         }
+
         private void AnimateEntrance(object sender, EventArgs e)
         {
 
@@ -46,6 +50,7 @@ namespace iPhoto.Views
 
             myStoryboard.Begin();
         }
+
         private void AnimateHeight(object sender, EventArgs e)
         {
             var myDoubleAnimation = new DoubleAnimation()
@@ -62,6 +67,7 @@ namespace iPhoto.Views
 
             myStoryboard.Begin();
         }
+
         private void AnimateLeave(object sender, EventArgs e)
         {
             var myDoubleAnimation = new DoubleAnimation()
@@ -80,6 +86,7 @@ namespace iPhoto.Views
 
             myStoryboard.Begin();
         }
+
         private void AnimateWidth(object sender, EventArgs e)
         {
             var myDoubleAnimation = new DoubleAnimation()
@@ -97,14 +104,21 @@ namespace iPhoto.Views
 
             myStoryboard.Begin();
         }
+
         private void RemovePopup(object sender, EventArgs e)
         {
             IsOpen = false;
         }
+
         private void Preview(object sender, MouseButtonEventArgs e)
         {
             PreviewCommand.Execute(ViewModel);
             RemovePopup(sender, e);
+        }
+
+        private void Delete(object sender, MouseButtonEventArgs e)
+        {
+            DeleteCommand.Execute(ViewModel);
         }
     }
 }

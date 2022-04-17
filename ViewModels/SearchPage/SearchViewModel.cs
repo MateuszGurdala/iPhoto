@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using iPhoto.Commands;
 using iPhoto.Commands.SearchPage;
 using iPhoto.DataBase;
-using iPhoto.UtilityClasses;
 
 namespace iPhoto.ViewModels
 {
@@ -24,7 +21,7 @@ namespace iPhoto.ViewModels
             PhotoSearchResultsCollection = new ObservableCollection<PhotoSearchResultViewModel>();
             _databaseHandler = database;
 
-            SearchCommand = new SearchCommand(PhotoSearchResultsCollection);
+            SearchCommand = new SearchCommand(_databaseHandler, PhotoSearchResultsCollection);
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             AddPhotoCommand = new AddPhotoCommand(_databaseHandler);
 
