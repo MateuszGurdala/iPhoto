@@ -13,18 +13,16 @@
        IsOpen="True"
        PlacementRectangle="480, 270, 1, 1">
     <Grid Background="Transparent">
-        <Border Background="{StaticResource DarkLightGreenGradient}"
-                CornerRadius="40">
+        <Border Background="{StaticResource DarkLightGreenGradient}">
             <Border Background="{StaticResource PastelWhiteGradient}"
-                    CornerRadius="40"
                     Margin="5">
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
                             <Setter Property="Height"
-                                    Value="36" />
+                                    Value="34" />
                             <Setter Property="FontSize"
-                                    Value="32" />
+                                    Value="30" />
                             <Setter Property="FontWeight"
                                     Value="DemiBold" />
                             <Setter Property="HorizontalAlignment"
@@ -39,15 +37,13 @@
                             <Setter Property="Height"
                                     Value="34" />
                             <Setter Property="HorizontalAlignment"
-                                    Value="Left" />
+                                    Value="Right" />
                             <Setter Property="FontSize"
-                                    Value="28" />
+                                    Value="25" />
                             <Setter Property="VerticalAlignment"
                                     Value="Center" />
                             <Setter Property="BorderThickness"
                                     Value="0" />
-                            <Setter Property="FontWeight"
-                                    Value="DemiBold" />
                             <Setter Property="Margin"
                                     Value="20, 0,0 ,0" />
                         </Style>
@@ -93,37 +89,37 @@
                                 CornerRadius="10">
                             <StackPanel Orientation="Vertical"
                                         Margin="10">
-                                <StackPanel>
+                                <Grid>
                                     <TextBlock Text="Title" />
                                     <userControls:TextBoxWithTitle x:Name="Title"
                                                                    TextWidth="300"
                                                                    EntryText="Default" />
-                                </StackPanel>
-                                <StackPanel>
+                                </Grid>
+                                <Grid>
                                     <TextBlock Text="Album" />
                                     <userControls:TextBoxWithTitle x:Name="Album"
-                                                                   TextWidth="265"
+                                                                   TextWidth="275"
                                                                    EntryText="OtherPhotos" />
-                                </StackPanel>
-                                <StackPanel>
+                                </Grid>
+                                <Grid>
                                     <TextBlock Text="Tags"
                                                Height="42" />
                                     <userControls:TextBoxWithTitle x:Name="RawTags"
-                                                                   TextWidth="295"
+                                                                   TextWidth="305"
                                                                    EntryText="#none" />
-                                </StackPanel>
-                                <StackPanel>
+                                </Grid>
+                                <Grid>
                                     <TextBlock Text="Creation Date" />
                                     <userControls:TextBoxWithTitle x:Name="CreationDateString"
-                                                                   TextWidth="160"
+                                                                   TextWidth="170"
                                                                    EntryText="Today" />
-                                </StackPanel>
-                                <StackPanel>
+                                </Grid>
+                                <Grid>
                                     <TextBlock Text="Place Taken" />
                                     <userControls:TextBoxWithTitle x:Name="PlaceTaken"
-                                                                   TextWidth="190"
+                                                                   TextWidth="200"
                                                                    EntryText="NoPlace" />
-                                </StackPanel>
+                                </Grid>
                             </StackPanel>
                         </Border>
                     </Grid>
