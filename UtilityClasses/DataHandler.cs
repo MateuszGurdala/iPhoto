@@ -27,10 +27,6 @@ namespace iPhoto.UtilityClasses
 
             return String.Join("\\", path, 0, length);
         }
-        public static string GetTestImagesDirectory()
-        {
-            return GetProjectDirectoryPath() + "\\Data\\TestImages";
-        }
         public static string GetDatabaseDirectory()
         {
             return GetProjectDirectoryPath() + "\\DataBase";

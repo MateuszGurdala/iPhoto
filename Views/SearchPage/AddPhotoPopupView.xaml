@@ -100,6 +100,25 @@
                                     <userControls:TextBoxWithTitle x:Name="Album"
                                                                    TextWidth="275"
                                                                    EntryText="OtherPhotos" />
+                                    <!--<ComboBox HorizontalAlignment="Right"
+                                              Width="275"
+                                              Height="34"
+                                              Background="{StaticResource DarkLightGreenGradient}"
+                                              Foreground="{StaticResource DarkLightGreenGradient}"
+                                              FontSize="25"
+                                              FontFamily="Open Sans">
+                                        <ComboBox.ItemContainerStyle>
+                                            <Style TargetType="ComboBoxItem">
+                                                <Setter Property="Background" Value="{StaticResource DarkLightGreenGradient}"/>
+                                                <Setter Property="Foreground" Value="{StaticResource PastelWhiteGradient}"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
+                                                <Setter Property="FontSize" Value="25"/>
+                                                <Setter Property="FontFamily" Value="Open Sans"/>
+                                            </Style>
+                                        </ComboBox.ItemContainerStyle>
+                                        <ComboBoxItem Content="OtherPhotos"/>
+                                        <ComboBoxItem Content="Favorites"/>
+                                    </ComboBox>-->
                                 </Grid>
                                 <Grid>
                                     <TextBlock Text="Tags"
@@ -113,6 +132,9 @@
                                     <userControls:TextBoxWithTitle x:Name="CreationDateString"
                                                                    TextWidth="170"
                                                                    EntryText="Today" />
+                                    <!--<DatePicker Height="34"
+                                                Width="170"
+                                                HorizontalAlignment="Right" />-->
                                 </Grid>
                                 <Grid>
                                     <TextBlock Text="Place Taken" />
@@ -123,7 +145,6 @@
                             </StackPanel>
                         </Border>
                     </Grid>
-
 
                     <StackPanel Grid.Column="1"
                                 VerticalAlignment="Bottom"
@@ -140,7 +161,7 @@
                                                    CornerRadius="20"
                                                    ImageSource="../../Graphics/Icons/Delete.png"
                                                    Command="{Binding DiscardCommand}"
-                                                   CommandParameter="{Binding Path=., ElementName=root}"/>
+                                                   CommandParameter="{Binding Path=., ElementName=root}" />
                     </StackPanel>
                 </Grid>
             </Border>
