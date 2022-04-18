@@ -27,50 +27,11 @@ namespace iPhoto.Models
 
             _fullPath = DataHandler.GetDatabaseImageDirectory() + "\\" + ImageData.Source;
             Title = PhotoData.Title;
-            PreviewImage = GetPreviewImage(ImageData.Source);
-        }
-        private string GetTitle(string uri)
-        {
-            foreach (char letter in uri)
-            {
-                string fileName;
-                if (letter == '/')
-                {
-                    fileName = uri.Split('/').Last();
-                    return (fileName.Length > _maxNameLength) ? String.Concat(fileName.Substring(0, _maxNameLength - 4), "...") : fileName;
-                }
-                else if (letter == '\\')
-                {
-                    fileName = uri.Split('\\').Last();
-                    return (fileName.Length > _maxNameLength) ? String.Concat(fileName.Substring(0, _maxNameLength - 4), "...") : fileName;
-                }
-            }
-            return "NameError";
-        }
-        private BitmapImage GetPreviewImage(string uri)
-        {
-            BitmapImage myBitmapImage = new BitmapImage();
-
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(_fullPath);
-            myBitmapImage.DecodePixelWidth = 140;
-            myBitmapImage.EndInit();
-
-            myBitmapImage.Freeze();
-
-            return myBitmapImage;
+            PreviewImage = DataHandler.LoadBitmapImage(_fullPath, 140);
         }
         public BitmapImage GetImage()
         {
-            BitmapImage myBitmapImage = new BitmapImage();
-
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(_fullPath);
-            myBitmapImage.EndInit();
-
-            myBitmapImage.Freeze();
-
-            return myBitmapImage;
+            return DataHandler.LoadBitmapImage(_fullPath, null);
         }
     }
 }

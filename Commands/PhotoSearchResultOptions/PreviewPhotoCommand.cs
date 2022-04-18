@@ -9,7 +9,7 @@ namespace iPhoto.Commands
         public override void Execute(object parameter)
         {
             var clickedPhoto = parameter as PhotoSearchResultViewModel;
-            var popup = new PhotoPreviewWindow(Application.Current.MainWindow, clickedPhoto.PhotoData.GetImage());
+            var popup = new PhotoPreviewWindow(Application.Current.MainWindow, clickedPhoto.Image);
         }
     }
 }

@@ -9,13 +9,20 @@ namespace iPhoto.ViewModels
 {
     public class PhotoSearchResultViewModel : ViewModelBase
     {
-        public readonly PhotoSearchResultModel PhotoData;
-        public BitmapImage ImagePreviewSource { get; }
-        public string PhotoTitle { get; }
+        private readonly SearchViewModel _searchViewModel;
+        private readonly PhotoSearchResultModel _photoData;
+
+        public BitmapImage ImagePreviewSource => _photoData.PreviewImage;
+        public BitmapImage Image => _photoData.GetImage();
+        public string PhotoTitle => _photoData.Title;
+        public DatabaseHandler Database => _searchViewModel.DatabaseHandler;
+
+        public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection =>
+            _searchViewModel.PhotoSearchResultsCollection;
+
         public ICommand ClickSearchResultCommand { get; }
         public ICommand ClickSearchResultOptionsCommand { get; }
         public ICommand PreviewPhotoCommand { get; }
-
         private bool _isClicked;
         public bool IsClicked
         {
@@ -27,18 +34,32 @@ namespace iPhoto.ViewModels
             }
         }
 
+
         //MG 16.04 implemented handling database data format 
-        public PhotoSearchResultViewModel(Photo photoData, Image imageData, Album albumData, Place placeData, ObservableCollection<PhotoSearchResultViewModel> searchResults)
+        public PhotoSearchResultViewModel(Photo photoData, Image imageData, Album albumData, Place placeData, SearchViewModel searchViewModel)
         {
-            PhotoData = new PhotoSearchResultModel(photoData, imageData, albumData, placeData);
+            _searchViewModel = searchViewModel;
+            _photoData = new PhotoSearchResultModel(photoData, imageData, albumData, placeData);
 
             PreviewPhotoCommand = new PreviewPhotoCommand();
-            ClickSearchResultCommand = new ClickSearchResultCommand(searchResults);
+            ClickSearchResultCommand = new ClickSearchResultCommand(_searchViewModel.PhotoSearchResultsCollection);
             ClickSearchResultOptionsCommand = new ClickSearchResultOptionsCommand();
 
-            ImagePreviewSource = PhotoData.PreviewImage;
-            PhotoTitle = PhotoData.Title;
             IsClicked = false;
+        }
+
+        public int GetPhotoId()
+        {
+            return _photoData.PhotoData.Id;
+        }
+        public int GetImageId()
+        {
+            return _photoData.ImageData.Id;
+        }
+
+        public string GetImageSource()
+        {
+            return _photoData.ImageData.Source;
         }
     }
 }

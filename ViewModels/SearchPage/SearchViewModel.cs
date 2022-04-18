@@ -14,24 +14,24 @@ namespace iPhoto.ViewModels
         public ICommand AddPhotoCommand { get; }
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
         //MG 15.04 added db handler class
-        private DatabaseHandler _databaseHandler;
+        public DatabaseHandler DatabaseHandler;
 
         public SearchViewModel(DatabaseHandler database)
         {
             PhotoSearchResultsCollection = new ObservableCollection<PhotoSearchResultViewModel>();
-            _databaseHandler = database;
+            DatabaseHandler = database;
 
-            SearchCommand = new SearchCommand(_databaseHandler, PhotoSearchResultsCollection);
+            SearchCommand = new SearchCommand(this);
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
-            AddPhotoCommand = new AddPhotoCommand(_databaseHandler);
+            AddPhotoCommand = new AddPhotoCommand(DatabaseHandler);
 
             //MG 16.04
             //DELETE THIS - ONLY FOR TESTING PURPOSES
-            var photo = _databaseHandler.Photos.FirstOrDefault(e => e.Id == 1);
-            var image = _databaseHandler.Images.FirstOrDefault(e => e.Id == photo!.ImageId);
-            var album = _databaseHandler.Albums.FirstOrDefault(e => e.Id == photo!.AlbumId);
-            var place = _databaseHandler.Places.FirstOrDefault(e => e.Id == photo!.PlaceId);
-            PhotoSearchResultsCollection.Add(new PhotoSearchResultViewModel(photo!, image!, album!, place!, PhotoSearchResultsCollection));
+            var photo = DatabaseHandler.Photos.FirstOrDefault(e => e.Id == 1);
+            var image = DatabaseHandler.Images.FirstOrDefault(e => e.Id == photo!.ImageId);
+            var album = DatabaseHandler.Albums.FirstOrDefault(e => e.Id == photo!.AlbumId);
+            var place = DatabaseHandler.Places.FirstOrDefault(e => e.Id == photo!.PlaceId);
+            PhotoSearchResultsCollection.Add(new PhotoSearchResultViewModel(photo!, image!, album!, place!, this));
             //~MG 16.04
         }
     }
