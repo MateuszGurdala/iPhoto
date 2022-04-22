@@ -1,18 +1,18 @@
 ﻿using System;
-using System.IO;
 using iPhoto.DataBase;
 using iPhoto.UtilityClasses;
 using Microsoft.Win32;
 
 namespace iPhoto.Commands.SearchPage
 {
-    public class AddPhotoCommand: CommandBase
+    public class AddPhotoCommand : CommandBase
     {
         private readonly DatabaseHandler _databaseHandler;
         public AddPhotoCommand(DatabaseHandler databaseHandler)
         {
             _databaseHandler = databaseHandler;
         }
+
         public override void Execute(object parameter)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -31,7 +31,7 @@ namespace iPhoto.Commands.SearchPage
         }
         private void ConfigureDialog(OpenFileDialog fileDialog)
         {
-            fileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+             fileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg";
             fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             fileDialog.Multiselect = true;
         }

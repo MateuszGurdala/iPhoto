@@ -50,7 +50,6 @@ namespace iPhoto.Views
 
             myStoryboard.Begin();
         }
-
         private void AnimateHeight(object sender, EventArgs e)
         {
             var myDoubleAnimation = new DoubleAnimation()
@@ -67,7 +66,6 @@ namespace iPhoto.Views
 
             myStoryboard.Begin();
         }
-
         private void AnimateLeave(object sender, EventArgs e)
         {
             var myDoubleAnimation = new DoubleAnimation()
@@ -86,7 +84,6 @@ namespace iPhoto.Views
 
             myStoryboard.Begin();
         }
-
         private void AnimateWidth(object sender, EventArgs e)
         {
             var myDoubleAnimation = new DoubleAnimation()
@@ -104,21 +101,19 @@ namespace iPhoto.Views
 
             myStoryboard.Begin();
         }
-
         private void RemovePopup(object sender, EventArgs e)
         {
             IsOpen = false;
         }
-
         private void Preview(object sender, MouseButtonEventArgs e)
         {
             PreviewCommand.Execute(ViewModel);
             RemovePopup(sender, e);
         }
-
         private void Delete(object sender, MouseButtonEventArgs e)
         {
             DeleteCommand.Execute(ViewModel);
+            AnimateLeave(sender, e);
         }
     }
 }
