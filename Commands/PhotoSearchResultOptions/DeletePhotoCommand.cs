@@ -10,7 +10,7 @@ namespace iPhoto.Commands.SearchPage
         public override void Execute(object parameter)
         {
             var viewModel = parameter as PhotoSearchResultViewModel;
-            File.Delete(DataHandler.GetDatabaseImageDirectory() + "\\" + viewModel.GetImageSource());
+            File.Delete(DataHandler.GetDatabaseImageDirectory() + "\\" + viewModel!.GetImageSource());
 
             viewModel!.Database.RemovePhoto(viewModel.GetPhotoId());
             viewModel.Database.RemoveImage(viewModel.GetImageId());

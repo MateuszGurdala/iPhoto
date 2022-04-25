@@ -37,8 +37,8 @@
                         Value="Center" />
                 <Setter Property="BorderThickness"
                         Value="0" />
-                <Setter Property="FontWeight"
-                        Value="DemiBold" />
+                <!--<Setter Property="FontWeight"
+                        Value="DemiBold" />-->
             </Style>
 
         </Grid.Resources>
