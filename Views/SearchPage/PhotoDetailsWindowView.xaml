@@ -1,0 +1,114 @@
+﻿<Window x:Class="iPhoto.Views.SearchPage.PhotoDetailsWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:userControls="clr-namespace:iPhoto.Views.UserControls"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        Title="Photo Preview"
+        Height="312"
+        Topmost="True"
+        Width="262">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="39" />
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Height"
+                    Value="28" />
+            <Setter Property="FontSize"
+                    Value="21" />
+            <Setter Property="FontWeight"
+                    Value="DemiBold" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource DarkLightGreenGradient}" />
+        </Style>
+        <Style TargetType="StackPanel">
+            <Setter Property="Orientation"
+                    Value="Horizontal" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <userControls:RoundedIcon Margin="7, 5, 5, 7">
+            <Grid Margin="4, 4, 4, 4">
+                <userControls:ChromeButton HorizontalAlignment="Right"
+                                           VerticalAlignment="Top" />
+                <StackPanel Margin="5, 34, 5, 5"
+                            Orientation="Vertical">
+                    <!--Title-->
+                    <StackPanel>
+                        <TextBlock Text="Title" />
+                        <TextBlock Text="Example"
+                                   Margin="10, 0, 0, 0"
+                                   FontWeight="Normal" />
+                    </StackPanel>
+                    <!--Album-->
+                    <StackPanel>
+                        <TextBlock Text="Album" />
+                        <TextBlock Text="OtherPhotos"
+                                   Margin="10, 0, 0, 0"
+                                   FontWeight="Normal" />
+                    </StackPanel>
+                    <!--Tags-->
+                    <StackPanel>
+                        <TextBlock Text="Tags" />
+                        <TextBlock Text="#none"
+                                   Margin="10, 0, 0, 0"
+                                   FontWeight="Normal" />
+                    </StackPanel>
+                    <!--Creation Date-->
+                    <StackPanel>
+                        <TextBlock Text="Creation Date" 
+                                   FontSize="20"/>
+                        <TextBlock Text="25.04.2022"
+                                   FontSize="20"
+                                   Margin="8, 0, 0, 0"
+                                   FontWeight="Normal" />
+                    </StackPanel>
+                    <!--PlaceTaken-->
+                    <StackPanel>
+                        <TextBlock Text="Place Taken" />
+                        <TextBlock Text="NoPlace"
+                                   Margin="10, 0, 0, 0"
+                                   FontWeight="Normal" />
+                    </StackPanel>
+                    <TextBlock Text="--------------------------------------"
+                               Height="14"
+                               FontSize="15" />
+                    <!--Source-->
+                    <StackPanel>
+                        <TextBlock Text="Source" />
+                        <TextBlock Text="testphoto.jpg"
+                                   Margin="10, 0, 0, 0"
+                                   FontWeight="Normal" />
+                    </StackPanel>
+                    <!--Resolution-->
+                    <StackPanel>
+                        <TextBlock Text="Resolution" />
+                        <TextBlock Text="3000x2300"
+                                   Margin="10, 0, 0, 0"
+                                   FontWeight="Normal" />
+                    </StackPanel>
+                    <!--Memory Size-->
+                    <StackPanel>
+                        <TextBlock Text="Memory Size" />
+                        <TextBlock Text="5.6 Mb"
+                                   Margin="10, 0, 0, 0"
+                                   FontWeight="Normal" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </userControls:RoundedIcon>
+    </Grid>
+
+</Window>
+
+<!--ShowInTaskbar="False"-->
