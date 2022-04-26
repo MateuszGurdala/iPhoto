@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using iPhoto.Commands;
@@ -14,7 +15,22 @@ namespace iPhoto.ViewModels
 
         public BitmapImage ImagePreviewSource => _photoData.PreviewImage;
         public BitmapImage Image => _photoData.GetImage();
-        public string PhotoTitle => _photoData.Title;
+        //MG 26.04 Fixed title display settings
+        //public string PhotoTitle => _photoData.Title;
+        public string PhotoTitle
+        {
+            get
+            {
+                if (_photoData.Title.Length > 19)
+                {
+                    return _photoData.Title.Substring(0, 16) + "...";
+                }
+                else
+                {
+                    return _photoData.Title;
+                }
+            }
+        }
         public DatabaseHandler Database => _searchViewModel.DatabaseHandler;
 
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection =>
