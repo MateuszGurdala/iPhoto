@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Dynamic;
+using System.Security.Cryptography.Pkcs;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using iPhoto.Commands;
@@ -58,7 +59,7 @@ namespace iPhoto.ViewModels
             _photoData = new PhotoSearchResultModel(photoData, imageData, albumData, placeData);
 
             PreviewPhotoCommand = new PreviewPhotoCommand();
-            ClickSearchResultCommand = new ClickSearchResultCommand(_searchViewModel.PhotoSearchResultsCollection);
+            ClickSearchResultCommand = new ClickSearchResultCommand(_searchViewModel.PhotoSearchResultsCollection, searchViewModel.PhotoDetails);
             ClickSearchResultOptionsCommand = new ClickSearchResultOptionsCommand();
 
             IsClicked = false;
@@ -76,6 +77,11 @@ namespace iPhoto.ViewModels
         public string GetImageSource()
         {
             return _photoData.ImageData.Source;
+        }
+
+        public PhotoSearchResultModel GetPhotoData()
+        {
+            return _photoData;
         }
     }
 }

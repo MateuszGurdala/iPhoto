@@ -10,6 +10,7 @@
         ResizeMode="NoResize"
         Background="Transparent"
         Title="Photo Preview"
+        ShowInTaskbar="False"
         Height="312"
         Topmost="True"
         Width="262">
@@ -47,21 +48,21 @@
                     <!--Title-->
                     <StackPanel>
                         <TextBlock Text="Title" />
-                        <TextBlock Text="Example"
+                        <TextBlock Text="{Binding Title}"
                                    Margin="10, 0, 0, 0"
                                    FontWeight="Normal" />
                     </StackPanel>
                     <!--Album-->
                     <StackPanel>
                         <TextBlock Text="Album" />
-                        <TextBlock Text="OtherPhotos"
+                        <TextBlock Text="{Binding Album}"
                                    Margin="10, 0, 0, 0"
                                    FontWeight="Normal" />
                     </StackPanel>
                     <!--Tags-->
                     <StackPanel>
                         <TextBlock Text="Tags" />
-                        <TextBlock Text="#none"
+                        <TextBlock Text="{Binding Tags}"
                                    Margin="10, 0, 0, 0"
                                    FontWeight="Normal" />
                     </StackPanel>
@@ -69,7 +70,7 @@
                     <StackPanel>
                         <TextBlock Text="Creation Date" 
                                    FontSize="20"/>
-                        <TextBlock Text="25.04.2022"
+                        <TextBlock Text="{Binding CreationDate}"
                                    FontSize="20"
                                    Margin="8, 0, 0, 0"
                                    FontWeight="Normal" />
@@ -77,7 +78,7 @@
                     <!--PlaceTaken-->
                     <StackPanel>
                         <TextBlock Text="Place Taken" />
-                        <TextBlock Text="NoPlace"
+                        <TextBlock Text="{Binding PlaceTaken}"
                                    Margin="10, 0, 0, 0"
                                    FontWeight="Normal" />
                     </StackPanel>
@@ -87,21 +88,21 @@
                     <!--Source-->
                     <StackPanel>
                         <TextBlock Text="Source" />
-                        <TextBlock Text="testphoto.jpg"
+                        <TextBlock Text="{Binding Source}"
                                    Margin="10, 0, 0, 0"
                                    FontWeight="Normal" />
                     </StackPanel>
                     <!--Resolution-->
                     <StackPanel>
                         <TextBlock Text="Resolution" />
-                        <TextBlock Text="3000x2300"
+                        <TextBlock Text="{Binding Resolution}"
                                    Margin="10, 0, 0, 0"
                                    FontWeight="Normal" />
                     </StackPanel>
                     <!--Memory Size-->
                     <StackPanel>
                         <TextBlock Text="Memory Size" />
-                        <TextBlock Text="5.6 Mb"
+                        <TextBlock Text="{Binding MemorySize}"
                                    Margin="10, 0, 0, 0"
                                    FontWeight="Normal" />
                     </StackPanel>
@@ -112,4 +113,3 @@
 
 </Window>
 
-<!--ShowInTaskbar="False"-->

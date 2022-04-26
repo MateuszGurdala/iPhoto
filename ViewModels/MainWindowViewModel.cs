@@ -1,6 +1,7 @@
 ﻿using iPhoto.Commands;
 using System.Windows;
 using iPhoto.DataBase;
+using iPhoto.Views.SearchPage;
 
 namespace iPhoto.ViewModels
 {
@@ -29,10 +30,10 @@ namespace iPhoto.ViewModels
         public HomePageViewModel HomePageViewModel { get; }
 
         //MG 15.04 added db handler class
-        public MainWindowViewModel(Window mainWindow, DatabaseHandler database)
+        public MainWindowViewModel(Window mainWindow, DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow)
         {
             HomePageViewModel = new HomePageViewModel();
-            SearchViewModel = new SearchViewModel(database);    //MG 15.04
+            SearchViewModel = new SearchViewModel(database, photoDetailsWindow);    //MG 15.04 //MG 26.04 add photo details 
             AlbumsViewModel = new AlbumsViewModel();
             PlacesViewModel = new PlacesViewModel();
             AccountViewModel = new AccountViewModel();

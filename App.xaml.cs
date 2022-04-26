@@ -18,16 +18,16 @@ namespace iPhoto
         }*/
         protected override void OnStartup(StartupEventArgs e)
         {
-
             MainWindow = new MainWindow();
+            //MG 26.04 Added window object, it will be moved to different model after I solve datacontext override bug
+            var photoDetailsWindow = new PhotoDetailsWindowView();
             _databaseHandler = new DatabaseHandler();   //MG 15.04
-            MainWindow.DataContext = new MainWindowViewModel(MainWindow, _databaseHandler); //MG 15.04
-            //var sideWindowView = new PhotoDetailsWindowView();
-            //sideWindowView.Show();
+            MainWindow.DataContext = new MainWindowViewModel(MainWindow, _databaseHandler, photoDetailsWindow); //MG 15.04
 
             //_navigationStore.CurrentViewModel = null;
             // MainWindow.DataContext = new MainWindowViewModel(_navigationStore);
             MainWindow.Show();
+            photoDetailsWindow.Show();
             base.OnStartup(e);
         }
     }
