@@ -33,7 +33,7 @@ namespace iPhoto.DataBase
         }
         public DateTime DateTaken
         {
-            get => DateTime.Parse(_photoEntity.DateTaken);
+            get => DateTime.ParseExact(_photoEntity.DateTaken, "dd.MM.yyyy HH:mm:ss", null);
             set => _photoEntity.DateTaken = value.ToString();
         }
         public int PlaceId
