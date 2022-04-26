@@ -40,7 +40,8 @@
         <userControls:RoundedIcon Margin="7, 5, 5, 7">
             <Grid Margin="4, 4, 4, 4">
                 <userControls:ChromeButton HorizontalAlignment="Right"
-                                           VerticalAlignment="Top" />
+                                           VerticalAlignment="Top"
+                                           PreviewMouseLeftButtonDown="Hide"/>
                 <StackPanel Margin="5, 34, 5, 5"
                             Orientation="Vertical">
                     <!--Title-->
