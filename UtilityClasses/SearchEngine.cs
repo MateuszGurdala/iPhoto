@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Automation;
 using iPhoto.DataBase;
 using iPhoto.Models;
 using iPhoto.ViewModels;
-using Microsoft.VisualBasic.FileIO;
 
 namespace iPhoto.UtilityClasses
 {
@@ -37,7 +34,7 @@ namespace iPhoto.UtilityClasses
                 _newDataLoaded = true;
             }
         }
-        public void GetSearchResults()
+        public async void GetSearchResults()
         {
             if (_newDataLoaded)
             {
@@ -50,6 +47,7 @@ namespace iPhoto.UtilityClasses
                 foreach (var photo in thirdSearch)
                 {
                     _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
+                    await Task.Delay(10);
                 }
             }
         }
@@ -154,6 +152,19 @@ namespace iPhoto.UtilityClasses
             }
 
             return secondSearchResults;
+        }
+        public async void LoadAllPhotos()
+        {
+            _searchViewModel.PhotoSearchResultsCollection.Clear();
+
+            foreach (var photo in _searchViewModel.DatabaseHandler.Photos)
+            {
+                var image = _databaseHandler.Images.First(e => e.Id == photo.ImageId);
+                var album = _databaseHandler.Albums.First(e => e.Id == photo.AlbumId);
+                var place = _databaseHandler.Places.First(e => e.Id == photo.PlaceId);
+                _searchViewModel.PhotoSearchResultsCollection.Add(new PhotoSearchResultViewModel(photo, image, album, place, _searchViewModel));
+                await Task.Delay(10);
+            }
         }
     }
 }
