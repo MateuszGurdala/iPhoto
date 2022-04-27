@@ -1,4 +1,5 @@
-﻿using iPhoto.Views;
+﻿using System;
+using iPhoto.Views;
 
 namespace iPhoto.Models
 {
@@ -54,6 +55,57 @@ namespace iPhoto.Models
         public string? GetLocationParam()
         {
             return _location;
+        }
+        public bool IsNull()
+        {
+            if (DateFormatValid() == false || TagsFormatValid() == false)
+            {
+                return true;
+            }
+            var parameters = new string?[] {_title, _photoAlbum, _tags, _startDate, _endDate, _location};
+            foreach (var param in parameters)
+            {
+                if (param is not null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool DateFormatValid()
+        {
+            if (_startDate != null)
+            {
+                try
+                {
+                    DateTime.Parse(_startDate);
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            if (_endDate != null)
+            {
+                try
+                {
+                    DateTime.Parse(_endDate);
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool TagsFormatValid()
+        {
+            if (_tags != null && _tags[0] != '#')
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

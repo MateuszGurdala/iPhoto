@@ -64,11 +64,15 @@
                             Height="40">
                     <uc:TextBoxWithTitle Width="110"
                                          EntryText="*From"
+                                         FontSize="21"
+                                         Height="30"
                                          x:Name="StartDate" />
 
                     <uc:TextBoxWithTitle Width="110"
                                          EntryText="*To"
                                          x:Name="EndDate"
+                                         FontSize="21"
+                                         Height="30"
                                          Margin="10, 0, 0, 0" />
 
                 </StackPanel>

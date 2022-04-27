@@ -4,9 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Automation;
 using iPhoto.DataBase;
 using iPhoto.Models;
 using iPhoto.ViewModels;
+using Microsoft.VisualBasic.FileIO;
 
 namespace iPhoto.UtilityClasses
 {
@@ -29,7 +31,7 @@ namespace iPhoto.UtilityClasses
         }
         public void LoadParams(SearchParams searchParams)
         {
-            if (searchParams != _searchParams)
+            if (searchParams != _searchParams && searchParams.IsNull() != true)
             {
                 _searchParams = searchParams;
                 _newDataLoaded = true;
@@ -43,8 +45,9 @@ namespace iPhoto.UtilityClasses
 
                 var firstSearch = FirstSearch();
                 var secondSearch = SecondSearch(firstSearch);
+                var thirdSearch = ThirdSearch(secondSearch);
 
-                foreach (var photo in secondSearch)
+                foreach (var photo in thirdSearch)
                 {
                     _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
                 }
@@ -70,19 +73,21 @@ namespace iPhoto.UtilityClasses
             if (_searchParams.GetAlbumParam() != null)
             {
                 album = _databaseHandler.Albums.FirstOrDefault(e => e.Name == _searchParams.GetAlbumParam());
-                if (album != null)
+                if (album == null)
                 {
-                    photos = photos.FindAll(e => e.AlbumId == album.Id);
+                    return new List<Photo>();
                 }
+                photos = photos.FindAll(e => e.AlbumId == album.Id);
             }
             //Searching through places
             if (_searchParams.GetLocationParam() != null)
             {
                 place = _databaseHandler.Places.FirstOrDefault(e => e.Name == _searchParams.GetLocationParam());
-                if (place != null)
+                if (place == null)
                 {
-                    photos = photos.FindAll(e => e.PlaceId == place.Id);
+                    return new List<Photo>();
                 }
+                photos = photos.FindAll(e => e.PlaceId == place.Id);
             }
             return photos;
         }
@@ -129,6 +134,26 @@ namespace iPhoto.UtilityClasses
                 }
             }
             return firstSearchResults;
+        }
+        private List<Photo> ThirdSearch(List<Photo> secondSearchResults)
+        {
+            if (_searchParams.GetTitleParam() != null)
+            {
+                secondSearchResults = secondSearchResults.FindAll(e =>
+                    e.Title.ToLower().Contains(_searchParams.GetTitleParam().ToLower()));
+            }
+
+            if (_searchParams.GetTagsParam() != null)
+            {
+                var tags = _searchParams.GetTagsParam().Split('#');
+                foreach (var tag in tags)
+                {
+                    secondSearchResults = secondSearchResults.FindAll(e =>
+                        e.RawTags.ToLower().Contains('#' + tag.ToLower()));
+                }
+            }
+
+            return secondSearchResults;
         }
     }
 }

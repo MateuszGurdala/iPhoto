@@ -1,7 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using iPhoto.DataBase;
 using iPhoto.Models;
 using iPhoto.UtilityClasses;
 using iPhoto.ViewModels;
@@ -23,6 +21,7 @@ namespace iPhoto.Commands
             var photoSearchOptions = parameter as PhotoSearchOptionsView;
             var searchData = new SearchParams(photoSearchOptions!);
 
+            //MG 27.04 Implemented Search Engine
             if (searchData.GetTitleParam() == "%ALL")
             {
                 SearchAllPhotos();
