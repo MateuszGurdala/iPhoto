@@ -11,7 +11,7 @@ namespace iPhoto.Views
 {
     public partial class PhotoSearchResultOptionsView : Popup
     {
-        private const double _maxHeight = 240;
+        private const double _maxHeight = 200;
         private const double _minHeight = 25;
         private const double _maxWidth = 160;
         private const int _duration = 150;
@@ -19,7 +19,6 @@ namespace iPhoto.Views
         public ICommand PreviewCommand { get; }
         public ICommand OpenCommand { get; }
         public ICommand AddToAlbumCommand { get; }
-        public ICommand ShowDetailsCommand { get; }
         public ICommand RenameCommand { get; }
         public ICommand DeleteCommand { get; }
 

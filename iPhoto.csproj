@@ -40,7 +40,9 @@
     <None Remove="Data\TestImages\test.jpg" />
     <None Remove="Graphics\Icons\AddPhoto.png" />
     <None Remove="Graphics\Icons\Checked.png" />
+    <None Remove="Graphics\Icons\CreateWindow.png" />
     <None Remove="Graphics\Icons\Delete.png" />
+    <None Remove="Graphics\Icons\PhotoDetails.png" />
     <None Remove="Graphics\Icons\Place.png" />
     <None Remove="Graphics\Icons\Search.png" />
     <None Remove="Graphics\ChromeButtons\Exit.png" />
@@ -96,8 +98,10 @@
     <Resource Include="Graphics\Icons\Add.png" />
     <Resource Include="Graphics\Icons\AddPhoto.png" />
     <Resource Include="Graphics\Icons\Checked.png" />
+    <Resource Include="Graphics\Icons\CreateWindow.png" />
     <Resource Include="Graphics\Icons\Delete.png" />
     <Resource Include="Graphics\Icons\ExtendMenu.png" />
+    <Resource Include="Graphics\Icons\PhotoDetails.png" />
     <Resource Include="Graphics\Icons\Place.png" />
     <Resource Include="Graphics\Icons\Refresh.png" />
     <Resource Include="Graphics\Icons\Search.png" />

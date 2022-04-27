@@ -27,7 +27,6 @@ namespace iPhoto
             //_navigationStore.CurrentViewModel = null;
             // MainWindow.DataContext = new MainWindowViewModel(_navigationStore);
             MainWindow.Show();
-            photoDetailsWindow.Show();
             base.OnStartup(e);
         }
     }

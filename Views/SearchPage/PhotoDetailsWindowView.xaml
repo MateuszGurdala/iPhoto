@@ -13,7 +13,7 @@
         ShowInTaskbar="False"
         Height="312"
         Topmost="True"
-        Width="262">
+        Width="362">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="39" />

@@ -89,14 +89,13 @@
         </Style>
     </Popup.Resources>
     <Grid Width="160"
-          Height="240"
+          Height="200"
           Background="{StaticResource DarkLightGreenGradient}">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Preview" 
                        PreviewMouseLeftButtonUp="Preview"/>
             <TextBlock Text="PhotoViewer" />
             <TextBlock Text="Move To Album" />
-            <TextBlock Text="Show Details" />
             <TextBlock Text="Rename" />
             <TextBlock Text="Delete"
                        PreviewMouseLeftButtonUp="Delete" />

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
              xmlns:vs="clr-namespace:iPhoto.Views"
+             xmlns:searchPage="clr-namespace:iPhoto.Views.SearchPage"
              mc:Ignorable="d"
              d:DesignHeight="900"
              d:DesignWidth="800">
@@ -41,16 +42,15 @@
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Margin="0, 5, 30, 10">
+            <!--Photo Details Button-->
+            <uc:CustomButton  ImageSource="../../Graphics/Icons/PhotoDetails.png"
+                              Margin="10, 0, 0, 0"
+                              Command="{Binding ExtendPhotoDetailsCommand}"
+                              CommandParameter="{Binding ElementName=PhotoDetailsColumn}"/>
             <!--Add Photos Button-->
             <uc:CustomButton  ImageSource="../../Graphics/Icons/AddPhoto.png"
                               Margin="10, 0, 0, 0"
                               Command="{Binding AddPhotoCommand}"/>
-            <!--Sort Button-->
-            <uc:CustomButton  ImageSource="../../Graphics/Icons/Sort.png"
-                              Margin="10, 0, 0, 0" />
-            <!--Refresh Button-->
-            <uc:CustomButton  ImageSource="../../Graphics/Icons/Refresh.png"
-                              Margin="10, 0, 0, 0" />
         </StackPanel>
 
         <Grid Grid.Row="1">
@@ -58,6 +58,8 @@
                 <ColumnDefinition Name="SearchOptionsColumn"
                                   Width="280" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Name="PhotoDetailsColumn"
+                                  Width="10" />
             </Grid.ColumnDefinitions>
 
             <!--Search Options View-->
@@ -67,7 +69,7 @@
 
             <!--Search Results View-->
             <uc:RoundedIcon Grid.Column="1"
-                            Margin="0, 0, 30, 20">
+                            Margin="0, 0, 10, 20">
                 <ScrollViewer>
                     <ItemsControl ItemsSource="{Binding PhotoSearchResultsCollection}">
                         <ItemsControl.ItemTemplate>
@@ -85,6 +87,12 @@
                     </ItemsControl>
                 </ScrollViewer>
             </uc:RoundedIcon>
+            <!--PhotoDetails-->
+            <searchPage:PhotoDetailsSideView Width="230"
+                                             Grid.Column="2"
+                                             HorizontalAlignment="Right"
+                                             Margin="0, 10, 10, 0"
+                                             DataContext="{Binding PhotoDetails}"/>
         </Grid>
     </Grid>
 </UserControl>

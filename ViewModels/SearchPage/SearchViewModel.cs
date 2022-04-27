@@ -13,23 +13,26 @@ namespace iPhoto.ViewModels
     {
         public ICommand SearchCommand { get; }
         public ICommand ExtendSearchMenuCommand { get; }
+        public ICommand ExtendPhotoDetailsCommand { get; }
         public ICommand AddPhotoCommand { get; }
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
         //MG 15.04 added db handler class
         public DatabaseHandler DatabaseHandler;
-        public PhotoDetailsViewModel PhotoDetails;  //MG 26.04 Added photo details
+        public PhotoDetailsViewModel PhotoDetails { get; }  //MG 26.04 Added photo details
 
         public SearchViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow)
         {
             PhotoSearchResultsCollection = new ObservableCollection<PhotoSearchResultViewModel>();
             DatabaseHandler = database;
-            PhotoDetails = new PhotoDetailsViewModel();
-            photoDetailsWindow.DataContext = PhotoDetails;
+
 
             SearchCommand = new SearchCommand(this);
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
+            ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
             AddPhotoCommand = new AddPhotoCommand(DatabaseHandler);
 
+            PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
+            photoDetailsWindow.DataContext = PhotoDetails;
 
             //MG 16.04
             //DELETE THIS - ONLY FOR TESTING PURPOSES

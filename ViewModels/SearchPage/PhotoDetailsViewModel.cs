@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using iPhoto.Commands.SearchPage;
+using iPhoto.Views.SearchPage;
 
 namespace iPhoto.ViewModels.SearchPage
 {
     public class PhotoDetailsViewModel : ViewModelBase
     {
+        public ICommand ShowPhotoDetailsCommand { get; }
+
         private string _title;
         public string Title
         {
@@ -133,6 +138,11 @@ namespace iPhoto.ViewModels.SearchPage
                 _memorySize = float.Parse(value);
                 OnPropertyChanged(nameof(MemorySize));
             }
+        }
+
+        public PhotoDetailsViewModel(PhotoDetailsWindowView photoDetailsWindow, ExtendPhotoDetailsCommand photoDetailsCommand)
+        {
+            ShowPhotoDetailsCommand = new ShowPhotoDetailsWindowCommand(photoDetailsWindow, photoDetailsCommand);
         }
     }
 }
