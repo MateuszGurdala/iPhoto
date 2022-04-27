@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using iPhoto.DataBase;
 using iPhoto.Models;
+using iPhoto.UtilityClasses;
 using iPhoto.ViewModels;
 using iPhoto.Views;
 
@@ -11,20 +12,25 @@ namespace iPhoto.Commands
     public class SearchCommand : CommandBase
     {
         private readonly SearchViewModel _searchViewModel;
-        public SearchCommand(SearchViewModel searchViewModel)
+        private readonly SearchEngine _searchEngine;
+        public SearchCommand(SearchViewModel searchViewModel, SearchEngine searchEngine)
         {
             _searchViewModel = searchViewModel;
+            _searchEngine = searchEngine;
         }
         public override void Execute(object parameter)
         {
             var photoSearchOptions = parameter as PhotoSearchOptionsView;
-            var searchData = new SearchData(photoSearchOptions!);
+            var searchData = new SearchParams(photoSearchOptions!);
 
-            _searchViewModel.PhotoSearchResultsCollection.Clear();
-
-            if (searchData.Title == "%ALL")
+            if (searchData.GetTitleParam() == "%ALL")
             {
                 SearchAllPhotos();
+            }
+            else
+            {
+                _searchEngine.LoadParams(searchData);
+                _searchEngine.GetSearchResults();
             }
         }
         //MG 17.04 

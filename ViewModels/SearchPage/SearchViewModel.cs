@@ -4,6 +4,7 @@ using System.Windows.Input;
 using iPhoto.Commands;
 using iPhoto.Commands.SearchPage;
 using iPhoto.DataBase;
+using iPhoto.UtilityClasses;
 using iPhoto.ViewModels.SearchPage;
 using iPhoto.Views.SearchPage;
 
@@ -16,8 +17,8 @@ namespace iPhoto.ViewModels
         public ICommand ExtendPhotoDetailsCommand { get; }
         public ICommand AddPhotoCommand { get; }
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
-        //MG 15.04 added db handler class
-        public DatabaseHandler DatabaseHandler;
+        public DatabaseHandler DatabaseHandler; //MG 15.04 added db handler class
+        public SearchEngine SearchEngine; //MG 27.04 Added
         public PhotoDetailsViewModel PhotoDetails { get; }  //MG 26.04 Added photo details
 
         public SearchViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow)
@@ -26,13 +27,15 @@ namespace iPhoto.ViewModels
             DatabaseHandler = database;
 
 
-            SearchCommand = new SearchCommand(this);
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
             AddPhotoCommand = new AddPhotoCommand(DatabaseHandler);
 
             PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
             photoDetailsWindow.DataContext = PhotoDetails;
+
+            SearchEngine = new SearchEngine(DatabaseHandler, this);
+            SearchCommand = new SearchCommand(this, SearchEngine);
 
             //MG 16.04
             //DELETE THIS - ONLY FOR TESTING PURPOSES

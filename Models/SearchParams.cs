@@ -2,7 +2,7 @@
 
 namespace iPhoto.Models
 {
-    public class SearchData
+    public class SearchParams
     {
         private string? _title;
         private string? _photoAlbum;
@@ -11,12 +11,7 @@ namespace iPhoto.Models
         private string? _endDate;
         private string? _location;
 
-        public string Title
-        {
-            get { return _title; }
-        }
-
-        public SearchData(PhotoSearchOptionsView searchOptions)
+        public SearchParams(PhotoSearchOptionsView searchOptions)
         {
             _title = searchOptions.Title.ContentTextBox.Text;
             _photoAlbum = searchOptions.Album.ContentTextBox.Text;
@@ -35,6 +30,30 @@ namespace iPhoto.Models
             _startDate = (_startDate[0] == '*') ? null : _startDate;
             _endDate = (_endDate[0] == '*') ? null : _endDate;
             _location = (_location[0] == '*') ? null : _location;
+        }
+        public string? GetTitleParam()
+        {
+            return _title;
+        }
+        public string? GetTagsParam()
+        {
+            return _tags;
+        }
+        public string? GetStartDateParam()
+        {
+            return _startDate;
+        }
+        public string? GetAlbumParam()
+        {
+            return _photoAlbum;
+        }
+        public string? GetEndDateParam()
+        {
+            return _endDate;
+        }
+        public string? GetLocationParam()
+        {
+            return _location;
         }
     }
 }
