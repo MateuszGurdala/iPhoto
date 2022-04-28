@@ -15,7 +15,7 @@ namespace iPhoto.Models
         public SearchParams(PhotoSearchOptionsView searchOptions)
         {
             _title = searchOptions.Title.ContentTextBox.Text;
-            _photoAlbum = searchOptions.Album.ContentTextBox.Text;
+            _photoAlbum = searchOptions.Album.Text;
             _tags = searchOptions.Tags.ContentTextBox.Text;
             _startDate = searchOptions.StartDate.ContentTextBox.Text;
             _endDate = searchOptions.EndDate.ContentTextBox.Text;

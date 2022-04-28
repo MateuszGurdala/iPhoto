@@ -70,7 +70,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Button Command="{Binding Exit}">
+    <Button>
         <Image Source="../../Graphics/ChromeButtons/Exit.png" />
     </Button>
 </UserControl>

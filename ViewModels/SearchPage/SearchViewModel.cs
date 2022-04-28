@@ -17,6 +17,13 @@ namespace iPhoto.ViewModels
         public ICommand ExtendPhotoDetailsCommand { get; }
         public ICommand AddPhotoCommand { get; }
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
+        public ObservableCollection<string> AlbumList
+        {
+            get
+            {
+                return DatabaseHandler.GetAlbumList();
+            }
+        }
         public DatabaseHandler DatabaseHandler; //MG 15.04 added db handler class
         public SearchEngine SearchEngine; //MG 27.04 Added
         public PhotoDetailsViewModel PhotoDetails { get; }  //MG 26.04 Added photo details
@@ -36,15 +43,6 @@ namespace iPhoto.ViewModels
 
             SearchEngine = new SearchEngine(DatabaseHandler, this);
             SearchCommand = new SearchCommand(this, SearchEngine);
-
-            //MG 16.04
-            //DELETE THIS - ONLY FOR TESTING PURPOSES
-            var photo = DatabaseHandler.Photos.FirstOrDefault(e => e.Id == 1);
-            var image = DatabaseHandler.Images.FirstOrDefault(e => e.Id == photo!.ImageId);
-            var album = DatabaseHandler.Albums.FirstOrDefault(e => e.Id == photo!.AlbumId);
-            var place = DatabaseHandler.Places.FirstOrDefault(e => e.Id == photo!.PlaceId);
-            PhotoSearchResultsCollection.Add(new PhotoSearchResultViewModel(photo!, image!, album!, place!, this));
-            //~MG 16.04
         }
     }
 }

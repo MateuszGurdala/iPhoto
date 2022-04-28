@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
@@ -367,6 +368,23 @@ namespace iPhoto.DataBase
             photo.Tags = tags ?? photo.Tags;
             photo.DateTaken = date ?? photo.DateTaken;
             photo.PlaceId = placeId ?? photo.PlaceId;
+        }
+        //Utility methods
+        public ObservableCollection<string> GetAlbumList()
+        {
+            var albumList = new List<string>();
+            var albumCollection = new ObservableCollection<string>();
+            albumList.Add("*");
+            foreach (var album in Albums)
+            {
+                albumList.Add(album.Name);
+            }
+            albumList.Sort();
+            foreach (var album in albumList)
+            {
+                albumCollection.Add(album);
+            }
+            return albumCollection;
         }
     }
 }
