@@ -80,7 +80,24 @@
                 <TextBlock Text="Creation Date" />
                 <StackPanel Orientation="Horizontal"
                             Height="40">
-                    <uc:TextBoxWithTitle Width="110"
+                    <DatePicker x:Name="StartDate"
+                                CalendarStyle="{DynamicResource DatePickerCalendarStyle1}"
+                                Style="{DynamicResource DatePickerStyle1}"
+                                Width="110"
+                                Height="30"
+                                FontSize="15"
+                                Background="{StaticResource DarkLightGreenGradient}"
+                                Foreground="{StaticResource PastelWhiteGradient}" />
+                    <DatePicker x:Name="EndDate"
+                                CalendarStyle="{DynamicResource DatePickerCalendarStyle1}"
+                                Style="{DynamicResource DatePickerStyle1}"
+                                Width="110"
+                                Height="30"
+                                FontSize="15"
+                                Background="{StaticResource DarkLightGreenGradient}"
+                                Foreground="{StaticResource PastelWhiteGradient}"
+                                Margin="10, 0, 0, 0"/>
+                    <!--<uc:TextBoxWithTitle Width="110"
                                          EntryText="*From"
                                          FontSize="21"
                                          Height="30"
@@ -91,7 +108,7 @@
                                          x:Name="EndDate"
                                          FontSize="21"
                                          Height="30"
-                                         Margin="10, 0, 0, 0" />
+                                         Margin="10, 0, 0, 0" />-->
 
                 </StackPanel>
                 <!--Location-->
