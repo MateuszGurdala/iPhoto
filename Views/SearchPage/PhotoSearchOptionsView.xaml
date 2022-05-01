@@ -51,8 +51,26 @@
                                      x:Name="Title" />
                 <!--Title-->
                 <TextBlock Text="Album" />
-                <uc:TextBoxWithTitle EntryText="*Any"
-                                     x:Name="Album" />
+                <ComboBox x:Name="Album"
+                          Style="{StaticResource ComboBoxStyle1}"
+                          Width="230"
+                          Height="35"
+                          HorizontalAlignment="Left"
+                          FontSize="25"
+                          ItemContainerStyle="{StaticResource ComboBoxItem1}"
+                          ItemsSource="{Binding AlbumList}"
+                          SelectedIndex="0">
+                    <ComboBox.Resources>
+                        <Style TargetType="ScrollViewer">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="Padding"
+                                    Value="0" />
+                        </Style>
+                    </ComboBox.Resources>
+                </ComboBox>
+                <!--<uc:TextBoxWithTitle EntryText="*Any"
+                                     x:Name="Album" />-->
                 <!--Title-->
                 <TextBlock Text="Tags"
                            Height="40" />
@@ -62,7 +80,24 @@
                 <TextBlock Text="Creation Date" />
                 <StackPanel Orientation="Horizontal"
                             Height="40">
-                    <uc:TextBoxWithTitle Width="110"
+                    <DatePicker x:Name="StartDate"
+                                CalendarStyle="{DynamicResource DatePickerCalendarStyle1}"
+                                Style="{DynamicResource DatePickerStyle1}"
+                                Width="110"
+                                Height="30"
+                                FontSize="15"
+                                Background="{StaticResource DarkLightGreenGradient}"
+                                Foreground="{StaticResource PastelWhiteGradient}" />
+                    <DatePicker x:Name="EndDate"
+                                CalendarStyle="{DynamicResource DatePickerCalendarStyle1}"
+                                Style="{DynamicResource DatePickerStyle1}"
+                                Width="110"
+                                Height="30"
+                                FontSize="15"
+                                Background="{StaticResource DarkLightGreenGradient}"
+                                Foreground="{StaticResource PastelWhiteGradient}"
+                                Margin="10, 0, 0, 0"/>
+                    <!--<uc:TextBoxWithTitle Width="110"
                                          EntryText="*From"
                                          FontSize="21"
                                          Height="30"
@@ -73,7 +108,7 @@
                                          x:Name="EndDate"
                                          FontSize="21"
                                          Height="30"
-                                         Margin="10, 0, 0, 0" />
+                                         Margin="10, 0, 0, 0" />-->
 
                 </StackPanel>
                 <!--Location-->

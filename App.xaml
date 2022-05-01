@@ -8,6 +8,7 @@
                 <ResourceDictionary Source="ResourceDictionaries/BaseStyles.xaml" />
                 <ResourceDictionary Source="ResourceDictionaries/ColorResources.xaml" />
                 <ResourceDictionary Source="ResourceDictionaries/ComboBoxStyle.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/DatePickerTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

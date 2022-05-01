@@ -24,8 +24,8 @@
         
         <Grid>
             <Border Name="Border"
-                    Width="152"
-                    Height="172"
+                    Width="142"
+                    Height="162"
                     Background="Transparent"
                     BorderThickness="1"
                     Opacity="{Binding IsClicked, Converter={StaticResource BoolToOpacityConverter}}">
@@ -33,8 +33,8 @@
                     <SolidColorBrush Color="{StaticResource BaseGreen}" />
                 </Border.BorderBrush>
             </Border>
-            <Grid Width="150"
-                  Height="170">
+            <Grid Width="140"
+                  Height="160">
                 <Grid.Background>
                     <SolidColorBrush Color="{StaticResource BaseGreen}"
                                      Opacity="0" />
@@ -72,10 +72,10 @@
 
                 <StackPanel Orientation="Vertical">
                     <!--Image Control-->
-                    <Grid Width="150"
-                          Height="150">
+                    <Grid Width="140"
+                          Height="140">
                         <Image Margin="5"
-                               Stretch="Uniform"
+                               Stretch="UniformToFill"
                                Source="{Binding ImagePreviewSource, ElementName=Root}" />
                     </Grid>
                     <!--Title Control-->
