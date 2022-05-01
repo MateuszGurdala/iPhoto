@@ -7,6 +7,7 @@ namespace iPhoto.DataBase
     public class Album
     {
         private readonly AlbumEntity _albumEntity;
+        private readonly string[] validDateFormats = { "dd.MM.yyyy HH:mm:ss", "dd.MM.yyyy" };
         public int Id
         {
             get => _albumEntity.Id;
@@ -33,8 +34,8 @@ namespace iPhoto.DataBase
             set => _albumEntity.Tags = value;
         }
         public DateTime CreationDate
-        {
-            get => DateTime.Parse(_albumEntity.CreationDate);
+        {    
+            get => DateTime.ParseExact(_albumEntity.CreationDate, validDateFormats , null);
             set => _albumEntity.CreationDate = value.ToString();
         }
         public bool IsLocal
@@ -42,19 +43,22 @@ namespace iPhoto.DataBase
             get => _albumEntity.IsLocal;
             set => _albumEntity.IsLocal = value;
         }
-
+        public string ColorGroup
+        {
+            get => _albumEntity.ColorGroup;
+            set => _albumEntity.ColorGroup = value;
+        }
 
         public Album(AlbumEntity albumEntity)
         {
             _albumEntity = albumEntity;
         }
-        public Album(int id, string name, int count, List<string>? tags, DateTime? date, bool isLocal)
+        public Album(int id, string name, int count, List<string>? tags, DateTime? date, bool isLocal, string? colorGroup)
         {
             if (count < 0)
             {
                 throw new InvalidDataException("Number of pictures cannot be less than zero.");
             }
-
             _albumEntity = new AlbumEntity();
             Id = id;
             Name = name;
@@ -62,6 +66,7 @@ namespace iPhoto.DataBase
             Tags = tags ?? new List<string>() {"#none"};
             CreationDate = date ?? DateTime.Now.Date;
             IsLocal = isLocal;
+            ColorGroup = colorGroup ?? "None";
         }
 
         private List<string> ParseTags(string tags)

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iPhoto"
         xmlns:vs="clr-namespace:iPhoto.Views"
+        xmlns:vsa="clr-namespace:iPhoto.Views.AlbumPage"
         xmlns:vms="clr-namespace:iPhoto.ViewModels"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         WindowStyle="None"
@@ -54,7 +55,7 @@
                     <vs:SearchView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vms:AlbumsViewModel}">
-                    <vs:AlbumsView />
+                    <vsa:AlbumsView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vms:PlacesViewModel}">
                     <vs:PlacesView />

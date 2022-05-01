@@ -34,7 +34,7 @@ namespace iPhoto.ViewModels
         {
             HomePageViewModel = new HomePageViewModel();
             SearchViewModel = new SearchViewModel(database, photoDetailsWindow);    //MG 15.04 //MG 26.04 add photo details 
-            AlbumsViewModel = new AlbumsViewModel();
+            AlbumsViewModel = new AlbumsViewModel(database);
             PlacesViewModel = new PlacesViewModel();
             AccountViewModel = new AccountViewModel();
             SettingsViewModel = new SettingsViewModel();

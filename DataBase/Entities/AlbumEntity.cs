@@ -10,5 +10,7 @@ public class AlbumEntity
     public string Tags { get; set; }
     public string CreationDate { get; set; }
     public bool IsLocal { get; set; }
+    public string ColorGroup { get; set; }
     public List<PhotoEntity> PhotoEntities { get; set; }
+    //public Photo CoverPhoto { get; set; }
 }

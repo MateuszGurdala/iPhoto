@@ -34,7 +34,7 @@ namespace iPhoto.DataBase
         {
             if (Albums.FirstOrDefault(e => e.Id == 1) == null)
             {
-                AddAlbum("OtherPhotos", 0, null, null, true);
+                AddAlbum("OtherPhotos", 0, null, null, true, null);
             }
         }
         private void CreateBasePlace()
@@ -164,7 +164,7 @@ namespace iPhoto.DataBase
         }
 
         //Adding new records
-        public void AddAlbum(string name, int count, List<string>? tags, DateTime? date, bool isLocal)
+        public void AddAlbum(string name, int count, List<string>? tags, DateTime? date, bool isLocal, string? colorGroup)
         {
             var id = Albums.Count == 0 ? 0 : Albums.OrderByDescending(e => e.Id).FirstOrDefault()!.Id;
 
@@ -173,7 +173,7 @@ namespace iPhoto.DataBase
                 throw new InvalidDataException("Album with that name already exists.");
             }
 
-            var album = new Album(id + 1, name, count, tags, date, isLocal);
+            var album = new Album(id + 1, name, count, tags, date, isLocal, colorGroup);
             Albums.Add(album);
 
             using var db = new DatabaseContext();

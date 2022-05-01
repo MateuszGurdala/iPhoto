@@ -46,6 +46,17 @@
     <None Remove="Data\TestImages\IMG_20191004_144725.jpg" />
     <None Remove="Data\TestImages\IMG_20200729_203254.jpg" />
     <None Remove="Data\TestImages\test.jpg" />
+    <None Remove="Graphics\AlbumIcons\AquaAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\BlueAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\DarkBlueAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\GenericAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\GreenAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\OrangeAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\PinkAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\RedAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\SyftAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\VioletAlbum.png" />
+    <None Remove="Graphics\AlbumIcons\YellowAlbum.png" />
     <None Remove="Graphics\Icons\AddPhoto.png" />
     <None Remove="Graphics\Icons\Checked.png" />
     <None Remove="Graphics\Icons\CreateWindow.png" />
@@ -75,6 +86,17 @@
 
   <ItemGroup>
     <Resource Include="DataBase\Images\test.jpg" />
+    <Resource Include="Graphics\AlbumIcons\AquaAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\BlueAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\DarkBlueAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\GreenAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\GenericAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\OrangeAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\PinkAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\RedAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\SyftAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\VioletAlbum.png" />
+    <Resource Include="Graphics\AlbumIcons\YellowAlbum.png" />
     <Resource Include="Graphics\Icons\Account.png" />
   </ItemGroup>
 
@@ -135,7 +157,7 @@
     <Page Update="Views\AccountView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\AlbumsView.xaml">
+    <Page Update="Views\AlbumPage\AlbumsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\HomePageView.xaml">
