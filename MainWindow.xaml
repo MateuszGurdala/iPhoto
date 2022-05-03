@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:iPhoto"
         xmlns:vs="clr-namespace:iPhoto.Views"
         xmlns:vsa="clr-namespace:iPhoto.Views.AlbumPage"
+        xmlns:vmsa="clr-namespace:iPhoto.ViewModels.AlbumsPage"
         xmlns:vms="clr-namespace:iPhoto.ViewModels"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         WindowStyle="None"
@@ -65,6 +66,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vms:SettingsViewModel}">
                     <vs:SettingsView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmsa:AlbumContentViewModel}">
+                    <vsa:AlbumContentView/>
                 </DataTemplate>
             </Grid.Resources>
 

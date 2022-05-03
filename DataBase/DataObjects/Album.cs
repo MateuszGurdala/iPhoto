@@ -48,10 +48,13 @@ namespace iPhoto.DataBase
             get => _albumEntity.ColorGroup;
             set => _albumEntity.ColorGroup = value;
         }
+        public List<Photo> PhotoEntities { get; set; }
+
 
         public Album(AlbumEntity albumEntity)
         {
             _albumEntity = albumEntity;
+            PhotoEntities = new List<Photo>() { };
         }
         public Album(int id, string name, int count, List<string>? tags, DateTime? date, bool isLocal, string? colorGroup)
         {
@@ -67,6 +70,7 @@ namespace iPhoto.DataBase
             CreationDate = date ?? DateTime.Now.Date;
             IsLocal = isLocal;
             ColorGroup = colorGroup ?? "None";
+            PhotoEntities = new List<Photo>() { };
         }
 
         private List<string> ParseTags(string tags)

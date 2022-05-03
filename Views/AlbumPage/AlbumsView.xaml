@@ -9,27 +9,29 @@
              xmlns:albumvms="clr-namespace:iPhoto.ViewModels.AlbumsPage"
              d:DataContext="{d:DesignInstance Type=viewmodels:AlbumsViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
+        <local:AlbumDetailsView Grid.Row="1" Grid.Column="2"/>
         <uc:RoundedIcon Grid.Row="1" Grid.Column="1" Margin="7 7 7 7">
             <ScrollViewer>
                 <ItemsControl ItemsSource="{Binding AlbumSearchResultsCollection}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type albumvms:AlbumSearchResultViewModel}">
-                            <local:AlbumSearchResultView/>
+                            <local:AlbumSearchResultView Margin="15"/>
                         </DataTemplate> 
                     </ItemsControl.ItemTemplate>
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Margin="5" />
+                            <WrapPanel Margin="10" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>

@@ -8,9 +8,11 @@ namespace iPhoto.Commands.SearchPage
     public class AddPhotoCommand : CommandBase
     {
         private readonly DatabaseHandler _databaseHandler;
-        public AddPhotoCommand(DatabaseHandler databaseHandler)
+        private readonly Album _targetAlbum;
+        public AddPhotoCommand(DatabaseHandler databaseHandler, Album? targetAlbum)
         {
             _databaseHandler = databaseHandler;
+            _targetAlbum = targetAlbum;
         }
 
         public override void Execute(object parameter)
@@ -25,7 +27,7 @@ namespace iPhoto.Commands.SearchPage
 
             foreach (var fileName in fileDialog.FileNames)
             {
-                var photoAdder = new PhotoAdder(_databaseHandler, fileName);
+                var photoAdder = new PhotoAdder(_databaseHandler, fileName, _targetAlbum);
                 photoAdder.GetPhotoData();
             }
         }

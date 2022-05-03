@@ -1,4 +1,7 @@
-﻿namespace iPhoto.DataBase;
+﻿using System;
+using System.Collections.Generic;
+
+namespace iPhoto.DataBase;
 
 public class PhotoEntity
 {

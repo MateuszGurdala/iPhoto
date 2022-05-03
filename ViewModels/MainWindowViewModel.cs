@@ -2,6 +2,7 @@
 using System.Windows;
 using iPhoto.DataBase;
 using iPhoto.Views.SearchPage;
+using iPhoto.ViewModels.AlbumsPage;
 
 namespace iPhoto.ViewModels
 {
@@ -34,11 +35,12 @@ namespace iPhoto.ViewModels
         {
             HomePageViewModel = new HomePageViewModel();
             SearchViewModel = new SearchViewModel(database, photoDetailsWindow);    //MG 15.04 //MG 26.04 add photo details 
-            AlbumsViewModel = new AlbumsViewModel(database);
+            AlbumsViewModel = new AlbumsViewModel(database, this, photoDetailsWindow);
             PlacesViewModel = new PlacesViewModel();
             AccountViewModel = new AccountViewModel();
             SettingsViewModel = new SettingsViewModel();
-            
+
+
             BindMainWindow(mainWindow);
 
             MainViewModel = HomePageViewModel;

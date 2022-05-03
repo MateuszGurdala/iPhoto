@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using iPhoto.UtilityClasses;
+using iPhoto.Commands.AlbumPage;
+using iPhoto.Commands;
+using iPhoto.Views.SearchPage;
+
 namespace iPhoto.ViewModels.AlbumsPage
 {
     public class AlbumSearchResultViewModel : ViewModelBase
@@ -20,9 +24,9 @@ namespace iPhoto.ViewModels.AlbumsPage
                         throw new InvalidDataException("Given cover photo does not exists in given album")
                     }
                 }*/
-        private  readonly AlbumSearchResultModel _albumData;
-        public  BitmapImage AlbumIcon => DataHandler.LoadBitmapImage(GetAlbumIcon(), 100);
-
+        private readonly AlbumSearchResultModel _albumData;
+        public BitmapImage AlbumIcon => DataHandler.LoadBitmapImage(GetAlbumIcon(), 100);
+        public bool IsClicked { get; set;}
         private string GetAlbumIcon()
         {
             if (_albumData.ColorGroup == "")
@@ -48,10 +52,15 @@ namespace iPhoto.ViewModels.AlbumsPage
                 }
             }
         }
-        public ICommand ClickSearchResultCommand { get; }
-        public AlbumSearchResultViewModel(Album album, List<PhotoEntity> photoEntities)
+        public ICommand ShowAlbumDetailsCommand { get; }
+        public ICommand ShowAlbumContentCommand { get; }
+        public ICommand ShowAlbumOptionsCommand { get; }
+        public AlbumSearchResultViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, Album album, List<PhotoEntity> photoEntities, MainWindowViewModel mainWindowViewModel)
         {
             _albumData = new AlbumSearchResultModel(album, photoEntities);
+            IsClicked = false;
+            ShowAlbumContentCommand = new ShowAlbumContentCommand(database, photoDetailsWindow, mainWindowViewModel, album);
         }
+        
     }
 }

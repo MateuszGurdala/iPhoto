@@ -63,6 +63,17 @@ namespace iPhoto.DataBase
         }
         //~MG 16.04
 
+        private void AddPhotosToAlbum()
+        {
+            foreach (Album Album in Albums)
+            {
+                foreach(Photo photo in Photos.Where(e => e.AlbumId == Album.Id))
+                {
+                    Album.PhotoEntities.Add(photo);
+                    Album.PhotoCount++;
+                }
+            }
+        }
         public void LoadAlbums()
         {
             using var db = new DatabaseContext();
@@ -110,6 +121,7 @@ namespace iPhoto.DataBase
             LoadImages();
             LoadPhotos();
             LoadPlaces();
+            AddPhotosToAlbum();
         }
         public void ShowData()
         {
@@ -233,14 +245,20 @@ namespace iPhoto.DataBase
             {
                 throw new InvalidDataException("Wrong place Id.");
             }
-
             var photo = new Photo(id + 1, title, albumId, tags, date, placeId, imageId);
+            AddPhotoToAlbum(Albums.FirstOrDefault(e => e.Id == albumId), photo);
             Photos.Add(photo);
-
             using var db = new DatabaseContext();
             db.PhotoEntities.Add(photo.GetEntity());
             db.SaveChanges();
 
+        }
+        // KG 03.05 small bugfix
+        private void AddPhotoToAlbum(Album album, Photo photo)
+        {
+            album.PhotoEntities.Add(photo);
+            //album.TotalSize += photo. 03.05 KG TODO
+            album.PhotoCount++;
         }
         //Removing records
         public void RemoveAlbum(int id)

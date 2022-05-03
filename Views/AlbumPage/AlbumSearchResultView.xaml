@@ -9,30 +9,78 @@
              Cursor="Hand"
              d:DesignHeight="300" d:DesignWidth="300">
     <Button Background="Transparent">
-        <!--Command Bindings-->
-        <!--<Button.InputBindings>
+        <Button.InputBindings>
             <MouseBinding Gesture="LeftClick"
-                          Command="{Binding ClickSearchResultCommand}"
+                          Command="{Binding ShowAlbumDetailsCommand}"
                           CommandParameter="{Binding Path=.}" />
             <MouseBinding Gesture="LeftDoubleClick"
-                          Command="{Binding PreviewAlbumCommand}"
+                          Command="{Binding ShowAlbumContentCommand}"
                           CommandParameter="{Binding Path=.}" />
             <MouseBinding Gesture="RightClick"
-                          Command="{Binding AlbumResultOptionsCommand}"
+                          Command="{Binding ShowAlbumOptionsCommand}"
                           CommandParameter="{Binding Path=.}" />
-        </Button.InputBindings> -->
-    
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-            <Image Source="{Binding AlbumIcon}"
-                   Width="175"
-                   Height="175"
-                   Margin="0 0 0 10"/>
-            <TextBlock Text="{Binding AlbumName}"
-                       FontSize="15"
-                       FontFamily="Helvetica"
-                       TextAlignment="Center"
-                       Foreground="Black"
-                       Width="200" Height="50"/>
-        </StackPanel>
+        </Button.InputBindings>
+        <Grid>
+            <Border Name="Border"
+                    Width="142"
+                    Height="162"
+                    Background="Transparent"
+                    BorderThickness="1"
+                    Opacity="{Binding IsClicked, Converter={StaticResource BoolToOpacityConverter}}">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{StaticResource BaseGreen}" />
+                </Border.BorderBrush>
+            </Border>
+            <Grid Width="140"
+                  Height="160">
+                <Grid.Background>
+                    <SolidColorBrush Color="{StaticResource BaseGreen}"
+                                     Opacity="0" />
+                </Grid.Background>
+                <!--Enter/Leave Animations-->
+                <Grid.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Opacity)"
+                                                     From="0"
+                                                     To="0.3"
+                                                     Duration="0:0:0.2">
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Opacity)"
+                                                     From="0.3"
+                                                     To="0"
+                                                     Duration="0:0:0.15">
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Grid.Triggers>
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                    <Image Source="{Binding AlbumIcon}"
+                    Width="140"
+                    Height="140"
+                    Margin="0 0 0 10"/>
+                    <TextBlock Text="{Binding AlbumName}"
+                    FontSize="20"
+                    FontFamily="Helvetica"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Width="200" Height="50"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Button>
 </UserControl>

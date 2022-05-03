@@ -18,6 +18,7 @@ namespace iPhoto.UtilityClasses
         private BitmapImage _bitmapImage;
         private readonly string _fullPath;
         public AddPhotoPopupView Popup;
+        private readonly Album _targetAlbum;
 
         //Image
         private string _fileName;
@@ -33,7 +34,7 @@ namespace iPhoto.UtilityClasses
         private int? _placeId;
         private int _imageId;
 
-        public PhotoAdder(DatabaseHandler databaseHandler, string fileName)
+        public PhotoAdder(DatabaseHandler databaseHandler, string fileName, Album? _targetAlbum)
         {
             _databaseHandler = databaseHandler;
             _fullPath = fileName;
@@ -71,6 +72,7 @@ namespace iPhoto.UtilityClasses
                 _databaseHandler.AddImage(_fileName, _width, _height, _size);
                 _imageId = _databaseHandler.Images.First(e => e.Source == _fileName).Id;
                 _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _imageId);
+                
                 MoveFileToDatabaseDirectory();
             });
             Popup.IsOpen = false;
