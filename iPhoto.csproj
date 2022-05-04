@@ -85,7 +85,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="DataBase\Images\test.jpg" />
     <Resource Include="Graphics\AlbumIcons\AquaAlbum.png" />
     <Resource Include="Graphics\AlbumIcons\BlueAlbum.png" />
     <Resource Include="Graphics\AlbumIcons\DarkBlueAlbum.png" />
@@ -199,6 +198,10 @@
     <Page Update="Views\ChromeButtonsView.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataBase\Images\" />
   </ItemGroup>
 
 </Project>

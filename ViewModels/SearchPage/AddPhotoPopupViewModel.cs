@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using iPhoto.Commands.SearchPage;
 using iPhoto.UtilityClasses;
@@ -15,6 +17,7 @@ namespace iPhoto.ViewModels.SearchPage
         public AddPhotoPopupView ParentView { get; set; }
         public BitmapImage Image { get; set; }
         public PhotoAdder PhotoAdder { get; set; }
+        public ObservableCollection<string> AlbumList { get; set; }
         public AddPhotoPopupViewModel()
         {
             DiscardCommand = new DiscardCommand();

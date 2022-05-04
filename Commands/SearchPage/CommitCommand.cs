@@ -12,7 +12,7 @@ namespace iPhoto.Commands.SearchPage
             var viewModel = parameter as AddPhotoPopupViewModel;
 
             var title = viewModel!.ParentView.Title.ContentTextBox.Text;
-            var album = viewModel!.ParentView.Album.ContentTextBox.Text;
+            var album = viewModel!.ParentView.Album.Text;
             var rawTags = viewModel!.ParentView.RawTags.ContentTextBox.Text;
             var creationDateString = viewModel!.ParentView.CreationDateString.ContentTextBox.Text;
             var placeTaken = viewModel!.ParentView.PlaceTaken.ContentTextBox.Text;

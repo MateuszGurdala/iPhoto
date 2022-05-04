@@ -26,7 +26,6 @@ namespace iPhoto.DataBase
             //MG 16.04
             CreateBaseAlbum();
             CreateBasePlace();
-            AddTestPhotos();
             //~MG 16.04
         }
 
@@ -44,22 +43,6 @@ namespace iPhoto.DataBase
             {
                 AddPlace("NoPlace", null, null);
             }
-        }
-        private void AddTestPhotos()
-        {
-            var image = Images.FirstOrDefault(e => e.Source == "test.jpg");
-            if (image == null)
-            {
-                AddImage("test.jpg", 1000, 1000, 2.5);
-            }
-
-            image = Images.FirstOrDefault(e => e.Source == "test.jpg");
-
-            if (Photos.FirstOrDefault(e => e.Title == "Test") == null)
-            {
-                AddPhoto("Test", null, null, null, null, image!.Id);
-            }
-
         }
         //~MG 16.04
 

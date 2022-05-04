@@ -73,7 +73,9 @@ namespace iPhoto.ViewModels.AlbumsPage
         /// </summary>
         public async void LoadAllAlbumPhotos()
         {
-            foreach (Photo photo in CurrentAlbum.PhotoEntities)
+            DatabaseHandler.LoadAllData();
+            var currentAlbum = DatabaseHandler.Albums.FirstOrDefault(e => e.Id == CurrentAlbum.Id);
+            foreach (Photo photo in currentAlbum.PhotoEntities)
             {
                 PhotoSearchResultsCollection.Add(new PhotoSearchResultViewModel(photo,
                     DatabaseHandler.Images.FirstOrDefault(y => y.Id == photo.ImageId),

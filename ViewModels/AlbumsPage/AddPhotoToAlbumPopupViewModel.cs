@@ -21,7 +21,6 @@ namespace iPhoto.ViewModels.AlbumsPage
             DiscardCommand = new DiscardCommand();
             CommitWithGivenAlbumCommand = new CommitWithGivenAlbumCommand(albumVm);
             CurrentAlbum = currentAlbum;
-
         }
     }
 }

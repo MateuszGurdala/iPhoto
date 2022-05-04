@@ -97,28 +97,27 @@
                                 </Grid>
                                 <Grid>
                                     <TextBlock Text="Album" />
-                                    <userControls:TextBoxWithTitle x:Name="Album"
+                                    <!--<userControls:TextBoxWithTitle x:Name="Album"
                                                                    TextWidth="275"
-                                                                   EntryText="OtherPhotos" />
-                                    <!--<ComboBox HorizontalAlignment="Right"
+                                                                   EntryText="OtherPhotos" />-->
+                                    <ComboBox x:Name="Album"
+                                              Style="{StaticResource ComboBoxStyle1}"
                                               Width="275"
-                                              Height="34"
-                                              Background="{StaticResource DarkLightGreenGradient}"
-                                              Foreground="{StaticResource DarkLightGreenGradient}"
+                                              Height="35"
+                                              HorizontalAlignment="Right"
                                               FontSize="25"
-                                              FontFamily="Open Sans">
-                                        <ComboBox.ItemContainerStyle>
-                                            <Style TargetType="ComboBoxItem">
-                                                <Setter Property="Background" Value="{StaticResource DarkLightGreenGradient}"/>
-                                                <Setter Property="Foreground" Value="{StaticResource PastelWhiteGradient}"/>
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                                <Setter Property="FontSize" Value="25"/>
-                                                <Setter Property="FontFamily" Value="Open Sans"/>
+                                              ItemContainerStyle="{StaticResource ComboBoxItem1}"
+                                              ItemsSource="{Binding AlbumList}"
+                                              SelectedIndex="0">
+                                        <ComboBox.Resources>
+                                            <Style TargetType="ScrollViewer">
+                                                <Setter Property="Background"
+                                                        Value="Transparent" />
+                                                <Setter Property="Padding"
+                                                        Value="0" />
                                             </Style>
-                                        </ComboBox.ItemContainerStyle>
-                                        <ComboBoxItem Content="OtherPhotos"/>
-                                        <ComboBoxItem Content="Favorites"/>
-                                    </ComboBox>-->
+                                        </ComboBox.Resources>
+                                    </ComboBox>
                                 </Grid>
                                 <Grid>
                                     <TextBlock Text="Tags"
