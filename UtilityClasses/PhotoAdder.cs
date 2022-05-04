@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using iPhoto.ViewModels.AlbumsPage;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 using iPhoto.DataBase;
 using iPhoto.ViewModels.SearchPage;
@@ -79,19 +80,19 @@ namespace iPhoto.UtilityClasses
             CheckData(title, album, rawTags, creationDateString, placeTaken);
             ParseData(title, album, rawTags, creationDateString, placeTaken);
 
-            await Task.Run(() =>
-            {
+            //MG 04.05 NIE TYKAĆ BO SIĘ WYWALI RESZTA
+            //await Task.Run(() =>
+            //{
                 _databaseHandler.AddImage(_fileName, _width, _height, _size);
                 _imageId = _databaseHandler.Images.First(e => e.Source == _fileName).Id;
                 _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _imageId);
                 
                 MoveFileToDatabaseDirectory(); // BUG throws error if same fale in DataBaseDirectory TODO
-            });
+            //});
             if(Popup != null)
                 Popup.IsOpen = false;
             else
                PopupForAlbums.IsOpen = false;
-            
         }
         private void CheckData(string title, string album, string? tags, string creationDateString, string placeTaken)
         {
