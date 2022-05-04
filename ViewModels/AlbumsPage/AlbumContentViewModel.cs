@@ -72,10 +72,8 @@ namespace iPhoto.ViewModels.AlbumsPage
         ///  DELETE THIS AFTER IMPLEMENTING ALBUM SEARCH ENGINE <DUPLICATE>
         /// </summary>
         public async void LoadAllAlbumPhotos()
-        {
-            DatabaseHandler.LoadAllData();
-            var currentAlbum = DatabaseHandler.Albums.FirstOrDefault(e => e.Id == CurrentAlbum.Id);
-            foreach (Photo photo in currentAlbum.PhotoEntities)
+        { 
+            foreach (Photo photo in CurrentAlbum.PhotoEntities)
             {
                 if (PhotoSearchResultsCollection.All(y => y.GetImageId() != photo.ImageId))
                 {
