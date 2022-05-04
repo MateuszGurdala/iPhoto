@@ -9,6 +9,7 @@ using iPhoto.DataBase;
 using iPhoto.ViewModels.SearchPage;
 using iPhoto.Views.SearchPage;
 using iPhoto.Views.AlbumPage;
+using System.Globalization;
 
 namespace iPhoto.UtilityClasses
 {
@@ -74,19 +75,19 @@ namespace iPhoto.UtilityClasses
                 PopupForAlbums = new AddPhotoToAlbumPopupView(dataContext);
             }
         }
-        public async void AddPhoto(string title, string album, string rawTags, string creationDateString, string placeTaken)
+        public void AddPhoto(string title, string album, string rawTags, string creationDateString, string placeTaken)
         {
             CheckData(title, album, rawTags, creationDateString, placeTaken);
             ParseData(title, album, rawTags, creationDateString, placeTaken);
 
-            await Task.Run(() =>
-            {
+/*            await Task.Run(() =>
+            {*/
                 _databaseHandler.AddImage(_fileName, _width, _height, _size);
                 _imageId = _databaseHandler.Images.First(e => e.Source == _fileName).Id;
                 _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _imageId);
                 
                 MoveFileToDatabaseDirectory(); // BUG throws error if same fale in DataBaseDirectory TODO
-            });
+           /* });*/
             if(Popup != null)
                 Popup.IsOpen = false;
             else
@@ -115,7 +116,7 @@ namespace iPhoto.UtilityClasses
         private void ParseData(string title, string album, string rawTags, string creationDateString, string placeTaken)
         {
             _rawTags = rawTags == "#none" ? null : rawTags;
-            _dateCreated = creationDateString == "Today" ? DateTime.Now : DateTime.ParseExact(creationDateString, "dd.MM.yyyy HH:mm:ss", null);
+            _dateCreated = creationDateString == "Today" ? DateTime.ParseExact(DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"), "dd.MM.yyyy HH:mm:ss", new CultureInfo("pl-PL")) : DateTime.ParseExact(creationDateString, "dd.MM.yyyy HH:mm:ss", new CultureInfo("pl-PL"));
             _title = title == "Default" ? GenerateDefaultTitle() : title;
             _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
             _albumId = album == "OtherPhotos" ? _databaseHandler.Albums[0].Id : _databaseHandler.Albums.First(e => e.Name == album).Id; // change this after implementing Photo Add checker TODO

@@ -75,14 +75,17 @@ namespace iPhoto.ViewModels.AlbumsPage
         {
             foreach (Photo photo in CurrentAlbum.PhotoEntities)
             {
-                PhotoSearchResultsCollection.Add(new PhotoSearchResultViewModel(photo,
-                    DatabaseHandler.Images.FirstOrDefault(y => y.Id == photo.ImageId),
-                    DatabaseHandler.Albums.FirstOrDefault(y => y.Id == CurrentAlbum.Id),
-                    DatabaseHandler.Places.FirstOrDefault(y => y.Id == photo.PlaceId),
-                    new SearchViewModel(DatabaseHandler, _photoDetailsWindow)
-                    ));
+                if (PhotoSearchResultsCollection.All(y => y.GetImageId() != photo.ImageId))
+                {
+                    PhotoSearchResultsCollection.Add(new PhotoSearchResultViewModel(photo,
+                        DatabaseHandler.Images.FirstOrDefault(y => y.Id == photo.ImageId),
+                        DatabaseHandler.Albums.FirstOrDefault(y => y.Id == CurrentAlbum.Id),
+                        DatabaseHandler.Places.FirstOrDefault(y => y.Id == photo.PlaceId),
+                        new SearchViewModel(DatabaseHandler, _photoDetailsWindow)
+                        ));
+                }
                 await Task.Delay(10);
-            }
+            }   
         }
     }
 }

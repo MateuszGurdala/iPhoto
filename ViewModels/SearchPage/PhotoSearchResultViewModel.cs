@@ -74,6 +74,11 @@ namespace iPhoto.ViewModels
             return _photoData.ImageData.Id;
         }
 
+        public int GetAlbumId()
+        {
+            return _photoData.AlbumData.Id;
+        }
+
         public string GetImageSource()
         {
             return _photoData.ImageData.Source;
