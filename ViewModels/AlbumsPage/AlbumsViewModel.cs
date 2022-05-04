@@ -1,4 +1,5 @@
-﻿using iPhoto.DataBase;
+﻿using iPhoto.Commands.AlbumPage;
+using iPhoto.DataBase;
 using iPhoto.ViewModels.AlbumsPage;
 using iPhoto.Views.SearchPage;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace iPhoto.ViewModels
 {
@@ -17,6 +19,7 @@ namespace iPhoto.ViewModels
         private readonly MainWindowViewModel _mainWindowViewModel;
         public DatabaseHandler DatabaseHandler;
         private readonly PhotoDetailsWindowView _photoDetailsWindow;
+        public ICommand AddAlbumCommand;
         public ObservableCollection<AlbumSearchResultViewModel> AlbumSearchResultsCollection
         {
             get { return _albumSearchResultsCollection; }
@@ -29,6 +32,7 @@ namespace iPhoto.ViewModels
             _photoDetailsWindow = photoDetailsWindow;
             _albumSearchResultsCollection = new ObservableCollection<AlbumSearchResultViewModel>();
             DisplayAllAlbums();
+            AddAlbumCommand = new AddAlbumCommand();
         }
 
         private void DisplayAllAlbums()

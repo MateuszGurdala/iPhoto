@@ -31,6 +31,7 @@ namespace iPhoto.Commands.SearchPage
         }
         private void ConfigureDialog(OpenFileDialog fileDialog)
         {
+
              fileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg";
             fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             fileDialog.Multiselect = true;
