@@ -68,6 +68,7 @@
     <None Remove="Graphics\ChromeButtons\Maximize.png" />
     <None Remove="Graphics\ChromeButtons\Minimize.png" />
     <None Remove="Graphics\ChromeButtons\Resize.png" />
+    <None Remove="Graphics\Icons\Undo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -144,6 +145,7 @@
     <Resource Include="Graphics\ChromeButtons\Maximize.png" />
     <Resource Include="Graphics\ChromeButtons\Minimize.png" />
     <Resource Include="Graphics\ChromeButtons\Resize.png" />
+    <Resource Include="Graphics\Icons\Undo.png" />
   </ItemGroup>
 
   <ItemGroup>

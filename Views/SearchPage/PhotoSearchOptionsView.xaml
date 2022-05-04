@@ -79,21 +79,22 @@
                 <!--Creation Date-->
                 <TextBlock Text="Creation Date" />
                 <StackPanel Orientation="Horizontal"
-                            Height="40">
+                            Height="50">
                     <DatePicker x:Name="StartDate"
                                 CalendarStyle="{DynamicResource DatePickerCalendarStyle1}"
                                 Style="{DynamicResource DatePickerStyle1}"
                                 Width="110"
-                                Height="30"
-                                FontSize="15"
+                                Height="50"
+                                FontSize="20"
                                 Background="{StaticResource DarkLightGreenGradient}"
-                                Foreground="{StaticResource PastelWhiteGradient}" />
+                                Foreground="{StaticResource PastelWhiteGradient}">
+                    </DatePicker>
                     <DatePicker x:Name="EndDate"
                                 CalendarStyle="{DynamicResource DatePickerCalendarStyle1}"
                                 Style="{DynamicResource DatePickerStyle1}"
                                 Width="110"
-                                Height="30"
-                                FontSize="15"
+                                Height="50"
+                                FontSize="20"
                                 Background="{StaticResource DarkLightGreenGradient}"
                                 Foreground="{StaticResource PastelWhiteGradient}"
                                 Margin="10, 0, 0, 0"/>
@@ -115,6 +116,13 @@
                 <TextBlock Text="Location" />
                 <uc:TextBoxWithTitle EntryText="*Any"
                                      x:Name="Location" />
+
+                <uc:CustomButton  ImageSource="../../Graphics/Icons/Undo.png"
+                                  Margin="0, 40, 15, 0"
+                                  Width="60"
+                                  Height="60"
+                                  CornerRadius="12"
+                                  Command="{Binding ClearSearchParams}" />
             </StackPanel>
         </Grid>
     </Grid>
