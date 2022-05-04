@@ -41,7 +41,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         {
             get
             {
-                return DatabaseHandler.GetAlbumList();
+                return DatabaseHandler.GetAlbumList(true);
             }
         }
         public DatabaseHandler DatabaseHandler; //MG 15.04 added db handler class

@@ -108,7 +108,7 @@
                                               FontSize="25"
                                               ItemContainerStyle="{StaticResource ComboBoxItem1}"
                                               ItemsSource="{Binding AlbumList}"
-                                              SelectedIndex="0">
+                                              SelectedItem="OtherPhotos">
                                         <ComboBox.Resources>
                                             <Style TargetType="ScrollViewer">
                                                 <Setter Property="Background"
