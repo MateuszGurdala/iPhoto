@@ -64,7 +64,7 @@
             <!--Add Photos Button-->
             <uc:CustomButton  ImageSource="../../Graphics/Icons/AddPhoto.png"
                               Margin="10, 0, 0, 0"
-                              Command="{Binding AddPhotoCommand}"/>
+                              Command="{Binding AddPhotoToAlbumCommand}"/>
         </StackPanel>
 
         <Grid Grid.Row="1">

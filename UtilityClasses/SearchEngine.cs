@@ -15,7 +15,7 @@ namespace iPhoto.UtilityClasses
         private readonly SearchViewModel _searchViewModel;
 
         private SearchParams _searchParams;
-        private ObservableCollection<PhotoSearchResultModel> _searchResults;
+        private readonly ObservableCollection<PhotoSearchResultModel>  _searchResults;
 
         private bool _newDataLoaded;
 

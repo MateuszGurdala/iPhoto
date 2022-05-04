@@ -54,7 +54,7 @@ namespace iPhoto.DataBase
         }
         public Photo(int id, string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId)
         {
-            
+            _photoEntity = new PhotoEntity(); // Change This to full constructor ??? KG 03.05
             Id = id;
             Title = title;
             AlbumId = albumId ?? 1; //Default "OtherPhotos" album Id
@@ -62,7 +62,6 @@ namespace iPhoto.DataBase
             DateTaken = date ?? DateTime.Now;
             PlaceId = placeId ?? 1; //Default "No place" place Id
             ImageId = imageId;
-            _photoEntity = new PhotoEntity(); // Change This to full constructor ??? KG 03.05
         }
         private List<string>? ParseTags(string tags)
         {

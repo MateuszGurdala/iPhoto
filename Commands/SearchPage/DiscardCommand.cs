@@ -1,4 +1,5 @@
-﻿using iPhoto.Views.SearchPage;
+﻿using iPhoto.Views.AlbumPage;
+using iPhoto.Views.SearchPage;
 
 namespace iPhoto.Commands.SearchPage
 {
@@ -6,7 +7,14 @@ namespace iPhoto.Commands.SearchPage
     {
         public override void Execute(object parameter)
         {
-            (parameter as AddPhotoPopupView)!.IsOpen = false;
+            try
+            {
+                (parameter as AddPhotoPopupView)!.IsOpen = false;
+            }
+            catch
+            {
+                (parameter as AddPhotoToAlbumPopupView)!.IsOpen = false;
+            }
         }
     }
 }

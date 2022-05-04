@@ -1,0 +1,142 @@
+﻿<Popup x:Class="iPhoto.Views.AlbumPage.AddPhotoToAlbumPopupView"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+       xmlns:local="clr-namespace:iPhoto.Views.AlbumPage"
+       xmlns:userControls="clr-namespace:iPhoto.Views.UserControls"
+       mc:Ignorable="d"
+       Width="960"
+       Height="540"
+       Name="root"
+       AllowsTransparency="True"
+       IsOpen="True"
+       PlacementRectangle="480, 270, 1, 1">
+    <Grid Background="Transparent">
+        <Border Background="{StaticResource DarkLightGreenGradient}">
+            <Border Background="{StaticResource PastelWhiteGradient}"
+                    Margin="5">
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Height"
+                                    Value="34" />
+                            <Setter Property="FontSize"
+                                    Value="30" />
+                            <Setter Property="FontWeight"
+                                    Value="DemiBold" />
+                            <Setter Property="HorizontalAlignment"
+                                    Value="Left" />
+                            <Setter Property="Margin"
+                                    Value="0, 10, 0, 5" />
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource DarkLightGreenGradient}" />
+                        </Style>
+
+                        <Style TargetType="userControls:TextBoxWithTitle">
+                            <Setter Property="Height"
+                                    Value="34" />
+                            <Setter Property="HorizontalAlignment"
+                                    Value="Right" />
+                            <Setter Property="FontSize"
+                                    Value="25" />
+                            <Setter Property="VerticalAlignment"
+                                    Value="Center" />
+                            <Setter Property="BorderThickness"
+                                    Value="0" />
+                            <Setter Property="Margin"
+                                    Value="20, 0,0 ,0" />
+                        </Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation"
+                                    Value="Horizontal" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="450" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{Binding Image}"
+                           Stretch="Uniform"
+                           Margin="10" />
+
+                    <Grid Margin="15"
+                          Grid.Column="1"
+                          Height="300"
+                          VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="5" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.ColumnSpan="2"
+                                Grid.RowSpan="2"
+                                Background="{StaticResource DarkLightGreenGradient}"
+                                CornerRadius="10">
+                            <Border.Effect>
+                                <BlurEffect Radius="10"
+                                            KernelType="Gaussian" />
+                            </Border.Effect>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Grid.Row="0"
+                                Background="{StaticResource PastelWhiteGradient}"
+                                CornerRadius="10">
+                            <StackPanel Orientation="Vertical"
+                                        Margin="10">
+                                <Grid>
+                                    <TextBlock Text="Title" />
+                                    <userControls:TextBoxWithTitle x:Name="Title"
+                                                                   TextWidth="300"
+                                                                   EntryText="Default" />
+                                </Grid>
+                                <Grid>
+                                    <TextBlock Text="Tags"
+                                               Height="42" />
+                                    <userControls:TextBoxWithTitle x:Name="RawTags"
+                                                                   TextWidth="305"
+                                                                   EntryText="#none" />
+                                </Grid>
+                                <Grid>
+                                    <TextBlock Text="Creation Date" />
+                                    <userControls:TextBoxWithTitle x:Name="CreationDateString"
+                                                                   TextWidth="170"
+                                                                   EntryText="Today" />
+                                </Grid>
+                                <Grid>
+                                    <TextBlock Text="Place Taken" />
+                                    <userControls:TextBoxWithTitle x:Name="PlaceTaken"
+                                                                   TextWidth="200"
+                                                                   EntryText="NoPlace" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <StackPanel Grid.Column="1"
+                                VerticalAlignment="Bottom"
+                                Margin="20, 0, 20, 50">
+                        <userControls:CustomButton Width="260"
+                                                   Height="100"
+                                                   CornerRadius="20"
+                                                   ImageSource="../../Graphics/Icons/Checked.png"
+                                                   Command="{Binding CommitWithGivenAlbumCommand}"
+                                                   CommandParameter="{Binding Path=.}" />
+                        <userControls:CustomButton Width="100"
+                                                   Height="100"
+                                                   Margin="50, 0, 0, 0"
+                                                   CornerRadius="20"
+                                                   ImageSource="../../Graphics/Icons/Delete.png"
+                                                   Command="{Binding DiscardCommand}"
+                                                   CommandParameter="{Binding Path=., ElementName=root}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Popup>

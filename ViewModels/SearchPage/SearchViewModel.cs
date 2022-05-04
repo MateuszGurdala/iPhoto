@@ -36,7 +36,7 @@ namespace iPhoto.ViewModels
 
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
-            AddPhotoCommand = new AddPhotoCommand(DatabaseHandler, null);
+            AddPhotoCommand = new AddPhotoCommand(DatabaseHandler);
 
             PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
             photoDetailsWindow.DataContext = PhotoDetails;

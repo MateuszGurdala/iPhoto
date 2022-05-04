@@ -11,6 +11,7 @@ namespace iPhoto.ViewModels.SearchPage
     {
         public ICommand DiscardCommand { get; }
         public ICommand CommitCommand { get; }
+
         public AddPhotoPopupView ParentView { get; set; }
         public BitmapImage Image { get; set; }
         public PhotoAdder PhotoAdder { get; set; }

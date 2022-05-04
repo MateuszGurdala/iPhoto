@@ -4,6 +4,7 @@ using iPhoto.Commands.SearchPage;
 using iPhoto.DataBase;
 using iPhoto.UtilityClasses;
 using iPhoto.ViewModels.SearchPage;
+using iPhoto.Views.AlbumPage;
 using iPhoto.Views.SearchPage;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,19 +14,20 @@ using System.Windows.Input;
 
 namespace iPhoto.ViewModels.AlbumsPage
 {
-    public class AlbumContentViewModel: ViewModelBase
+    public class AlbumContentViewModel : ViewModelBase
     {
         //TODO CAN BE MERGED WITH SEARCH VIEWMODEL KG
         //public ICommand SearchCommand { get; }
         public ICommand ExtendSearchMenuCommand { get; }
         public ICommand ExtendPhotoDetailsCommand { get; }
-        public ICommand AddPhotoCommand { get; }
+        public ICommand AddPhotoToAlbumCommand { get; }
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
         // KG 2.05 Methods for album content handling
         public Album CurrentAlbum { get; }
         public ICommand NavigateCommand { get; }
+
         public static string NavigateParam { get; } = "Albums";
-        PhotoDetailsWindowView _photoDetailsWindow;
+        private readonly PhotoDetailsWindowView _photoDetailsWindow;
         public string AlbumText 
         {
             get
@@ -52,7 +54,7 @@ namespace iPhoto.ViewModels.AlbumsPage
             DatabaseHandler = database;
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
-            AddPhotoCommand = new AddPhotoCommand(DatabaseHandler, currentAlbum);
+            AddPhotoToAlbumCommand = new AddPhotoToAlbumCommand(DatabaseHandler, currentAlbum, this );
 
             PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
             _photoDetailsWindow = photoDetailsWindow;
@@ -69,7 +71,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         /// <summary>
         ///  DELETE THIS AFTER IMPLEMENTING ALBUM SEARCH ENGINE <DUPLICATE>
         /// </summary>
-        private async void LoadAllAlbumPhotos()
+        public async void LoadAllAlbumPhotos()
         {
             foreach (Photo photo in CurrentAlbum.PhotoEntities)
             {
