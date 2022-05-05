@@ -20,32 +20,6 @@
 
   <ItemGroup>
     <None Remove="DataBase\Images\test.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_140617.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_141306.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_141429.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_141443.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_141527.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_141551.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_141800.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_141826.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_141848.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_141936.jpg" />
-    <None Remove="Data\TestImages\IMG_20190814_185012.jpg" />
-    <None Remove="Data\TestImages\IMG_20190815_021255.jpg" />
-    <None Remove="Data\TestImages\IMG_20190815_021850.jpg" />
-    <None Remove="Data\TestImages\IMG_20190815_130021.jpg" />
-    <None Remove="Data\TestImages\IMG_20190815_181255.jpg" />
-    <None Remove="Data\TestImages\IMG_20190816_212831.jpg" />
-    <None Remove="Data\TestImages\IMG_20190816_233525.jpg" />
-    <None Remove="Data\TestImages\IMG_20190818_000956.jpg" />
-    <None Remove="Data\TestImages\IMG_20190818_090300.jpg" />
-    <None Remove="Data\TestImages\IMG_20190821_224622.jpg" />
-    <None Remove="Data\TestImages\IMG_20190826_125118.jpg" />
-    <None Remove="Data\TestImages\IMG_20190826_131454.jpg" />
-    <None Remove="Data\TestImages\IMG_20190919_210252.jpg" />
-    <None Remove="Data\TestImages\IMG_20191004_144725.jpg" />
-    <None Remove="Data\TestImages\IMG_20200729_203254.jpg" />
-    <None Remove="Data\TestImages\test.jpg" />
     <None Remove="Graphics\AlbumIcons\AquaAlbum.png" />
     <None Remove="Graphics\AlbumIcons\BlueAlbum.png" />
     <None Remove="Graphics\AlbumIcons\DarkBlueAlbum.png" />
@@ -101,30 +75,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Data\TestImages\IMG_20190814_141306.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190814_141429.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190814_141443.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190814_141527.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190814_141551.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190814_141800.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190814_141826.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190814_141848.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190814_141936.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190815_021255.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190815_021850.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190815_130021.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190815_181255.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190816_212831.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190816_233525.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190818_000956.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190818_090300.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190821_224622.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190826_125118.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190826_131454.jpg" />
-    <Resource Include="Data\TestImages\IMG_20190919_210252.jpg" />
-    <Resource Include="Data\TestImages\IMG_20191004_144725.jpg" />
-    <Resource Include="Data\TestImages\IMG_20200729_203254.jpg" />
-    <Resource Include="Data\TestImages\test.jpg" />
     <Resource Include="Graphics\Icons\Add.png" />
     <Resource Include="Graphics\Icons\AddPhoto.png" />
     <Resource Include="Graphics\Icons\Checked.png" />
