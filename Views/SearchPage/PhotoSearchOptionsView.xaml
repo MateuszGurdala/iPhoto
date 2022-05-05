@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
              mc:Ignorable="d"
+             x:Name="root"
              d:DesignHeight="600"
              d:DesignWidth="800">
     <Grid>
@@ -37,8 +38,6 @@
                         Value="Center" />
                 <Setter Property="BorderThickness"
                         Value="0" />
-                <!--<Setter Property="FontWeight"
-                        Value="DemiBold" />-->
             </Style>
 
         </Grid.Resources>
@@ -69,8 +68,6 @@
                         </Style>
                     </ComboBox.Resources>
                 </ComboBox>
-                <!--<uc:TextBoxWithTitle EntryText="*Any"
-                                     x:Name="Album" />-->
                 <!--Title-->
                 <TextBlock Text="Tags"
                            Height="40" />
@@ -98,19 +95,6 @@
                                 Background="{StaticResource DarkLightGreenGradient}"
                                 Foreground="{StaticResource PastelWhiteGradient}"
                                 Margin="10, 0, 0, 0"/>
-                    <!--<uc:TextBoxWithTitle Width="110"
-                                         EntryText="*From"
-                                         FontSize="21"
-                                         Height="30"
-                                         x:Name="StartDate" />
-
-                    <uc:TextBoxWithTitle Width="110"
-                                         EntryText="*To"
-                                         x:Name="EndDate"
-                                         FontSize="21"
-                                         Height="30"
-                                         Margin="10, 0, 0, 0" />-->
-
                 </StackPanel>
                 <!--Location-->
                 <TextBlock Text="Location" />
@@ -122,7 +106,8 @@
                                   Width="60"
                                   Height="60"
                                   CornerRadius="12"
-                                  Command="{Binding ClearSearchParams}" />
+                                  Command="{Binding ClearSearchParamsCommand}"
+                                  CommandParameter="{Binding Path=., ElementName=root}"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -16,6 +16,8 @@ namespace iPhoto.ViewModels
         public ICommand ExtendSearchMenuCommand { get; }
         public ICommand ExtendPhotoDetailsCommand { get; }
         public ICommand AddPhotoCommand { get; }
+        public ICommand ClearSearchParamsCommand { get; }
+
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
         public ObservableCollection<string> AlbumList
         {
@@ -37,6 +39,7 @@ namespace iPhoto.ViewModels
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
             AddPhotoCommand = new AddPhotoCommand(DatabaseHandler);
+            ClearSearchParamsCommand = new ClearSearchParamsCommand();
 
             PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
             photoDetailsWindow.DataContext = PhotoDetails;
