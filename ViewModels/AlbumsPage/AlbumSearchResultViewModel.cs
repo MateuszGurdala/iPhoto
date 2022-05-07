@@ -29,7 +29,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         public bool IsClicked { get; set;}
         private string GetAlbumIcon()
         {
-            if (_albumData.ColorGroup == "")
+            if (_albumData.ColorGroup == "" || _albumData.ColorGroup == "None")
             {
                 return DataHandler.GetAlbumIconsDirectoryPath() + "GenericAlbum.png";
             }
