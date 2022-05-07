@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using iPhoto.Models;
+﻿using iPhoto.Models;
 using iPhoto.UtilityClasses;
 using iPhoto.ViewModels;
 using iPhoto.Views;

@@ -61,7 +61,7 @@ namespace iPhoto.UtilityClasses
                 var dataContext = new AddPhotoPopupViewModel()
                 {
                     Image = _bitmapImage,
-                    AlbumList = _databaseHandler.GetAlbumList()
+                    AlbumList = _databaseHandler.GetAlbumList(false)
                 };
                 dataContext.PhotoAdder = this;
                 Popup = new AddPhotoPopupView(dataContext);
@@ -76,7 +76,7 @@ namespace iPhoto.UtilityClasses
                 PopupForAlbums = new AddPhotoToAlbumPopupView(dataContext);
             }
         }
-        public async void AddPhoto(string title, string album, string rawTags, string creationDateString, string placeTaken)
+        public async void AddPhoto(string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
             CheckData(title, album, rawTags, creationDateString, placeTaken);
             ParseData(title, album, rawTags, creationDateString, placeTaken);
@@ -95,7 +95,7 @@ namespace iPhoto.UtilityClasses
             else
                PopupForAlbums.IsOpen = false;
         }
-        private void CheckData(string title, string album, string? tags, string creationDateString, string placeTaken)
+        private void CheckData(string title, string album, string? tags, string? creationDateString, string placeTaken)
         {
             if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
             {
@@ -114,10 +114,10 @@ namespace iPhoto.UtilityClasses
                 throw new InvalidDataException("Invalid tags format.");
             }
         }
-        private void ParseData(string title, string album, string rawTags, string creationDateString, string placeTaken)
+        private void ParseData(string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
             _rawTags = rawTags == "#none" ? null : rawTags;
-            _dateCreated = creationDateString == "Today" ? DateTime.Now : DateTime.ParseExact(creationDateString, "dd.MM.yyyy", null);
+            _dateCreated = creationDateString == "" ? DateTime.Now : DateTime.ParseExact(creationDateString, "dd.MM.yyyy", null);
             _title = title == "Default" ? GenerateDefaultTitle() : title;
             _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
             _albumId = album == "OtherPhotos" ? _databaseHandler.Albums[0].Id : _databaseHandler.Albums.First(e => e.Name == album).Id; // change this after implementing Photo Add checker TODO

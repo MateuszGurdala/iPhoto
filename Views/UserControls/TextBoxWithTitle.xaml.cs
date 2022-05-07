@@ -26,7 +26,7 @@ namespace iPhoto.Views.UserControls
             InitializeComponent();
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        public void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             var textBox = sender as TextBox;
             if (textBox.Text == String.Empty)

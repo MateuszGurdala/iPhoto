@@ -50,7 +50,7 @@ namespace iPhoto.DataBase
         {
             foreach (Album Album in Albums)
             {
-                foreach(Photo photo in Photos.Where(e => e.AlbumId == Album.Id))
+                foreach (Photo photo in Photos.Where(e => e.AlbumId == Album.Id))
                 {
                     Album.PhotoEntities.Add(photo);
                     Album.PhotoCount++;
@@ -371,11 +371,14 @@ namespace iPhoto.DataBase
             photo.PlaceId = placeId ?? photo.PlaceId;
         }
         //Utility methods
-        public ObservableCollection<string> GetAlbumList()
+        public ObservableCollection<string> GetAlbumList(bool addStar)
         {
             var albumList = new List<string>();
             var albumCollection = new ObservableCollection<string>();
-            albumList.Add("*");
+            if (addStar)
+            {
+                albumList.Add("*");
+            }
             foreach (var album in Albums)
             {
                 albumList.Add(album.Name);
