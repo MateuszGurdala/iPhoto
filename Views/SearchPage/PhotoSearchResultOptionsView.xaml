@@ -94,7 +94,8 @@
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Preview" 
                        PreviewMouseLeftButtonUp="Preview"/>
-            <TextBlock Text="PhotoViewer" />
+            <TextBlock Text="Change Details"
+                       PreviewMouseLeftButtonDown="ChangeDetails"/>
             <TextBlock Text="Move To Album" />
             <TextBlock Text="Rename" />
             <TextBlock Text="Delete"

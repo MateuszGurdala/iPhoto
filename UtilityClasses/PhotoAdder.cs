@@ -35,11 +35,14 @@ namespace iPhoto.UtilityClasses
         private int? _placeId;
         private int _imageId;
 
-        public PhotoAdder(DatabaseHandler databaseHandler, string fileName)
+        public PhotoAdder(DatabaseHandler databaseHandler, string? fileName)
         {
             _databaseHandler = databaseHandler;
-            _fullPath = fileName;
-            GetImageData();
+            if (fileName != null)
+            {
+                _fullPath = fileName;
+                GetImageData();
+            }
         }
 
         private void GetImageData()
@@ -76,7 +79,7 @@ namespace iPhoto.UtilityClasses
                 PopupForAlbums = new AddPhotoToAlbumPopupView(dataContext);
             }
         }
-        public async void AddPhoto(string title, string album, string rawTags, string? creationDateString, string placeTaken)
+        public void AddPhoto(string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
             CheckData(title, album, rawTags, creationDateString, placeTaken);
             ParseData(title, album, rawTags, creationDateString, placeTaken);
@@ -95,12 +98,34 @@ namespace iPhoto.UtilityClasses
             else
                PopupForAlbums.IsOpen = false;
         }
+        public void UpdatePhoto(int id ,string title, string album, string rawTags, string? creationDateString, string placeTaken)
+        {
+            CheckUpdateData(title, album, rawTags, creationDateString, placeTaken);
+            ParseData(title, album, rawTags, creationDateString, placeTaken);
+
+            _databaseHandler.UpdatePhoto(id, title, album, rawTags, DateTime.Parse(creationDateString), placeTaken);
+        }
         private void CheckData(string title, string album, string? tags, string? creationDateString, string placeTaken)
         {
             if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
             {
                 throw new InvalidDataException("Title is already taken");
             }
+            if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
+            {
+                throw new InvalidDataException("Invalid album name.");
+            }
+            if (_databaseHandler.Places.FirstOrDefault(e => e.Name == placeTaken) == null)
+            {
+                throw new InvalidDataException("Invalid place name.");
+            }
+            if (tags != null && tags[0] != '#')
+            {
+                throw new InvalidDataException("Invalid tags format.");
+            }
+        }
+        private void CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken)
+        {
             if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
             {
                 throw new InvalidDataException("Invalid album name.");

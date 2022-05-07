@@ -17,7 +17,6 @@ namespace iPhoto.ViewModels
         public BitmapImage ImagePreviewSource => _photoData.PreviewImage;
         public BitmapImage Image => _photoData.GetImage();
         //MG 26.04 Fixed title display settings
-        //public string PhotoTitle => _photoData.Title;
         public string PhotoTitle
         {
             get
@@ -33,10 +32,8 @@ namespace iPhoto.ViewModels
             }
         }
         public DatabaseHandler Database => SearchViewModel.DatabaseHandler;
-
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection =>
             SearchViewModel.PhotoSearchResultsCollection;
-
         public ICommand ClickSearchResultCommand { get; }
         public ICommand ClickSearchResultOptionsCommand { get; }
         public ICommand PreviewPhotoCommand { get; }
@@ -73,17 +70,14 @@ namespace iPhoto.ViewModels
         {
             return _photoData.ImageData.Id;
         }
-
         public int GetAlbumId()
         {
             return _photoData.AlbumData.Id;
         }
-
         public string GetImageSource()
         {
             return _photoData.ImageData.Source;
         }
-
         public PhotoSearchResultModel GetPhotoData()
         {
             return _photoData;

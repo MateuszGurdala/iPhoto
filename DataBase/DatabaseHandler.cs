@@ -343,7 +343,7 @@ namespace iPhoto.DataBase
             place.Latitude = lat ?? place.Latitude;
             place.Longitude = lon ?? place.Longitude;
         }
-        public void UpdatePhoto(int id, string? title, int? albumId, List<string>? tags, DateTime? date, int? placeId)
+        public void UpdatePhoto(int id, string? title, string? album, string? rawTags, DateTime? date, string? place)
         {
             var photo = Photos.FirstOrDefault(e => e.Id == id);
 
@@ -351,24 +351,28 @@ namespace iPhoto.DataBase
             {
                 throw new InvalidDataException("Photo doesn't exist.");
             }
-            if (title != null && Photos.FirstOrDefault(e => e.Title.Equals(title)) != null)
-            {
-                throw new InvalidDataException("Photo title is already taken.");
-            }
-            if (albumId != null && Albums.FirstOrDefault(e => e.Id == albumId) == null)
+            //if (title != null && Photos.FirstOrDefault(e => e.Title.Equals(title)) != null)
+            //{
+            //    throw new InvalidDataException("Photo title is already taken.");
+            //}
+            if (album != null && Albums.FirstOrDefault(e => e.Name == album) == null)
             {
                 throw new InvalidDataException("Wrong album Id.");
             }
-            if (placeId != null && Places.FirstOrDefault(e => e.Id == albumId) == null)
+            if (place != null && Places.FirstOrDefault(e => e.Name == place) == null)
             {
                 throw new InvalidDataException("Wrong place Id.");
             }
 
             photo.Title = title ?? photo.Title;
-            photo.AlbumId = albumId ?? photo.AlbumId;
-            photo.Tags = tags ?? photo.Tags;
+            photo.AlbumId = Albums.FirstOrDefault(e => e.Name == album) == null ? Albums.FirstOrDefault(e => e.Name == album).Id : photo.AlbumId;
+            photo.RawTags = rawTags ?? photo.RawTags;
             photo.DateTaken = date ?? photo.DateTaken;
-            photo.PlaceId = placeId ?? photo.PlaceId;
+            photo.PlaceId = Places.FirstOrDefault(e => e.Name == place) == null ? Places.FirstOrDefault(e => e.Name == place).Id : photo.PlaceId;
+
+            using var db = new DatabaseContext();
+            db.PhotoEntities.Update(photo.GetEntity());
+            db.SaveChanges();
         }
         //Utility methods
         public ObservableCollection<string> GetAlbumList(bool addStar)
