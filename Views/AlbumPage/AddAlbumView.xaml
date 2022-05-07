@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:iPhoto.Views.AlbumPage"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="200">
+             d:DesignHeight="450" d:DesignWidth="200"
+             xmlns:vma="clr-namespace:iPhoto.ViewModels.AlbumsPage"
+             xmlns:uc="clr-namespace:iPhoto.Views.UserControls" d:DataContext="{d:DesignInstance Type=vma:AddAlbumViewModel}"
+             Name="root">
     <StackPanel>
         <StackPanel.Resources>
             <!-- Style for TextBox-->
@@ -44,6 +47,38 @@
         <TextBlock> ADD NEW ALBUM </TextBlock>
         <TextBlock> ---------------------</TextBlock>
         <TextBlock> Name of album:</TextBlock>
-        <TextBox> No Name</TextBox>
+        <TextBox Name="AlbumName"
+                 Height="40" 
+                 TextWrapping="WrapWithOverflow" 
+                 GotFocus="TextBox_GotFocus" 
+                 Text="Default Name"
+                 HorizontalAlignment="Center"/>
+        <TextBlock Margin="0 20 0 0"> Color:</TextBlock>
+        <ComboBox x:Name="AlbumColorsComboBox"
+                          Style="{StaticResource ComboBoxStyle1}"
+                          Width="200"
+                          Height="35"
+                          HorizontalAlignment="Center"
+                          SelectedIndex="0"
+                          ItemContainerStyle="{StaticResource ComboBoxItem1}"
+                          >
+            <Rectangle x:Name="Green" Fill="Green"  Margin="5" Width="200" Height="35" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Blue" Fill="Blue" Margin="5" Width="200" Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Red" Fill="Red" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Aqua" Fill="Aqua" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="DarkBlue" Fill="DarkBlue" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Generic" Fill="LightGray" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Orange" Fill="Orange" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Pink" Fill="Pink" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Violet" Fill="Purple" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Yellow" Fill="Yellow" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            </ComboBox>
+        <!--Add Album-->
+            <uc:CustomButton
+                              Margin="100"
+                              Command="{Binding AddAlbumCommand}"
+                              CommandParameter="{Binding Path=., ElementName=root}"
+                              ImageSource="../../Graphics/Icons/AddAlbum.png"/>
+
     </StackPanel>
 </UserControl>

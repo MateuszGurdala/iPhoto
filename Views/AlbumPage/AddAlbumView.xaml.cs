@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iPhoto.ViewModels.AlbumsPage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace iPhoto.Views.AlbumPage
         public AddAlbumView()
         {
             InitializeComponent();
+        }
+        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBox_GotFocus;
         }
     }
 }

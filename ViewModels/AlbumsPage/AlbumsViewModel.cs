@@ -1,6 +1,7 @@
 ﻿using iPhoto.Commands.AlbumPage;
 using iPhoto.DataBase;
 using iPhoto.ViewModels.AlbumsPage;
+using iPhoto.Views.AlbumPage;
 using iPhoto.Views.SearchPage;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,9 @@ namespace iPhoto.ViewModels
         private readonly MainWindowViewModel _mainWindowViewModel;
         public DatabaseHandler DatabaseHandler;
         private readonly PhotoDetailsWindowView _photoDetailsWindow;
-        public ICommand AddAlbumCommand;
+        public AddAlbumViewModel AddAlbumViewModel { get; }
+
+        public AddAlbumView AddAlbumView { get; }
         public ObservableCollection<AlbumSearchResultViewModel> AlbumSearchResultsCollection
         {
             get { return _albumSearchResultsCollection; }
@@ -31,13 +34,19 @@ namespace iPhoto.ViewModels
             _mainWindowViewModel = mainWindowViewModel;
             _photoDetailsWindow = photoDetailsWindow;
             _albumSearchResultsCollection = new ObservableCollection<AlbumSearchResultViewModel>();
+            AddAlbumViewModel = new AddAlbumViewModel(DataBase, this);
             DisplayAllAlbums();
-            AddAlbumCommand = new AddAlbumCommand();
         }
 
-        private void DisplayAllAlbums()
+        public void AddAlbumToView(Album album)
         {
-            for(int i = 1; i <= DatabaseHandler.Albums.Count; i++)
+            AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel));
+        }
+
+
+        public void DisplayAllAlbums()
+        {
+            for (int i = 1; i <= DatabaseHandler.Albums.Count; i++)
             {
                 var album = DatabaseHandler.Albums.FirstOrDefault(e => e.Id == i);
                 AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler,_photoDetailsWindow, album, null, _mainWindowViewModel));

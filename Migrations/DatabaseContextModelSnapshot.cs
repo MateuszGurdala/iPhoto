@@ -51,7 +51,7 @@ namespace iPhoto.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AlbumEntities");
+                    b.ToTable("AlbumEntities", (string)null);
                 });
 
             modelBuilder.Entity("iPhoto.DataBase.ImageEntity", b =>
@@ -75,7 +75,7 @@ namespace iPhoto.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ImageEntities");
+                    b.ToTable("ImageEntities", (string)null);
                 });
 
             modelBuilder.Entity("iPhoto.DataBase.PhotoEntity", b =>
@@ -120,7 +120,7 @@ namespace iPhoto.Migrations
 
                     b.HasIndex("PlaceEntityId");
 
-                    b.ToTable("PhotoEntities");
+                    b.ToTable("PhotoEntities", (string)null);
                 });
 
             modelBuilder.Entity("iPhoto.DataBase.PlaceEntity", b =>
@@ -141,7 +141,7 @@ namespace iPhoto.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlaceEntities");
+                    b.ToTable("PlaceEntities", (string)null);
                 });
 
             modelBuilder.Entity("iPhoto.DataBase.PhotoEntity", b =>

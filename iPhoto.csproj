@@ -28,9 +28,9 @@
     <None Remove="Graphics\AlbumIcons\OrangeAlbum.png" />
     <None Remove="Graphics\AlbumIcons\PinkAlbum.png" />
     <None Remove="Graphics\AlbumIcons\RedAlbum.png" />
-    <None Remove="Graphics\AlbumIcons\SyftAlbum.png" />
     <None Remove="Graphics\AlbumIcons\VioletAlbum.png" />
     <None Remove="Graphics\AlbumIcons\YellowAlbum.png" />
+    <None Remove="Graphics\Icons\AddAlbum.png" />
     <None Remove="Graphics\Icons\AddPhoto.png" />
     <None Remove="Graphics\Icons\Checked.png" />
     <None Remove="Graphics\Icons\CreateWindow.png" />
@@ -46,6 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Graphics\Icons\AddAlbum.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
 
@@ -68,7 +69,6 @@
     <Resource Include="Graphics\AlbumIcons\OrangeAlbum.png" />
     <Resource Include="Graphics\AlbumIcons\PinkAlbum.png" />
     <Resource Include="Graphics\AlbumIcons\RedAlbum.png" />
-    <Resource Include="Graphics\AlbumIcons\SyftAlbum.png" />
     <Resource Include="Graphics\AlbumIcons\VioletAlbum.png" />
     <Resource Include="Graphics\AlbumIcons\YellowAlbum.png" />
     <Resource Include="Graphics\Icons\Account.png" />

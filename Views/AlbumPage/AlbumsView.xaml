@@ -24,19 +24,15 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <!--Add Album-->
-        <uc:CustomButton
-                              Grid.Column="1"
-                              Grid.Row="0"
-                              Margin="10, 0, 0, 0"
-                              Command="{Binding AddAlbumCommand}"/>
-        <local:AlbumDetailsView Grid.Row="1" Grid.Column="2"/>
+        <local:AlbumDetailsView Grid.Row="1" Grid.Column="0"/>
+        <local:AddAlbumView Grid.Row="1" Grid.Column="2"
+                            DataContext="{Binding AddAlbumViewModel}"/>
         <uc:RoundedIcon Grid.Row="1" Grid.Column="1" Margin="7 7 7 7">
             <ScrollViewer>
                 <ItemsControl ItemsSource="{Binding AlbumSearchResultsCollection}">
