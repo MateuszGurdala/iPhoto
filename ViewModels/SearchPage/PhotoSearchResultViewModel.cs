@@ -11,7 +11,7 @@ namespace iPhoto.ViewModels
 {
     public class PhotoSearchResultViewModel : ViewModelBase
     {
-        private readonly SearchViewModel _searchViewModel;
+        public SearchViewModel SearchViewModel { get; }
         private readonly PhotoSearchResultModel _photoData;
 
         public BitmapImage ImagePreviewSource => _photoData.PreviewImage;
@@ -32,10 +32,10 @@ namespace iPhoto.ViewModels
                 }
             }
         }
-        public DatabaseHandler Database => _searchViewModel.DatabaseHandler;
+        public DatabaseHandler Database => SearchViewModel.DatabaseHandler;
 
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection =>
-            _searchViewModel.PhotoSearchResultsCollection;
+            SearchViewModel.PhotoSearchResultsCollection;
 
         public ICommand ClickSearchResultCommand { get; }
         public ICommand ClickSearchResultOptionsCommand { get; }
@@ -55,11 +55,11 @@ namespace iPhoto.ViewModels
         //MG 16.04 implemented handling database data format 
         public PhotoSearchResultViewModel(Photo photoData, Image imageData, Album albumData, Place placeData, SearchViewModel searchViewModel)
         {
-            _searchViewModel = searchViewModel;
+            SearchViewModel = searchViewModel;
             _photoData = new PhotoSearchResultModel(photoData, imageData, albumData, placeData);
 
             PreviewPhotoCommand = new PreviewPhotoCommand();
-            ClickSearchResultCommand = new ClickSearchResultCommand(_searchViewModel.PhotoSearchResultsCollection, searchViewModel.PhotoDetails);
+            ClickSearchResultCommand = new ClickSearchResultCommand(SearchViewModel.PhotoSearchResultsCollection, searchViewModel.PhotoDetails);
             ClickSearchResultOptionsCommand = new ClickSearchResultOptionsCommand();
 
             IsClicked = false;

@@ -16,7 +16,6 @@ namespace iPhoto.ViewModels.AlbumsPage
 {
     public class AlbumContentViewModel : ViewModelBase
     {
-        //TODO CAN BE MERGED WITH SEARCH VIEWMODEL KG
         //public ICommand SearchCommand { get; }
         public ICommand ExtendSearchMenuCommand { get; }
         public ICommand ExtendPhotoDetailsCommand { get; }
@@ -69,7 +68,7 @@ namespace iPhoto.ViewModels.AlbumsPage
             LoadAllAlbumPhotos();
         }
         /// <summary>
-        ///  DELETE THIS AFTER IMPLEMENTING ALBUM SEARCH ENGINE <DUPLICATE>
+        ///  Diplay in GUI all photos that are in given album. 
         /// </summary>
         public async void LoadAllAlbumPhotos()
         { 
@@ -85,7 +84,11 @@ namespace iPhoto.ViewModels.AlbumsPage
                         ));
                 }
                 await Task.Delay(10);
-            }   
+            }
+            foreach (var VM in PhotoSearchResultsCollection)
+            {
+                VM.SearchViewModel.PhotoSearchResultsCollection = PhotoSearchResultsCollection;
+            }
         }
     }
 }

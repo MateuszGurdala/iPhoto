@@ -5,6 +5,7 @@ using iPhoto.Commands;
 using iPhoto.Commands.SearchPage;
 using iPhoto.DataBase;
 using iPhoto.UtilityClasses;
+using iPhoto.ViewModels.AlbumsPage;
 using iPhoto.ViewModels.SearchPage;
 using iPhoto.Views.SearchPage;
 
@@ -16,7 +17,7 @@ namespace iPhoto.ViewModels
         public ICommand ExtendSearchMenuCommand { get; }
         public ICommand ExtendPhotoDetailsCommand { get; }
         public ICommand AddPhotoCommand { get; }
-        public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
+        public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; set; }
         public ObservableCollection<string> AlbumList
         {
             get
@@ -30,10 +31,8 @@ namespace iPhoto.ViewModels
 
         public SearchViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow)
         {
-            PhotoSearchResultsCollection = new ObservableCollection<PhotoSearchResultViewModel>();
+            PhotoSearchResultsCollection = new ObservableCollection<PhotoSearchResultViewModel>() { };
             DatabaseHandler = database;
-
-
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
             AddPhotoCommand = new AddPhotoCommand(DatabaseHandler);
