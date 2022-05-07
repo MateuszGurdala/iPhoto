@@ -11,5 +11,12 @@ namespace iPhoto.Views.SearchPage
             DataContext = dataContext;
             dataContext.ParentView = this;
         }
+        public AddPhotoPopupView(ChangePhotoDetailsViewModel dataContext)
+        {
+            InitializeComponent();
+            DataContext = dataContext;
+            dataContext.ParentView = this;
+            dataContext.UpdateViewData();
+        }
     }
 }

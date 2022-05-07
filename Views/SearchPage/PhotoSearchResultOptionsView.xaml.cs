@@ -4,6 +4,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using iPhoto.Commands;
+using iPhoto.Commands.PhotoSearchResultOptions;
 using iPhoto.Commands.SearchPage;
 using iPhoto.ViewModels;
 
@@ -17,7 +18,7 @@ namespace iPhoto.Views
         private const int _duration = 150;
         public PhotoSearchResultViewModel ViewModel { get; set; }
         public ICommand PreviewCommand { get; }
-        public ICommand OpenCommand { get; }
+        public ICommand ChangeDetailsCommand { get; }
         public ICommand AddToAlbumCommand { get; }
         public ICommand RenameCommand { get; }
         public ICommand DeleteCommand { get; }
@@ -29,6 +30,7 @@ namespace iPhoto.Views
 
             PreviewCommand = new PreviewPhotoCommand();
             DeleteCommand = new DeletePhotoCommand();
+            ChangeDetailsCommand = new ChangePhotoDetailsCommand(viewModel);
         }
 
         private void AnimateEntrance(object sender, EventArgs e)
@@ -112,6 +114,11 @@ namespace iPhoto.Views
         private void Delete(object sender, MouseButtonEventArgs e)
         {
             DeleteCommand.Execute(ViewModel);
+            AnimateLeave(sender, e);
+        }
+        private void ChangeDetails(object sender, MouseButtonEventArgs e)
+        {
+            ChangeDetailsCommand.Execute(null);
             AnimateLeave(sender, e);
         }
     }
