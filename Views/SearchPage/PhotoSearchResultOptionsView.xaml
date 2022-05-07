@@ -96,8 +96,6 @@
                        PreviewMouseLeftButtonUp="Preview"/>
             <TextBlock Text="Change Details"
                        PreviewMouseLeftButtonDown="ChangeDetails"/>
-            <TextBlock Text="Move To Album" />
-            <TextBlock Text="Rename" />
             <TextBlock Text="Delete"
                        PreviewMouseLeftButtonUp="Delete" />
         </StackPanel>

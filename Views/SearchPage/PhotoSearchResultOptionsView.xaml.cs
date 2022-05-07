@@ -12,7 +12,7 @@ namespace iPhoto.Views
 {
     public partial class PhotoSearchResultOptionsView : Popup
     {
-        private const double _maxHeight = 200;
+        private const double _maxHeight = 120;
         private const double _minHeight = 25;
         private const double _maxWidth = 160;
         private const int _duration = 150;
