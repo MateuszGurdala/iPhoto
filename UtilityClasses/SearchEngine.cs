@@ -15,7 +15,7 @@ namespace iPhoto.UtilityClasses
         private readonly SearchViewModel _searchViewModel;
 
         private SearchParams _searchParams;
-        private readonly ObservableCollection<PhotoSearchResultModel>  _searchResults;
+        private readonly ObservableCollection<PhotoSearchResultModel> _searchResults;
 
         private bool _newDataLoaded;
 
@@ -49,6 +49,20 @@ namespace iPhoto.UtilityClasses
                     _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
                     await Task.Delay(10);
                 }
+            }
+        }
+        public async void UpdateSearchResults()
+        {
+            _searchViewModel.PhotoSearchResultsCollection.Clear();
+
+            var firstSearch = FirstSearch();
+            var secondSearch = SecondSearch(firstSearch);
+            var thirdSearch = ThirdSearch(secondSearch);
+
+            foreach (var photo in thirdSearch)
+            {
+                _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
+                await Task.Delay(10);
             }
         }
         private PhotoSearchResultViewModel GetViewModel(int photoId)

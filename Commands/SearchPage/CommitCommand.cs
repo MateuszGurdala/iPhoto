@@ -29,6 +29,8 @@ namespace iPhoto.Commands.SearchPage
 
                 viewModel.PhotoAdder.UpdatePhoto(id,title, album, rawTags, creationDateString, placeTaken);
                 viewModel.ParentView.IsOpen = false;
+
+                viewModel.SearchResultViewModel.SearchViewModel.SearchEngine.UpdateSearchResults();
             }
             else
             {

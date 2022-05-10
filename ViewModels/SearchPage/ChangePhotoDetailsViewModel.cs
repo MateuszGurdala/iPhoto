@@ -9,7 +9,7 @@ namespace iPhoto.ViewModels.SearchPage
 {
     public class ChangePhotoDetailsViewModel : ViewModelBase
     {
-        private readonly PhotoSearchResultViewModel _searchResultViewModel;
+        public readonly PhotoSearchResultViewModel SearchResultViewModel;
 
         public ICommand DiscardCommand { get; }
         public ICommand CommitCommand { get; }
@@ -23,25 +23,25 @@ namespace iPhoto.ViewModels.SearchPage
 
         public ChangePhotoDetailsViewModel(PhotoSearchResultViewModel photoSearchResultViewModel)
         {
-            _searchResultViewModel = photoSearchResultViewModel;
+            SearchResultViewModel = photoSearchResultViewModel;
 
             DiscardCommand = new DiscardCommand();
             CommitCommand = new CommitCommand(true);
 
-            Image = _searchResultViewModel.Image;
-            AlbumList = _searchResultViewModel.Database.GetAlbumList(false);
-            PhotoId = _searchResultViewModel.GetPhotoId();
-            PhotoAdder = new PhotoAdder(_searchResultViewModel.Database, null);
+            Image = SearchResultViewModel.Image;
+            AlbumList = SearchResultViewModel.Database.GetAlbumList(false);
+            PhotoId = SearchResultViewModel.GetPhotoId();
+            PhotoAdder = new PhotoAdder(SearchResultViewModel.Database, null);
             PhotoAdder.Popup = ParentView;
 
         }
         public void UpdateViewData()
         {
-            ParentView.Title.ContentTextBox.Text = _searchResultViewModel.GetPhotoData().Title;
-            ParentView.Album.Text = _searchResultViewModel.GetPhotoData().AlbumData.Name;
-            ParentView.RawTags.ContentTextBox.Text = _searchResultViewModel.GetPhotoData().PhotoData.RawTags;
-            ParentView.CreationDateString.Text = _searchResultViewModel.GetPhotoData().PhotoData.DateTaken.ToString();
-            ParentView.PlaceTaken.ContentTextBox.Text = _searchResultViewModel.GetPhotoData().PlaceData.Name;
+            ParentView.Title.ContentTextBox.Text = SearchResultViewModel.GetPhotoData().Title;
+            ParentView.Album.Text = SearchResultViewModel.GetPhotoData().AlbumData.Name;
+            ParentView.RawTags.ContentTextBox.Text = SearchResultViewModel.GetPhotoData().PhotoData.RawTags;
+            ParentView.CreationDateString.Text = SearchResultViewModel.GetPhotoData().PhotoData.DateTaken.ToString();
+            ParentView.PlaceTaken.ContentTextBox.Text = SearchResultViewModel.GetPhotoData().PlaceData.Name;
 
             if (ParentView.Title.ContentTextBox.Text != ParentView.Title.EntryText)
             {
