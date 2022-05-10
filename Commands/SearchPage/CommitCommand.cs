@@ -13,6 +13,7 @@ namespace iPhoto.Commands.SearchPage
         {
             _update = update;
         }
+
         public override void Execute(object parameter)
         {
             if (_update)
