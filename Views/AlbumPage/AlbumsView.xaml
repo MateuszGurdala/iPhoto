@@ -7,7 +7,6 @@
              xmlns:uc="clr-namespace:iPhoto.Views.UserControls" 
              xmlns:viewmodels="clr-namespace:iPhoto.ViewModels" 
              xmlns:albumvms="clr-namespace:iPhoto.ViewModels.AlbumsPage"
-             d:DataContext="{d:DesignInstance Type=viewmodels:AlbumsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>

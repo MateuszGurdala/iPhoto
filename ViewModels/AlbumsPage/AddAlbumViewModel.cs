@@ -12,7 +12,7 @@ namespace iPhoto.ViewModels.AlbumsPage
     public class AddAlbumViewModel : ViewModelBase
     {
         public ICommand AddAlbumCommand { get; }
-        public AddAlbumViewModel(DatabaseHandler databaseHandler, AlbumsViewModel albumsViewModel )
+        public AddAlbumViewModel(DatabaseHandler databaseHandler, AlbumViewModel albumsViewModel )
         {
             AddAlbumCommand = new AddAlbumCommand(databaseHandler, albumsViewModel);
         }

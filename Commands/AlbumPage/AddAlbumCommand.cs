@@ -11,14 +11,14 @@ namespace iPhoto.Commands.AlbumPage
     public class AddAlbumCommand : CommandBase
     {
         private readonly DatabaseHandler _databaseHandler;
-        private readonly AlbumsViewModel _albumViewModel;
+        private readonly AlbumViewModel _albumViewModel;
 
         /// <summary>
         /// Adds new album to database and to view  
         /// </summary>
         /// <param name="databaseHandler"> database where album entity will be added </param>
         /// <param name="albumViewModel"> album view where new album will be displayed</param>
-        public AddAlbumCommand(DatabaseHandler databaseHandler, AlbumsViewModel albumViewModel)
+        public AddAlbumCommand(DatabaseHandler databaseHandler, AlbumViewModel albumViewModel)
         {
             _databaseHandler = databaseHandler;
             _albumViewModel = albumViewModel;

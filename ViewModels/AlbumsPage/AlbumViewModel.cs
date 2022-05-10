@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace iPhoto.ViewModels
 {
-    public class AlbumsViewModel : ViewModelBase
+    public class AlbumViewModel : ViewModelBase
     {
         private ObservableCollection<AlbumSearchResultViewModel> _albumSearchResultsCollection;
 
@@ -28,7 +28,7 @@ namespace iPhoto.ViewModels
             get { return _albumSearchResultsCollection; }
             set { _albumSearchResultsCollection = value; }
         }
-        public AlbumsViewModel(DatabaseHandler DataBase, MainWindowViewModel mainWindowViewModel, PhotoDetailsWindowView photoDetailsWindow)
+        public AlbumViewModel(DatabaseHandler DataBase, MainWindowViewModel mainWindowViewModel, PhotoDetailsWindowView photoDetailsWindow)
         {
              DatabaseHandler = DataBase;
             _mainWindowViewModel = mainWindowViewModel;
@@ -40,7 +40,12 @@ namespace iPhoto.ViewModels
 
         public void AddAlbumToView(Album album)
         {
-            AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel));
+            AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel, this));
+        }
+        public void ReloadAlbumView(Album album)
+        {
+            int index = AlbumSearchResultsCollection.IndexOf(AlbumSearchResultsCollection.FirstOrDefault(y => y.AlbumId == album.Id));
+            AlbumSearchResultsCollection[index] = new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel, this);
         }
 
         public void DisplayAllAlbums()
@@ -48,7 +53,7 @@ namespace iPhoto.ViewModels
             for (int i = 1; i <= DatabaseHandler.Albums.Count; i++)
             {
                 var album = DatabaseHandler.Albums.FirstOrDefault(e => e.Id == i);
-                AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler,_photoDetailsWindow, album, null, _mainWindowViewModel));
+                AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler,_photoDetailsWindow, album, null, _mainWindowViewModel, this));
             }
         }
 /*        /// <summary>

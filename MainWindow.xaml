@@ -55,7 +55,7 @@
                 <DataTemplate DataType="{x:Type vms:SearchViewModel}">
                     <vs:SearchView />
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vms:AlbumsViewModel}">
+                <DataTemplate DataType="{x:Type vms:AlbumViewModel}">
                     <vsa:AlbumsView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vms:PlacesViewModel}">

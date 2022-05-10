@@ -52,7 +52,10 @@ namespace iPhoto.DataBase
         {
             get
             {
+                if (_databaseHandler != null)
                     return _databaseHandler.Images.FirstOrDefault(y => y.Id == ImageId).Size;
+                else
+                    return 0.0;
             }
         }
 

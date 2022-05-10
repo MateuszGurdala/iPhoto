@@ -105,14 +105,19 @@ namespace iPhoto.ViewModels.AlbumsPage
                 return string.Concat(header,_albumData.TotalMemorySize.ToString(), sizeUnit);
             }
         }
+        public int AlbumId
+        {
+            get => _albumData.Id;
+        }
+
         public ICommand ShowAlbumDetailsCommand { get; }
         public ICommand ShowAlbumContentCommand { get; }
         public ICommand ShowAlbumOptionsCommand { get; }
-        public AlbumSearchResultViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, Album album, List<PhotoEntity> photoEntities, MainWindowViewModel mainWindowViewModel)
+        public AlbumSearchResultViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, Album album, List<PhotoEntity> photoEntities, MainWindowViewModel mainWindowViewModel, AlbumViewModel albumViewModel)
         {
             _albumData = new AlbumSearchResultModel(album, photoEntities);
             IsClicked = false;
-            ShowAlbumContentCommand = new ShowAlbumContentCommand(database, photoDetailsWindow, mainWindowViewModel, album);
+            ShowAlbumContentCommand = new ShowAlbumContentCommand(database, photoDetailsWindow, mainWindowViewModel, album, albumViewModel);
         }
         
     }

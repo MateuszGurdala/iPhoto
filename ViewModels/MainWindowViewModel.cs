@@ -24,7 +24,7 @@ namespace iPhoto.ViewModels
             }
         }
         public SearchViewModel SearchViewModel { get; }
-        public AlbumsViewModel AlbumsViewModel { get; }
+        public AlbumViewModel AlbumsViewModel { get; }
         public PlacesViewModel PlacesViewModel { get; }
         public AccountViewModel AccountViewModel { get; }
         public SettingsViewModel SettingsViewModel { get; }
@@ -35,7 +35,7 @@ namespace iPhoto.ViewModels
         {
             HomePageViewModel = new HomePageViewModel();
             SearchViewModel = new SearchViewModel(database, photoDetailsWindow);    //MG 15.04 //MG 26.04 add photo details 
-            AlbumsViewModel = new AlbumsViewModel(database, this, photoDetailsWindow);
+            AlbumsViewModel = new AlbumViewModel(database, this, photoDetailsWindow);
             PlacesViewModel = new PlacesViewModel();
             AccountViewModel = new AccountViewModel();
             SettingsViewModel = new SettingsViewModel();

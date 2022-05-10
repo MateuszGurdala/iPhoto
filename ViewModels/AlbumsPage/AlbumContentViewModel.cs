@@ -23,7 +23,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
         // KG 2.05 Methods for album content handling
         public Album CurrentAlbum { get; }
-        public ICommand NavigateCommand { get; }
+        public ICommand NavigateBackToAlbumsCommand { get; }
 
         public static string NavigateParam { get; } = "Albums";
         private readonly PhotoDetailsWindowView _photoDetailsWindow;
@@ -47,7 +47,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         //public SearchEngine SearchEngine; //MG 27.04 Added
         public PhotoDetailsViewModel PhotoDetails { get; }  //MG 26.04 Added photo details
 
-        public AlbumContentViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, MainWindowViewModel mainWindowVM, Album currentAlbum)
+        public AlbumContentViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, MainWindowViewModel mainWindowVM, Album currentAlbum, AlbumViewModel albumViewModel)
         {
             PhotoSearchResultsCollection = new ObservableCollection<PhotoSearchResultViewModel>();
             DatabaseHandler = database;
@@ -64,7 +64,7 @@ namespace iPhoto.ViewModels.AlbumsPage
 #pragma warning disable CS8601 // Possible null reference assignment.
             CurrentAlbum = currentAlbum;
 #pragma warning restore CS8601 // Possible null reference assignment.
-            NavigateCommand = new NavigateCommand(mainWindowVM);
+            NavigateBackToAlbumsCommand = new NavigateBackToAlbumsCommand(mainWindowVM, albumViewModel, currentAlbum);
             LoadAllAlbumPhotos();
         }
         /// <summary>
