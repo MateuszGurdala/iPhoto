@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:iPhoto.Views.AlbumPage"
+             xmlns:local="clr-namespace:iPhoto.Views.AlbumPage" xmlns:albumspage="clr-namespace:iPhoto.ViewModels.AlbumsPage" d:DataContext="{d:DesignInstance Type=albumspage:AlbumSearchResultViewModel}"
              mc:Ignorable="d"
              Name="Root"
              Cursor="Hand"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="260" d:DesignWidth="800">
     <Button Background="Transparent">
         <Button.InputBindings>
             <MouseBinding Gesture="LeftClick"
@@ -22,17 +22,45 @@
         </Button.InputBindings>
         <Grid>
             <Border Name="Border"
-                    Width="142"
-                    Height="162"
+                    Width="800"
+                    Height="260"
                     Background="Transparent"
-                    BorderThickness="1"
+                    BorderThickness="1.5"
                     Opacity="{Binding IsClicked, Converter={StaticResource BoolToOpacityConverter}}">
                 <Border.BorderBrush>
                     <SolidColorBrush Color="{StaticResource BaseGreen}" />
                 </Border.BorderBrush>
             </Border>
-            <Grid Width="140"
-                  Height="160">
+            <Grid Width="780"
+                  Height="240">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize"
+                            Value="25" />
+                        <Setter Property="FontWeight"
+                            Value="DemiBold" />
+                        <Setter Property="HorizontalAlignment"
+                            Value="Left" />
+                        <Setter Property="VerticalAlignment"
+                            Value="Center" />
+                        <Setter Property="Foreground"
+                            Value="{StaticResource DarkLightGreenGradient}" />
+                        <Setter Property="FontFamily"
+                            Value="Helvetica" />
+                    </Style>
+                </Grid.Resources>
                 <Grid.Background>
                     <SolidColorBrush Color="{StaticResource BaseGreen}"
                                      Opacity="0" />
@@ -67,19 +95,35 @@
                         </EventTrigger.Actions>
                     </EventTrigger>
                 </Grid.Triggers>
-
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                    <Image Source="{Binding AlbumIcon}"
-                    Width="140"
-                    Height="140"
-                    Margin="0 0 0 10"/>
-                    <TextBlock Text="{Binding AlbumName}"
-                    FontSize="20"
-                    FontFamily="Helvetica"
-                    TextAlignment="Center"
-                    Foreground="Black"
-                    Width="200" Height="50"/>
-                </StackPanel>
+                <Image Source="{Binding AlbumIcon}"
+                    Width="200"
+                    Height="200"
+                    Margin="0 0 0 10"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Grid.RowSpan="5"/>
+                <TextBlock Text="{Binding AlbumNameText}"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="0"/>
+                <TextBlock Text="{Binding TagsText}"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="1"/>
+                <TextBlock Text="{Binding CreationDateText}"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="2"/>
+                <TextBlock Text="{Binding ColorGroupText}"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="3"/>
+                <TextBlock Text="{Binding MemorySizeText}"
+                    Grid.Column="2"
+                    Grid.Row="4"/>
+                <TextBlock Text="{Binding PhotoCountText}"
+                    Grid.Column="1"
+                    Grid.Row="4"/>
             </Grid>
         </Grid>
     </Button>

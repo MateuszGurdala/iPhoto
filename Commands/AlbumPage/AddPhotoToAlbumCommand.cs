@@ -11,6 +11,14 @@ namespace iPhoto.Commands.AlbumPage
         private readonly DatabaseHandler _databaseHandler;
         private readonly Album _currentAlbum;
         private readonly AlbumContentViewModel _albumVm;
+
+
+        /// <summary>
+        /// Add photo inside existing album
+        /// </summary>
+        /// <param name="databaseHandler"> database handler to database where new photos are added</param>
+        /// <param name="currentAlbum"> target album where photos will be added </param>
+        /// <param name="albumVm"> viewmodel of album where photos are added </param>
         public AddPhotoToAlbumCommand(DatabaseHandler databaseHandler, Album currentAlbum, AlbumContentViewModel albumVm)
         {
             _databaseHandler = databaseHandler;
@@ -18,6 +26,11 @@ namespace iPhoto.Commands.AlbumPage
             _albumVm = albumVm;
         }
 
+
+        /// <summary>
+        /// execute command and add photos to album
+        /// </summary>
+        /// <param name="parameter"> not used </param>
         public override void Execute(object parameter)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -34,6 +47,10 @@ namespace iPhoto.Commands.AlbumPage
                 photoAdder.GetPhotoData(_currentAlbum, _albumVm);
             }
         }
+        /// <summary>
+        /// handles system file explorer where photos are chosen.  
+        /// </summary>
+        /// <param name="fileDialog"> file Dialog handler</param>
         private void ConfigureDialog(OpenFileDialog fileDialog)
         {
             fileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg";

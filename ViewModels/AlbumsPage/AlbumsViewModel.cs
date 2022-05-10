@@ -43,7 +43,6 @@ namespace iPhoto.ViewModels
             AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel));
         }
 
-
         public void DisplayAllAlbums()
         {
             for (int i = 1; i <= DatabaseHandler.Albums.Count; i++)

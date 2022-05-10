@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace iPhoto.DataBase
 {
     public class Photo
     {
+        private readonly DatabaseHandler _databaseHandler;
         private readonly PhotoEntity _photoEntity;
         public int Id
         {
@@ -46,15 +48,22 @@ namespace iPhoto.DataBase
             get => _photoEntity.ImageEntityId;
             set => _photoEntity.ImageEntityId = value;
         }
+        public double MemorySize
+        {
+            get
+            {
+                    return _databaseHandler.Images.FirstOrDefault(y => y.Id == ImageId).Size;
+            }
+        }
 
-
-        public Photo(PhotoEntity photoEntity)
+        public Photo(PhotoEntity photoEntity, DatabaseHandler database)
         {
             _photoEntity = photoEntity;
+            _databaseHandler = database;
         }
         public Photo(int id, string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId)
         {
-            _photoEntity = new PhotoEntity(); // Change This to full constructor ??? KG 03.05
+            _photoEntity = new PhotoEntity();
             Id = id;
             Title = title;
             AlbumId = albumId ?? 1; //Default "OtherPhotos" album Id

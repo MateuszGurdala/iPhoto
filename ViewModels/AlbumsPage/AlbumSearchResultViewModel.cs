@@ -38,18 +38,71 @@ namespace iPhoto.ViewModels.AlbumsPage
                 return DataHandler.GetAlbumIconsDirectoryPath() + _albumData.ColorGroup + "Album.png";
             }
         }
-        public string AlbumName
+        public string AlbumNameText
         {
             get
             {
+                string header = "Album Name: ";
                 if (_albumData.Name.Length > 19)
                 {
-                    return _albumData.Name.Substring(0, 16) + "...";
+                    return string.Concat(header, _albumData.Name.AsSpan(0, 16), "...");
                 }
                 else
                 {
-                    return _albumData.Name;
+                    return string.Concat(header, _albumData.Name);
                 }
+            }
+        }
+
+        public string PhotoCountText
+        {
+            get
+            {
+                string header = "Photo count: ";
+                string photoCount = _albumData.PhotoCount.ToString();
+                return header + photoCount;
+            }
+        
+        }
+        public string TagsText
+        {
+            get
+            {
+                string output = "Tags: ";
+                foreach (string tag in _albumData.Tags)
+                {
+                    output += tag;
+                    output += ", ";
+                }
+                output = output.Trim(' ');
+                output = output.Trim(',');
+                return output;
+            }
+        }
+                
+        public string CreationDateText
+        { 
+            get
+            {
+                string header = "Creation date: ";
+                return header + _albumData.CreationDate.ToShortDateString();
+            }
+        }
+        public string ColorGroupText
+        {
+            get
+            {
+                string header = "Current color group: ";
+                return header + _albumData.ColorGroup;
+            }
+        }
+        public string MemorySizeText
+        {
+            get
+            {
+                string header = "Total memory size: ";
+                string sizeUnit = "MB";
+                return string.Concat(header,_albumData.TotalMemorySize.ToString(), sizeUnit);
             }
         }
         public ICommand ShowAlbumDetailsCommand { get; }

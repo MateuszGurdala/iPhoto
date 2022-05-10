@@ -17,7 +17,7 @@ namespace iPhoto.Models
         public readonly bool IsLocal;
         public readonly string ColorGroup;
         public readonly List<PhotoEntity> PhotoEntities;
-        //public readonly Photo CoverPhoto { get; set; }
+        public readonly double TotalMemorySize;
 
         public AlbumSearchResultModel(Album album, List<PhotoEntity>? photoEntities)
         {
@@ -29,6 +29,7 @@ namespace iPhoto.Models
             IsLocal = album.IsLocal;
             ColorGroup = album.ColorGroup;
             PhotoEntities = photoEntities ?? new List<PhotoEntity>{ };
+            TotalMemorySize = album.TotalMemorySize;
         }
 
         

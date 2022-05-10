@@ -12,11 +12,21 @@ namespace iPhoto.Commands.AlbumPage
     {
         private readonly DatabaseHandler _databaseHandler;
         private readonly AlbumsViewModel _albumViewModel;
+
+        /// <summary>
+        /// Adds new album to database and to view  
+        /// </summary>
+        /// <param name="databaseHandler"> database where album entity will be added </param>
+        /// <param name="albumViewModel"> album view where new album will be displayed</param>
         public AddAlbumCommand(DatabaseHandler databaseHandler, AlbumsViewModel albumViewModel)
         {
             _databaseHandler = databaseHandler;
             _albumViewModel = albumViewModel;
         }
+        /// <summary>
+        /// execute command and Add album 
+        /// </summary>
+        /// <param name="parameter"> AlbumView where new album is displayed </param>
         public override void Execute(object parameter)
         {
             var view = parameter as AddAlbumView;

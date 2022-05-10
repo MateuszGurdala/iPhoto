@@ -78,7 +78,7 @@ namespace iPhoto.DataBase
             using var db = new DatabaseContext();
             foreach (var e in db.PhotoEntities)
             {
-                Photos.Add(new Photo(e));
+                Photos.Add(new Photo(e, this));
             }
         }
         public void LoadPlaces()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 
 namespace iPhoto.DataBase
 {
@@ -50,7 +51,10 @@ namespace iPhoto.DataBase
             set => _albumEntity.ColorGroup = value;
         }
         public ObservableCollection<Photo> PhotoEntities { get; set; }
-
+        public double TotalMemorySize
+        {
+            get => PhotoEntities.Sum(e => e.MemorySize);
+        }
 
         public Album(AlbumEntity albumEntity)
         {
