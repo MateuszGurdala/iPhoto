@@ -365,10 +365,10 @@ namespace iPhoto.DataBase
             }
 
             photo.Title = title ?? photo.Title;
-            photo.AlbumId = Albums.FirstOrDefault(e => e.Name == album) == null ? Albums.FirstOrDefault(e => e.Name == album).Id : photo.AlbumId;
+            photo.AlbumId = Albums.FirstOrDefault(e => e.Name == album) != null ? Albums.FirstOrDefault(e => e.Name == album).Id : photo.AlbumId;
             photo.RawTags = rawTags ?? photo.RawTags;
             photo.DateTaken = date ?? photo.DateTaken;
-            photo.PlaceId = Places.FirstOrDefault(e => e.Name == place) == null ? Places.FirstOrDefault(e => e.Name == place).Id : photo.PlaceId;
+            photo.PlaceId = Places.FirstOrDefault(e => e.Name == place) != null ? Places.FirstOrDefault(e => e.Name == place).Id : photo.PlaceId;
 
             using var db = new DatabaseContext();
             db.PhotoEntities.Update(photo.GetEntity());
