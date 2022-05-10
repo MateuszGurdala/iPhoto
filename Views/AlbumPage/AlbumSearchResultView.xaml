@@ -23,7 +23,7 @@
         <Grid>
             <Border Name="Border"
                     Width="800"
-                    Height="260"
+                    Height="210"
                     Background="Transparent"
                     BorderThickness="1.5"
                     Opacity="{Binding IsClicked, Converter={StaticResource BoolToOpacityConverter}}">
@@ -32,7 +32,7 @@
                 </Border.BorderBrush>
             </Border>
             <Grid Width="780"
-                  Height="240">
+                  Height="180">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="1.3*"/>
@@ -96,8 +96,8 @@
                     </EventTrigger>
                 </Grid.Triggers>
                 <Image Source="{Binding AlbumIcon}"
-                    Width="200"
-                    Height="200"
+                    Width="180"
+                    Height="180"
                     Margin="0 0 0 10"
                     Grid.Column="0"
                     Grid.Row="0"

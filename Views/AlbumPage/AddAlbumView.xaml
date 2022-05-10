@@ -57,21 +57,21 @@
         <ComboBox x:Name="AlbumColorsComboBox"
                           Style="{StaticResource ComboBoxStyle1}"
                           Width="200"
-                          Height="35"
+                          Height="45"
                           HorizontalAlignment="Center"
                           SelectedIndex="0"
                           ItemContainerStyle="{StaticResource ComboBoxItem1}"
                           >
-            <Rectangle x:Name="Green" Fill="Green"  Margin="5" Width="200" Height="35" RadiusX="10" RadiusY="10"></Rectangle>
-            <Rectangle x:Name="Blue" Fill="Blue" Margin="5" Width="200" Height="40" RadiusX="10" RadiusY="10"></Rectangle>
-            <Rectangle x:Name="Red" Fill="Red" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
-            <Rectangle x:Name="Aqua" Fill="Aqua" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
-            <Rectangle x:Name="DarkBlue" Fill="DarkBlue" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
-            <Rectangle x:Name="Generic" Fill="LightGray" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
-            <Rectangle x:Name="Orange" Fill="Orange" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
-            <Rectangle x:Name="Pink" Fill="Pink" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
-            <Rectangle x:Name="Violet" Fill="Purple" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
-            <Rectangle x:Name="Yellow" Fill="Yellow" Margin="5" Width="200"  Height="40" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Green" Fill="Green"  Margin="5" Width="180" Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Blue" Fill="Blue" Margin="5" Width="180" Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Red" Fill="Red" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Aqua" Fill="Aqua" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="DarkBlue" Fill="DarkBlue" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Generic" Fill="LightGray" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Orange" Fill="Orange" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Pink" Fill="Pink" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Violet" Fill="Purple" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            <Rectangle x:Name="Yellow" Fill="Yellow" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
             </ComboBox>
         <!--Add Album-->
             <uc:CustomButton

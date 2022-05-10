@@ -89,7 +89,7 @@ namespace iPhoto.UtilityClasses
             //{
                 _databaseHandler.AddImage(_fileName, _width, _height, _size);
                 _imageId = _databaseHandler.Images.First(e => e.Source == _fileName).Id;
-                _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _imageId);
+                _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _imageId, _databaseHandler);
                 
                 MoveFileToDatabaseDirectory(); // BUG throws error if same fale in DataBaseDirectory TODO
             //});

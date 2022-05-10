@@ -208,7 +208,7 @@ namespace iPhoto.DataBase
             db.PlaceEntities.Add(place.GetEntity());
             db.SaveChanges();
         }
-        public void AddPhoto(string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId)
+        public void AddPhoto(string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId, DatabaseHandler databaseHandler) // Added dbHandler in order to access memory size
         {
             var id = Photos.Count == 0 ? 0 : Photos.OrderByDescending(e => e.Id).FirstOrDefault()!.Id;
 
@@ -228,7 +228,7 @@ namespace iPhoto.DataBase
             {
                 throw new InvalidDataException("Wrong place Id.");
             }
-            var photo = new Photo(id + 1, title, albumId, tags, date, placeId, imageId);
+            var photo = new Photo(id + 1, title, albumId, tags, date, placeId, imageId, databaseHandler);
             AddPhotoToAlbum(Albums.FirstOrDefault(e => e.Id == albumId), photo);
             Photos.Add(photo);
             using var db = new DatabaseContext();
@@ -240,7 +240,6 @@ namespace iPhoto.DataBase
         private void AddPhotoToAlbum(Album album, Photo photo)
         {
             album.PhotoEntities.Add(photo);
-            //album.TotalSize += photo. 03.05 KG TODO
             album.PhotoCount++;
         }
         //Removing records

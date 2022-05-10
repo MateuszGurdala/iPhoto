@@ -53,7 +53,7 @@ namespace iPhoto.DataBase
         public ObservableCollection<Photo> PhotoEntities { get; set; }
         public double TotalMemorySize
         {
-            get => PhotoEntities.Sum(e => e.MemorySize);
+            get => Math.Round(PhotoEntities.Sum(e => e.MemorySize), 2);
         }
 
         public Album(AlbumEntity albumEntity)

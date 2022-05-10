@@ -52,11 +52,9 @@ namespace iPhoto.DataBase
         {
             get
             {
-                if (_databaseHandler != null)
-                    return _databaseHandler.Images.FirstOrDefault(y => y.Id == ImageId).Size;
-                else
-                    return 0.0;
+                return _databaseHandler.Images.FirstOrDefault(y => y.Id == ImageId).Size;
             }
+
         }
 
         public Photo(PhotoEntity photoEntity, DatabaseHandler database)
@@ -64,7 +62,7 @@ namespace iPhoto.DataBase
             _photoEntity = photoEntity;
             _databaseHandler = database;
         }
-        public Photo(int id, string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId)
+        public Photo(int id, string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId, DatabaseHandler database)
         {
             _photoEntity = new PhotoEntity();
             Id = id;
@@ -74,6 +72,7 @@ namespace iPhoto.DataBase
             DateTaken = date ?? DateTime.Now;
             PlaceId = placeId ?? 1; //Default "No place" place Id
             ImageId = imageId;
+            _databaseHandler = database;
         }
         private List<string>? ParseTags(string tags)
         {
