@@ -142,7 +142,7 @@ namespace iPhoto.UtilityClasses
         private void ParseData(string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
             _rawTags = rawTags == "#none" ? null : rawTags;
-            _dateCreated = creationDateString == "Today" ? DateTime.Now : DateTime.ParseExact(creationDateString, "dd.MM.yyyy", null);
+            _dateCreated = creationDateString == "" ? DateTime.Now : DateTime.ParseExact(creationDateString, "dd.MM.yyyy", null);
             _title = title == "Default" ? GenerateDefaultTitle() : title;
             _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
             _albumId = album == "OtherPhotos" ? _databaseHandler.Albums[0].Id : _databaseHandler.Albums.First(e => e.Name == album).Id; // change this after implementing Photo Add checker TODO

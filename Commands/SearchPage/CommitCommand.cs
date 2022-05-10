@@ -13,6 +13,7 @@ namespace iPhoto.Commands.SearchPage
         {
             _update = update;
         }
+
         public override void Execute(object parameter)
         {
             if (_update)
@@ -28,6 +29,8 @@ namespace iPhoto.Commands.SearchPage
 
                 viewModel.PhotoAdder.UpdatePhoto(id,title, album, rawTags, creationDateString, placeTaken);
                 viewModel.ParentView.IsOpen = false;
+
+                viewModel.SearchResultViewModel.SearchViewModel.SearchEngine.UpdateSearchResults();
             }
             else
             {
