@@ -14,15 +14,29 @@ using System.Windows.Input;
 
 namespace iPhoto.ViewModels.AlbumsPage
 {
-    public class AlbumContentViewModel : ViewModelBase
+    public class AlbumContentViewModel : ViewModelBase, IPhotoSearchVM
     {
         //public ICommand SearchCommand { get; }
         public ICommand ExtendSearchMenuCommand { get; }
         public ICommand ExtendPhotoDetailsCommand { get; }
         public ICommand AddPhotoToAlbumCommand { get; }
-        public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; }
+        public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; set; }
         // KG 2.05 Methods for album content handling
         public Album CurrentAlbum { get; }
+
+        // Photo Search Options View Bindings:
+        public ICommand ClearSearchParamsCommand { get; }
+        public ObservableCollection<string> AlbumList // returns current album
+        {
+            get
+            {
+                string[] currentAlbum = { CurrentAlbum.Name };
+                return new ObservableCollection<string>(currentAlbum);
+            }
+        }
+        public ICommand SearchCommand { get; }
+        //
+
         public ICommand NavigateBackToAlbumsCommand { get; }
 
         public static string NavigateParam { get; } = "Albums";
@@ -34,38 +48,32 @@ namespace iPhoto.ViewModels.AlbumsPage
                 return $"CURRENT ALBUM: {CurrentAlbum.Name}";
             }
         }
-        // 
-        
-        public ObservableCollection<string> AlbumList
-        {
-            get
-            {
-                return DatabaseHandler.GetAlbumList(true);
-            }
-        }
-        public DatabaseHandler DatabaseHandler; //MG 15.04 added db handler class
-        //public SearchEngine SearchEngine; //MG 27.04 Added
-        public PhotoDetailsViewModel PhotoDetails { get; }  //MG 26.04 Added photo details
+
+        public DatabaseHandler DatabaseHandler { get;}
+        public PhotoDetailsViewModel PhotoDetails { get; }
+        public SearchEngine SearchEngine { get; }
 
         public AlbumContentViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, MainWindowViewModel mainWindowVM, Album currentAlbum, AlbumViewModel albumViewModel)
         {
             PhotoSearchResultsCollection = new ObservableCollection<PhotoSearchResultViewModel>();
             DatabaseHandler = database;
-            ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
-            ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
-            AddPhotoToAlbumCommand = new AddPhotoToAlbumCommand(DatabaseHandler, currentAlbum, this );
-
             PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
             _photoDetailsWindow = photoDetailsWindow;
             photoDetailsWindow.DataContext = PhotoDetails;
-
-           // SearchEngine = new SearchEngine(DatabaseHandler, this);
-          //  SearchCommand = new SearchCommand(this, SearchEngine);
-#pragma warning disable CS8601 // Possible null reference assignment.
+            SearchEngine = new SearchEngine(DatabaseHandler, this);      
             CurrentAlbum = currentAlbum;
-#pragma warning restore CS8601 // Possible null reference assignment.
+           
+
+            // COMMANDS
+            SearchCommand = new SearchCommand(SearchEngine, this);
+            ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
+            ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
+            AddPhotoToAlbumCommand = new AddPhotoToAlbumCommand(DatabaseHandler, currentAlbum, this);
             NavigateBackToAlbumsCommand = new NavigateBackToAlbumsCommand(mainWindowVM, albumViewModel, currentAlbum);
+            ClearSearchParamsCommand = new ClearSearchParamsCommand(true);
+
             LoadAllAlbumPhotos();
+
         }
         /// <summary>
         ///  Diplay in GUI all photos that are in given album. 

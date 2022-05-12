@@ -1,4 +1,5 @@
 ﻿using System;
+using iPhoto.DataBase;
 using iPhoto.Views;
 
 namespace iPhoto.Models

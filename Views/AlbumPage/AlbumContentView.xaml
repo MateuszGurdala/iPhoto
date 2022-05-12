@@ -11,7 +11,8 @@
              d:DataContext="{d:DesignInstance Type=albumspage:AlbumContentViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="745"
-             d:DesignWidth="1352">
+             d:DesignWidth="1352"
+             x:Name="root">
     <UserControl.Resources>
         <Style TargetType="uc:CustomButton">
             <Setter Property="Height"
@@ -105,6 +106,11 @@
                                              HorizontalAlignment="Right"
                                              Margin="0, 10, 10, 0"
                                              DataContext="{Binding PhotoDetails}" />
+            <!--Search Options View-->
+            <vs:PhotoSearchOptionsView x:Name="SearchOptions"
+                                       Width="250"
+                                       Margin="30, 0, 0, 0"
+                                       DataContext="{Binding DataContext, ElementName=root}"/>
         </Grid>
     </Grid>
 </UserControl>

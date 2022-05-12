@@ -104,9 +104,16 @@
                                 </Grid>
                                 <Grid>
                                     <TextBlock Text="Creation Date" />
-                                    <userControls:TextBoxWithTitle x:Name="CreationDateString"
-                                                                   TextWidth="170"
-                                                                   EntryText="Today" />
+                                    <DatePicker x:Name="CreationDateString"
+                                                CalendarStyle="{DynamicResource DatePickerCalendarStyle1}"
+                                                Style="{DynamicResource DatePickerStyle2}"
+                                                Width="170"
+                                                Height="34"
+                                                FontSize="25"
+                                                HorizontalAlignment="Right"
+                                                Background="{StaticResource DarkLightGreenGradient}"
+                                                Foreground="{StaticResource PastelWhiteGradient}"
+                                                Margin="10, 0, 0, 0" />
                                 </Grid>
                                 <Grid>
                                     <TextBlock Text="Place Taken" />

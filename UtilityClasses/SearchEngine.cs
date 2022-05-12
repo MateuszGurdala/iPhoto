@@ -6,25 +6,23 @@ using System.Threading.Tasks;
 using iPhoto.DataBase;
 using iPhoto.Models;
 using iPhoto.ViewModels;
+using iPhoto.ViewModels.AlbumsPage;
 
 namespace iPhoto.UtilityClasses
 {
     public class SearchEngine
     {
         private readonly DatabaseHandler _databaseHandler;
-        private readonly SearchViewModel _searchViewModel;
+        private readonly IPhotoSearchVM _searchViewModel;
 
         private SearchParams _searchParams;
-        private readonly ObservableCollection<PhotoSearchResultModel> _searchResults;
 
         private bool _newDataLoaded;
 
-        public SearchEngine(DatabaseHandler databaseHandler, SearchViewModel viewModel)
+        public SearchEngine(DatabaseHandler databaseHandler, IPhotoSearchVM viewModel)
         {
             _databaseHandler = databaseHandler;
             _searchViewModel = viewModel;
-
-
         }
         public void LoadParams(SearchParams searchParams)
         {

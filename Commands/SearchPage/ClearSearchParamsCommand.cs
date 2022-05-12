@@ -5,11 +5,20 @@ namespace iPhoto.Commands.SearchPage
 {
     public class ClearSearchParamsCommand : CommandBase
     {
+        private readonly bool _isInsideAlbum;
+
+        public ClearSearchParamsCommand(bool isInsideAlbum)
+        {
+            _isInsideAlbum = isInsideAlbum;
+        }
         public override void Execute(object parameter)
         {
             var view = parameter as PhotoSearchOptionsView;
             view.Title.ContentTextBox.Clear();
-            view.Album.SelectedValue = "*";
+            if (!_isInsideAlbum)
+            {
+                view.Album.SelectedValue = "*";
+            }
             view.Tags.ContentTextBox.Clear();
             view.StartDate.Text = "";
             view.EndDate.Text = "";

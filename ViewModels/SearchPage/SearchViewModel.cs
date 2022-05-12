@@ -10,7 +10,7 @@ using iPhoto.Views.SearchPage;
 
 namespace iPhoto.ViewModels
 {
-    public class SearchViewModel : ViewModelBase
+    public class SearchViewModel : ViewModelBase, IPhotoSearchVM
     {
         public ICommand SearchCommand { get; }
         public ICommand ExtendSearchMenuCommand { get; }
@@ -26,8 +26,8 @@ namespace iPhoto.ViewModels
                 return DatabaseHandler.GetAlbumList(true);
             }
         }
-        public DatabaseHandler DatabaseHandler; //MG 15.04 added db handler class
-        public SearchEngine SearchEngine; //MG 27.04 Added
+        public DatabaseHandler DatabaseHandler { get; } //MG 15.04 added db handler class
+        public SearchEngine SearchEngine { get; } //MG 27.04 Added
         public PhotoDetailsViewModel PhotoDetails { get; }  //MG 26.04 Added photo details
 
         public SearchViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow)
@@ -39,13 +39,13 @@ namespace iPhoto.ViewModels
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
             AddPhotoCommand = new AddPhotoCommand(DatabaseHandler);
-            ClearSearchParamsCommand = new ClearSearchParamsCommand();
+            ClearSearchParamsCommand = new ClearSearchParamsCommand(false);
 
             PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
             photoDetailsWindow.DataContext = PhotoDetails;
 
             SearchEngine = new SearchEngine(DatabaseHandler, this);
-            SearchCommand = new SearchCommand(this, SearchEngine);
+            SearchCommand = new SearchCommand(SearchEngine);
         }
     }
 }

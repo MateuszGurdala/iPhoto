@@ -22,7 +22,7 @@ namespace iPhoto.Commands.AlbumPage
             var title = viewModel!.ParentView.Title.ContentTextBox.Text;
             var album = viewModel!.CurrentAlbum.Name;
             var rawTags = viewModel!.ParentView.RawTags.ContentTextBox.Text;
-            var creationDateString = viewModel!.ParentView.CreationDateString.ContentTextBox.Text;
+            var creationDateString = viewModel!.ParentView.CreationDateString.Text;
             var placeTaken = viewModel!.ParentView.PlaceTaken.ContentTextBox.Text;
 
             viewModel.PhotoAdder.AddPhoto(title, album, rawTags, creationDateString, placeTaken);

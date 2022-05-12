@@ -11,7 +11,7 @@ namespace iPhoto.ViewModels
 {
     public class PhotoSearchResultViewModel : ViewModelBase
     {
-        public SearchViewModel SearchViewModel { get; }
+        public IPhotoSearchVM SearchViewModel { get; }
         private readonly PhotoSearchResultModel _photoData;
 
         public BitmapImage ImagePreviewSource => _photoData.PreviewImage;
@@ -50,7 +50,7 @@ namespace iPhoto.ViewModels
 
 
         //MG 16.04 implemented handling database data format 
-        public PhotoSearchResultViewModel(Photo photoData, Image imageData, Album albumData, Place placeData, SearchViewModel searchViewModel)
+        public PhotoSearchResultViewModel(Photo photoData, Image imageData, Album albumData, Place placeData, IPhotoSearchVM searchViewModel)
         {
             SearchViewModel = searchViewModel;
             _photoData = new PhotoSearchResultModel(photoData, imageData, albumData, placeData);
