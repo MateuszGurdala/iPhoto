@@ -23,7 +23,6 @@ namespace iPhoto.UtilityClasses
         {
             _databaseHandler = databaseHandler;
             _searchViewModel = viewModel;
-            _searchParams = new SearchParams();
         }
         public void LoadParams(SearchParams searchParams)
         {

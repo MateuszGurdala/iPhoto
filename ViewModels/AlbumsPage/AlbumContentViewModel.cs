@@ -2,6 +2,7 @@
 using iPhoto.Commands.AlbumPage;
 using iPhoto.Commands.SearchPage;
 using iPhoto.DataBase;
+using iPhoto.Models;
 using iPhoto.UtilityClasses;
 using iPhoto.ViewModels.SearchPage;
 using iPhoto.Views.AlbumPage;
@@ -60,17 +61,21 @@ namespace iPhoto.ViewModels.AlbumsPage
             photoDetailsWindow.DataContext = PhotoDetails;
             SearchEngine = new SearchEngine(DatabaseHandler, this);      
             CurrentAlbum = currentAlbum;
-           
 
-            // COMMANDS
-            SearchCommand = new SearchCommand(SearchEngine, this);
+
+                // COMMANDS
+                SearchCommand = new SearchCommand(SearchEngine, this);
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
             AddPhotoToAlbumCommand = new AddPhotoToAlbumCommand(DatabaseHandler, currentAlbum, this);
             NavigateBackToAlbumsCommand = new NavigateBackToAlbumsCommand(mainWindowVM, albumViewModel, currentAlbum);
             ClearSearchParamsCommand = new ClearSearchParamsCommand(true);
 
-            LoadAllAlbumPhotos();
+
+            // inital photos load
+            SearchEngine.LoadParams(new SearchParams(CurrentAlbum));
+            SearchEngine.GetSearchResults();
+            //LoadAllAlbumPhotos();
 
         }
         /// <summary>

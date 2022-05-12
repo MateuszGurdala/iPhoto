@@ -26,19 +26,19 @@ namespace iPhoto.Models
 
             CheckForNull();
         }
-        public SearchParams()
+        public SearchParams(Album album)
         {
-            BuildDefaultSearchParamsForAlbum();
+            BuildDefaultSearchParamsForAlbum(album.Name);
         }
 
-        private void BuildDefaultSearchParamsForAlbum()
+        private void BuildDefaultSearchParamsForAlbum(string albumName)
         {
-            _title = "*";
-            _photoAlbum = "OtherPhotos";
-            _tags = "*";
-            _startDate = "";
-            _endDate = "";
-            _location = "*";
+            _title = null;
+            _photoAlbum = albumName;
+            _tags = null;
+            _startDate = null;
+            _endDate = null;
+            _location = null;
         }
 
         private void CheckForNull()
