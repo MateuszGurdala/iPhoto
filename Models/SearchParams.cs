@@ -26,6 +26,21 @@ namespace iPhoto.Models
 
             CheckForNull();
         }
+        public SearchParams()
+        {
+            BuildDefaultSearchParamsForAlbum();
+        }
+
+        private void BuildDefaultSearchParamsForAlbum()
+        {
+            _title = "*";
+            _photoAlbum = "OtherPhotos";
+            _tags = "*";
+            _startDate = "";
+            _endDate = "";
+            _location = "*";
+        }
+
         private void CheckForNull()
         {
             _title = (_title[0] == '*') ? null : _title;

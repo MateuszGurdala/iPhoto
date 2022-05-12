@@ -16,15 +16,13 @@ namespace iPhoto.ViewModels.AlbumsPage
 {
     public class AlbumContentViewModel : ViewModelBase, IPhotoSearchVM
     {
-        //public ICommand SearchCommand { get; }
         public ICommand ExtendSearchMenuCommand { get; }
         public ICommand ExtendPhotoDetailsCommand { get; }
         public ICommand AddPhotoToAlbumCommand { get; }
         public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection { get; set; }
-        // KG 2.05 Methods for album content handling
+        // KG 12.05 Methods for album content handling
         public Album CurrentAlbum { get; }
 
-        // Photo Search Options View Bindings:
         public ICommand ClearSearchParamsCommand { get; }
         public ObservableCollection<string> AlbumList // returns current album
         {
