@@ -28,6 +28,7 @@ namespace iPhoto.Commands
                 case "Albums":
                     {
                         _mainWindowViewModel.MainViewModel = _mainWindowViewModel.AlbumsViewModel;
+                        _mainWindowViewModel.AlbumsViewModel.DisplayAllAlbums();
                         break;
                     }
                 case "Places":

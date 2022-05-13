@@ -32,6 +32,7 @@ namespace iPhoto.Commands
                     _searchEngine.LoadAllPhotos();
                 else
                     _currentAlbumVM.LoadAllAlbumPhotos();
+                _searchEngine.LoadParams(searchData);
             }
             else
             {

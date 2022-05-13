@@ -52,15 +52,21 @@ namespace iPhoto.UtilityClasses
         public async void UpdateSearchResults()
         {
             _searchViewModel.PhotoSearchResultsCollection.Clear();
-
-            var firstSearch = FirstSearch();
-            var secondSearch = SecondSearch(firstSearch);
-            var thirdSearch = ThirdSearch(secondSearch);
-
-            foreach (var photo in thirdSearch)
+            if (_searchParams.GetTitleParam() == "%ALL")
             {
-                _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
-                await Task.Delay(10);
+                LoadAllPhotos();
+            }
+            else
+            {
+                var firstSearch = FirstSearch();
+                var secondSearch = SecondSearch(firstSearch);
+                var thirdSearch = ThirdSearch(secondSearch);
+
+                foreach (var photo in thirdSearch)
+                {
+                    _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
+                    await Task.Delay(10);
+                }
             }
         }
         private PhotoSearchResultViewModel GetViewModel(int photoId)

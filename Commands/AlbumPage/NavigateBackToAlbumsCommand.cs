@@ -21,7 +21,7 @@ namespace iPhoto.Commands.AlbumPage
         }
         public override void Execute(object parameter)
         {
-            _albumViewModel.ReloadAlbumView(_currentAlbum);
+            _albumViewModel.DisplayAllAlbums();
             _mainWindowViewModel.MainViewModel = _mainWindowViewModel.AlbumsViewModel;
 
         }

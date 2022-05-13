@@ -50,6 +50,7 @@ namespace iPhoto.ViewModels
 
         public void DisplayAllAlbums()
         {
+            AlbumSearchResultsCollection.Clear();
             for (int i = 1; i <= DatabaseHandler.Albums.Count; i++)
             {
                 var album = DatabaseHandler.Albums.FirstOrDefault(e => e.Id == i);
