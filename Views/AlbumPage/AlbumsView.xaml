@@ -21,14 +21,27 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.7*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"
+                    Margin="60, 5, 0, 10"
+                    Grid.Row="0" Grid.Column="0"/>
+        <!--Search Button-->
+         <uc:CustomButton  ImageSource="../../Graphics/Icons/Search.png"
+                              Margin="15, 0, 0, 0"
+                              Command="{Binding SearchAlbumsCommand}"
+                              CommandParameter="{Binding ElementName=SearchOptions}" />
+        <StackPanel RenderTransformOrigin="0.905,0.55"/>
+        
+        <local:AlbumSearchView 
+                               x:Name="AlbumSearchView"
+                               Grid.Row="1" Grid.Column="0"/>
         <local:AddAlbumView Grid.Row="1" Grid.Column="2"
                             DataContext="{Binding AddAlbumViewModel}"/>
         <uc:RoundedIcon Grid.Row="1" Grid.Column="1" Margin="7 7 7 7">

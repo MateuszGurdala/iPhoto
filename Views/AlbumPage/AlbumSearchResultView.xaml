@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              Name="Root"
              Cursor="Hand"
-             d:DesignHeight="260" d:DesignWidth="800">
+             d:DesignHeight="165" d:DesignWidth="800">
     <Button Background="Transparent">
         <Button.InputBindings>
             <MouseBinding Gesture="LeftClick"
@@ -23,7 +23,7 @@
         <Grid>
             <Border Name="Border"
                     Width="800"
-                    Height="210"
+                    Height="165"
                     Background="Transparent"
                     BorderThickness="1.5"
                     Opacity="{Binding IsClicked, Converter={StaticResource BoolToOpacityConverter}}">
@@ -32,7 +32,7 @@
                 </Border.BorderBrush>
             </Border>
             <Grid Width="780"
-                  Height="180">
+                  Height="160">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="1.3*"/>
@@ -48,7 +48,7 @@
                 <Grid.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="FontSize"
-                            Value="25" />
+                            Value="22" />
                         <Setter Property="FontWeight"
                             Value="DemiBold" />
                         <Setter Property="HorizontalAlignment"
@@ -96,8 +96,8 @@
                     </EventTrigger>
                 </Grid.Triggers>
                 <Image Source="{Binding AlbumIcon}"
-                    Width="180"
-                    Height="180"
+                    Width="160"
+                    Height="160"
                     Margin="0 0 0 10"
                     Grid.Column="0"
                     Grid.Row="0"

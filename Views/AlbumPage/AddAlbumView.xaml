@@ -75,7 +75,7 @@
             </ComboBox>
         <!--Add Album-->
             <uc:CustomButton
-                              Margin="100"
+                              Margin="40"
                               Command="{Binding AddAlbumCommand}"
                               CommandParameter="{Binding Path=., ElementName=root}"
                               ImageSource="../../Graphics/Icons/AddAlbum.png"/>

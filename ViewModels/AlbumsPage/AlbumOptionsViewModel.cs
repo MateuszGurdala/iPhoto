@@ -7,11 +7,10 @@ using System.Windows.Input;
 
 namespace iPhoto.ViewModels.AlbumsPage
 {
-    public class AlbumOptionsViewModel
+    public class AlbumOptionsViewModel : ViewModelBase
     {
         public ICommand ShowAlbumContentCommand { get; }
-        public ICommand RenameAlbumCommand { get; }
         public ICommand DeleteAlbumCommand { get; }
-        public ICommand ChangeAlbumColorCommand { get; }
+        public ICommand ChangeAlbumPropertiesCommand { get; }
     }
 }
