@@ -9,6 +9,7 @@
         xmlns:vmsa="clr-namespace:iPhoto.ViewModels.AlbumsPage"
         xmlns:vms="clr-namespace:iPhoto.ViewModels"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:accountPage="clr-namespace:iPhoto.Views.AccountPage"
         WindowStyle="None"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
@@ -62,7 +63,7 @@
                     <vs:PlacesView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vms:AccountViewModel}">
-                    <vs:AccountView />
+                    <accountPage:AccountView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vms:SettingsViewModel}">
                     <vs:SettingsView />
