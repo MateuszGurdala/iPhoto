@@ -15,7 +15,7 @@ namespace iPhoto.UtilityClasses
         {
             return GetProjectDirectoryPath() + "\\Graphics\\AlbumIcons\\";
         }
-        private static string GetProjectDirectoryPath()
+        public static string GetProjectDirectoryPath()
         {
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!.Split('\\');
             int length = 0;
