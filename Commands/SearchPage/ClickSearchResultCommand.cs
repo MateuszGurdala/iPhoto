@@ -11,6 +11,7 @@ namespace iPhoto.Commands
 
         public ClickSearchResultCommand(ObservableCollection<PhotoSearchResultViewModel> searchResults, PhotoDetailsViewModel photoDetails)
         {
+            
             _searchResults = searchResults;
             _photoDetails = photoDetails;
         }

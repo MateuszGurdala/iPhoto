@@ -1,18 +1,24 @@
-﻿using iPhoto.Models;
+﻿using iPhoto.DataBase;
+using iPhoto.Models;
 using iPhoto.UtilityClasses;
 using iPhoto.ViewModels;
+using iPhoto.ViewModels.AlbumsPage;
 using iPhoto.Views;
 
 namespace iPhoto.Commands
 {
     public class SearchCommand : CommandBase
     {
-        private readonly SearchViewModel _searchViewModel;
         private readonly SearchEngine _searchEngine;
-        public SearchCommand(SearchViewModel searchViewModel, SearchEngine searchEngine)
-        {
-            _searchViewModel = searchViewModel;
+        private readonly AlbumContentViewModel _currentAlbumVM;
+        public SearchCommand(SearchEngine searchEngine)
+        { 
             _searchEngine = searchEngine;
+        }
+        public SearchCommand(SearchEngine searchEngine, AlbumContentViewModel currentAlbumVM)
+        {
+            _searchEngine = searchEngine;
+            _currentAlbumVM = currentAlbumVM;
         }
         public override void Execute(object parameter)
         {
@@ -22,7 +28,11 @@ namespace iPhoto.Commands
             //MG 27.04 Implemented Search Engine
             if (searchData.GetTitleParam() == "%ALL")
             {
-                _searchEngine.LoadAllPhotos();
+                if (_currentAlbumVM == null)
+                    _searchEngine.LoadAllPhotos();
+                else
+                    _currentAlbumVM.LoadAllAlbumPhotos();
+                _searchEngine.LoadParams(searchData);
             }
             else
             {

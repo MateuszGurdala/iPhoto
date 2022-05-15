@@ -242,6 +242,13 @@ namespace iPhoto.DataBase
             album.PhotoEntities.Add(photo);
             album.PhotoCount++;
         }
+        private void RemovePhotoFromAlbum(Album album, Photo photo)
+        {
+            album.PhotoEntities.Remove(photo);
+            album.PhotoCount--;
+        }
+
+
         //Removing records
         public void RemoveAlbum(int id)
         {
@@ -363,12 +370,13 @@ namespace iPhoto.DataBase
                 throw new InvalidDataException("Wrong place Id.");
             }
 
+            RemovePhotoFromAlbum(Albums.FirstOrDefault(e => e.Id == photo.AlbumId), photo);
             photo.Title = title ?? photo.Title;
             photo.AlbumId = Albums.FirstOrDefault(e => e.Name == album) != null ? Albums.FirstOrDefault(e => e.Name == album).Id : photo.AlbumId;
             photo.RawTags = rawTags ?? photo.RawTags;
             photo.DateTaken = date ?? photo.DateTaken;
             photo.PlaceId = Places.FirstOrDefault(e => e.Name == place) != null ? Places.FirstOrDefault(e => e.Name == place).Id : photo.PlaceId;
-
+            AddPhotoToAlbum(Albums.FirstOrDefault(e => e.Id == photo.AlbumId), photo);
             using var db = new DatabaseContext();
             db.PhotoEntities.Update(photo.GetEntity());
             db.SaveChanges();

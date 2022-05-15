@@ -29,7 +29,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <local:AlbumDetailsView Grid.Row="1" Grid.Column="0"/>
         <local:AddAlbumView Grid.Row="1" Grid.Column="2"
                             DataContext="{Binding AddAlbumViewModel}"/>
         <uc:RoundedIcon Grid.Row="1" Grid.Column="1" Margin="7 7 7 7">

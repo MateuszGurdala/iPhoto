@@ -7,9 +7,10 @@ namespace iPhoto.Commands.PhotoSearchResultOptions
     public class ChangePhotoDetailsCommand : CommandBase
     {
         private readonly PhotoSearchResultViewModel _viewModel;
+        private readonly AlbumViewModel _albumVM;
         public ChangePhotoDetailsCommand(PhotoSearchResultViewModel viewModel)
         {
-            _viewModel = viewModel;
+            _viewModel = viewModel;;
         }
         public override void Execute(object parameter)
         {

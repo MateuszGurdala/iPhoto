@@ -6,25 +6,23 @@ using System.Threading.Tasks;
 using iPhoto.DataBase;
 using iPhoto.Models;
 using iPhoto.ViewModels;
+using iPhoto.ViewModels.AlbumsPage;
 
 namespace iPhoto.UtilityClasses
 {
     public class SearchEngine
     {
         private readonly DatabaseHandler _databaseHandler;
-        private readonly SearchViewModel _searchViewModel;
+        private readonly IPhotoSearchVM _searchViewModel;
 
         private SearchParams _searchParams;
-        private readonly ObservableCollection<PhotoSearchResultModel> _searchResults;
 
         private bool _newDataLoaded;
 
-        public SearchEngine(DatabaseHandler databaseHandler, SearchViewModel viewModel)
+        public SearchEngine(DatabaseHandler databaseHandler, IPhotoSearchVM viewModel)
         {
             _databaseHandler = databaseHandler;
             _searchViewModel = viewModel;
-
-
         }
         public void LoadParams(SearchParams searchParams)
         {
@@ -54,15 +52,21 @@ namespace iPhoto.UtilityClasses
         public async void UpdateSearchResults()
         {
             _searchViewModel.PhotoSearchResultsCollection.Clear();
-
-            var firstSearch = FirstSearch();
-            var secondSearch = SecondSearch(firstSearch);
-            var thirdSearch = ThirdSearch(secondSearch);
-
-            foreach (var photo in thirdSearch)
+            if (_searchParams.GetTitleParam() == "%ALL")
             {
-                _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
-                await Task.Delay(10);
+                LoadAllPhotos();
+            }
+            else
+            {
+                var firstSearch = FirstSearch();
+                var secondSearch = SecondSearch(firstSearch);
+                var thirdSearch = ThirdSearch(secondSearch);
+
+                foreach (var photo in thirdSearch)
+                {
+                    _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
+                    await Task.Delay(10);
+                }
             }
         }
         private PhotoSearchResultViewModel GetViewModel(int photoId)

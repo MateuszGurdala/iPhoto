@@ -1,4 +1,5 @@
 ﻿using System;
+using iPhoto.DataBase;
 using iPhoto.Views;
 
 namespace iPhoto.Models
@@ -25,6 +26,21 @@ namespace iPhoto.Models
 
             CheckForNull();
         }
+        public SearchParams(Album album)
+        {
+            BuildDefaultSearchParamsForAlbum(album.Name);
+        }
+
+        private void BuildDefaultSearchParamsForAlbum(string albumName)
+        {
+            _title = null;
+            _photoAlbum = albumName;
+            _tags = null;
+            _startDate = null;
+            _endDate = null;
+            _location = null;
+        }
+
         private void CheckForNull()
         {
             _title = (_title[0] == '*') ? null : _title;

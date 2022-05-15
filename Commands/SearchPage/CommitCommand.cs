@@ -1,6 +1,7 @@
 ﻿using System;
 using iPhoto.DataBase;
 using iPhoto.UtilityClasses;
+using iPhoto.ViewModels;
 using iPhoto.ViewModels.SearchPage;
 
 namespace iPhoto.Commands.SearchPage
@@ -13,7 +14,6 @@ namespace iPhoto.Commands.SearchPage
         {
             _update = update;
         }
-
         public override void Execute(object parameter)
         {
             if (_update)
