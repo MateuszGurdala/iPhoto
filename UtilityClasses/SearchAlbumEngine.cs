@@ -13,11 +13,11 @@ namespace iPhoto.UtilityClasses
 {
     public class SearchAlbumEngine
     {
-        private readonly AlbumViewModel _albumViewModel;
+        private readonly DatabaseHandler _databaseHandler;
 
-        public SearchAlbumEngine(AlbumViewModel albumViewModel)
+        public SearchAlbumEngine(DatabaseHandler databaseHandler)
         {
-            _albumViewModel = albumViewModel;
+            _databaseHandler = databaseHandler;
         }
 
         /// <summary>
@@ -25,27 +25,28 @@ namespace iPhoto.UtilityClasses
         /// leaving only albums that does contain <paramref name="name"/> as substring
         /// </summary>
         /// <param name="name"></param>
-        private void SearchAlbumsByName(string? name)
+        private List<Album> SearchAlbumsByName(string? name)
         {
-            if (name != null && name != "")
+            var excludedAlbums = new List<Album>();
+            if (name != null && name != "" && name != "*Any")
             {
-                _albumViewModel.AlbumSearchResultsCollection = new (_albumViewModel.AlbumSearchResultsCollection.
-                    Where(e => e.AlbumData.Name == name));
+                excludedAlbums = (_databaseHandler.Albums.Where(e => !(e.Name.Contains(name)))).ToList();
             }
+            return excludedAlbums;
         }
         /// <summary>
         /// Restricts Albums collection, 
         /// leaving only albums that does contain <paramref name="color"/> as their color group
         /// </summary>
         /// <param name="color"></param>
-        private void SearchAlbumsByColorGroup(string? color)
+        private List<Album> SearchAlbumsByColorGroup(string? color)
         {
-
-            if (color != null && color != "")
+            var excludedAlbums = new List<Album>();
+            if (color != "Any" && color != null)
             {
-                _albumViewModel.AlbumSearchResultsCollection = new(_albumViewModel.AlbumSearchResultsCollection.
-                    Where(e => e.AlbumData.ColorGroup == color));
+                excludedAlbums = (_databaseHandler.Albums.Where(e=> e.ColorGroup != color)).ToList();
             }
+            return excludedAlbums;
         }
         /// <summary>
         /// Restricts Albums collection, 
@@ -53,28 +54,30 @@ namespace iPhoto.UtilityClasses
         /// </summary>
         /// <param name="beginDate"></param>
         /// <param name="endDate"></param>
-        private void SearchAlbumsByDate(DateTime? beginDate, DateTime? endDate)
+        private List<Album> SearchAlbumsByDate(DateTime? beginDate, DateTime? endDate)
         {
-
+            var excludedAlbums = new List<Album>();
             if (beginDate != null && endDate != null)
             {
-                _albumViewModel.AlbumSearchResultsCollection = new(_albumViewModel.AlbumSearchResultsCollection.
-                    Where(e => (e.AlbumData.CreationDate > beginDate && e.AlbumData.CreationDate < beginDate)));
+                excludedAlbums = _databaseHandler.Albums.Where(e => e.CreationDate < beginDate || e.CreationDate > endDate).ToList();
             }
+            return excludedAlbums;
         }
 
-        private void SearchAlbumsByTags(string[]? tagsList)
+        private List<Album> SearchAlbumsByTags(string[]? tagsList)
         {
             // TODO after implementing tags for albums
             throw new NotImplementedException();
         }
 
-        public void SearchAlbums(AlbumSearchParams albumSearchParams)
+        public List<Album> SearchAlbums(AlbumSearchParams albumSearchParams)
         {
-            SearchAlbumsByColorGroup(albumSearchParams.Color);
+            var excludedAlbums = new List<Album>();
+            excludedAlbums = excludedAlbums.Concat(SearchAlbumsByColorGroup(albumSearchParams.Color)).ToList();
             //SearchAlbumsByTags(albumSearchParams.Tags);
-            SearchAlbumsByDate(albumSearchParams.StartDate,albumSearchParams.EndDate);
-            SearchAlbumsByName(albumSearchParams.Name);      
+            excludedAlbums = excludedAlbums.Concat(SearchAlbumsByDate(albumSearchParams.StartDate,albumSearchParams.EndDate)).ToList();
+            excludedAlbums = excludedAlbums.Concat(SearchAlbumsByName(albumSearchParams.Name)).ToList();
+            return _databaseHandler.Albums.Except(excludedAlbums).ToList();
         }
 
     }

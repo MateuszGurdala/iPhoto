@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace iPhoto.Models
@@ -36,9 +37,14 @@ namespace iPhoto.Models
                 {
                     EndDate = ConvertToDatetime(searchView.EndDate.Text);
                 }
-                Color = ((Rectangle)searchView.ColorsComboBox.SelectedItem).Name;
-
-                CheckForNull();
+                if (searchView.ColorsComboBox.SelectedItem is Rectangle)
+                {
+                    Color = ((Rectangle)searchView.ColorsComboBox.SelectedItem).Name;
+                }
+                else
+                {
+                Color = ((TextBlock)searchView.ColorsComboBox.SelectedItem).Name;
+                }
         }
 
         private string[] ParseTags(string tagsLine)
@@ -56,16 +62,7 @@ namespace iPhoto.Models
         /// </returns>
         private DateTime ConvertToDatetime(string date)
         {
-            return DateTime.ParseExact(date, "dd/mm/yyyy", null);
-        }
-
-        /// <summary>
-        /// Checks if elements are empty search values
-        /// </summary>
-        private void CheckForNull()
-        {
-            Name = (Name[0] == '*') ? null : Name;
-            Color = (Color == "") ? null : Color;
+            return DateTime.ParseExact(date, "dd/MM/yyyy", null);
         }
     }
 }

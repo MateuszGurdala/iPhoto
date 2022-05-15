@@ -45,7 +45,7 @@
                 <!--Name-->
                 <TextBlock Text="Name"
                            Margin="0, 0, 0, 5" />
-                <uc:TextBoxWithTitle EntryText="*Name"
+                <uc:TextBoxWithTitle EntryText= "*Any"
                                      x:Name="Name" />
                 <!--Title-->
                 <TextBlock Text="Color" />
@@ -57,6 +57,7 @@
                           SelectedIndex="0"
                           ItemContainerStyle="{StaticResource ComboBoxItem1}"
                           >
+                    <TextBlock x:Name="Any" Text="ANY COLOR"  Margin="5" Width="180" Height="30" Foreground="White"></TextBlock>
                     <Rectangle x:Name="Green" Fill="Green"  Margin="5" Width="180" Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                     <Rectangle x:Name="Blue" Fill="Blue" Margin="5" Width="180" Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                     <Rectangle x:Name="Red" Fill="Red" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>

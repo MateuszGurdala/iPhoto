@@ -8,7 +8,8 @@
              xmlns:viewmodels="clr-namespace:iPhoto.ViewModels" 
              xmlns:albumvms="clr-namespace:iPhoto.ViewModels.AlbumsPage"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1000">
+             d:DesignHeight="800" d:DesignWidth="1000"
+             Name="root">
     <UserControl.Resources>
         <Style TargetType="uc:CustomButton">
             <Setter Property="Height"
@@ -33,15 +34,14 @@
                     Margin="60, 5, 0, 10"
                     Grid.Row="0" Grid.Column="0"/>
         <!--Search Button-->
-         <uc:CustomButton  ImageSource="../../Graphics/Icons/Search.png"
+        <uc:CustomButton  ImageSource="../../Graphics/Icons/Search.png"
                               Margin="15, 0, 0, 0"
                               Command="{Binding SearchAlbumsCommand}"
-                              CommandParameter="{Binding ElementName=SearchOptions}" />
-        <StackPanel RenderTransformOrigin="0.905,0.55"/>
-        
+                              CommandParameter="{Binding ElementName=AlbumSearchView, Path=.}" />
         <local:AlbumSearchView 
                                x:Name="AlbumSearchView"
-                               Grid.Row="1" Grid.Column="0"/>
+                               Grid.Row="1" Grid.Column="0"
+                               DataContext="{Binding AlbumSearchViewModel}"/>
         <local:AddAlbumView Grid.Row="1" Grid.Column="2"
                             DataContext="{Binding AddAlbumViewModel}"/>
         <uc:RoundedIcon Grid.Row="1" Grid.Column="1" Margin="7 7 7 7">

@@ -1,6 +1,7 @@
 ﻿using iPhoto.Models;
 using iPhoto.UtilityClasses;
 using iPhoto.ViewModels;
+using iPhoto.ViewModels.AlbumsPage;
 using iPhoto.Views.AlbumPage;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,18 @@ namespace iPhoto.Commands.AlbumPage
 {
     public class SearchAlbumsCommand : CommandBase
     {
-        private readonly SearchAlbumEngine _searchAlbumEngine;
-        private readonly AlbumSearchView _albumSearchView;
+        private readonly AlbumViewModel _albumViewModel;
         public SearchAlbumsCommand(AlbumViewModel albumViewModel)
         {
-            _searchAlbumEngine = albumViewModel.SearchAlbumEngine;
-            _albumSearchView = albumViewModel.AlbumSearchView;
+            _albumViewModel = albumViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            _searchAlbumEngine.SearchAlbums(new AlbumSearchParams(_albumSearchView));
+            AlbumSearchView albumSearchView = (AlbumSearchView)parameter;
+            var albumResult = _albumViewModel.SearchAlbumEngine.SearchAlbums(new AlbumSearchParams(albumSearchView));
+            _albumViewModel.LoadGivenAlbums(albumResult);
+
         }
     }
 }

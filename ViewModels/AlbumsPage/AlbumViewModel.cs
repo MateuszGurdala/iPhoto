@@ -24,7 +24,8 @@ namespace iPhoto.ViewModels
         public AddAlbumViewModel AddAlbumViewModel { get; }
 
         public SearchAlbumEngine SearchAlbumEngine { get; }
-        public AlbumSearchView AlbumSearchView { get; }
+        public AlbumSearchViewModel AlbumSearchViewModel { get; }
+        public AlbumSearchView AlbumSearchViewx { get; }
         public AddAlbumView AddAlbumView { get; }
 
         public ObservableCollection<AlbumSearchResultViewModel> AlbumSearchResultsCollection
@@ -34,15 +35,15 @@ namespace iPhoto.ViewModels
         }
         public AlbumViewModel(DatabaseHandler DataBase, MainWindowViewModel mainWindowViewModel, PhotoDetailsWindowView photoDetailsWindow)
         {
-            SearchAlbumEngine = new SearchAlbumEngine(this);
-            SearchAlbumsCommand = new SearchAlbumsCommand(this);
             DatabaseHandler = DataBase;
             _mainWindowViewModel = mainWindowViewModel;
             _photoDetailsWindow = photoDetailsWindow;
             _albumSearchResultsCollection = new ObservableCollection<AlbumSearchResultViewModel>();
+            AlbumSearchViewModel = new AlbumSearchViewModel();
             AddAlbumViewModel = new AddAlbumViewModel(DataBase, this);
             DisplayAllAlbums();
-            AlbumSearchView = new AlbumSearchView(); 
+            SearchAlbumEngine = new SearchAlbumEngine(DataBase);
+            SearchAlbumsCommand = new SearchAlbumsCommand(this);
         }
 
         public void AddAlbumToView(Album album)
@@ -62,6 +63,19 @@ namespace iPhoto.ViewModels
             {
                 var album = DatabaseHandler.Albums.FirstOrDefault(e => e.Id == i);
                 AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler,_photoDetailsWindow, album, null, _mainWindowViewModel, this));
+            }
+        }
+
+        /// <summary>
+        /// displays only albums that are in <paramref name="albums"/> list
+        /// </summary>
+        /// <param name="albums"></param>
+        public void LoadGivenAlbums(List<Album> albums)
+        {
+            AlbumSearchResultsCollection.Clear();
+            foreach (Album album in albums)
+            {
+                AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel, this));
             }
         }
 }
