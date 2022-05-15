@@ -155,7 +155,6 @@
 
   <ItemGroup>
     <Folder Include="DataBase\Images\" />
-    <Folder Include="DatabaseApi\" />
   </ItemGroup>
 
 </Project>

@@ -25,8 +25,8 @@ namespace iPhoto
             //MG 15.05 
             _googleDriveHandler = new GoogleDriveHandler();
 
-            //MainWindow.Show();
-            //base.OnStartup(e);
+            MainWindow.Show();
+            base.OnStartup(e);
         }
     }
 }
