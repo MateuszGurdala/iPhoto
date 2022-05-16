@@ -6,7 +6,6 @@ namespace iPhoto.DataBase
 {
     public class Photo
     {
-        private readonly DatabaseHandler _databaseHandler;
         private readonly PhotoEntity _photoEntity;
         public int Id
         {
@@ -48,21 +47,17 @@ namespace iPhoto.DataBase
             get => _photoEntity.ImageEntityId;
             set => _photoEntity.ImageEntityId = value;
         }
-        public double MemorySize
-        {
-            get
-            {
-                return _databaseHandler.Images.FirstOrDefault(y => y.Id == ImageId).Size;
-            }
 
-        }
+        public double MemorySize { get; }
+        public bool IsLocal { get; }
 
-        public Photo(PhotoEntity photoEntity, DatabaseHandler database)
+        public Photo(PhotoEntity photoEntity, ImageEntity imageEntity, bool isLocal)
         {
             _photoEntity = photoEntity;
-            _databaseHandler = database;
+            MemorySize = imageEntity.Size;
+            IsLocal = isLocal;
         }
-        public Photo(int id, string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId, DatabaseHandler database)
+        public Photo(int id, string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId, double memorySize, bool isLocal)
         {
             _photoEntity = new PhotoEntity();
             Id = id;
@@ -72,7 +67,8 @@ namespace iPhoto.DataBase
             DateTaken = date ?? DateTime.Now;
             PlaceId = placeId ?? 1; //Default "No place" place Id
             ImageId = imageId;
-            _databaseHandler = database;
+            MemorySize = memorySize;
+            IsLocal = isLocal;
         }
         private List<string>? ParseTags(string tags)
         {

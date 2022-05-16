@@ -78,7 +78,7 @@ namespace iPhoto.DataBase
             using var db = new DatabaseContext();
             foreach (var e in db.PhotoEntities)
             {
-                Photos.Add(new Photo(e, this));
+                Photos.Add(new Photo(e, Images.FirstOrDefault(ei => ei.Id == e.ImageEntityId).GetEntity(), true));
             }
         }
         public void LoadPlaces()
@@ -208,7 +208,7 @@ namespace iPhoto.DataBase
             db.PlaceEntities.Add(place.GetEntity());
             db.SaveChanges();
         }
-        public void AddPhoto(string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId, DatabaseHandler databaseHandler) // Added dbHandler in order to access memory size
+        public void AddPhoto(string title, int? albumId, string? tags, DateTime? date, int? placeId, int imageId, double memorySize)
         {
             var id = Photos.Count == 0 ? 0 : Photos.OrderByDescending(e => e.Id).FirstOrDefault()!.Id;
 
@@ -228,7 +228,7 @@ namespace iPhoto.DataBase
             {
                 throw new InvalidDataException("Wrong place Id.");
             }
-            var photo = new Photo(id + 1, title, albumId, tags, date, placeId, imageId, databaseHandler);
+            var photo = new Photo(id + 1, title, albumId, tags, date, placeId, imageId, memorySize, true);
             AddPhotoToAlbum(Albums.FirstOrDefault(e => e.Id == albumId), photo);
             Photos.Add(photo);
             using var db = new DatabaseContext();
