@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace iPhoto.Views.AccountPage
 {
     /// <summary>
-    /// Interaction logic for AccountView.xaml
+    /// Interaction logic for OnlineAlbumView.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class OnlineAlbumView : UserControl
     {
-        public LoginView()
+        public OnlineAlbumView()
         {
             InitializeComponent();
         }

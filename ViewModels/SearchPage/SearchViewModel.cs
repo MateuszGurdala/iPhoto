@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using iPhoto.Commands;
 using iPhoto.Commands.SearchPage;
 using iPhoto.DataBase;
@@ -29,6 +30,11 @@ namespace iPhoto.ViewModels
         public DatabaseHandler DatabaseHandler { get; } //MG 15.04 added db handler class
         public SearchEngine SearchEngine { get; } //MG 27.04 Added
         public PhotoDetailsViewModel PhotoDetails { get; }  //MG 26.04 Added photo details
+
+        public BitmapImage ExtendMenuImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "ExtendMenu.png", 144);
+        public BitmapImage SearchImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Search.png", 144);
+        public BitmapImage PhotoDetailsImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "PhotoDetails.png", 144);
+        public BitmapImage AddPhotoImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "AddPhoto.png", 144);
 
         public SearchViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow)
         {

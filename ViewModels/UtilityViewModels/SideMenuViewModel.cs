@@ -11,20 +11,6 @@ namespace iPhoto.ViewModels
     public class SideMenuViewModel : ViewModelBase
     {
         
-        private BitmapImage _extendImage;
-        public BitmapImage ExtendImage
-        {
-            get
-            {
-                return _extendImage;
-            }
-            set
-            {
-                _extendImage = value;
-                OnPropertyChanged(nameof(ExtendImage));
-            }
-        }
-
         private Button _lastClicked;
 
         public Button LastClicked
@@ -33,12 +19,7 @@ namespace iPhoto.ViewModels
             set { _lastClicked = value; }
         }
 
-        public BitmapImage ExtendImageSource { get; } =
-            DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Extend.png", 100);
-        public BitmapImage HideImageSource { get; } = 
-            DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Hide.png", 100);
         //Commands
-        public ICommand ExtendCommand { get; set; }
         public ICommand NavigateCommand { get; set; }
         public ICommand LastClickedCommand { get; set; }
         //Navigate Parameters
@@ -48,11 +29,16 @@ namespace iPhoto.ViewModels
         public string PlacesParameter { get; } = "Places";
         public string AccountParameter { get; } = "Account";
         public string SettingsParameter { get; } = "Settings";
+        //Icons
+        public BitmapImage HomeImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Home.png", 100);
+        public BitmapImage SearchImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Search.png", 100);
+        public BitmapImage AlbumsImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Albums.png", 100);
+        public BitmapImage PlacesImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Place.png", 100);
+        public BitmapImage AccountImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Account.png", 100);
+        public BitmapImage SettingsImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "Settings.png", 100);
 
         public SideMenuViewModel(SideMenuView sideMenu, SideMenuButton[] buttonList)
         {
-            ExtendCommand = new ExtendSideMenuCommand(sideMenu, this);
-            ExtendImage = ExtendImageSource;
             LastClickedCommand = new LastClickedCommand(buttonList);
         }
     }

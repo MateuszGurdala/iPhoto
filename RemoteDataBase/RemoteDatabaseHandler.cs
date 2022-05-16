@@ -18,8 +18,8 @@ namespace iPhoto.RemoteDatabase
             _googleDriveHandler = new GoogleDriveHandler();
             _apiHandler = new DatabaseApiHandler();
 
-            _googleDriveHandler.LoadAllData();
-            LoadAllData();
+            //_googleDriveHandler.LoadAllData();
+            //LoadAllData();
         }
 
         public new async void LoadAlbums()
@@ -48,19 +48,18 @@ namespace iPhoto.RemoteDatabase
         }
         public new async void LoadPhotos()
         {
+            LoadImages();
             var apiPhotos = await _apiHandler.GetPhotos();
             foreach (var e in apiPhotos)
             {
                 var photoEntity = e.ToEntity();
-                Photos.Add(new Photo(photoEntity, Images.FirstOrDefault(ei => ei.Id == photoEntity.ImageEntityId).GetEntity(), false));
+                Photos.Add(new Photo(photoEntity, Images.FirstOrDefault(ei => ei.GetEntity().Id == photoEntity.ImageEntityId).GetEntity(), false));
             }
         }
-
         public new void LoadAllData()
         {
-            LoadImages();
-            LoadAlbums();
             LoadPhotos();
+            LoadAlbums();
             LoadPlaces();
         }
     }

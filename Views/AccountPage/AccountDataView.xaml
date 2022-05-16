@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="iPhoto.Views.AccountPage.AccountDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:iPhoto.Views.AccountPage"
+             xmlns:userControls="clr-namespace:iPhoto.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <userControls:RoundedIcon Margin="0, 10, 10, 10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize"
+                                Value="25" />
+                        <Setter Property="Foreground"
+                                Value="{StaticResource DarkLightGreenGradient}" />
+                        <Setter Property="Margin"
+                                Value="0, 0, 0, 5" />
+                    </Style>
+                </Grid.Resources>
+
+                <StackPanel Orientation="Vertical"
+                            Margin="10, 5, 0, 5">
+                    <TextBlock Text="Account"
+                               FontWeight="Bold" />
+                    <TextBlock Text="Name"
+                               FontWeight="Bold" />
+                    <TextBlock Text="Surname"
+                               FontWeight="Bold" />
+                    <TextBlock Text="Email"
+                               FontWeight="Bold" />
+                    <TextBlock Text="Albums Online"
+                               FontWeight="Bold" />
+                    <TextBlock Text="Last Logged On"
+                               FontWeight="Bold" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Grid.Column="1"
+                            Margin="0, 5, 0, 5">
+                    <TextBlock Text="{Binding AccountData.Account}" />
+                    <TextBlock Text="{Binding AccountData.Name}" />
+                    <TextBlock Text="{Binding AccountData.Surname}" />
+                    <TextBlock Text="{Binding AccountData.Email}" />
+                    <TextBlock Text="{Binding AccountData.AlbumCount}" />
+                    <TextBlock Text="{Binding AccountData.LastLoggedOn}" />
+                </StackPanel>
+            </Grid>
+        </userControls:RoundedIcon>
+    </Grid>
+</UserControl>

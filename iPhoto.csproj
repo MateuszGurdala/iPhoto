@@ -35,6 +35,8 @@
     <None Remove="Graphics\Icons\Checked.png" />
     <None Remove="Graphics\Icons\CreateWindow.png" />
     <None Remove="Graphics\Icons\Delete.png" />
+    <None Remove="Graphics\Icons\Logout.png" />
+    <None Remove="Graphics\Icons\Online.png" />
     <None Remove="Graphics\Icons\PhotoDetails.png" />
     <None Remove="Graphics\Icons\Place.png" />
     <None Remove="Graphics\Icons\Search.png" />
@@ -42,6 +44,7 @@
     <None Remove="Graphics\ChromeButtons\Maximize.png" />
     <None Remove="Graphics\ChromeButtons\Minimize.png" />
     <None Remove="Graphics\ChromeButtons\Resize.png" />
+    <None Remove="Graphics\Icons\Test.jpg" />
     <None Remove="Graphics\Icons\Undo.png" />
   </ItemGroup>
 
@@ -82,6 +85,8 @@
     <Resource Include="Graphics\Icons\CreateWindow.png" />
     <Resource Include="Graphics\Icons\Delete.png" />
     <Resource Include="Graphics\Icons\ExtendMenu.png" />
+    <Resource Include="Graphics\Icons\Logout.png" />
+    <Resource Include="Graphics\Icons\Online.png" />
     <Resource Include="Graphics\Icons\PhotoDetails.png" />
     <Resource Include="Graphics\Icons\Place.png" />
     <Resource Include="Graphics\Icons\Refresh.png" />
@@ -96,6 +101,7 @@
     <Resource Include="Graphics\ChromeButtons\Maximize.png" />
     <Resource Include="Graphics\ChromeButtons\Minimize.png" />
     <Resource Include="Graphics\ChromeButtons\Resize.png" />
+    <Resource Include="Graphics\Icons\Test.jpg" />
     <Resource Include="Graphics\Icons\Undo.png" />
   </ItemGroup>
 

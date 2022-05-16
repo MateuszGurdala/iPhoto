@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:viewmodels="clr-namespace:iPhoto.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:SideMenuViewModel}"
              mc:Ignorable="d"
@@ -24,48 +24,46 @@
                     Margin="0, 100, 0, 0">
             <uc:SideMenuButton x:Name="HomeButton"
                                Text="Home"
-                               Image="../../Graphics/Icons/Home.png">
-                
+                               Image="{Binding HomeImage}">
+
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
-                                               CommandParameter="{Binding HomeParameter}"/>
-                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}" 
-                                               CommandParameter="{Binding ElementName=HomeButton}"/>
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                               CommandParameter="{Binding HomeParameter}" />
+                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}"
+                                               CommandParameter="{Binding ElementName=HomeButton}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
 
             </uc:SideMenuButton>
             <uc:SideMenuButton x:Name="SearchButton"
                                Text="Search"
-                               Image="../../Graphics/Icons/Search.png"
-                               >
-                
+                               Image="{Binding SearchImage}">
+
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
-                                               CommandParameter="{Binding SearchParameter}"/>
-                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}" 
-                                               CommandParameter="{Binding ElementName=SearchButton}"/>
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                               CommandParameter="{Binding SearchParameter}" />
+                        <i:InvokeCommandAction Command="{Binding LastClickedCommand}"
+                                               CommandParameter="{Binding ElementName=SearchButton}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </uc:SideMenuButton>
             <uc:SideMenuButton x:Name="AlbumButton"
                                Text="Albums"
-                               Image="../../Graphics/Icons/Albums.png"
-                               >
+                               Image="{Binding AlbumsImage}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
-                                               CommandParameter="{Binding AlbumsParameter}"/>
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                               CommandParameter="{Binding AlbumsParameter}" />
                         <i:InvokeCommandAction Command="{Binding LastClickedCommand}"
-                                               CommandParameter="{Binding ElementName=AlbumButton}"/>
+                                               CommandParameter="{Binding ElementName=AlbumButton}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </uc:SideMenuButton>
             <uc:SideMenuButton x:Name="PlacesButton"
                                Text="Places"
-                               Image="../../Graphics/Icons/Place.png">
+                               Image="{Binding PlacesImage}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                         <i:InvokeCommandAction Command="{Binding NavigateCommand}"
@@ -80,30 +78,28 @@
         <StackPanel VerticalAlignment="Bottom">
             <uc:SideMenuButton x:Name="AccountButton"
                                Text="Account"
-                               Image="../../Graphics/Icons/Account.png"
-                               >
+                               Image="{Binding AccountImage}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
-                                               CommandParameter="{Binding AccountParameter}"/>
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                               CommandParameter="{Binding AccountParameter}" />
                         <i:InvokeCommandAction Command="{Binding LastClickedCommand}"
-                                               CommandParameter="{Binding ElementName=AccountButton}"/>
+                                               CommandParameter="{Binding ElementName=AccountButton}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
 
             </uc:SideMenuButton>
-            <uc:SideMenuButton 
-                               x:Name="SettingsButton"
+            <uc:SideMenuButton x:Name="SettingsButton"
                                Text="Settings"
-                               Image="../../Graphics/Icons/Settings.png"
+                               Image="{Binding SettingsImage}"
                                Command="{Binding NavigateCommand}"
                                Parameter="{Binding SettingsParameter}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
-                                               CommandParameter="{Binding SettingsParameter}"/>
+                        <i:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                               CommandParameter="{Binding SettingsParameter}" />
                         <i:InvokeCommandAction Command="{Binding LastClickedCommand}"
-                                               CommandParameter="{Binding ElementName=SettingsButton}"/>
+                                               CommandParameter="{Binding ElementName=SettingsButton}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </uc:SideMenuButton>

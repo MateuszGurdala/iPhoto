@@ -1,19 +1,19 @@
-﻿using iPhoto.Commands.AccountPage;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using iPhoto.Commands.AccountPage;
 
-namespace iPhoto.ViewModels
+namespace iPhoto.ViewModels.AccountPage
 {
-    public class AccountViewModel : ViewModelBase 
+    public class LogInViewModel : ViewModelBase
     {
         public ICommand OpenRegisterWebPageCommand { get; set; }
         public ICommand LogInCommand { get; set; }
 
-        public AccountViewModel()
+        public LogInViewModel()
         {
             OpenRegisterWebPageCommand = new OpenRegisterWebPageCommand();
             LogInCommand = new LogInCommand();
