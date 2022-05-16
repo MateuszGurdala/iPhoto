@@ -24,18 +24,18 @@ namespace iPhoto.ViewModels.AlbumsPage
                         throw new InvalidDataException("Given cover photo does not exists in given album")
                     }
                 }*/
-        private readonly AlbumSearchResultModel _albumData;
+        public AlbumSearchResultModel AlbumData { get; }
         public BitmapImage AlbumIcon => DataHandler.LoadBitmapImage(GetAlbumIcon(), 100);
         public bool IsClicked { get; set;}
         private string GetAlbumIcon()
         {
-            if (_albumData.ColorGroup == "" || _albumData.ColorGroup == "None")
+            if (AlbumData.ColorGroup == "" || AlbumData.ColorGroup == "None")
             {
                 return DataHandler.GetAlbumIconsDirectoryPath() + "GenericAlbum.png";
             }
             else
             {
-                return DataHandler.GetAlbumIconsDirectoryPath() + _albumData.ColorGroup + "Album.png";
+                return DataHandler.GetAlbumIconsDirectoryPath() + AlbumData.ColorGroup + "Album.png";
             }
         }
         public string AlbumNameText
@@ -43,13 +43,13 @@ namespace iPhoto.ViewModels.AlbumsPage
             get
             {
                 string header = "Album Name: ";
-                if (_albumData.Name.Length > 19)
+                if (AlbumData.Name.Length > 19)
                 {
-                    return string.Concat(header, _albumData.Name.AsSpan(0, 16), "...");
+                    return string.Concat(header, AlbumData.Name.AsSpan(0, 16), "...");
                 }
                 else
                 {
-                    return string.Concat(header, _albumData.Name);
+                    return string.Concat(header, AlbumData.Name);
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace iPhoto.ViewModels.AlbumsPage
             get
             {
                 string header = "Photo count: ";
-                string photoCount = _albumData.PhotoCount.ToString();
+                string photoCount = AlbumData.PhotoCount.ToString();
                 return header + photoCount;
             }
         
@@ -69,7 +69,7 @@ namespace iPhoto.ViewModels.AlbumsPage
             get
             {
                 string output = "Tags: ";
-                foreach (string tag in _albumData.Tags)
+                foreach (string tag in AlbumData.Tags)
                 {
                     output += tag;
                     output += ", ";
@@ -85,7 +85,7 @@ namespace iPhoto.ViewModels.AlbumsPage
             get
             {
                 string header = "Creation date: ";
-                return header + _albumData.CreationDate.ToShortDateString();
+                return header + AlbumData.CreationDate.ToShortDateString();
             }
         }
         public string ColorGroupText
@@ -93,7 +93,7 @@ namespace iPhoto.ViewModels.AlbumsPage
             get
             {
                 string header = "Current color group: ";
-                return header + _albumData.ColorGroup;
+                return header + AlbumData.ColorGroup;
             }
         }
         public string MemorySizeText
@@ -102,12 +102,12 @@ namespace iPhoto.ViewModels.AlbumsPage
             {
                 string header = "Total memory size: ";
                 string sizeUnit = "MB";
-                return string.Concat(header,_albumData.TotalMemorySize.ToString(), sizeUnit);
+                return string.Concat(header,AlbumData.TotalMemorySize.ToString(), sizeUnit);
             }
         }
         public int AlbumId
         {
-            get => _albumData.Id;
+            get => AlbumData.Id;
         }
 
         public ICommand ShowAlbumDetailsCommand { get; }
@@ -115,7 +115,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         public ICommand ShowAlbumOptionsCommand { get; }
         public AlbumSearchResultViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, Album album, List<PhotoEntity> photoEntities, MainWindowViewModel mainWindowViewModel, AlbumViewModel albumViewModel)
         {
-            _albumData = new AlbumSearchResultModel(album, photoEntities);
+            AlbumData = new AlbumSearchResultModel(album, photoEntities);
             IsClicked = false;
             ShowAlbumContentCommand = new ShowAlbumContentCommand(database, photoDetailsWindow, mainWindowViewModel, album, albumViewModel);
         }

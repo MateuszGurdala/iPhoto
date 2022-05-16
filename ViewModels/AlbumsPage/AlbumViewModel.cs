@@ -1,5 +1,6 @@
 ﻿using iPhoto.Commands.AlbumPage;
 using iPhoto.DataBase;
+using iPhoto.UtilityClasses;
 using iPhoto.ViewModels.AlbumsPage;
 using iPhoto.Views.AlbumPage;
 using iPhoto.Views.SearchPage;
@@ -16,13 +17,17 @@ namespace iPhoto.ViewModels
     public class AlbumViewModel : ViewModelBase
     {
         private ObservableCollection<AlbumSearchResultViewModel> _albumSearchResultsCollection;
-
+        public SearchAlbumsCommand SearchAlbumsCommand { get; }
         private readonly MainWindowViewModel _mainWindowViewModel;
         public DatabaseHandler DatabaseHandler;
         private readonly PhotoDetailsWindowView _photoDetailsWindow;
         public AddAlbumViewModel AddAlbumViewModel { get; }
 
+        public SearchAlbumEngine SearchAlbumEngine { get; }
+        public AlbumSearchViewModel AlbumSearchViewModel { get; }
+        public AlbumSearchView AlbumSearchViewx { get; }
         public AddAlbumView AddAlbumView { get; }
+
         public ObservableCollection<AlbumSearchResultViewModel> AlbumSearchResultsCollection
         {
             get { return _albumSearchResultsCollection; }
@@ -30,12 +35,15 @@ namespace iPhoto.ViewModels
         }
         public AlbumViewModel(DatabaseHandler DataBase, MainWindowViewModel mainWindowViewModel, PhotoDetailsWindowView photoDetailsWindow)
         {
-             DatabaseHandler = DataBase;
+            DatabaseHandler = DataBase;
             _mainWindowViewModel = mainWindowViewModel;
             _photoDetailsWindow = photoDetailsWindow;
             _albumSearchResultsCollection = new ObservableCollection<AlbumSearchResultViewModel>();
+            AlbumSearchViewModel = new AlbumSearchViewModel();
             AddAlbumViewModel = new AddAlbumViewModel(DataBase, this);
             DisplayAllAlbums();
+            SearchAlbumEngine = new SearchAlbumEngine(DataBase);
+            SearchAlbumsCommand = new SearchAlbumsCommand(this);
         }
 
         public void AddAlbumToView(Album album)
@@ -57,57 +65,18 @@ namespace iPhoto.ViewModels
                 AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler,_photoDetailsWindow, album, null, _mainWindowViewModel, this));
             }
         }
-/*        /// <summary>
-        /// Restricts Albums collection, 
-        /// leaving only albums that does contain <paramref name="phrase"/> as substring
+
+        /// <summary>
+        /// displays only albums that are in <paramref name="albums"/> list
         /// </summary>
-        /// <param name="phrase"></param>
-        public void SearchAlbumsByName(string phrase)
+        /// <param name="albums"></param>
+        public void LoadGivenAlbums(List<Album> albums)
         {
-            // TODO make this into LINQ KG 29.4
-            if (phrase == null || phrase == "")
+            AlbumSearchResultsCollection.Clear();
+            foreach (Album album in albums)
             {
-                _albumSearchResultsCollection = _dataBase.Albums;
-            }
-            else
-            {
-                List<Album> tempAlbumCollection = new();
-                foreach (Album album in _dataBase.Albums)
-                {
-                    if(album.Name.Contains(phrase))
-                    {
-                        tempAlbumCollection.Add(album);
-                    }
-                }
-                _albumSearchResultsCollection = tempAlbumCollection;
+                AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel, this));
             }
         }
-        /// <summary>
-        ///  Restricts Albums collection, 
-        /// leaving only albums that does contain <paramref name="color"/> as their color group
-        /// </summary>
-        /// <param name="color"></param>
-        public void SearchAlbumsByColorGroup(string color)
-        {
-            // TODO make this into LINQ KG 29.4
-            if (color == null || color == "")
-            {
-                _albumSearchResultsCollection = _dataBase.Albums;
-            }
-            else
-            {
-                List<Album> tempAlbumCollection = new();
-                foreach (Album album in _dataBase.Albums)
-                {
-                    if (album.ColorGroup == color)
-                    {
-                        tempAlbumCollection.Add(album);
-                    }
-                }
-                _albumSearchResultsCollection = tempAlbumCollection;
-            }
-        }*/
-
-
 }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace iPhoto.Commands.AlbumPage
 {
-    public class ChangeAlbumColorCommand : CommandBase
+    public class ChangeAlbumPropertiesCommand : CommandBase
     {
         public override void Execute(object parameter)
         {

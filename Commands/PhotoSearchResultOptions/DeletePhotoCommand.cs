@@ -22,7 +22,6 @@ namespace iPhoto.Commands.SearchPage
             var album = viewModel.Database.Albums.FirstOrDefault(e => e.Id == viewModel.GetAlbumId());
             var photo = viewModel.Database.Photos.FirstOrDefault(e => e.Id == viewModel.GetPhotoId());
             album.PhotoEntities.Remove(photo);
-            //album.TotalSize -= photo. 04.05 KG TODO
             album.PhotoCount--;
         }
     }
