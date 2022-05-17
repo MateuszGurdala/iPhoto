@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
              mc:Ignorable="d"
+             x:Name="root"
              d:DesignHeight="776"
              d:DesignWidth="1340">
     <Grid>
@@ -41,10 +42,14 @@
                                 Value="340" />
                         <Setter Property="Height"
                                 Value="60" />
-                        <Setter Property="Margin" Value="0, 30, 0, 0" />
-                        <Setter Property="Background" Value="{StaticResource DarkLightGreenGradient}" />
-                        <Setter Property="Foreground" Value="{StaticResource PastelWhiteGradient}" />
-                        <Setter Property="FontSize" Value="50" />
+                        <Setter Property="Margin"
+                                Value="0, 30, 0, 0" />
+                        <Setter Property="Background"
+                                Value="{StaticResource DarkLightGreenGradient}" />
+                        <Setter Property="Foreground"
+                                Value="{StaticResource PastelWhiteGradient}" />
+                        <Setter Property="FontSize"
+                                Value="50" />
                     </Style>
                     <Style TargetType="PasswordBox">
                         <Setter Property="Width"
@@ -77,12 +82,13 @@
                 <StackPanel Orientation="Vertical"
                             Grid.Column="0"
                             VerticalAlignment="Center">
-                    <TextBlock Text="Log In" />
-                    <TextBox Margin="0, 100, 0, 0"/>
-                    <PasswordBox/>
+                    <TextBlock Text="Log In"/>
+                    <TextBox Margin="0, 100, 0, 0" Text="{Binding UsernameText}"/>
+                    <PasswordBox PasswordChanged="PasswordBox_PasswordChanged"/>
                     <uc:CustomButton Margin="0 , 60, 0 ,0"
                                      ImageSource="../../Graphics/Icons/Extend.png"
-                                     Command="{Binding LogInCommand}" />
+                                     Command="{Binding LogInCommand}"
+                                     CommandParameter="{Binding .}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical"
@@ -91,9 +97,8 @@
                     <TextBlock Text="Register" />
                     <uc:CustomButton Margin="0 , 310, 0 ,0"
                                      ImageSource="../../Graphics/Icons/Add.png"
-                                     Command="{Binding OpenRegisterWebPageCommand}"/>
+                                     Command="{Binding OpenRegisterWebPageCommand}" />
                 </StackPanel>
-
             </Grid>
         </uc:RoundedIcon>
     </Grid>

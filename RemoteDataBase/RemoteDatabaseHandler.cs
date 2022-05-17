@@ -8,21 +8,30 @@ using iPhoto.DataBase;
 
 namespace iPhoto.RemoteDatabase
 {
-    public class RemoteDatabaseHandler : DatabaseHandler
+    public class RemoteDatabaseHandler
     {
         private readonly DatabaseApiHandler _apiHandler;
         private readonly GoogleDriveHandler _googleDriveHandler;
+
+        public ObservableCollection<Album> Albums { get; set; }
+        public ObservableCollection<Photo> Photos { get; set; }
+        public ObservableCollection<Image> Images { get; set; }
+        public ObservableCollection<Place> Places { get; set; }
 
         public RemoteDatabaseHandler()
         {
             _googleDriveHandler = new GoogleDriveHandler();
             _apiHandler = new DatabaseApiHandler();
 
-            //_googleDriveHandler.LoadAllData();
+            Albums = new ObservableCollection<Album>();
+            Photos = new ObservableCollection<Photo>();
+            Images = new ObservableCollection<Image>();
+            Places = new ObservableCollection<Place>();
+
             //LoadAllData();
         }
 
-        public new async void LoadAlbums()
+        public async void LoadAlbums()
         {
             var apiAlbums = await _apiHandler.GetAlbums();
             foreach (var e in apiAlbums)
@@ -30,7 +39,7 @@ namespace iPhoto.RemoteDatabase
                 Albums.Add(new Album(e.ToEntity()));
             }
         }
-        public new async void LoadPlaces()
+        public async void LoadPlaces()
         {
             var apiPlace = await _apiHandler.GetPlaces();
             foreach (var e in apiPlace)
@@ -38,7 +47,7 @@ namespace iPhoto.RemoteDatabase
                 Places.Add(new Place(e.ToEntity()));
             }
         }
-        public new async void LoadImages()
+        public async void LoadImages()
         {
             var apiImages = await _apiHandler.GetImages();
             foreach (var e in apiImages)
@@ -46,7 +55,7 @@ namespace iPhoto.RemoteDatabase
                 Images.Add(new Image(e.ToEntity()));
             }
         }
-        public new async void LoadPhotos()
+        public async void LoadPhotos()
         {
             LoadImages();
             var apiPhotos = await _apiHandler.GetPhotos();
@@ -56,8 +65,9 @@ namespace iPhoto.RemoteDatabase
                 Photos.Add(new Photo(photoEntity, Images.FirstOrDefault(ei => ei.GetEntity().Id == photoEntity.ImageEntityId).GetEntity(), false));
             }
         }
-        public new void LoadAllData()
+        public void LoadAllData()
         {
+            _googleDriveHandler.LoadAllData();
             LoadPhotos();
             LoadAlbums();
             LoadPlaces();

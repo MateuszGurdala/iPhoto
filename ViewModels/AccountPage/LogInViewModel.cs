@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security;
 using System.Windows.Input;
 using iPhoto.Commands.AccountPage;
 
@@ -12,6 +8,9 @@ namespace iPhoto.ViewModels.AccountPage
     {
         public ICommand OpenRegisterWebPageCommand { get; set; }
         public ICommand LogInCommand { get; set; }
+
+        public string UsernameText { get; set; }
+        public SecureString SecurePassword { get; set; }
 
         public LogInViewModel()
         {

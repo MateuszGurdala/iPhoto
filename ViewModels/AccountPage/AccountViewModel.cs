@@ -1,17 +1,12 @@
-﻿using iPhoto.Commands.AccountPage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using iPhoto.ViewModels.AccountPage;
+﻿using iPhoto.ViewModels.AccountPage;
+using iPhoto.RemoteDatabase;
 
 namespace iPhoto.ViewModels
 {
     public class AccountViewModel : ViewModelBase 
     {
         private ViewModelBase? _currentViewModel;
+        private RemoteDatabaseHandler _remoteDatabaseHandler;
         public ViewModelBase CurrentViewModel
         {
             get
@@ -24,10 +19,11 @@ namespace iPhoto.ViewModels
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
-        public AccountViewModel()
+        public AccountViewModel(RemoteDatabaseHandler remoteDatabase)
         {
-            //CurrentViewModel = new LogInViewModel();
-            CurrentViewModel = new LoggedInAuthViewModel();
+            _remoteDatabaseHandler = remoteDatabase;
+            CurrentViewModel = new LogInViewModel();
+            //CurrentViewModel = new LoggedInAuthViewModel(remoteDatabase);
         }
     }
 }

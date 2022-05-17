@@ -25,9 +25,9 @@ namespace GoogleDriveHandlerDemo.ApiHandler.ApiResponseObjects
                 Name = name,
                 PhotoCount = photo_count,
                 Tags = tags,
-                ColorGroup = color_group,
+                ColorGroup = color_group == "White" ? "Generic" : color_group,
                 IsLocal = is_local,
-                CreationDate = create_time
+                CreationDate = create_time.Substring(0, 10)
             };
         }
     }

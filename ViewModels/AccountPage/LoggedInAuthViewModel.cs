@@ -6,11 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using iPhoto.Models;
+using iPhoto.RemoteDatabase;
 
 namespace iPhoto.ViewModels.AccountPage
 {
     public class LoggedInAuthViewModel : ViewModelBase
     {
+        private readonly RemoteDatabaseHandler _remoteDatabase;
+
         private AccountDataModel _accountData;
         public AccountDataModel AccountData
         {
@@ -28,10 +31,14 @@ namespace iPhoto.ViewModels.AccountPage
         public ObservableCollection<RecentChangesInfo> RecentChanges { get; }
         public ObservableCollection<OnlineAlbumViewModel> OnlineAlbums { get; }
 
-        public LoggedInAuthViewModel()
+        public LoggedInAuthViewModel(RemoteDatabaseHandler remoteDatabase)
         {
+            _remoteDatabase = remoteDatabase;
             RecentChanges = new ObservableCollection<RecentChangesInfo>();
             OnlineAlbums = new ObservableCollection<OnlineAlbumViewModel>();
+
+            _remoteDatabase.LoadAllData();
+            LoadAlbums();
 
             AccountData = new AccountDataModel()
             {
@@ -48,23 +55,22 @@ namespace iPhoto.ViewModels.AccountPage
                 DateAndTime = "16.05.2022 16:58",
                 Message = "User GreysonKrystian added 3 new photos to album CepyPlusPlus"
             });
+        }
+        public async void LoadAlbums()
+        {
+            await Task.Delay(1000);
+            foreach (var album in _remoteDatabase.Albums)
+            {
+                OnlineAlbums.Add(new OnlineAlbumViewModel()
+                {
+                    PhotoCount = album.PhotoCount.ToString(),
+                    Name = album.Name,
+                    Color = album.ColorGroup,
+                    Tags = album.RawTags,
+                    LastEdit = album.CreationDate.ToString().Substring(0, 10),
+                }) ;
 
-            OnlineAlbums.Add(new OnlineAlbumViewModel()
-            {
-                Color = "Generic",
-                LastEdit = "15.05.2022",
-                Name = "Piwka",
-                PhotoCount = "6",
-                Tags = "#piwo#browar"
-            });
-            OnlineAlbums.Add(new OnlineAlbumViewModel()
-            {
-                Color = "Blue",
-                LastEdit = "24.04.2022",
-                Name = "Reszta",
-                PhotoCount = "3",
-                Tags = "#none"
-            });
+            }
         }
     }
 }

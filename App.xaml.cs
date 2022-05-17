@@ -26,7 +26,7 @@ namespace iPhoto
             _databaseHandler = new DatabaseHandler();   //MG 15.04
             _remoteDatabaseHandler = new RemoteDatabaseHandler(); //MG 15.05
 
-            MainWindow.DataContext = new MainWindowViewModel(MainWindow, _databaseHandler, photoDetailsWindow); //MG 15.04
+            MainWindow.DataContext = new MainWindowViewModel(MainWindow, _databaseHandler, _remoteDatabaseHandler, photoDetailsWindow); //MG 15.04
 
             //MG 15.05 
             _googleDriveHandler = new GoogleDriveHandler();
