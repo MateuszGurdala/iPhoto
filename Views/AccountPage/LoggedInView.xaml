@@ -30,7 +30,9 @@
         <!--Buttons-->
         <StackPanel Orientation="Horizontal"
                     Margin="40, 5, 0, 10">
-            <userControls:CustomButton  ImageSource="../../Graphics/Icons/Logout.png" />
+            <userControls:CustomButton  ImageSource="../../Graphics/Icons/Logout.png"
+                                        Command="{Binding LogOutCommand}"
+                                        CommandParameter="{Binding .}"/>
             <userControls:CustomButton  ImageSource="../../Graphics/Icons/Online.png" />
         </StackPanel>
 

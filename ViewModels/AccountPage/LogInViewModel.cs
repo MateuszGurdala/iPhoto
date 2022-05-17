@@ -11,9 +11,11 @@ namespace iPhoto.ViewModels.AccountPage
 
         public string UsernameText { get; set; }
         public SecureString SecurePassword { get; set; }
+        public AccountViewModel AccountViewModel;
 
-        public LogInViewModel()
+        public LogInViewModel(AccountViewModel accountView)
         {
+            AccountViewModel = accountView;
             OpenRegisterWebPageCommand = new OpenRegisterWebPageCommand();
             LogInCommand = new LogInCommand();
         }

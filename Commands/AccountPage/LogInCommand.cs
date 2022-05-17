@@ -1,7 +1,4 @@
 ﻿using iPhoto.ViewModels.AccountPage;
-using iPhoto.Views.UserControls;
-using System.Diagnostics;
-using System.Windows.Controls;
 
 namespace iPhoto.Commands.AccountPage
 {
@@ -14,7 +11,7 @@ namespace iPhoto.Commands.AccountPage
             var username = viewModel.UsernameText;
             var password = viewModel.SecurePassword;
 
-            viewModel.
+            viewModel.AccountViewModel.CurrentViewModel = viewModel.AccountViewModel.LoggedInViewModel;
 
             //Process.Start(new ProcessStartInfo
             //{

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
+using System.Windows.Input;
+using iPhoto.Commands.AccountPage;
 using iPhoto.Models;
 using iPhoto.RemoteDatabase;
 
@@ -30,10 +27,15 @@ namespace iPhoto.ViewModels.AccountPage
 
         public ObservableCollection<RecentChangesInfo> RecentChanges { get; }
         public ObservableCollection<OnlineAlbumViewModel> OnlineAlbums { get; }
+        public AccountViewModel AccountViewModel;
+        public ICommand LogOutCommand { get; }
 
-        public LoggedInAuthViewModel(RemoteDatabaseHandler remoteDatabase)
+        public LoggedInAuthViewModel(AccountViewModel accountViewModel,RemoteDatabaseHandler remoteDatabase)
         {
+            AccountViewModel = accountViewModel;
             _remoteDatabase = remoteDatabase;
+
+            LogOutCommand = new LogOutCommand();
             RecentChanges = new ObservableCollection<RecentChangesInfo>();
             OnlineAlbums = new ObservableCollection<OnlineAlbumViewModel>();
 
