@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Threading.Tasks;
 using GoogleDriveHandlerDemo.ApiHandler.ApiResponseObjects;
 
 namespace GoogleDriveHandlerDemo.ApiHandler
@@ -19,25 +20,29 @@ namespace GoogleDriveHandlerDemo.ApiHandler
         {
             SetHandler();
         }
-        public async void GetPhotos()
+        public async Task<List<ApiPhotoObject>> GetPhotos()
         {
             var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "photos");
             _apiPhotoObjects = JsonSerializer.Deserialize<List<ApiPhotoObject>>(photosApiResult);
+            return _apiPhotoObjects;
         }
-        public async void GetAlbums()
+        public async Task<List<ApiAlbumObject>> GetAlbums()
         {
             var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "groups");
             _apiAlbumObjects = JsonSerializer.Deserialize<List<ApiAlbumObject>>(photosApiResult);
+            return _apiAlbumObjects;
         }
-        public async void GetPlaces()
+        public async Task<List<ApiPlaceObject>> GetPlaces()
         {
             var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "places");
             _apiPlaceObjects = JsonSerializer.Deserialize<List<ApiPlaceObject>>(photosApiResult);
+            return _apiPlaceObjects;
         }
-        public async void GetImages()
+        public async Task<List<ApiImageObject>> GetImages()
         {
             var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "images");
             _apiImageObjects = JsonSerializer.Deserialize<List<ApiImageObject>>(photosApiResult);
+            return _apiImageObjects;
         }
         private void SetHandler()
         {

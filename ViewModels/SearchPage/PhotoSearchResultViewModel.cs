@@ -1,6 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Dynamic;
-using System.Security.Cryptography.Pkcs;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using iPhoto.Commands;
@@ -14,7 +12,19 @@ namespace iPhoto.ViewModels
         public IPhotoSearchVM SearchViewModel { get; }
         private readonly PhotoSearchResultModel _photoData;
 
-        public BitmapImage ImagePreviewSource => _photoData.PreviewImage;
+        public BitmapImage ImagePreviewSource
+        {
+            get
+            {
+                return _photoData.PreviewImage;
+            }
+            set
+            {
+                _photoData.PreviewImage = value;
+                OnPropertyChanged(nameof(ImagePreviewSource));
+            }
+        }
+            
         public BitmapImage Image => _photoData.GetImage();
         //MG 26.04 Fixed title display settings
         public string PhotoTitle

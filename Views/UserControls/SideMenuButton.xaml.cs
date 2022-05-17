@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 
 
 namespace iPhoto.Views.UserControls
@@ -22,13 +23,13 @@ namespace iPhoto.Views.UserControls
             set { _lastClicked = value; }
         }
 
-        public string Image
+        public BitmapImage Image
         {
-            get { return (string)GetValue(ImageProperty); }
+            get { return (BitmapImage)GetValue(ImageProperty); }
             set { SetValue(ImageProperty, value); }
         }
         public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register("Image", typeof(string), typeof(SideMenuButton));
+            DependencyProperty.Register("Image", typeof(BitmapImage), typeof(SideMenuButton));
 
         public string Text
         {

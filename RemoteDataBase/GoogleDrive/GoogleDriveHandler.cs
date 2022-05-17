@@ -49,8 +49,8 @@ namespace GoogleDriveHandlerDemo
         private void CreateDriveService()
         {
             UserCredential credential;
-            string tokenPath = DataHandler.GetProjectDirectoryPath() + "\\GoogleDrive\\token.json";
-            string credentialsPath = DataHandler.GetProjectDirectoryPath() + "\\GoogleDrive\\credentials.json";
+            string tokenPath = DataHandler.GetProjectDirectoryPath() + "\\RemoteDatabase\\GoogleDrive\\token.json";
+            string credentialsPath = DataHandler.GetProjectDirectoryPath() + "\\RemoteDatabase\\GoogleDrive\\credentials.json";
 
             using (var stream =
                    new FileStream(@credentialsPath, FileMode.Open, FileAccess.Read))

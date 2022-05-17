@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Media.Imaging;
 
 namespace iPhoto.UtilityClasses
@@ -55,6 +58,29 @@ namespace iPhoto.UtilityClasses
             image.Freeze();
 
             return image;
+        }
+        public static BitmapImage LoadBitmapImageAsync(string path, double? decodePixelWidth)
+        {
+            var webClient = new WebClient();
+            byte[] imageBytes = webClient.DownloadData(path);
+            Stream stream = new MemoryStream(imageBytes);
+
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = stream;
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+
+            if (decodePixelWidth != null)
+            {
+                bitmapImage.DecodePixelWidth = (int)decodePixelWidth;
+            }
+
+
+            var client = new HttpClient();
+
+            bitmapImage.EndInit();
+
+            return bitmapImage;
         }
     }
 }

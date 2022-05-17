@@ -3,6 +3,7 @@ using System.Windows;
 using iPhoto.DataBase;
 using iPhoto.Views.SearchPage;
 using iPhoto.ViewModels.AlbumsPage;
+using iPhoto.RemoteDatabase;
 
 namespace iPhoto.ViewModels
 {
@@ -31,13 +32,13 @@ namespace iPhoto.ViewModels
         public HomePageViewModel HomePageViewModel { get; }
 
         //MG 15.04 added db handler class
-        public MainWindowViewModel(Window mainWindow, DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow)
+        public MainWindowViewModel(Window mainWindow, DatabaseHandler database, RemoteDatabaseHandler remoteHandler, PhotoDetailsWindowView photoDetailsWindow)
         {
             HomePageViewModel = new HomePageViewModel();
             SearchViewModel = new SearchViewModel(database, photoDetailsWindow);    //MG 15.04 //MG 26.04 add photo details 
             AlbumsViewModel = new AlbumViewModel(database, this, photoDetailsWindow);
             PlacesViewModel = new PlacesViewModel();
-            AccountViewModel = new AccountViewModel();
+            AccountViewModel = new AccountViewModel(remoteHandler);
             SettingsViewModel = new SettingsViewModel();
 
 

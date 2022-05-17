@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="iPhoto.Views.AccountPage.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:iPhoto.Views.AccountPage"
+             xmlns:accountPage="clr-namespace:iPhoto.ViewModels.AccountPage"
+             mc:Ignorable="d"
+             d:DesignHeight="776"
+             d:DesignWidth="1340">
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type accountPage:LogInViewModel}">
+                <local:LoginView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type accountPage:LoggedInAuthViewModel}">
+                <local:LoggedInView />
+            </DataTemplate>
+        </Grid.Resources>
+
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+    </Grid>
+</UserControl>

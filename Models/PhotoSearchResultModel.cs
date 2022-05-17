@@ -13,7 +13,8 @@ namespace iPhoto.Models
         public readonly Album AlbumData;
         public readonly Place PlaceData;
         public string Title { get; }
-        public BitmapImage PreviewImage { get; }
+        public BitmapImage PreviewImage { get; set; }
+        private BitmapImage? _image = null;
         private const int _maxNameLength = 15;
         private readonly string _fullPath;
 
@@ -25,13 +26,33 @@ namespace iPhoto.Models
             AlbumData = albumData;
             PlaceData = placeData;
 
-            _fullPath = DataHandler.GetDatabaseImageDirectory() + "\\" + ImageData.Source;
             Title = PhotoData.Title;
-            PreviewImage = DataHandler.LoadBitmapImage(_fullPath, 140);
+
+            if (photoData.IsLocal)
+            {
+                _fullPath = DataHandler.GetDatabaseImageDirectory() + "\\" + ImageData.Source;
+                PreviewImage = DataHandler.LoadBitmapImage(_fullPath, 140);
+            }
+            else
+            {
+                _fullPath = "https://drive.google.com/uc?id=" + ImageData.Source;
+                PreviewImage = DataHandler.LoadBitmapImageAsync(_fullPath, 140);
+            }
         }
         public BitmapImage GetImage()
         {
-            return DataHandler.LoadBitmapImage(_fullPath, null);
+            if (_image == null)
+            {
+                if (!PhotoData.IsLocal)
+                {
+                    _image = DataHandler.LoadBitmapImageAsync(_fullPath, null);
+                }
+                else
+                {
+                    _image = DataHandler.LoadBitmapImage(_fullPath, null);
+                }
+            }
+            return _image;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace iPhoto.UtilityClasses
         private DateTime? _dateCreated;
         private int? _albumId;
         private int? _placeId;
-        private int _imageId;
+        private Image _image;
 
         public PhotoAdder(DatabaseHandler databaseHandler, string? fileName)
         {
@@ -88,8 +88,8 @@ namespace iPhoto.UtilityClasses
             //await Task.Run(() =>
             //{
                 _databaseHandler.AddImage(_fileName, _width, _height, _size);
-                _imageId = _databaseHandler.Images.First(e => e.Source == _fileName).Id;
-                _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _imageId, _databaseHandler);
+                _image = _databaseHandler.Images.First(e => e.Source == _fileName);
+                _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _image.Id, _image.Size);
                 
                 MoveFileToDatabaseDirectory(); // BUG throws error if same fale in DataBaseDirectory TODO
             //});

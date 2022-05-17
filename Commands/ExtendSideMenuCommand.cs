@@ -46,7 +46,7 @@ namespace iPhoto.Commands
 
             myStoryboard.Begin();
 
-            _sideMenuViewModel.ExtendImage = _sideMenuViewModel.HideImageSource;
+            //_sideMenuViewModel.ExtendImage = _sideMenuViewModel.HideImageSource;
         }
         private void Collapse()
         {
@@ -63,7 +63,7 @@ namespace iPhoto.Commands
 
             myStoryboard.Begin();
 
-            _sideMenuViewModel.ExtendImage = _sideMenuViewModel.ExtendImageSource;
+            //_sideMenuViewModel.ExtendImage = _sideMenuViewModel.ExtendImageSource;
         }
     }
 }

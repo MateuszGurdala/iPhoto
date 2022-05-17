@@ -9,7 +9,7 @@ namespace iPhoto.DataBase
     public class Album
     {
         private readonly AlbumEntity _albumEntity;
-        private readonly string[] validDateFormats = { "dd.MM.yyyy HH:mm:ss", "dd.MM.yyyy" };
+        private readonly string[] validDateFormats = { "dd.MM.yyyy HH:mm:ss", "dd.MM.yyyy", "yyyy-MM-dd" };
         public int Id
         {
             get => _albumEntity.Id;

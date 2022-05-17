@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace iPhoto.Views
+namespace iPhoto.Views.AccountPage
 {
     /// <summary>
-    /// Interaction logic for AccountView.xaml
+    /// Interaction logic for RecentInfoIconView.xaml
     /// </summary>
-    public partial class AccountView : UserControl
+    public partial class RecentInfoIconView : UserControl
     {
-        public AccountView()
+        public RecentInfoIconView()
         {
             InitializeComponent();
         }

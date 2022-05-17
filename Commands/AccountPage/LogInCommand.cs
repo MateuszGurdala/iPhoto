@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using iPhoto.ViewModels.AccountPage;
 
 namespace iPhoto.Commands.AccountPage
 {
-    internal class LogInCommand : CommandBase
+    public class LogInCommand : CommandBase
     {
         public override void Execute(object parameter)
         {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "http://weiti.pl",
-                UseShellExecute = true
-            });
+            var viewModel = parameter as LogInViewModel;
+
+            var username = viewModel.UsernameText;
+            var password = viewModel.SecurePassword;
+
+            viewModel.AccountViewModel.CurrentViewModel = viewModel.AccountViewModel.LoggedInViewModel;
+
+            //Process.Start(new ProcessStartInfo
+            //{
+            //    FileName = "http://weiti.pl",
+            //    UseShellExecute = true
+            //});
         }
     }
 }

@@ -30,11 +30,11 @@
         <StackPanel Orientation="Horizontal"
                     Margin="40, 5, 0, 10">
             <!--Extend Search Options Button-->
-            <uc:CustomButton  ImageSource="../../Graphics/Icons/ExtendMenu.png"
+            <uc:CustomButton  ImageSource="{Binding ExtendMenuImage}"
                               Command="{Binding ExtendSearchMenuCommand}"
                               CommandParameter="{Binding ElementName=SearchOptionsColumn}" />
             <!--Search Button-->
-            <uc:CustomButton  ImageSource="../../Graphics/Icons/Search.png"
+            <uc:CustomButton  ImageSource="{Binding SearchImage}"
                               Margin="10, 0, 0, 0"
                               Command="{Binding SearchCommand}"
                               CommandParameter="{Binding ElementName=SearchOptions}" />
@@ -44,12 +44,12 @@
                     HorizontalAlignment="Right"
                     Margin="0, 5, 30, 10">
             <!--Photo Details Button-->
-            <uc:CustomButton  ImageSource="../../Graphics/Icons/PhotoDetails.png"
+            <uc:CustomButton  ImageSource="{Binding PhotoDetailsImage}"
                               Margin="10, 0, 0, 0"
                               Command="{Binding ExtendPhotoDetailsCommand}"
                               CommandParameter="{Binding ElementName=PhotoDetailsColumn}"/>
             <!--Add Photos Button-->
-            <uc:CustomButton  ImageSource="../../Graphics/Icons/AddPhoto.png"
+            <uc:CustomButton  ImageSource="{Binding AddPhotoImage}"
                               Margin="10, 0, 0, 0"
                               Command="{Binding AddPhotoCommand}"/>
         </StackPanel>
