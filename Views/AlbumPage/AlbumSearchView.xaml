@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:iPhoto.Views.AlbumPage"
              xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500">
+             d:DesignHeight="500" d:DesignWidth="500"
+             x:Name = "root">
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -111,7 +112,7 @@
                                   Width="60"
                                   Height="60"
                                   CornerRadius="12"
-                                  Command="{Binding ClearSearchParamsCommand}"
+                                  Command="{Binding ClearAlbumSearchParamsCommand}"
                                   CommandParameter="{Binding Path=., ElementName=root}"/>
             </StackPanel>
         </Grid>

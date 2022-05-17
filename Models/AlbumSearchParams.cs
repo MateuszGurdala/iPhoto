@@ -33,7 +33,7 @@ namespace iPhoto.Models
                 {
                     StartDate = ConvertToDatetime(searchView.StartDate.Text);
                 }
-                if (searchView.StartDate.Text != "")
+                if (searchView.EndDate.Text != "")
                 {
                     EndDate = ConvertToDatetime(searchView.EndDate.Text);
                 }
