@@ -56,12 +56,17 @@ namespace iPhoto.ViewModels
             AlbumSearchResultsCollection[index] = new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel, this);
         }
 
+        public void DeleteAlbumFromView(Album album)
+        {
+            int index = AlbumSearchResultsCollection.IndexOf(AlbumSearchResultsCollection.FirstOrDefault(y => y.AlbumId == album.Id));
+            AlbumSearchResultsCollection.RemoveAt(index);
+        }
+
         public void DisplayAllAlbums()
         {
             AlbumSearchResultsCollection.Clear();
-            for (int i = 1; i <= DatabaseHandler.Albums.Count; i++)
+            foreach (Album album in DatabaseHandler.Albums)
             {
-                var album = DatabaseHandler.Albums.FirstOrDefault(e => e.Id == i);
                 AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler,_photoDetailsWindow, album, null, _mainWindowViewModel, this));
             }
         }

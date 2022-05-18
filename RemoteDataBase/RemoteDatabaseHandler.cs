@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using GoogleDriveHandlerDemo;
 using GoogleDriveHandlerDemo.ApiHandler;
 using iPhoto.DataBase;
@@ -31,7 +32,7 @@ namespace iPhoto.RemoteDatabase
             //LoadAllData();
         }
 
-        public async void LoadAlbums()
+        public async Task LoadAlbums()
         {
             var apiAlbums = await _apiHandler.GetAlbums();
             foreach (var e in apiAlbums)
@@ -39,7 +40,7 @@ namespace iPhoto.RemoteDatabase
                 Albums.Add(new Album(e.ToEntity()));
             }
         }
-        public async void LoadPlaces()
+        public async Task LoadPlaces()
         {
             var apiPlace = await _apiHandler.GetPlaces();
             foreach (var e in apiPlace)
@@ -47,7 +48,7 @@ namespace iPhoto.RemoteDatabase
                 Places.Add(new Place(e.ToEntity()));
             }
         }
-        public async void LoadImages()
+        public async Task LoadImages()
         {
             var apiImages = await _apiHandler.GetImages();
             foreach (var e in apiImages)
@@ -55,9 +56,9 @@ namespace iPhoto.RemoteDatabase
                 Images.Add(new Image(e.ToEntity()));
             }
         }
-        public async void LoadPhotos()
+        public async Task LoadPhotos()
         {
-            LoadImages();
+            await LoadImages();
             var apiPhotos = await _apiHandler.GetPhotos();
             foreach (var e in apiPhotos)
             {
@@ -65,12 +66,12 @@ namespace iPhoto.RemoteDatabase
                 Photos.Add(new Photo(photoEntity, Images.FirstOrDefault(ei => ei.GetEntity().Id == photoEntity.ImageEntityId).GetEntity(), false));
             }
         }
-        public void LoadAllData()
+        public async Task LoadAllData()
         {
             _googleDriveHandler.LoadAllData();
-            LoadPhotos();
-            LoadAlbums();
-            LoadPlaces();
+            await LoadPhotos();
+            await LoadAlbums();
+            await LoadPlaces();
         }
     }
 }

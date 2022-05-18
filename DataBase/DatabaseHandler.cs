@@ -236,20 +236,19 @@ namespace iPhoto.DataBase
             db.SaveChanges();
 
         }
-        // KG 03.05 small bugfix
         private void AddPhotoToAlbum(Album album, Photo photo)
         {
             album.PhotoEntities.Add(photo);
             album.PhotoCount++;
+
         }
+
+        //Removing records
         private void RemovePhotoFromAlbum(Album album, Photo photo)
         {
             album.PhotoEntities.Remove(photo);
             album.PhotoCount--;
         }
-
-
-        //Removing records
         public void RemoveAlbum(int id)
         {
             var album = Albums.FirstOrDefault(e => e.Id == id);
@@ -306,6 +305,26 @@ namespace iPhoto.DataBase
             db.PhotoEntities.Remove(photo.GetEntity());
             db.SaveChanges();
         }
+
+        public void RemoveAllAlbumPhotos(int albumId)
+        {
+            using var db = new DatabaseContext();
+            var photosToDelete = Photos.Where(e => e.AlbumId == albumId);
+            foreach (var photo in photosToDelete)
+            {
+                var imageToDelete = Images.FirstOrDefault(e => e.Id == photo.ImageId);
+                if (imageToDelete != null)
+                {
+                    Images.Remove(imageToDelete);
+                    db.ImageEntities.Remove(imageToDelete.GetEntity());
+                }
+                db.PhotoEntities.Remove(photo.GetEntity());
+            }
+
+            Photos.RemoveAll(e => e.AlbumId == albumId);
+            db.SaveChanges();
+        }
+
         //Updating Records
         public void UpdateAlbum(int id, string? name, int? count, List<string>? tags, DateTime? date, bool? isLocal)
         {

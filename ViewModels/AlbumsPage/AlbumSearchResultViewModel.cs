@@ -100,7 +100,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         {
             get
             {
-                string header = "Total memory size: ";
+                string header = "Total size: ";
                 string sizeUnit = "MB";
                 return string.Concat(header,AlbumData.TotalMemorySize.ToString(), sizeUnit);
             }
@@ -110,14 +110,16 @@ namespace iPhoto.ViewModels.AlbumsPage
             get => AlbumData.Id;
         }
 
-        public ICommand ShowAlbumDetailsCommand { get; }
         public ICommand ShowAlbumContentCommand { get; }
-        public ICommand ShowAlbumOptionsCommand { get; }
+        public ICommand EditAlbumCommand { get; }
+        public ICommand DeleteAlbumCommand { get; }
         public AlbumSearchResultViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, Album album, List<PhotoEntity> photoEntities, MainWindowViewModel mainWindowViewModel, AlbumViewModel albumViewModel)
         {
             AlbumData = new AlbumSearchResultModel(album, photoEntities);
             IsClicked = false;
             ShowAlbumContentCommand = new ShowAlbumContentCommand(database, photoDetailsWindow, mainWindowViewModel, album, albumViewModel);
+            EditAlbumCommand = new EditAlbumCommand(albumViewModel, album);
+            DeleteAlbumCommand = new DeleteAlbumCommand(albumViewModel, album);
         }
         
     }

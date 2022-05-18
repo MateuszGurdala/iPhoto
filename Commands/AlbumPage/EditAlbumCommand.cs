@@ -9,22 +9,20 @@ using System.Threading.Tasks;
 
 namespace iPhoto.Commands.AlbumPage
 {
-    public class DeleteAlbumCommand : CommandBase
+    public class EditAlbumCommand : CommandBase
     {
+
         private readonly AlbumViewModel _albumViewModel;
         private readonly Album _album;
 
-        public DeleteAlbumCommand(AlbumViewModel albumViewModel, Album album)
+        public EditAlbumCommand(AlbumViewModel albumViewModel, Album album)
         {
-            _albumViewModel = albumViewModel;
+             _albumViewModel = albumViewModel;
             _album = album;
         }
-
         public override void Execute(object parameter)
         {
-            _albumViewModel.DeleteAlbumFromView(_album);
-            _albumViewModel.DatabaseHandler.RemoveAllAlbumPhotos(_album.Id);
-            _albumViewModel.DatabaseHandler.RemoveAlbum(_album.Id);
+            throw new NotImplementedException();
         }
     }
 }

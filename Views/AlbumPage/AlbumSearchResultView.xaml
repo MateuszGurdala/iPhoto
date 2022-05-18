@@ -3,11 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:iPhoto.Views.AlbumPage" xmlns:albumspage="clr-namespace:iPhoto.ViewModels.AlbumsPage" d:DataContext="{d:DesignInstance Type=albumspage:AlbumSearchResultViewModel}"
+             xmlns:local="clr-namespace:iPhoto.Views.AlbumPage" 
+             xmlns:albumspage="clr-namespace:iPhoto.ViewModels.AlbumsPage"
+             xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
+             d:DataContext="{d:DesignInstance Type=albumspage:AlbumSearchResultViewModel}"
              mc:Ignorable="d"
              Name="Root"
              Cursor="Hand"
              d:DesignHeight="165" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="uc:CustomButton">
+            <Setter Property="Height"
+                        Value="60" />
+            <Setter Property="Width"
+                        Value="60" />
+            <Setter Property="CornerRadius"
+                        Value="12" />
+        </Style>
+    </UserControl.Resources>
     <Button Background="Transparent">
         <Button.InputBindings>
             <MouseBinding Gesture="LeftClick"
@@ -15,9 +28,6 @@
                           CommandParameter="{Binding Path=.}" />
             <MouseBinding Gesture="LeftDoubleClick"
                           Command="{Binding ShowAlbumContentCommand}"
-                          CommandParameter="{Binding Path=.}" />
-            <MouseBinding Gesture="RightClick"
-                          Command="{Binding ShowAlbumOptionsCommand}"
                           CommandParameter="{Binding Path=.}" />
         </Button.InputBindings>
         <Grid>
@@ -34,8 +44,9 @@
             <Grid Width="780"
                   Height="160">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.37*"/>
                     <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="1.3*"/>
+                    <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -95,35 +106,50 @@
                         </EventTrigger.Actions>
                     </EventTrigger>
                 </Grid.Triggers>
+                <!-- Icon with album -->
                 <Image Source="{Binding AlbumIcon}"
                     Width="160"
                     Height="160"
                     Margin="0 0 0 10"
-                    Grid.Column="0"
+                    Grid.Column="1"
                     Grid.Row="0"
                     Grid.RowSpan="5"/>
+                
+                <!-- Details about album -->
                 <TextBlock Text="{Binding AlbumNameText}"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Grid.ColumnSpan="2"
                     Grid.Row="0"/>
                 <TextBlock Text="{Binding TagsText}"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Grid.ColumnSpan="2"
                     Grid.Row="1"/>
                 <TextBlock Text="{Binding CreationDateText}"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Grid.ColumnSpan="2"
                     Grid.Row="2"/>
                 <TextBlock Text="{Binding ColorGroupText}"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Grid.ColumnSpan="2"
                     Grid.Row="3"/>
                 <TextBlock Text="{Binding MemorySizeText}"
-                    Grid.Column="2"
+                    Grid.Column="3"
                     Grid.Row="4"/>
                 <TextBlock Text="{Binding PhotoCountText}"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Grid.Row="4"/>
+                <!-- Buttons for albums management-->
+                <StackPanel Grid.Row="0" 
+                            Grid.Column="0"
+                            Grid.RowSpan="5">
+                    <uc:CustomButton  ImageSource="../../Graphics/Icons/Delete.png"
+                              Margin="0, 12, 0, 0"
+                              Command="{Binding DeleteAlbumCommand}"/>
+                    <uc:CustomButton  ImageSource="../../Graphics/Icons/Search.png"
+                              Margin="0, 12, 0, 0"
+                              Command="{Binding EditAlbumCommand}"/>
+                </StackPanel>
+            
             </Grid>
         </Grid>
     </Button>

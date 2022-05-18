@@ -13,9 +13,9 @@
     <UserControl.Resources>
         <Style TargetType="uc:CustomButton">
             <Setter Property="Height"
-                    Value="60" />
+                    Value="80" />
             <Setter Property="Width"
-                    Value="60" />
+                    Value="80" />
             <Setter Property="CornerRadius"
                     Value="12" />
         </Style>
@@ -27,24 +27,21 @@
             <ColumnDefinition Width="1.7*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.2*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal"
-                    Margin="60, 5, 0, 10"
-                    Grid.Row="0" Grid.Column="0"/>
         <!--Search Button-->
         <uc:CustomButton  ImageSource="../../Graphics/Icons/Search.png"
-                              Margin="15, 0, 0, 0"
+                              Margin="0, 0, 0, 0"
                               Command="{Binding SearchAlbumsCommand}"
                               CommandParameter="{Binding ElementName=AlbumSearchView, Path=.}" />
         <local:AlbumSearchView 
                                x:Name="AlbumSearchView"
                                Grid.Row="1" Grid.Column="0"
                                DataContext="{Binding AlbumSearchViewModel}"/>
-        <local:AddAlbumView Grid.Row="1" Grid.Column="2"
+        <local:AddAlbumView Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Margin="0 45 0 0"
                             DataContext="{Binding AddAlbumViewModel}"/>
-        <uc:RoundedIcon Grid.Row="1" Grid.Column="1" Margin="7 7 7 7">
+        <uc:RoundedIcon Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Margin="7 45 7 7">
             <ScrollViewer>
                 <ItemsControl ItemsSource="{Binding AlbumSearchResultsCollection}">
                     <ItemsControl.ItemTemplate>
