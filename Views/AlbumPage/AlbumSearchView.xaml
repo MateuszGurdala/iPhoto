@@ -48,7 +48,7 @@
                            Margin="0, 0, 0, 5" />
                 <uc:TextBoxWithTitle EntryText= "*Any"
                                      x:Name="Name" />
-                <!--Title-->
+                <!--Color-->
                 <TextBlock Text="Color" />
                 <ComboBox x:Name="ColorsComboBox"
                           Style="{StaticResource ComboBoxStyle1}"
@@ -78,7 +78,7 @@
                         </Style>
                     </ComboBox.Resources>
                 </ComboBox>
-                <!--Title-->
+                <!--Tags-->
                 <TextBlock Text="Tags"
                            Height="40" />
                 <uc:TextBoxWithTitle EntryText="*All"

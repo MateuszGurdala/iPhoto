@@ -240,6 +240,7 @@ namespace iPhoto.DataBase
         {
             album.PhotoEntities.Add(photo);
             album.PhotoCount++;
+            UpdateAlbum(album.Id, null, album.PhotoCount, null, null, null, null);
 
         }
 
@@ -248,6 +249,7 @@ namespace iPhoto.DataBase
         {
             album.PhotoEntities.Remove(photo);
             album.PhotoCount--;
+            UpdateAlbum(album.Id, null, album.PhotoCount, null, null, null, null);
         }
         public void RemoveAlbum(int id)
         {
@@ -298,7 +300,7 @@ namespace iPhoto.DataBase
             {
                 throw new InvalidDataException("Photo doesn't exist.");
             }
-
+            RemovePhotoFromAlbum(Albums.FirstOrDefault(e => e.Id == photo.AlbumId), photo);
             Photos.Remove(photo);
 
             using var db = new DatabaseContext();
@@ -326,7 +328,7 @@ namespace iPhoto.DataBase
         }
 
         //Updating Records
-        public void UpdateAlbum(int id, string? name, int? count, List<string>? tags, DateTime? date, bool? isLocal)
+        public void UpdateAlbum(int id, string? name, int? count, List<string>? tags, DateTime? date, bool? isLocal, string? ColorGroup)
         {
             var album = Albums.FirstOrDefault(e => e.Id == id);
 
@@ -337,9 +339,13 @@ namespace iPhoto.DataBase
 
             album.Name = name ?? album.Name;
             album.PhotoCount = count ?? album.PhotoCount;
-            album.Tags = tags!;
+            album.Tags = tags ?? album.Tags;
             album.CreationDate = date ?? album.CreationDate;
             album.IsLocal = isLocal ?? album.IsLocal;
+            album.ColorGroup = ColorGroup ?? album.ColorGroup;
+            using var db = new DatabaseContext();
+            db.AlbumEntities.Update(album.GetEntity());
+            db.SaveChanges();
         }
         public void UpdateImage(int id, string? source, int? width, int? height, double? size)
         {
@@ -354,6 +360,9 @@ namespace iPhoto.DataBase
             image.ResolutionHeight = height ?? image.ResolutionHeight;
             image.ResolutionWidth = width ?? image.ResolutionWidth;
             image.Size = size ?? image.Size;
+            using var db = new DatabaseContext();
+            db.ImageEntities.Update(image.GetEntity());
+            db.SaveChanges();
         }
         public void UpdatePlace(int id, string? name, double? lat, double? lon)
         {
@@ -367,6 +376,9 @@ namespace iPhoto.DataBase
             place.Name = name ?? place.Name;
             place.Latitude = lat ?? place.Latitude;
             place.Longitude = lon ?? place.Longitude;
+            using var db = new DatabaseContext();
+            db.PlaceEntities.Update(place.GetEntity());
+            db.SaveChanges();
         }
         public void UpdatePhoto(int id, string? title, string? album, string? rawTags, DateTime? date, string? place)
         {

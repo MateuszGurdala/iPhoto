@@ -11,9 +11,13 @@ namespace iPhoto.Commands.SearchPage
             { 
                 (parameter as AddPhotoPopupView)!.IsOpen = false;
             }
-            else
+            else if(parameter as AddPhotoToAlbumPopupView != null)
             {
                 (parameter as AddPhotoToAlbumPopupView)!.IsOpen = false;
+            }
+            else
+            {
+                (parameter as EditAlbumPopupView)!.IsOpen = false;
             }
         }
     }

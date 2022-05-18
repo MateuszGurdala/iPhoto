@@ -1,6 +1,7 @@
 ﻿using iPhoto.DataBase;
 using iPhoto.ViewModels;
 using iPhoto.ViewModels.AlbumsPage;
+using iPhoto.Views.AlbumPage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,11 @@ namespace iPhoto.Commands.AlbumPage
         {
              _albumViewModel = albumViewModel;
             _album = album;
+            
         }
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            var _ = new EditAlbumPopupView(new EditAlbumPopupViewModel(_album, _albumViewModel));
         }
     }
 }
