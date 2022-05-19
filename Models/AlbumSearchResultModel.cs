@@ -18,6 +18,7 @@ namespace iPhoto.Models
         public readonly string ColorGroup;
         public readonly List<PhotoEntity> PhotoEntities;
         public readonly double TotalMemorySize;
+        public readonly ImageEntity CoverPhoto;
 
         public AlbumSearchResultModel(Album album, List<PhotoEntity>? photoEntities)
         {
@@ -30,6 +31,7 @@ namespace iPhoto.Models
             ColorGroup = album.ColorGroup;
             PhotoEntities = photoEntities ?? new List<PhotoEntity>{ };
             TotalMemorySize = album.TotalMemorySize;
+            CoverPhoto = album.CoverPhoto;
         }
 
         

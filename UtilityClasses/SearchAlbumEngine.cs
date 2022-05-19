@@ -59,22 +59,31 @@ namespace iPhoto.UtilityClasses
             var excludedAlbums = new List<Album>();
             if (beginDate != null && endDate != null)
             {
-                excludedAlbums = _databaseHandler.Albums.Where(e => e.CreationDate < beginDate || e.CreationDate > endDate).ToList();
+                excludedAlbums = _databaseHandler.Albums.Where(e => e.CreationDate <= beginDate || e.CreationDate >= endDate).ToList();
             }
             return excludedAlbums;
         }
 
         private List<Album> SearchAlbumsByTags(string[]? tagsList)
         {
-            // TODO after implementing tags for albums
-            throw new NotImplementedException();
+            var excludedAlbums = new List<Album>();
+            if (tagsList != null && tagsList[0] != "")
+            {
+                foreach (var tag in tagsList)
+                {
+                    excludedAlbums = _databaseHandler.Albums.Where(e => !(e.Tags.Contains(tag))).ToList();
+                }
+            }
+            return excludedAlbums;
+
+
         }
 
         public List<Album> SearchAlbums(AlbumSearchParams albumSearchParams)
         {
             var excludedAlbums = new List<Album>();
             excludedAlbums = excludedAlbums.Concat(SearchAlbumsByColorGroup(albumSearchParams.Color)).ToList();
-            //SearchAlbumsByTags(albumSearchParams.Tags);
+            excludedAlbums = excludedAlbums.Concat(SearchAlbumsByTags(albumSearchParams.Tags)).ToList();
             excludedAlbums = excludedAlbums.Concat(SearchAlbumsByDate(albumSearchParams.StartDate,albumSearchParams.EndDate)).ToList();
             excludedAlbums = excludedAlbums.Concat(SearchAlbumsByName(albumSearchParams.Name)).ToList();
             return _databaseHandler.Albums.Except(excludedAlbums).ToList();
