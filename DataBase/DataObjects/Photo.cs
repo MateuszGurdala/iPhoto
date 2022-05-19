@@ -76,7 +76,7 @@ namespace iPhoto.DataBase
             var tagsParsed = tags.Split('#');
             for (int i = 1; i < tagsParsed.Length; i++)
             {
-                list.Add('#' + tagsParsed[i]);
+                list.Add(('#' + tagsParsed[i]).Trim());
             }
             return list;
         }

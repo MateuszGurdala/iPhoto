@@ -25,10 +25,6 @@ namespace iPhoto.Models
                 {
                     Tags = ParseTags(searchView.Tags.ContentTextBox.Text);
                 }
-                else
-                {
-                    Tags = null;
-                }
                 if (searchView.StartDate.Text != "")
                 {
                     StartDate = ConvertToDatetime(searchView.StartDate.Text);

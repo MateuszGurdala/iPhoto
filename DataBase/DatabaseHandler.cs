@@ -240,6 +240,7 @@ namespace iPhoto.DataBase
             album.PhotoEntities.Add(photo);
             album.PhotoCount++;
             UpdateAlbum(album.Id, null, album.PhotoCount, null, null, null, null);
+            AddAlbumTags(album, photo);
 
         }
 
@@ -249,6 +250,7 @@ namespace iPhoto.DataBase
             album.PhotoEntities.Remove(photo);
             album.PhotoCount--;
             UpdateAlbum(album.Id, null, album.PhotoCount, null, null, null, null);
+            RemoveAlbumTags(album, photo);
         }
         public void RemoveAlbum(int id)
         {
@@ -327,7 +329,7 @@ namespace iPhoto.DataBase
         }
 
         //Updating Records
-        public void UpdateAlbum(int id, string? name, int? count, List<string>? tags, DateTime? date, bool? isLocal, string? ColorGroup)
+        public void UpdateAlbum(int id, string? name = null, int? count = null, List<string>? tags = null, DateTime? date = null, bool? isLocal = null, string? ColorGroup = null)
         {
             var album = Albums.FirstOrDefault(e => e.Id == id);
 
@@ -346,7 +348,7 @@ namespace iPhoto.DataBase
             db.AlbumEntities.Update(album.GetEntity());
             db.SaveChanges();
         }
-        public void UpdateImage(int id, string? source, int? width, int? height, double? size)
+        public void UpdateImage(int id, string? source = null, int? width = null, int? height = null, double? size = null)
         {
             var image = Images.FirstOrDefault(e => e.Id == id);
 
@@ -363,7 +365,7 @@ namespace iPhoto.DataBase
             db.ImageEntities.Update(image.GetEntity());
             db.SaveChanges();
         }
-        public void UpdatePlace(int id, string? name, double? lat, double? lon)
+        public void UpdatePlace(int id, string? name = null, double? lat = null, double? lon = null)
         {
             var place = Places.FirstOrDefault(e => e.Id == id);
 
@@ -379,7 +381,7 @@ namespace iPhoto.DataBase
             db.PlaceEntities.Update(place.GetEntity());
             db.SaveChanges();
         }
-        public void UpdatePhoto(int id, string? title, string? album, string? rawTags, DateTime? date, string? place)
+        public void UpdatePhoto(int id, string? title=null, string? album=null, string? rawTags = null, DateTime? date = null, string? place = null)
         {
             var photo = Photos.FirstOrDefault(e => e.Id == id);
 
@@ -430,6 +432,38 @@ namespace iPhoto.DataBase
                 albumCollection.Add(album);
             }
             return albumCollection;
+        }
+        private void AddAlbumTags(Album album, Photo photo)
+        {
+            List<string> tagsToAdd = new List<string>(album.Tags);
+            foreach (string tag in photo.Tags)
+            {
+                if (!(album.Tags.Contains(tag)))
+                {
+                    tagsToAdd.Add(tag);
+                }
+            }
+            album.Tags = tagsToAdd;
+            UpdateAlbum(album.Id, null, null, album.Tags);
+        }
+
+        private void RemoveAlbumTags(Album album, Photo photo)
+        {
+            List<string> newTagsList = new List<string>(album.Tags);
+
+            foreach (string tag in photo.Tags)
+            {
+                if (!(album.PhotoEntities.Any(e => e.Tags.Contains(tag) && e.Id != photo.Id)))
+                {
+                    newTagsList.Remove(tag);
+                }
+            }
+            if(newTagsList.Count == 0)
+            {
+                newTagsList.Add("#none");
+            }
+            album.Tags = newTagsList;
+            UpdateAlbum(album.Id, null, null, album.Tags);
         }
     }
 }

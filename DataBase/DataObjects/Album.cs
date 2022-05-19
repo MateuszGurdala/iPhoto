@@ -50,7 +50,7 @@ namespace iPhoto.DataBase
             get => _albumEntity.ColorGroup;
             set => _albumEntity.ColorGroup = value;
         }
-        public ObservableCollection<Photo> PhotoEntities { get; set; }
+        public List<Photo> PhotoEntities { get; set; }
         public double TotalMemorySize
         {
             get => Math.Round(PhotoEntities.Sum(e => e.MemorySize), 2);
@@ -59,7 +59,7 @@ namespace iPhoto.DataBase
         public Album(AlbumEntity albumEntity)
         {
             _albumEntity = albumEntity;
-            PhotoEntities = new ObservableCollection<Photo>() { };
+            PhotoEntities = new List<Photo>() { };
         }
         public Album(int id, string name, int count, List<string>? tags, DateTime? date, bool isLocal, string? colorGroup)
         {
@@ -75,7 +75,7 @@ namespace iPhoto.DataBase
             CreationDate = date ?? DateTime.Now.Date;
             IsLocal = isLocal;
             ColorGroup = colorGroup ?? "None";
-            PhotoEntities = new ObservableCollection<Photo>() { };
+            PhotoEntities = new List<Photo>() { };
         }
 
         private List<string> ParseTags(string tags)
