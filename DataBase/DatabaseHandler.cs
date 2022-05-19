@@ -53,7 +53,6 @@ namespace iPhoto.DataBase
                 foreach (Photo photo in Photos.Where(e => e.AlbumId == Album.Id))
                 {
                     Album.PhotoEntities.Add(photo);
-                    Album.PhotoCount++;
                 }
             }
         }
