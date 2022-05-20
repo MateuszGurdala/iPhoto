@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Media.Imaging;
+using GoogleDriveHandlerDemo;
 
 namespace iPhoto.UtilityClasses
 {
@@ -61,26 +62,27 @@ namespace iPhoto.UtilityClasses
         }
         public static BitmapImage LoadBitmapImageAsync(string path, double? decodePixelWidth)
         {
-            var webClient = new WebClient();
-            byte[] imageBytes = webClient.DownloadData(path);
-            Stream stream = new MemoryStream(imageBytes);
+            //var webClient = new WebClient();
+            //byte[] imageBytes = webClient.DownloadData(path);
+            //Stream stream = new MemoryStream(imageBytes);
 
-            var bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.StreamSource = stream;
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            //var bitmapImage = new BitmapImage();
+            //bitmapImage.BeginInit();
+            //bitmapImage.StreamSource = stream;
+            //bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
 
-            if (decodePixelWidth != null)
-            {
-                bitmapImage.DecodePixelWidth = (int)decodePixelWidth;
-            }
+            //if (decodePixelWidth != null)
+            //{
+            //    bitmapImage.DecodePixelWidth = (int)decodePixelWidth;
+            //}
 
 
-            var client = new HttpClient();
+            //var client = new HttpClient();
 
-            bitmapImage.EndInit();
+            //bitmapImage.EndInit();
+            
 
-            return bitmapImage;
+            return GoogleDriveHandler.GetBitmapImage(path, (int)decodePixelWidth);
         }
     }
 }

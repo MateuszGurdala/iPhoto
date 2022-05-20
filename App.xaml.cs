@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using GoogleDriveHandlerDemo;
-using GoogleDriveHandlerDemo.ApiHandler;
 using iPhoto.DataBase;
 using iPhoto.RemoteDatabase;
 using iPhoto.ViewModels;
@@ -14,7 +13,6 @@ namespace iPhoto
         private DatabaseHandler? _databaseHandler;
 
         //MG 15.05 Added GoogleDriveHandler + RemoteDatabaseHandler + deleted commented NavigationService lines
-        private GoogleDriveHandler? _googleDriveHandler;
         private RemoteDatabaseHandler? _remoteDatabaseHandler;
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -28,8 +26,8 @@ namespace iPhoto
 
             MainWindow.DataContext = new MainWindowViewModel(MainWindow, _databaseHandler, _remoteDatabaseHandler, photoDetailsWindow); //MG 15.04
 
-            //MG 15.05 
-            _googleDriveHandler = new GoogleDriveHandler();
+            //MG 20.05 
+            GoogleDriveHandler.CreateDriveService();
 
             MainWindow.Show();
             base.OnStartup(e);

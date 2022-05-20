@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Windows.Media.Imaging;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
@@ -9,28 +10,28 @@ using iPhoto.UtilityClasses;
 
 namespace GoogleDriveHandlerDemo
 {
-    public class GoogleDriveHandler
+    public static class GoogleDriveHandler
     {
         private static string[] Scopes = { DriveService.Scope.Drive, DriveService.Scope.DriveFile };
         private static string ApplicationName = "Drive API .NET Quickstart";
-        private string _databaseAlbumId = "19oGqH41C6V7pvHTTC98fhMiGqMH0Of3H";
-        private Dictionary<string, string> _mimeKeyDictionary = new()
+        private static string _databaseAlbumId = "19oGqH41C6V7pvHTTC98fhMiGqMH0Of3H";
+        private static Dictionary<string, string> _mimeKeyDictionary = new()
         {
-            {".jpg", "image/jpeg"},
-            {".jpeg", "image/jpeg"},
-            {".png", "image/png"}
+            { ".jpg", "image/jpeg" },
+            { ".jpeg", "image/jpeg" },
+            { ".png", "image/png" }
         };
 
-        private DriveService _driveService;
-        public readonly List<GoogleDatabaseFile> DatabaseFiles;
+        private static DriveService _driveService;
+        public static readonly List<GoogleDatabaseFile> DatabaseFiles;
 
-        public GoogleDriveHandler()
-        {
-            DatabaseFiles = new List<GoogleDatabaseFile>();
-            CreateDriveService();
-        }
+        //public GoogleDriveHandler()
+        //{
+        //    DatabaseFiles = new List<GoogleDatabaseFile>();
+        //    CreateDriveService();
+        //}
 
-        public void LoadAllData()
+        public static void LoadAllData()
         {
             FilesResource.ListRequest listRequest = _driveService.Files.List();
             listRequest.PageSize = 10;
@@ -46,7 +47,7 @@ namespace GoogleDriveHandlerDemo
                 }
             }
         }
-        private void CreateDriveService()
+        public static void CreateDriveService()
         {
             UserCredential credential;
             string tokenPath = DataHandler.GetProjectDirectoryPath() + "\\RemoteDatabase\\GoogleDrive\\token.json";
@@ -69,7 +70,7 @@ namespace GoogleDriveHandlerDemo
                 ApplicationName = ApplicationName,
             });
         }
-        public string UploadFile(string fileName, string filePath)
+        public static string UploadFile(string fileName, string filePath)
         {
             FileStream file = new FileStream(filePath, FileMode.Open);
 
@@ -90,12 +91,12 @@ namespace GoogleDriveHandlerDemo
 
             return request.ResponseBody.Id;
         }
-        public void DeleteFile(GoogleDatabaseFile file)
+        public static void DeleteFile(GoogleDatabaseFile file)
         {
             var command = _driveService.Files.Delete(file.StringId);
             var result = command.Execute();
         }
-        private string CreateFolder(string folderName)
+        private static string CreateFolder(string folderName)
         {
             var driveFolder = new Google.Apis.Drive.v3.Data.File
             {
@@ -105,6 +106,25 @@ namespace GoogleDriveHandlerDemo
             var command = _driveService.Files.Create(driveFolder);
             var file = command.Execute();
             return file.Id;
+        }
+
+        public static BitmapImage GetBitmapImage(string id, int? decodePixelWidth)
+        {
+            var stream = new MemoryStream();
+            var fileRequest = _driveService.Files.Get(id);
+            fileRequest.Download(stream);
+
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.StreamSource = stream;
+            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+            if (decodePixelWidth != null)
+            {
+                bitmap.DecodePixelWidth = (int) decodePixelWidth;
+            }
+            bitmap.EndInit();
+
+            return bitmap;
         }
     }
 }

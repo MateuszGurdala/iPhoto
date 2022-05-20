@@ -1,6 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
+using GoogleDriveHandlerDemo;
 using iPhoto.DataBase;
 using iPhoto.UtilityClasses;
 
@@ -15,7 +14,6 @@ namespace iPhoto.Models
         public string Title { get; }
         public BitmapImage PreviewImage { get; set; }
         private BitmapImage? _image = null;
-        private const int _maxNameLength = 15;
         private readonly string _fullPath;
 
         //MG 16.04 implemented handling database data format 
@@ -35,8 +33,9 @@ namespace iPhoto.Models
             }
             else
             {
-                _fullPath = "https://drive.google.com/uc?id=" + ImageData.Source;
-                PreviewImage = DataHandler.LoadBitmapImageAsync(_fullPath, 140);
+                //_fullPath = "https://drive.google.com/uc?id=" + ImageData.Source;
+                //PreviewImage = DataHandler.LoadBitmapImageAsync(_fullPath, 140);
+                PreviewImage = GoogleDriveHandler.GetBitmapImage(ImageData.Source, 140);
             }
         }
         public BitmapImage GetImage()
@@ -45,7 +44,7 @@ namespace iPhoto.Models
             {
                 if (!PhotoData.IsLocal)
                 {
-                    _image = DataHandler.LoadBitmapImageAsync(_fullPath, null);
+                    _image = GoogleDriveHandler.GetBitmapImage(ImageData.Source, null);
                 }
                 else
                 {

@@ -11,7 +11,6 @@ namespace iPhoto.RemoteDatabase
     public class RemoteDatabaseHandler
     {
         private readonly DatabaseApiHandler _apiHandler;
-        private readonly GoogleDriveHandler _googleDriveHandler;
 
         public List<Album> Albums { get; set; }
         public List<Photo> Photos { get; set; }
@@ -20,7 +19,6 @@ namespace iPhoto.RemoteDatabase
 
         public RemoteDatabaseHandler()
         {
-            _googleDriveHandler = new GoogleDriveHandler();
             _apiHandler = new DatabaseApiHandler();
 
             Albums = new List<Album>();
@@ -69,7 +67,6 @@ namespace iPhoto.RemoteDatabase
         }
         public void LoadAllData()
         {
-            _googleDriveHandler.LoadAllData();
             LoadPhotos();
             LoadPlaces();
         }
