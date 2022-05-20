@@ -11,7 +11,7 @@ using iPhoto.DataBase;
 namespace iPhoto.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220519180135_AlbumAddCoverPhoto")]
+    [Migration("20220519230347_AlbumAddCoverPhoto")]
     partial class AlbumAddCoverPhoto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,7 +56,8 @@ namespace iPhoto.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageEntityId");
+                    b.HasIndex("ImageEntityId")
+                        .IsUnique();
 
                     b.ToTable("AlbumEntities");
                 });
@@ -154,8 +155,10 @@ namespace iPhoto.Migrations
             modelBuilder.Entity("iPhoto.DataBase.AlbumEntity", b =>
                 {
                     b.HasOne("iPhoto.DataBase.ImageEntity", "ImageEntity")
-                        .WithMany()
-                        .HasForeignKey("ImageEntityId");
+                        .WithOne("AlbumEntity")
+                        .HasForeignKey("iPhoto.DataBase.AlbumEntity", "ImageEntityId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("AlbumImageFK");
 
                     b.Navigation("ImageEntity");
                 });
@@ -189,6 +192,9 @@ namespace iPhoto.Migrations
 
             modelBuilder.Entity("iPhoto.DataBase.ImageEntity", b =>
                 {
+                    b.Navigation("AlbumEntity")
+                        .IsRequired();
+
                     b.Navigation("PhotoEntity")
                         .IsRequired();
                 });

@@ -249,8 +249,7 @@ namespace iPhoto.DataBase
         }
         private void AddCoverPhotoToAlbum(Album album, Photo photo)
         {
-            ImageEntity imageEntity = Images.FirstOrDefault(e => e.Id == photo.ImageId).GetEntity();
-            UpdateAlbum(album.Id, null, null, null, null, null, null, imageEntity);
+            UpdateAlbum(album.Id, null, null, null, null, null, null, photo.ImageId);
         }
 
         //Removing records
@@ -339,7 +338,7 @@ namespace iPhoto.DataBase
 
         //Updating Records
         public void UpdateAlbum(int id, string? name = null, int? count = null, List<string>? tags = null, 
-                                DateTime? date = null, bool? isLocal = null, string? ColorGroup = null, ImageEntity? coverImage = null)
+                                DateTime? date = null, bool? isLocal = null, string? ColorGroup = null, int? coverImageId = null)
         {
             var album = Albums.FirstOrDefault(e => e.Id == id);
 
@@ -354,7 +353,7 @@ namespace iPhoto.DataBase
             album.CreationDate = date ?? album.CreationDate;
             album.IsLocal = isLocal ?? album.IsLocal;
             album.ColorGroup = ColorGroup ?? album.ColorGroup;
-            album.CoverPhoto = coverImage ?? album.CoverPhoto;
+            album.CoverPhotoId = coverImageId ?? album.CoverPhotoId;
             using var db = new DatabaseContext();
             db.AlbumEntities.Update(album.GetEntity());
             db.SaveChanges();

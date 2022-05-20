@@ -17,20 +17,22 @@ namespace iPhoto.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AlbumEntities_ImageEntityId",
                 table: "AlbumEntities",
-                column: "ImageEntityId");
+                column: "ImageEntityId",
+                unique: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AlbumEntities_ImageEntities_ImageEntityId",
+                name: "AlbumImageFK",
                 table: "AlbumEntities",
                 column: "ImageEntityId",
                 principalTable: "ImageEntities",
-                principalColumn: "Id");
+                principalColumn: "Id",
+                onDelete: ReferentialAction.SetNull);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_AlbumEntities_ImageEntities_ImageEntityId",
+                name: "AlbumImageFK",
                 table: "AlbumEntities");
 
             migrationBuilder.DropIndex(

@@ -52,7 +52,7 @@ namespace iPhoto.UtilityClasses
         public async void UpdateSearchResults()
         {
             _searchViewModel.PhotoSearchResultsCollection.Clear();
-            if (_searchParams.GetTitleParam() == "%ALL")
+            if (_searchParams.GetTitleParam() != null && _searchParams.GetTitleParam() == "%ALL")
             {
                 LoadAllPhotos();
             }

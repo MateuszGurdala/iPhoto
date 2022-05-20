@@ -44,9 +44,9 @@ namespace iPhoto.ViewModels.AlbumsPage
         }
         private string GetAlbumCover()
         {
-            if (AlbumData.CoverPhoto != null)
+            if (AlbumData.CoverImage != null)
             {
-                return DataHandler.GetDatabaseImageDirectory() + "\\" + AlbumData.CoverPhoto.Source;
+                return DataHandler.GetDatabaseImageDirectory() + "\\" + AlbumData.CoverImage.Source;
             }
             else
             {
@@ -131,7 +131,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         public ICommand DeleteAlbumCommand { get; }
         public AlbumSearchResultViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, Album album, List<PhotoEntity> photoEntities, MainWindowViewModel mainWindowViewModel, AlbumViewModel albumViewModel)
         {
-            AlbumData = new AlbumSearchResultModel(album, photoEntities);
+            AlbumData = new AlbumSearchResultModel(album, photoEntities, database);
             IsClicked = false;
             ShowAlbumContentCommand = new ShowAlbumContentCommand(database, photoDetailsWindow, mainWindowViewModel, album, albumViewModel);
             EditAlbumCommand = new EditAlbumCommand(albumViewModel, album);

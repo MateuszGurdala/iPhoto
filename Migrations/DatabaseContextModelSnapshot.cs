@@ -54,7 +54,8 @@ namespace iPhoto.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageEntityId");
+                    b.HasIndex("ImageEntityId")
+                        .IsUnique();
 
                     b.ToTable("AlbumEntities");
                 });
@@ -152,8 +153,10 @@ namespace iPhoto.Migrations
             modelBuilder.Entity("iPhoto.DataBase.AlbumEntity", b =>
                 {
                     b.HasOne("iPhoto.DataBase.ImageEntity", "ImageEntity")
-                        .WithMany()
-                        .HasForeignKey("ImageEntityId");
+                        .WithOne("AlbumEntity")
+                        .HasForeignKey("iPhoto.DataBase.AlbumEntity", "ImageEntityId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("AlbumImageFK");
 
                     b.Navigation("ImageEntity");
                 });
@@ -187,6 +190,9 @@ namespace iPhoto.Migrations
 
             modelBuilder.Entity("iPhoto.DataBase.ImageEntity", b =>
                 {
+                    b.Navigation("AlbumEntity")
+                        .IsRequired();
+
                     b.Navigation("PhotoEntity")
                         .IsRequired();
                 });

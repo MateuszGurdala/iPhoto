@@ -1,4 +1,6 @@
-﻿namespace iPhoto.DataBase;
+﻿using System.Collections.Generic;
+
+namespace iPhoto.DataBase;
 
 public class ImageEntity
 {
@@ -8,4 +10,6 @@ public class ImageEntity
     public int ResolutionHeight { get; set; }
     public double Size { get; set; }
     public PhotoEntity PhotoEntity { get; set; }
+    
+    public AlbumEntity AlbumEntity { get; set; }
 }
