@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using iPhoto.DataBase;
 using iPhoto.Models;
+using iPhoto.RemoteDatabase;
 using iPhoto.ViewModels;
-using iPhoto.ViewModels.AlbumsPage;
 
 namespace iPhoto.UtilityClasses
 {
     public class SearchEngine
     {
         private readonly DatabaseHandler _databaseHandler;
+        private readonly RemoteDatabaseHandler _remoteDatabaseHandler;
         private readonly IPhotoSearchVM _searchViewModel;
 
         private SearchParams _searchParams;
 
         private bool _newDataLoaded;
+        private bool _localSearch = false;
 
-        public SearchEngine(DatabaseHandler databaseHandler, IPhotoSearchVM viewModel)
+        public SearchEngine(DatabaseHandler databaseHandler, RemoteDatabaseHandler remoteDatabaseHandler, IPhotoSearchVM viewModel)
         {
             _databaseHandler = databaseHandler;
             _searchViewModel = viewModel;
+            _remoteDatabaseHandler = remoteDatabaseHandler;
         }
         public void LoadParams(SearchParams searchParams)
         {
@@ -32,19 +34,19 @@ namespace iPhoto.UtilityClasses
                 _newDataLoaded = true;
             }
         }
-        public async void GetSearchResults()
+        public async void GetSearchResults(bool localSearch)
         {
+            _localSearch = localSearch;
             if (_newDataLoaded)
             {
                 _searchViewModel.PhotoSearchResultsCollection.Clear();
-
-                var firstSearch = FirstSearch();
+                var firstSearch = _localSearch ? FirstSearch(_databaseHandler) : FirstSearch(_remoteDatabaseHandler);
                 var secondSearch = SecondSearch(firstSearch);
                 var thirdSearch = ThirdSearch(secondSearch);
 
                 foreach (var photo in thirdSearch)
                 {
-                    _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
+                    _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id, _localSearch));
                     await Task.Delay(10);
                 }
             }
@@ -58,37 +60,52 @@ namespace iPhoto.UtilityClasses
             }
             else
             {
-                var firstSearch = FirstSearch();
+                var firstSearch = _localSearch ? FirstSearch(_databaseHandler) : FirstSearch(_remoteDatabaseHandler);
                 var secondSearch = SecondSearch(firstSearch);
                 var thirdSearch = ThirdSearch(secondSearch);
 
                 foreach (var photo in thirdSearch)
                 {
-                    _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id));
+                    _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id, _localSearch));
                     await Task.Delay(10);
                 }
             }
         }
-        private PhotoSearchResultViewModel GetViewModel(int photoId)
+        private PhotoSearchResultViewModel GetViewModel(int photoId, bool localSearch)
         {
-            var photo = _databaseHandler.Photos.FirstOrDefault(e => e.Id == photoId);
-            var image = _databaseHandler.Images.FirstOrDefault(e => e.Id == photo!.ImageId);
-            var album = _databaseHandler.Albums.FirstOrDefault(e => e.Id == photo!.AlbumId);
-            var place = _databaseHandler.Places.FirstOrDefault(e => e.Id == photo!.PlaceId);
+            Photo photo;
+            Album album;
+            Image image;
+            Place place;
+            if (localSearch)
+            {
+                photo = _databaseHandler.Photos.FirstOrDefault(e => e.Id == photoId);
+                image = _databaseHandler.Images.FirstOrDefault(e => e.Id == photo!.ImageId);
+                album = _databaseHandler.Albums.FirstOrDefault(e => e.Id == photo!.AlbumId);
+                place = _databaseHandler.Places.FirstOrDefault(e => e.Id == photo!.PlaceId);
+            }
+            else
+            {
+                photo = _remoteDatabaseHandler.Photos.FirstOrDefault(e => e.Id == photoId);
+                image = _remoteDatabaseHandler.Images.FirstOrDefault(e => e.Id == photo!.ImageId);
+                album = _remoteDatabaseHandler.Albums.FirstOrDefault(e => e.Id == photo!.AlbumId);
+                place = _remoteDatabaseHandler.Places.FirstOrDefault(e => e.Id == photo!.PlaceId);
+            }
+
             return new PhotoSearchResultViewModel(photo!, image!, album!, place!, _searchViewModel);
         }
-        private List<Photo> FirstSearch()
+        private List<Photo> FirstSearch(DatabaseHandler database)
         {
             //First Search
             //Filtering all photos through album and place Ids params
             Album album = null;
             Place place = null;
-            var photos = _databaseHandler.Photos;
+            var photos = database.Photos;
 
             //Searching through albums
             if (_searchParams.GetAlbumParam() != null)
             {
-                album = _databaseHandler.Albums.FirstOrDefault(e => e.Name == _searchParams.GetAlbumParam());
+                album = database.Albums.FirstOrDefault(e => e.Name == _searchParams.GetAlbumParam());
                 if (album == null)
                 {
                     return new List<Photo>();
@@ -98,7 +115,37 @@ namespace iPhoto.UtilityClasses
             //Searching through places
             if (_searchParams.GetLocationParam() != null)
             {
-                place = _databaseHandler.Places.FirstOrDefault(e => e.Name == _searchParams.GetLocationParam());
+                place = database.Places.FirstOrDefault(e => e.Name == _searchParams.GetLocationParam());
+                if (place == null)
+                {
+                    return new List<Photo>();
+                }
+                photos = photos.FindAll(e => e.PlaceId == place.Id);
+            }
+            return photos;
+        }
+        private List<Photo> FirstSearch(RemoteDatabaseHandler database)
+        {
+            //First Search
+            //Filtering all photos through album and place Ids params
+            Album album = null;
+            Place place = null;
+            var photos = database.Photos;
+
+            //Searching through albums
+            if (_searchParams.GetAlbumParam() != null)
+            {
+                album = database.Albums.FirstOrDefault(e => e.Name == _searchParams.GetAlbumParam());
+                if (album == null)
+                {
+                    return new List<Photo>();
+                }
+                photos = photos.FindAll(e => e.AlbumId == album.Id);
+            }
+            //Searching through places
+            if (_searchParams.GetLocationParam() != null)
+            {
+                place = database.Places.FirstOrDefault(e => e.Name == _searchParams.GetLocationParam());
                 if (place == null)
                 {
                     return new List<Photo>();

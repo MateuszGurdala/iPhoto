@@ -74,7 +74,13 @@
                         <ItemsControl ItemsSource="{Binding OnlineAlbums}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <accountPage:OnlineAlbumView/>
+                                    <accountPage:OnlineAlbumView>
+                                        <accountPage:OnlineAlbumView.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick"
+                                                          Command="{Binding ShowOnlineAlbumPhotosCommand}"
+                                                          CommandParameter="{Binding Path=.}" />
+                                        </accountPage:OnlineAlbumView.InputBindings>
+                                    </accountPage:OnlineAlbumView>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                             </ItemsControl>

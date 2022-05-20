@@ -12,6 +12,7 @@ namespace iPhoto.Commands.AccountPage
             var password = viewModel.SecurePassword;
 
             viewModel.AccountViewModel.CurrentViewModel = viewModel.AccountViewModel.LoggedInViewModel;
+            viewModel.AccountViewModel.LoggedInViewModel.LoadAlbums();
 
             //Process.Start(new ProcessStartInfo
             //{

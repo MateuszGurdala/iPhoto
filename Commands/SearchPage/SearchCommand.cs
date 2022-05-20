@@ -37,7 +37,7 @@ namespace iPhoto.Commands
             else
             {
                 _searchEngine.LoadParams(searchData);
-                _searchEngine.GetSearchResults();
+                _searchEngine.GetSearchResults(true);
             }
         }
     }

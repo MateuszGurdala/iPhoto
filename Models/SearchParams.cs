@@ -31,7 +31,12 @@ namespace iPhoto.Models
             BuildDefaultSearchParamsForAlbum(album.Name);
         }
 
-        private void BuildDefaultSearchParamsForAlbum(string albumName)
+        public SearchParams()
+        {
+
+        }
+
+        public void BuildDefaultSearchParamsForAlbum(string albumName)
         {
             _title = null;
             _photoAlbum = albumName;

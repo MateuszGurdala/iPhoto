@@ -32,10 +32,13 @@ namespace GoogleDriveHandlerDemo
         public BitmapImage GetBitmapImage()
         {
             if (_bitmapImage != null) return _bitmapImage;
-            var uriSource = _httpViewLink + StringId;
+
+            var stream = new MemoryStream();
+            _fileRequest.Download(stream);
+
             _bitmapImage = new BitmapImage();
             _bitmapImage.BeginInit();
-            _bitmapImage.UriSource = new Uri(uriSource, UriKind.Absolute);
+            _bitmapImage.StreamSource = stream;
             _bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
             _bitmapImage.DecodePixelWidth = 400;
             _bitmapImage.EndInit();

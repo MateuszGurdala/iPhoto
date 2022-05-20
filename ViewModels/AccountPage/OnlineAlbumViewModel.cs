@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Windows.Automation;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using iPhoto.Commands.AccountPage;
 using iPhoto.UtilityClasses;
 
 namespace iPhoto.ViewModels.AccountPage
 {
     public class OnlineAlbumViewModel : ViewModelBase
     {
+        public ICommand ShowOnlineAlbumPhotosCommand { get; }
+
         private string _name;
         public string Name
         {
@@ -76,6 +80,11 @@ namespace iPhoto.ViewModels.AccountPage
                 var path = DataHandler.GetAlbumIconsDirectoryPath() + _colorAlbum + "Album.png";
                 return DataHandler.LoadBitmapImage(path, 100);
             }
+        }
+
+        public OnlineAlbumViewModel()
+        {
+            ShowOnlineAlbumPhotosCommand = new ShowOnlineAlbumPhotosCommand();
         }
     }
 }

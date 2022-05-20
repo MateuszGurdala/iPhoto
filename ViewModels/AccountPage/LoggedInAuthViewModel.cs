@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using iPhoto.Commands.AccountPage;
 using iPhoto.Models;
@@ -29,6 +28,7 @@ namespace iPhoto.ViewModels.AccountPage
         public ObservableCollection<OnlineAlbumViewModel> OnlineAlbums { get; }
         public AccountViewModel AccountViewModel;
         public ICommand LogOutCommand { get; }
+        
 
         public LoggedInAuthViewModel(AccountViewModel accountViewModel,RemoteDatabaseHandler remoteDatabase)
         {
@@ -38,9 +38,6 @@ namespace iPhoto.ViewModels.AccountPage
             LogOutCommand = new LogOutCommand();
             RecentChanges = new ObservableCollection<RecentChangesInfo>();
             OnlineAlbums = new ObservableCollection<OnlineAlbumViewModel>();
-
-            _remoteDatabase.LoadAllData();
-            LoadAlbums();
 
             AccountData = new AccountDataModel()
             {
@@ -60,8 +57,8 @@ namespace iPhoto.ViewModels.AccountPage
         }
         public async void LoadAlbums()
         {
-            await Task.Delay(1000);
-            foreach (var album in _remoteDatabase.Albums)
+            var albums = await _remoteDatabase.LoadAlbums();
+            foreach (var album in albums)
             {
                 OnlineAlbums.Add(new OnlineAlbumViewModel()
                 {
@@ -71,8 +68,15 @@ namespace iPhoto.ViewModels.AccountPage
                     Tags = album.RawTags,
                     LastEdit = album.CreationDate.ToString().Substring(0, 10),
                 }) ;
-
             }
+            _remoteDatabase.LoadAllData();
+        }
+
+        public void Clear()
+        {
+            _remoteDatabase.Clear();
+            RecentChanges.Clear();
+            OnlineAlbums.Clear();
         }
     }
 }

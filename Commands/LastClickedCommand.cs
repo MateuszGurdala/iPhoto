@@ -14,22 +14,22 @@ namespace iPhoto.Commands
     /// </summary>
     public class LastClickedCommand : CommandBase
     {
-        private SideMenuButton[] _buttonsList;
+        public SideMenuButton[] ButtonsList { get; }
         public LastClickedCommand(SideMenuButton[] buttonsList)
         {
-            _buttonsList = buttonsList;
+            ButtonsList = buttonsList;
         }
         public override void Execute(object parameter)
         {
             var currentButton = parameter as SideMenuButton;
-            if (_buttonsList.All(i => i.LastClicked == false))
+            if (ButtonsList.All(i => i.LastClicked == false))
             {
                 currentButton.LastClicked = true;
                 currentButton.AnimateClicked();
             }
             else
             {
-                foreach (SideMenuButton button in _buttonsList)
+                foreach (SideMenuButton button in ButtonsList)
                 {
                     if (button.LastClicked)
                     {

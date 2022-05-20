@@ -9,6 +9,7 @@ namespace iPhoto.Commands.AccountPage
             var viewModel = parameter as LoggedInAuthViewModel;
 
             viewModel.AccountViewModel.CurrentViewModel = viewModel.AccountViewModel.LogInViewModel;
+            viewModel.AccountViewModel.LoggedInViewModel.Clear();
         }
     }
 }
