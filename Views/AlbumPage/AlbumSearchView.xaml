@@ -109,8 +109,8 @@
 
                 <uc:CustomButton  ImageSource="../../Graphics/Icons/Undo.png"
                                   Margin="0, 40, 15, 0"
-                                  Width="60"
-                                  Height="60"
+                                  Width="80"
+                                  Height="80"
                                   CornerRadius="12"
                                   Command="{Binding ClearAlbumSearchParamsCommand}"
                                   CommandParameter="{Binding Path=., ElementName=root}"/>

@@ -56,6 +56,13 @@ namespace iPhoto.DataBase
             get => Math.Round(PhotoEntities.Sum(e => e.MemorySize), 2);
         }
 
+        public int? CoverPhotoId
+        {
+            get => _albumEntity.ImageEntityId;
+            set => _albumEntity.ImageEntityId = value;
+        }
+
+
         public Album(AlbumEntity albumEntity)
         {
             _albumEntity = albumEntity;

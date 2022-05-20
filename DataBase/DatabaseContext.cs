@@ -24,6 +24,11 @@ namespace iPhoto.DataBase
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+/*            ////ImageEntity
+            modelBuilder.Entity<ImageEntity>()
+                .Ignore(b => b.AlbumEntity);*/
+
             //AlbumEntity
             modelBuilder.Entity<AlbumEntity>()
                 .Property(b => b.PhotoCount)
@@ -31,6 +36,16 @@ namespace iPhoto.DataBase
             modelBuilder.Entity<AlbumEntity>()
                 .Property(b => b.Tags)
                 .HasDefaultValue("#none");
+
+            modelBuilder.Entity<AlbumEntity>()
+                .HasOne(a => a.ImageEntity)
+                .WithOne(b => b.AlbumEntity)
+                .HasForeignKey<AlbumEntity>(b => b.ImageEntityId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("AlbumImageFK");
+
+
             ////PhotoEntity
             modelBuilder.Entity<PhotoEntity>()
                 .Property(b => b.AlbumEntityId)
@@ -41,6 +56,8 @@ namespace iPhoto.DataBase
             modelBuilder.Entity<PhotoEntity>()
                 .Property(b => b.Tags)
                 .HasDefaultValue("#none");
+
+
         }
     }
 }

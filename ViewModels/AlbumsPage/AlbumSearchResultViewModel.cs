@@ -16,14 +16,18 @@ namespace iPhoto.ViewModels.AlbumsPage
 {
     public class AlbumSearchResultViewModel : ViewModelBase
     {
-        // ALBUM PROPERTY ! TODO
-        /*        public void AddAlbumCover(PhotoEntity coverPhoto)
+
+        public BitmapImage? AlbumCover
+        {
+            get
+            {
+                if (GetAlbumCover() != null)
                 {
-                    if (!PhotoEntities.Contains(coverPhoto))
-                    {
-                        throw new InvalidDataException("Given cover photo does not exists in given album")
-                    }
-                }*/
+                    return DataHandler.LoadBitmapImage(GetAlbumCover(), 200);
+                }
+                return null;
+            }
+        }
         public AlbumSearchResultModel AlbumData { get; }
         public BitmapImage AlbumIcon => DataHandler.LoadBitmapImage(GetAlbumIcon(), 100);
         public bool IsClicked { get; set;}
@@ -38,6 +42,18 @@ namespace iPhoto.ViewModels.AlbumsPage
                 return DataHandler.GetAlbumIconsDirectoryPath() + AlbumData.ColorGroup + "Album.png";
             }
         }
+        private string GetAlbumCover()
+        {
+            if (AlbumData.CoverImage != null)
+            {
+                return DataHandler.GetDatabaseImageDirectory() + "\\" + AlbumData.CoverImage.Source;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public string AlbumNameText
         {
             get
@@ -115,7 +131,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         public ICommand DeleteAlbumCommand { get; }
         public AlbumSearchResultViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, Album album, List<PhotoEntity> photoEntities, MainWindowViewModel mainWindowViewModel, AlbumViewModel albumViewModel)
         {
-            AlbumData = new AlbumSearchResultModel(album, photoEntities);
+            AlbumData = new AlbumSearchResultModel(album, photoEntities, database);
             IsClicked = false;
             ShowAlbumContentCommand = new ShowAlbumContentCommand(database, photoDetailsWindow, mainWindowViewModel, album, albumViewModel);
             EditAlbumCommand = new EditAlbumCommand(albumViewModel, album);

@@ -24,7 +24,7 @@ namespace iPhoto.DataBase
             //Delete if loading all data immediately is unnecessary
             LoadAllData();
             //MG 16.04
-            CreateBaseAlbum();
+            //CreateBaseAlbum();
             CreateBasePlace();
             //~MG 16.04
         }
@@ -239,9 +239,17 @@ namespace iPhoto.DataBase
         {
             album.PhotoEntities.Add(photo);
             album.PhotoCount++;
-            UpdateAlbum(album.Id, null, album.PhotoCount, null, null, null, null);
+            if(album.PhotoCount == 1)
+            {
+                AddCoverPhotoToAlbum(album, photo);
+            }
+            UpdateAlbum(album.Id, null, album.PhotoCount);
             AddAlbumTags(album, photo);
 
+        }
+        private void AddCoverPhotoToAlbum(Album album, Photo photo)
+        {
+            UpdateAlbum(album.Id, null, null, null, null, null, null, photo.ImageId);
         }
 
         //Removing records
@@ -249,7 +257,7 @@ namespace iPhoto.DataBase
         {
             album.PhotoEntities.Remove(photo);
             album.PhotoCount--;
-            UpdateAlbum(album.Id, null, album.PhotoCount, null, null, null, null);
+            UpdateAlbum(album.Id, null, album.PhotoCount);
             RemoveAlbumTags(album, photo);
         }
         public void RemoveAlbum(int id)
@@ -329,7 +337,8 @@ namespace iPhoto.DataBase
         }
 
         //Updating Records
-        public void UpdateAlbum(int id, string? name = null, int? count = null, List<string>? tags = null, DateTime? date = null, bool? isLocal = null, string? ColorGroup = null)
+        public void UpdateAlbum(int id, string? name = null, int? count = null, List<string>? tags = null, 
+                                DateTime? date = null, bool? isLocal = null, string? ColorGroup = null, int? coverImageId = null)
         {
             var album = Albums.FirstOrDefault(e => e.Id == id);
 
@@ -344,6 +353,7 @@ namespace iPhoto.DataBase
             album.CreationDate = date ?? album.CreationDate;
             album.IsLocal = isLocal ?? album.IsLocal;
             album.ColorGroup = ColorGroup ?? album.ColorGroup;
+            album.CoverPhotoId = coverImageId ?? album.CoverPhotoId;
             using var db = new DatabaseContext();
             db.AlbumEntities.Update(album.GetEntity());
             db.SaveChanges();
@@ -436,6 +446,7 @@ namespace iPhoto.DataBase
         private void AddAlbumTags(Album album, Photo photo)
         {
             List<string> tagsToAdd = new List<string>(album.Tags);
+            tagsToAdd.Remove("#none");
             foreach (string tag in photo.Tags)
             {
                 if (!(album.Tags.Contains(tag)))
