@@ -2,11 +2,6 @@
 using iPhoto.ViewModels;
 using iPhoto.ViewModels.AlbumsPage;
 using iPhoto.Views.SearchPage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace iPhoto.Commands.AlbumPage
 {
@@ -28,7 +23,7 @@ namespace iPhoto.Commands.AlbumPage
         }
         public override void Execute(object parameter)
         {
-            _mainWindowViewModel.MainViewModel = new AlbumContentViewModel(_database, _photoDetailsWindow, _mainWindowViewModel, _album, _albumViewModel);
+            _mainWindowViewModel.MainViewModel = new AlbumContentViewModel(_database,_mainWindowViewModel.SearchViewModel.RemoteDatabaseHandler, _photoDetailsWindow, _mainWindowViewModel, _album, _albumViewModel);
         }
     }
 }

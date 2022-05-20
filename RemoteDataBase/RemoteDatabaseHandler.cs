@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GoogleDriveHandlerDemo;
@@ -14,33 +13,35 @@ namespace iPhoto.RemoteDatabase
         private readonly DatabaseApiHandler _apiHandler;
         private readonly GoogleDriveHandler _googleDriveHandler;
 
-        public ObservableCollection<Album> Albums { get; set; }
-        public ObservableCollection<Photo> Photos { get; set; }
-        public ObservableCollection<Image> Images { get; set; }
-        public ObservableCollection<Place> Places { get; set; }
+        public List<Album> Albums { get; set; }
+        public List<Photo> Photos { get; set; }
+        public List<Image> Images { get; set; }
+        public List<Place> Places { get; set; }
 
         public RemoteDatabaseHandler()
         {
             _googleDriveHandler = new GoogleDriveHandler();
             _apiHandler = new DatabaseApiHandler();
 
-            Albums = new ObservableCollection<Album>();
-            Photos = new ObservableCollection<Photo>();
-            Images = new ObservableCollection<Image>();
-            Places = new ObservableCollection<Place>();
+            Albums = new List<Album>();
+            Photos = new List<Photo>();
+            Images = new List<Image>();
+            Places = new List<Place>();
 
             //LoadAllData();
         }
 
-        public async Task LoadAlbums()
+        public async Task<List<Album>> LoadAlbums()
         {
             var apiAlbums = await _apiHandler.GetAlbums();
             foreach (var e in apiAlbums)
             {
                 Albums.Add(new Album(e.ToEntity()));
             }
+
+            return Albums;
         }
-        public async Task LoadPlaces()
+        public async void LoadPlaces()
         {
             var apiPlace = await _apiHandler.GetPlaces();
             foreach (var e in apiPlace)
@@ -56,7 +57,7 @@ namespace iPhoto.RemoteDatabase
                 Images.Add(new Image(e.ToEntity()));
             }
         }
-        public async Task LoadPhotos()
+        public async void LoadPhotos()
         {
             await LoadImages();
             var apiPhotos = await _apiHandler.GetPhotos();
@@ -66,12 +67,19 @@ namespace iPhoto.RemoteDatabase
                 Photos.Add(new Photo(photoEntity, Images.FirstOrDefault(ei => ei.GetEntity().Id == photoEntity.ImageEntityId).GetEntity(), false));
             }
         }
-        public async Task LoadAllData()
+        public void LoadAllData()
         {
             _googleDriveHandler.LoadAllData();
-            await LoadPhotos();
-            await LoadAlbums();
-            await LoadPlaces();
+            LoadPhotos();
+            LoadPlaces();
+        }
+
+        public void Clear()
+        {
+            Albums.Clear();
+            Photos.Clear();
+            Images.Clear();
+            Places.Clear();
         }
     }
 }

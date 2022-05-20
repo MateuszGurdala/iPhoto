@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using iPhoto.Commands;
 using iPhoto.Commands.SearchPage;
 using iPhoto.DataBase;
+using iPhoto.RemoteDatabase;
 using iPhoto.UtilityClasses;
 using iPhoto.ViewModels.SearchPage;
 using iPhoto.Views.SearchPage;
@@ -28,6 +28,7 @@ namespace iPhoto.ViewModels
             }
         }
         public DatabaseHandler DatabaseHandler { get; } //MG 15.04 added db handler class
+        public RemoteDatabaseHandler RemoteDatabaseHandler { get; set; }
         public SearchEngine SearchEngine { get; } //MG 27.04 Added
         public PhotoDetailsViewModel PhotoDetails { get; }  //MG 26.04 Added photo details
 
@@ -36,10 +37,11 @@ namespace iPhoto.ViewModels
         public BitmapImage PhotoDetailsImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "PhotoDetails.png", 144);
         public BitmapImage AddPhotoImage { get; } = DataHandler.LoadBitmapImage(DataHandler.GetSideMenuIconsDirectoryPath() + "AddPhoto.png", 144);
 
-        public SearchViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow)
+        public SearchViewModel(DatabaseHandler database,RemoteDatabaseHandler remoteDatabase, PhotoDetailsWindowView photoDetailsWindow)
         {
             PhotoSearchResultsCollection = new ObservableCollection<PhotoSearchResultViewModel>();
             DatabaseHandler = database;
+            RemoteDatabaseHandler = remoteDatabase;
 
 
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
@@ -50,7 +52,7 @@ namespace iPhoto.ViewModels
             PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
             photoDetailsWindow.DataContext = PhotoDetails;
 
-            SearchEngine = new SearchEngine(DatabaseHandler, this);
+            SearchEngine = new SearchEngine(DatabaseHandler,RemoteDatabaseHandler, this);
             SearchCommand = new SearchCommand(SearchEngine);
         }
     }

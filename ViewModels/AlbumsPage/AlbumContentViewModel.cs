@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using iPhoto.RemoteDatabase;
 
 namespace iPhoto.ViewModels.AlbumsPage
 {
@@ -49,17 +50,19 @@ namespace iPhoto.ViewModels.AlbumsPage
         }
 
         public DatabaseHandler DatabaseHandler { get;}
+        public RemoteDatabaseHandler RemoteDatabaseHandler { get;}
         public PhotoDetailsViewModel PhotoDetails { get; }
         public SearchEngine SearchEngine { get; }
 
-        public AlbumContentViewModel(DatabaseHandler database, PhotoDetailsWindowView photoDetailsWindow, MainWindowViewModel mainWindowVM, Album currentAlbum, AlbumViewModel albumViewModel)
+        public AlbumContentViewModel(DatabaseHandler database,RemoteDatabaseHandler remoteDatabase, PhotoDetailsWindowView photoDetailsWindow, MainWindowViewModel mainWindowVM, Album currentAlbum, AlbumViewModel albumViewModel)
         {
             PhotoSearchResultsCollection = new ObservableCollection<PhotoSearchResultViewModel>();
             DatabaseHandler = database;
+            RemoteDatabaseHandler = remoteDatabase;
             PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
             _photoDetailsWindow = photoDetailsWindow;
             photoDetailsWindow.DataContext = PhotoDetails;
-            SearchEngine = new SearchEngine(DatabaseHandler, this);      
+            SearchEngine = new SearchEngine(DatabaseHandler, remoteDatabase , this);      
             CurrentAlbum = currentAlbum;
 
 
@@ -74,7 +77,7 @@ namespace iPhoto.ViewModels.AlbumsPage
 
             // inital photos load
             SearchEngine.LoadParams(new SearchParams(CurrentAlbum));
-            SearchEngine.GetSearchResults();
+            SearchEngine.GetSearchResults(true);
             //LoadAllAlbumPhotos();
 
         }
@@ -91,7 +94,7 @@ namespace iPhoto.ViewModels.AlbumsPage
                         DatabaseHandler.Images.FirstOrDefault(y => y.Id == photo.ImageId),
                         DatabaseHandler.Albums.FirstOrDefault(y => y.Id == CurrentAlbum.Id),
                         DatabaseHandler.Places.FirstOrDefault(y => y.Id == photo.PlaceId),
-                        new SearchViewModel(DatabaseHandler, _photoDetailsWindow)
+                        new SearchViewModel(DatabaseHandler, RemoteDatabaseHandler, _photoDetailsWindow)
                         ));
                 }
                 await Task.Delay(10);

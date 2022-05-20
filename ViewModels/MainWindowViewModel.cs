@@ -30,15 +30,16 @@ namespace iPhoto.ViewModels
         public AccountViewModel AccountViewModel { get; }
         public SettingsViewModel SettingsViewModel { get; }
         public HomePageViewModel HomePageViewModel { get; }
+        public SideMenuViewModel SideMenuViewModel { get; set; }
 
         //MG 15.04 added db handler class
-        public MainWindowViewModel(Window mainWindow, DatabaseHandler database, RemoteDatabaseHandler remoteHandler, PhotoDetailsWindowView photoDetailsWindow)
+        public MainWindowViewModel(Window mainWindow, DatabaseHandler database, RemoteDatabaseHandler remoteDatabase, PhotoDetailsWindowView photoDetailsWindow)
         {
             HomePageViewModel = new HomePageViewModel();
-            SearchViewModel = new SearchViewModel(database, photoDetailsWindow);    //MG 15.04 //MG 26.04 add photo details 
+            SearchViewModel = new SearchViewModel(database, remoteDatabase, photoDetailsWindow);    //MG 15.04 //MG 26.04 add photo details 
             AlbumsViewModel = new AlbumViewModel(database, this, photoDetailsWindow);
             PlacesViewModel = new PlacesViewModel();
-            AccountViewModel = new AccountViewModel(remoteHandler);
+            AccountViewModel = new AccountViewModel(remoteDatabase);
             SettingsViewModel = new SettingsViewModel();
 
 
@@ -50,9 +51,9 @@ namespace iPhoto.ViewModels
         {
             _mainWindow = mainWindow as MainWindow;
 
-            var sideMenuDataContext = _mainWindow!.sideMenu.DataContext as SideMenuViewModel;
+            SideMenuViewModel = _mainWindow!.sideMenu.DataContext as SideMenuViewModel;
 
-            sideMenuDataContext!.NavigateCommand = new NavigateCommand(this);
+            SideMenuViewModel!.NavigateCommand = new NavigateCommand(this);
         }
     }
 }
