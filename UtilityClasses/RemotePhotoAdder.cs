@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using iPhoto.ViewModels.AlbumsPage;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 using iPhoto.DataBase;
-using iPhoto.ViewModels.SearchPage;
-using iPhoto.Views.SearchPage;
+using iPhoto.RemoteDatabase;
 using iPhoto.Views.AlbumPage;
+using iPhoto.Views.SearchPage;
 
 namespace iPhoto.UtilityClasses
 {
-    public class PhotoAdder
+    public class RemotePhotoAdder
     {
         //Miscellaneous
-        private readonly DatabaseHandler _databaseHandler;
+        private readonly RemoteDatabaseHandler _databaseHandler;
         private BitmapImage _bitmapImage;
         private readonly string _fullPath;
         public AddPhotoPopupView Popup;
@@ -35,16 +31,6 @@ namespace iPhoto.UtilityClasses
         private int? _placeId;
         private Image _image;
 
-        public PhotoAdder(DatabaseHandler databaseHandler, string? fileName)
-        {
-            _databaseHandler = databaseHandler;
-            if (fileName != null)
-            {
-                _fullPath = fileName;
-                GetImageData();
-            }
-        }
-
         private void GetImageData()
         {
             _fileName = Path.GetFileName(_fullPath);
@@ -57,53 +43,16 @@ namespace iPhoto.UtilityClasses
             _width = (int)_bitmapImage.Width;
             _height = (int)_bitmapImage.Height;
         }
-        public void GetPhotoData(Album album = null, AlbumContentViewModel albumVm = null)
-        {
-            if (album == null || albumVm == null)
-            {
-                var dataContext = new AddPhotoPopupViewModel()
-                {
-                    Image = _bitmapImage,
-                    AlbumList = _databaseHandler.GetAlbumList(false)
-                };
-                dataContext.PhotoAdder = this;
-                Popup = new AddPhotoPopupView(dataContext);
-            }
-            else
-            {
-                var dataContext = new AddPhotoToAlbumPopupViewModel(album, albumVm)
-                {
-                    Image = _bitmapImage,
-                };
-                dataContext.PhotoAdder = this;
-                PopupForAlbums = new AddPhotoToAlbumPopupView(dataContext);
-            }
-        }
         public void AddPhoto(string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
             CheckData(title, album, rawTags, creationDateString, placeTaken);
             ParseData(title, album, rawTags, creationDateString, placeTaken);
 
-            //MG 04.05 NIE TYKAĆ BO SIĘ WYWALI RESZTA
-            //await Task.Run(() =>
-            //{
-            _databaseHandler.AddImage(_fileName, _width, _height, _size);
-            _image = _databaseHandler.Images.First(e => e.Source == _fileName);
-            _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _image.Id, _image.Size);
-
-            MoveFileToDatabaseDirectory(); // BUG throws error if same fale in DataBaseDirectory TODO
-            //});
-            if (Popup != null)
-                Popup.IsOpen = false;
-            else
-                PopupForAlbums.IsOpen = false;
         }
         public void UpdatePhoto(int id, string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
             CheckUpdateData(title, album, rawTags, creationDateString, placeTaken);
             ParseData(title, album, rawTags, creationDateString, placeTaken);
-
-            _databaseHandler.UpdatePhoto(id, title, album, rawTags, DateTime.Parse(creationDateString), placeTaken);
         }
         private void CheckData(string title, string album, string? tags, string? creationDateString, string placeTaken)
         {
@@ -146,29 +95,6 @@ namespace iPhoto.UtilityClasses
             _title = title == "Default" ? GenerateDefaultTitle() : title;
             _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
             _albumId = album == "OtherPhotos" ? _databaseHandler.Albums[0].Id : _databaseHandler.Albums.First(e => e.Name == album).Id; // change this after implementing Photo Add checker TODO
-        }
-        private void MoveFileToDatabaseDirectory()
-        {
-            File.Copy(_fullPath, DataHandler.GetDatabaseImageDirectory() + "\\" + _fileName);
-        }
-        private bool IsFileLocked(FileInfo file)
-        {
-            try
-            {
-                using FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
-                stream.Close();
-            }
-            catch (IOException)
-            {
-                //the file is unavailable because it is:
-                //still being written to
-                //or being processed by another thread
-                //or does not exist (has already been processed)
-                return true;
-            }
-
-            //file is not locked
-            return false;
         }
         private string GenerateDefaultTitle()
         {

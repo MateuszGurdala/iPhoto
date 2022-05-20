@@ -70,13 +70,31 @@ namespace iPhoto.RemoteDatabase
             LoadPhotos();
             LoadPlaces();
         }
-
         public void Clear()
         {
             Albums.Clear();
             Photos.Clear();
             Images.Clear();
             Places.Clear();
+        }
+        public ObservableCollection<string> GetAlbumList(bool addStar)
+        {
+            var albumList = new List<string>();
+            var albumCollection = new ObservableCollection<string>();
+            if (addStar)
+            {
+                albumList.Add("*");
+            }
+            foreach (var album in Albums)
+            {
+                albumList.Add(album.Name);
+            }
+            albumList.Sort();
+            foreach (var album in albumList)
+            {
+                albumCollection.Add(album);
+            }
+            return albumCollection;
         }
     }
 }

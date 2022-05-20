@@ -18,7 +18,8 @@ namespace iPhoto.UtilityClasses
         private SearchParams _searchParams;
 
         private bool _newDataLoaded;
-        private bool _localSearch = false;
+        private bool _localSearch = true;
+        private bool _onlineSearch = false;
 
         public SearchEngine(DatabaseHandler databaseHandler, RemoteDatabaseHandler remoteDatabaseHandler, IPhotoSearchVM viewModel)
         {
@@ -34,21 +35,39 @@ namespace iPhoto.UtilityClasses
                 _newDataLoaded = true;
             }
         }
-        public async void GetSearchResults(bool localSearch)
+        public async void GetSearchResults(bool localSearch, bool onlineSearch)
         {
             _localSearch = localSearch;
+            _onlineSearch = onlineSearch;
             if (_newDataLoaded)
             {
                 _searchViewModel.PhotoSearchResultsCollection.Clear();
-                var firstSearch = _localSearch ? FirstSearch(_databaseHandler) : FirstSearch(_remoteDatabaseHandler);
-                var secondSearch = SecondSearch(firstSearch);
-                var thirdSearch = ThirdSearch(secondSearch);
-
-                foreach (var photo in thirdSearch)
+                if (localSearch)
                 {
-                    _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id, _localSearch));
-                    await Task.Delay(10);
+                    var firstSearch = FirstSearch(_databaseHandler);
+                    var secondSearch = SecondSearch(firstSearch);
+                    var thirdSearch = ThirdSearch(secondSearch);
+
+                    foreach (var photo in thirdSearch)
+                    {
+                        _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id, "Local"));
+                        await Task.Delay(10);
+                    }
                 }
+
+                if (onlineSearch)
+                {
+                    var firstSearch = FirstSearch(_remoteDatabaseHandler);
+                    var secondSearch = SecondSearch(firstSearch);
+                    var thirdSearch = ThirdSearch(secondSearch);
+
+                    foreach (var photo in thirdSearch)
+                    {
+                        _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id, "Remote"));
+                        await Task.Delay(10);
+                    }
+                }
+
             }
         }
         public async void UpdateSearchResults()
@@ -60,24 +79,16 @@ namespace iPhoto.UtilityClasses
             }
             else
             {
-                var firstSearch = _localSearch ? FirstSearch(_databaseHandler) : FirstSearch(_remoteDatabaseHandler);
-                var secondSearch = SecondSearch(firstSearch);
-                var thirdSearch = ThirdSearch(secondSearch);
-
-                foreach (var photo in thirdSearch)
-                {
-                    _searchViewModel.PhotoSearchResultsCollection.Add(GetViewModel(photo.Id, _localSearch));
-                    await Task.Delay(10);
-                }
+                GetSearchResults(_localSearch,  _onlineSearch);
             }
         }
-        private PhotoSearchResultViewModel GetViewModel(int photoId, bool localSearch)
+        private PhotoSearchResultViewModel GetViewModel(int photoId, string database)
         {
             Photo photo;
             Album album;
             Image image;
             Place place;
-            if (localSearch)
+            if (database == "Local")
             {
                 photo = _databaseHandler.Photos.FirstOrDefault(e => e.Id == photoId);
                 image = _databaseHandler.Images.FirstOrDefault(e => e.Id == photo!.ImageId);

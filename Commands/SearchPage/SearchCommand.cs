@@ -12,7 +12,7 @@ namespace iPhoto.Commands
         private readonly SearchEngine _searchEngine;
         private readonly AlbumContentViewModel _currentAlbumVM;
         public SearchCommand(SearchEngine searchEngine)
-        { 
+        {
             _searchEngine = searchEngine;
         }
         public SearchCommand(SearchEngine searchEngine, AlbumContentViewModel currentAlbumVM)
@@ -37,7 +37,17 @@ namespace iPhoto.Commands
             else
             {
                 _searchEngine.LoadParams(searchData);
-                _searchEngine.GetSearchResults(true);
+
+                var accountViewModel = (App.Current.MainWindow.DataContext as MainWindowViewModel).AccountViewModel;
+
+                if (accountViewModel.CurrentViewModel == accountViewModel.LoggedInViewModel)
+                {
+                    _searchEngine.GetSearchResults(true, true);
+                }
+                else
+                {
+                    _searchEngine.GetSearchResults(true, false);
+                }
             }
         }
     }

@@ -36,8 +36,7 @@ namespace iPhoto.Commands.AccountPage
             var albumSearchParams = new SearchParams();
             albumSearchParams.BuildDefaultSearchParamsForAlbum(_album.Name);
             searchViewModel.SearchEngine.LoadParams(albumSearchParams);
-            searchViewModel.SearchEngine.GetSearchResults(false);
-
+            searchViewModel.SearchEngine.GetSearchResults(false, true);
         }
     }
 }

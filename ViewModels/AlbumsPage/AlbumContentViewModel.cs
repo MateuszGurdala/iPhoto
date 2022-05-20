@@ -77,7 +77,7 @@ namespace iPhoto.ViewModels.AlbumsPage
 
             // inital photos load
             SearchEngine.LoadParams(new SearchParams(CurrentAlbum));
-            SearchEngine.GetSearchResults(true);
+            SearchEngine.GetSearchResults(true, true);
             //LoadAllAlbumPhotos();
 
         }

@@ -24,7 +24,16 @@ namespace iPhoto.ViewModels
         {
             get
             {
-                return DatabaseHandler.GetAlbumList(true);
+                var accountViewModel = (App.Current.MainWindow.DataContext as MainWindowViewModel).AccountViewModel;
+                var albums = DatabaseHandler.GetAlbumList(true);
+                if (accountViewModel.CurrentViewModel == accountViewModel.LoggedInViewModel)
+                {
+                    foreach (var album in RemoteDatabaseHandler.GetAlbumList(false))
+                    {
+                        albums.Add(album);
+                    }
+                }
+                return albums;
             }
         }
         public DatabaseHandler DatabaseHandler { get; } //MG 15.04 added db handler class
