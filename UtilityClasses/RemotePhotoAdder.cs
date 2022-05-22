@@ -1,60 +1,51 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Windows.Media.Imaging;
-using iPhoto.DataBase;
+using System.Threading.Tasks;
+using GoogleDriveHandlerDemo;
 using iPhoto.RemoteDatabase;
-using iPhoto.Views.AlbumPage;
-using iPhoto.Views.SearchPage;
 
 namespace iPhoto.UtilityClasses
 {
-    public class RemotePhotoAdder
+    public static class RemotePhotoAdder
     {
         //Miscellaneous
-        private readonly RemoteDatabaseHandler _databaseHandler;
-        private BitmapImage _bitmapImage;
-        private readonly string _fullPath;
-        public AddPhotoPopupView Popup;
-        public AddPhotoToAlbumPopupView PopupForAlbums;
-        //Image
-        private string _fileName;
-        private int _width;
-        private int _height;
-        private double _size;
+        private static RemoteDatabaseHandler _databaseHandler;
 
         //Photo
-        private string _title;
-        private string? _rawTags;
-        private DateTime? _dateCreated;
-        private int? _albumId;
-        private int? _placeId;
-        private Image _image;
+        private static string _title;
+        private static string? _rawTags;
+        private static DateTime _dateCreated;
+        private static int? _albumId;
+        private static int? _placeId;
 
-        private void GetImageData()
+        public static void SetRemoteDatabaseHandler(RemoteDatabaseHandler remoteDatabase)
         {
-            _fileName = Path.GetFileName(_fullPath);
-            _bitmapImage = DataHandler.LoadBitmapImage(_fullPath, null);
-
-            _size = new FileInfo(_fullPath).Length;
-            _size /= 1048576;
-            _size = Math.Round(_size, 2);
-
-            _width = (int)_bitmapImage.Width;
-            _height = (int)_bitmapImage.Height;
+            _databaseHandler = remoteDatabase;
         }
-        public void AddPhoto(string title, string album, string rawTags, string? creationDateString, string placeTaken)
+        public static string UploadImage(string fileName, string filePath)
+        {
+            var stringId = GoogleDriveHandler.UploadFile(fileName, filePath);
+            return stringId;
+        }
+
+        public static async Task AddImage(string source, double size, int width, int height)
+        {
+            await _databaseHandler.AddImage(source, size, width, height);
+        }
+        public async static void AddPhoto(string title, string album,string imageSource, string rawTags, string? creationDateString, string placeTaken, Task task)
         {
             CheckData(title, album, rawTags, creationDateString, placeTaken);
             ParseData(title, album, rawTags, creationDateString, placeTaken);
 
+            await _databaseHandler.AddPhoto(_title, _dateCreated.ToString("yyyy-MM-ddTHH:mm:ssZ"), _rawTags, album, imageSource, task);
         }
-        public void UpdatePhoto(int id, string title, string album, string rawTags, string? creationDateString, string placeTaken)
+        public static void UpdatePhoto(int id, string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
             CheckUpdateData(title, album, rawTags, creationDateString, placeTaken);
             ParseData(title, album, rawTags, creationDateString, placeTaken);
         }
-        private void CheckData(string title, string album, string? tags, string? creationDateString, string placeTaken)
+        private static void CheckData(string title, string album, string? tags, string? creationDateString, string placeTaken)
         {
             if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
             {
@@ -73,7 +64,7 @@ namespace iPhoto.UtilityClasses
                 throw new InvalidDataException("Invalid tags format.");
             }
         }
-        private void CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken)
+        private static void CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken)
         {
             if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
             {
@@ -88,22 +79,22 @@ namespace iPhoto.UtilityClasses
                 throw new InvalidDataException("Invalid tags format.");
             }
         }
-        private void ParseData(string title, string album, string rawTags, string? creationDateString, string placeTaken)
+        private static void ParseData(string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
-            _rawTags = rawTags == "#none" ? null : rawTags;
+            _rawTags = rawTags;
             _dateCreated = creationDateString == "" ? DateTime.Now : DateTime.ParseExact(creationDateString, "dd.MM.yyyy", null);
             _title = title == "Default" ? GenerateDefaultTitle() : title;
-            _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
-            _albumId = album == "OtherPhotos" ? _databaseHandler.Albums[0].Id : _databaseHandler.Albums.First(e => e.Name == album).Id; // change this after implementing Photo Add checker TODO
+            _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id - 1000;
+            _albumId = _databaseHandler.Albums.First(e => e.Name == album).Id - 1000;
         }
-        private string GenerateDefaultTitle()
+        private static string GenerateDefaultTitle()
         {
-            var title = DateTime.Now.Date.ToShortDateString() + "photo";
+            var title = DateTime.Now.Date.ToShortDateString() + "remotePhoto";
             var number = 0;
             while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
             {
                 number += 1;
-                title = DateTime.Now.Date.ToShortDateString() + "photo" + number;
+                title = DateTime.Now.Date.ToShortDateString() + "remotePhoto" + number;
             }
 
             return title;

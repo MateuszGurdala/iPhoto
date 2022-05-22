@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using GoogleDriveHandlerDemo;
 using GoogleDriveHandlerDemo.ApiHandler;
 using iPhoto.DataBase;
@@ -55,7 +56,7 @@ namespace iPhoto.RemoteDatabase
                 Images.Add(new Image(e.ToEntity()));
             }
         }
-        public async void LoadPhotos()
+        public async Task LoadPhotos()
         {
             await LoadImages();
             var apiPhotos = await _apiHandler.GetPhotos();
@@ -96,5 +97,22 @@ namespace iPhoto.RemoteDatabase
             }
             return albumCollection;
         }
+
+        public async Task AddImage(string source, double size, int width, int height)
+        {
+            var data = await _apiHandler.PostImage(source, size, width, height);
+            await LoadImages();
+        }
+
+        public async Task AddPhoto(string title, string dateTaken, string tags, string album, string imageSource, Task addImageTask)
+        {
+            await addImageTask;
+            addImageTask.Wait();
+            var imageId = Images.FirstOrDefault(e => e.Source == imageSource).Id - 1000;
+            var albumId = Albums.FirstOrDefault(e => e.Name == album).Id - 1000;
+            var data = _apiHandler.PostPhoto(title, albumId, imageId, tags, dateTaken);
+            await LoadPhotos();
+        }
+
     }
 }
