@@ -117,12 +117,14 @@ namespace GoogleDriveHandlerDemo
             var bitmap = new BitmapImage();
             bitmap.BeginInit();
             bitmap.StreamSource = stream;
-            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+            bitmap.CacheOption = BitmapCacheOption.OnDemand;
             if (decodePixelWidth != null)
             {
                 bitmap.DecodePixelWidth = (int) decodePixelWidth;
             }
             bitmap.EndInit();
+
+            bitmap.Freeze();
 
             return bitmap;
         }

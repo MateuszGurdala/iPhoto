@@ -32,6 +32,7 @@ namespace iPhoto.RemoteDatabase
 
         public async Task<List<Album>> LoadAlbums()
         {
+            Albums.Clear();
             var apiAlbums = await _apiHandler.GetAlbums();
             foreach (var e in apiAlbums)
             {
@@ -42,6 +43,7 @@ namespace iPhoto.RemoteDatabase
         }
         public async void LoadPlaces()
         {
+            Places.Clear();
             var apiPlace = await _apiHandler.GetPlaces();
             foreach (var e in apiPlace)
             {
@@ -50,6 +52,7 @@ namespace iPhoto.RemoteDatabase
         }
         public async Task LoadImages()
         {
+            Images.Clear();
             var apiImages = await _apiHandler.GetImages();
             foreach (var e in apiImages)
             {
@@ -58,6 +61,7 @@ namespace iPhoto.RemoteDatabase
         }
         public async Task LoadPhotos()
         {
+            Photos.Clear();
             await LoadImages();
             var apiPhotos = await _apiHandler.GetPhotos();
             foreach (var e in apiPhotos)
@@ -97,13 +101,11 @@ namespace iPhoto.RemoteDatabase
             }
             return albumCollection;
         }
-
         public async Task AddImage(string source, double size, int width, int height)
         {
             var data = await _apiHandler.PostImage(source, size, width, height);
             await LoadImages();
         }
-
         public async Task AddPhoto(string title, string dateTaken, string tags, string album, string imageSource, Task addImageTask)
         {
             await addImageTask;

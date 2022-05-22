@@ -1,5 +1,4 @@
-﻿using iPhoto.DataBase;
-using iPhoto.Models;
+﻿using iPhoto.Models;
 using iPhoto.UtilityClasses;
 using iPhoto.ViewModels;
 using iPhoto.ViewModels.AlbumsPage;
@@ -20,6 +19,7 @@ namespace iPhoto.Commands
             _searchEngine = searchEngine;
             _currentAlbumVM = currentAlbumVM;
         }
+
         public override void Execute(object parameter)
         {
             var photoSearchOptions = parameter as PhotoSearchOptionsView;
