@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iPhoto.ViewModels
+namespace iPhoto.ViewModels.PlacesPage
 {
-    public class PlacesViewModel : ViewModelBase
+    public class PlacesListViewModel : ViewModelBase
     {
     }
 }

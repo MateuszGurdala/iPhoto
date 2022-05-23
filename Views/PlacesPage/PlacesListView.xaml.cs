@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace iPhoto.Views
+namespace iPhoto.Views.PlacesPage
 {
     /// <summary>
-    /// Interaction logic for PlacesView.xaml
+    /// Interaction logic for PlacesListView.xaml
     /// </summary>
-    public partial class PlacesView : UserControl
+    public partial class PlacesListView : UserControl
     {
-        public PlacesView()
+        public PlacesListView()
         {
             InitializeComponent();
         }
