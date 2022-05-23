@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
+using Google.Apis.Util;
 using Google.Apis.Util.Store;
 using iPhoto.UtilityClasses;
 
@@ -108,15 +109,21 @@ namespace GoogleDriveHandlerDemo
             return file.Id;
         }
 
-        public static BitmapImage GetBitmapImage(string id, int? decodePixelWidth)
+        public static BitmapImage GetBitmapImage(string id,List<byte> imageBytes, int? decodePixelWidth)
         {
-            var stream = new MemoryStream();
-            var fileRequest = _driveService.Files.Get(id);
-            fileRequest.Download(stream);
+            if (imageBytes.Count == 0)
+            {
+                var stream = new MemoryStream();
+                var fileRequest = _driveService.Files.Get(id);
+                fileRequest.Download(stream);
+                imageBytes.AddRange(stream.ToArray());
+            }
+
+            var imageStream = new MemoryStream(imageBytes.ToArray());
 
             var bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.StreamSource = stream;
+            bitmap.StreamSource = imageStream;
             bitmap.CacheOption = BitmapCacheOption.OnDemand;
             if (decodePixelWidth != null)
             {

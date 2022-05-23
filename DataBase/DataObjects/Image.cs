@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 
 namespace iPhoto.DataBase
 {
@@ -30,6 +32,8 @@ namespace iPhoto.DataBase
             get => _imageEntity.Size;
             set => _imageEntity.Size = value;
         }
+
+        public List<byte> RemoteImageData { get; set; } = new List<byte>();
 
         public Image(ImageEntity imageEntity)
         {
