@@ -41,7 +41,7 @@ namespace iPhoto.DataBase
         {
             if (Places.FirstOrDefault(e => e.Id == 1) == null)
             {
-                AddPlace("NoPlace", null, null);
+                AddPlace("NoPlace", null, null, null);
             }
         }
         //~MG 16.04
@@ -191,7 +191,7 @@ namespace iPhoto.DataBase
             db.ImageEntities.Add(image.GetEntity());
             db.SaveChanges();
         }
-        public void AddPlace(string name, double? lat, double? lon)
+        public void AddPlace(string name, double? lat, double? lon, string? markerColor)
         {
             var id = Places.Count == 0 ? 0 : Places.OrderByDescending(e => e.Id).FirstOrDefault()!.Id;
 
@@ -200,7 +200,7 @@ namespace iPhoto.DataBase
                 throw new InvalidDataException("Place is already in database.");
             }
 
-            var place = new Place(id + 1, name, lat, lon);
+            var place = new Place(id + 1, name, lat, lon, markerColor);
             Places.Add(place);
 
             using var db = new DatabaseContext();
