@@ -22,7 +22,7 @@
         </Grid.Resources>
             
             <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <map:GMapControl Margin="10 10 20 20"
@@ -33,6 +33,6 @@
                          MinZoom="6"
                          MouseLeftButtonDown="MainMap_MouseLeftButtonDown"/>
         <ContentControl Content="{Binding SidePlaceViewModel}"
-                        Grid.Row="0"
+                        Grid.Row="0"/>
     </Grid>
 </UserControl>

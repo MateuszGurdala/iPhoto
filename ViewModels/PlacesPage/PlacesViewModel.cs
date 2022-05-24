@@ -36,13 +36,14 @@ namespace iPhoto.ViewModels
 
         public PlacesViewModel(DatabaseHandler databaseHandler)
         {
-            AddMapMarkerCommand = new AddMapMarkerCommand();
-            GetMapPositionCommand = new GetMapPositionCommand();
 
             PlacesListViewModel = new PlacesListViewModel();
-            AddMarkerViewModel = new AddMarkerViewModel();
+            AddMarkerViewModel = new AddMarkerViewModel(this);
 
             SidePlaceViewModel = AddMarkerViewModel;
+
+            AddMapMarkerCommand = new AddMapMarkerCommand(AddMarkerViewModel);
+            GetMapPositionCommand = new GetMapPositionCommand(AddMarkerViewModel);
         }
     }
 }

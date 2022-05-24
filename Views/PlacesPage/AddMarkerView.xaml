@@ -4,9 +4,111 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:iPhoto.Views.PlacesPage"
+             xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="800" d:DesignWidth="300">
+    <StackPanel>
+            <StackPanel.Resources>
+                <!-- Style for TextBox-->
+                <Style TargetType="TextBox">
+                    <Setter Property="Height"
+                        Value="32" />
+                    <Setter Property="Width"
+                        Value="200" />
+                    <Setter Property="FontSize"
+                        Value="21" />
+                    <Setter Property="FontWeight"
+                        Value="DemiBold" />
+                    <Setter Property="HorizontalAlignment"
+                        Value="Left" />
+                    <Setter Property="BorderBrush"
+                        Value="{StaticResource DarkLightGreenGradient}"/>
+                    <Setter Property="BorderThickness"
+                        Value="2"/>
+                    <Setter Property="Foreground"
+                        Value="{StaticResource DarkLightGreenGradient}" />
+                </Style>
+                <!-- Style for TextBox-->
+                <Style TargetType="TextBlock">
+                    <Setter Property="Height"
+                        Value="40" />
+                    <Setter Property="FontSize"
+                        Value="30" />
+                    <Setter Property="FontWeight"
+                        Value="DemiBold" />
+                    <Setter Property="HorizontalAlignment"
+                        Value="Center" />
+                    <Setter Property="Foreground"
+                        Value="{StaticResource DarkLightGreenGradient}" />
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock> ADD NEW PLACE</TextBlock>
+            <TextBlock> ---------------------</TextBlock>
+            <TextBlock> Name of palce:</TextBlock>
+            <TextBox Name="PlaceName"
+                 Margin="20"
+                 Height="40" 
+                 TextWrapping="WrapWithOverflow" 
+                 GotFocus="TextBox_GotFocus" 
+                 Text="Default Name"
+                 TextAlignment="Center"
+                 HorizontalAlignment="Center" Width="280"/>
+        <TextBlock> Latitude: </TextBlock>
+        <TextBox Name="Latitude"
+                 Margin="20"
+                 Height="40" 
+                 TextWrapping="WrapWithOverflow"  
+                 Text="{Binding LatitudeText, Mode=TwoWay}"
+                 TextAlignment="Center"
+                 HorizontalAlignment="Center" Width="150"
+                 IsReadOnly="True"/>
+        <TextBlock> Longtitude:</TextBlock>
+        <TextBox Name="Longtitude"
+                 Margin="20"
+                 Height="40" 
+                 TextWrapping="WrapWithOverflow" 
+                 Text="{Binding LongtitudeText, Mode=TwoWay}"
+                 TextAlignment="Center"
+                 HorizontalAlignment="Center" Width="150"
+                 IsReadOnly="True"/>
+        <TextBlock > Color:</TextBlock>
+            <ComboBox x:Name="AlbumColorsComboBox"
+                          Style="{StaticResource ComboBoxStyle1}"
+                          Width="200"
+                          Height="45"
+                          HorizontalAlignment="Center"
+                          SelectedIndex="0"
+                          ItemContainerStyle="{StaticResource ComboBoxItem1}"
+                          Margin="20"
+                          >
+                <Rectangle x:Name="Green" Fill="Green"  Margin="5" Width="180" Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Blue" Fill="Blue" Margin="5" Width="180" Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Red" Fill="Red" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Aqua" Fill="Aqua" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="DarkBlue" Fill="DarkBlue" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Generic" Fill="LightGray" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Orange" Fill="Orange" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Pink" Fill="Pink" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Violet" Fill="Purple" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Yellow" Fill="Yellow" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+            </ComboBox>
+            <!--Add Album-->
+        <StackPanel Orientation="Horizontal">
             
-    </Grid>
+        
+            <uc:CustomButton
+                              x:Name="AddMarker"
+                              Margin="35"
+                              Command="{Binding AddMapMarkerCommand}"
+                              CommandParameter="{Binding Path=., ElementName=root}"
+                              ImageSource="../../Graphics/Icons/AddAlbum.png" Height="80" Width="80"/>
+            <uc:CustomButton
+                              x:Name="DeleteMarker"
+                              Margin="35"
+                              Command="{Binding FindMarkerOnMap}"
+                              CommandParameter="{Binding Path=., ElementName=root}"
+                              ImageSource="../../Graphics/Icons/Search.png" Height="80" Width="80"/>
+        </StackPanel>
+
+    </StackPanel>
 </UserControl>

@@ -24,5 +24,12 @@ namespace iPhoto.Views.PlacesPage
         {
             InitializeComponent();
         }
+
+        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBox_GotFocus;
+        }
     }
 }

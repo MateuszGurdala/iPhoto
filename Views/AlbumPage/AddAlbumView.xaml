@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="200"
              xmlns:vma="clr-namespace:iPhoto.ViewModels.AlbumsPage"
-             xmlns:uc="clr-namespace:iPhoto.Views.UserControls" d:DataContext="{d:DesignInstance Type=vma:AddAlbumViewModel}"
+             xmlns:uc="clr-namespace:iPhoto.Views.UserControls" 
+             d:DataContext="{d:DesignInstance Type=vma:AddAlbumViewModel}"
              Name="root">
     <StackPanel>
         <StackPanel.Resources>
