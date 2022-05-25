@@ -5,8 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:iPhoto.Views.PlacesPage"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="300">
-    <Grid>
-            
+             xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
+             xmlns:vm ="clr-namespace:iPhoto.ViewModels.PlacesPage"
+             d:DesignHeight="450" d:DesignWidth="400">
+    <Grid Width="400">
+        <uc:RoundedIcon
+            Width="400"
+            Margin="7 7 7 7">
+            <ScrollViewer Width="400">
+                <ItemsControl ItemsSource="{Binding MapMarkersCollection}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:PlacesListElementsViewModel}">
+                            <local:PlacesListElementsView Margin="10"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Margin="10" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </uc:RoundedIcon>
     </Grid>
 </UserControl>

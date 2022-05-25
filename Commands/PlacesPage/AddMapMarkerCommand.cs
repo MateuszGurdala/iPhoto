@@ -52,6 +52,8 @@ namespace iPhoto.Commands.PlacesPage
                 markerToAdd.Offset = new Point(-5, -5);
                 markerToAdd.ZIndex = int.MaxValue;
                 _placesViewModel.MainMap.Markers.Add(markerToAdd);
+                _databaseHandler.AddPlace(name, lat, lon, color);
+                _placesViewModel.PlacesListViewModel.AddPlaceToList(markerToAdd);
             }
         }
 

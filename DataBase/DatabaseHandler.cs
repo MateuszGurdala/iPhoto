@@ -25,7 +25,7 @@ namespace iPhoto.DataBase
             //Delete if loading all data immediately is unnecessary
             LoadAllData();
             //MG 16.04
-            //CreateBaseAlbum();
+            CreateBaseAlbum();
             CreateBasePlace();
             //~MG 16.04
         }
@@ -33,14 +33,14 @@ namespace iPhoto.DataBase
         //MG 16.04
         private void CreateBaseAlbum()
         {
-            if (Albums.FirstOrDefault(e => e.Id == 1) == null)
+            if (Albums.Count == 0)
             {
-                AddAlbum("OtherPhotos", 0, null, null, true, null);
+                AddAlbum("OtherPhotos", 0, null, null, true, "Generic");
             }
         }
         private void CreateBasePlace()
         {
-            if (Places.FirstOrDefault(e => e.Id == 1) == null)
+            if (Places.FirstOrDefault(e => e.Name == "NoPlace") == null)
             {
                 AddPlace("NoPlace", null, null, null);
             }

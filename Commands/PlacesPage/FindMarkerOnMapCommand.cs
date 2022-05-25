@@ -1,5 +1,6 @@
 ﻿using GMap.NET.WindowsPresentation;
 using iPhoto.ViewModels;
+using iPhoto.ViewModels.PlacesPage;
 using iPhoto.Views.PlacesPage;
 using System;
 using System.Collections.Generic;
@@ -12,19 +13,29 @@ namespace iPhoto.Commands.PlacesPage
     public class FindMarkerOnMapCommand : CommandBase
     {
         private readonly PlacesViewModel _placesViewModel;
-        public FindMarkerOnMapCommand(PlacesViewModel placesViewModel)
+        private readonly PlacesListElementsViewModel _placesListElementsViewModel;
+        public FindMarkerOnMapCommand(PlacesViewModel placesViewModel, PlacesListElementsViewModel placesListElementsViewModel =null)
         {
             _placesViewModel = placesViewModel;
+            _placesListElementsViewModel = placesListElementsViewModel;
         }
         public override void Execute(object parameter)
         {
-            AddMarkerView view = (AddMarkerView)parameter;
-            string name = view.PlaceName.Text;
+            string name;
+            if (_placesListElementsViewModel == null)
+            {
+                AddMarkerView view = (AddMarkerView)parameter;
+                name = view.PlaceName.Text;
+            }
+            else
+            {
+                name = (string)_placesListElementsViewModel.Marker.Tag;
+            }
             GMapMarker markerToChange = _placesViewModel.MainMap.Markers.SingleOrDefault(e => (string)e.Tag == name);
             if (markerToChange == null)
                 return;
              var Position = markerToChange.Position;
-            _placesViewModel.MainMap.Zoom = 12;
+            _placesViewModel.MainMap.Zoom = 15;
             _placesViewModel.MainMap.Position = Position;
         }
     }

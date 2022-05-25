@@ -62,15 +62,13 @@ namespace iPhoto.ViewModels
             AlbumSearchResultsCollection.RemoveAt(index);
         }
 
-        public void DisplayAllAlbums()
+        public async void DisplayAllAlbums()
         {
             AlbumSearchResultsCollection.Clear();
             foreach (Album album in DatabaseHandler.Albums)
             {
-                App.Current.Dispatcher.BeginInvoke((Action)delegate ()
-                {
                     AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel, this));
-                });
+                    await Task.Delay(10);
             }
         }
 

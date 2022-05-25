@@ -32,7 +32,6 @@
                               x:Name="AddMarker"
                               Margin="5"
                               Command="{Binding SwitchPlacesPanelCommand}"
-                              CommandParameter="{Binding Path=., ElementName=root}"
                               ImageSource="../../Graphics/Icons/Extend.png" Height="80" Width="80"/>
         <ContentControl  Content="{Binding MainMap}"
                          Name="Map"

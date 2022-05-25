@@ -18,12 +18,14 @@ namespace iPhoto.ViewModels
 {
     public class PlacesViewModel : ViewModelBase
     {
-
+        private readonly DatabaseHandler _databaseHandler;
         public GMapControl MainMap { get; }
         public GMapMarker PreviewMarker { get; }
 
 
         public ICommand GetMapPositionCommand { get; }
+
+        public ICommand SwitchPlacesPanelCommand { get; }
 
         public PlacesListViewModel PlacesListViewModel { get; }
 
@@ -45,6 +47,7 @@ namespace iPhoto.ViewModels
 
         public PlacesViewModel(DatabaseHandler databaseHandler)
         {
+            _databaseHandler = databaseHandler;
             MainMap = new GMapControl
             {
                 MapProvider = GMapProviders.GoogleMap,
@@ -67,14 +70,43 @@ namespace iPhoto.ViewModels
             mainMarker.ZIndex = int.MaxValue;
             MainMap.Markers.Add(mainMarker);
             PreviewMarker = mainMarker;
+            addMarkersToMap();
 
-
-            PlacesListViewModel = new PlacesListViewModel();
+            PlacesListViewModel = new PlacesListViewModel(this, databaseHandler);
             AddMarkerViewModel = new AddMarkerViewModel(this, databaseHandler);
 
             SidePlaceViewModel = AddMarkerViewModel;
 
             GetMapPositionCommand = new GetMapPositionCommand(AddMarkerViewModel, this);
+            SwitchPlacesPanelCommand = new SwitchPlacesPanelCommand(this);
+
+        }
+
+        private void addMarkersToMap()
+        {
+            foreach(var place in _databaseHandler.Places)
+            {
+                if (place.Latitude == null && place.Longitude == null)
+                    continue;
+#pragma warning disable CS8629
+                GMapMarker marker = new GMapMarker(new PointLatLng((double)place.Latitude, (double)place.Longitude));
+                SolidColorBrush markerColor = (SolidColorBrush)new BrushConverter().ConvertFromString(place.MapMarkerColor);
+#pragma warning restore CS8629
+                {
+                    marker.Shape = new Ellipse
+                    {
+                        Width = 10,
+                        Height = 10,
+                        Stroke = Brushes.Black,
+                        Fill = markerColor,
+                        StrokeThickness = 1.5
+                    };
+                    marker.Offset = new Point(-5, -5);
+                    marker.ZIndex = int.MaxValue;
+                    marker.Tag = place.Name;
+                    MainMap.Markers.Add(marker);
+                }
+            }
         }
     }
 }
