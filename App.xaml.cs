@@ -2,6 +2,7 @@
 using GoogleDriveHandlerDemo;
 using iPhoto.DataBase;
 using iPhoto.RemoteDatabase;
+using iPhoto.UtilityClasses;
 using iPhoto.ViewModels;
 using iPhoto.Views.SearchPage;
 
@@ -23,6 +24,7 @@ namespace iPhoto
 
             _databaseHandler = new DatabaseHandler();   //MG 15.04
             _remoteDatabaseHandler = new RemoteDatabaseHandler(); //MG 15.05
+            RemotePhotoAdder.SetRemoteDatabaseHandler(_remoteDatabaseHandler); //MG 22.05
 
             MainWindow.DataContext = new MainWindowViewModel(MainWindow, _databaseHandler, _remoteDatabaseHandler, photoDetailsWindow); //MG 15.04
 

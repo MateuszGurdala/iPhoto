@@ -92,5 +92,9 @@ namespace iPhoto.ViewModels
         {
             return _photoData;
         }
+        public void LoadPreviewImage()
+        {
+            ImagePreviewSource = _photoData.PreviewImage;
+        }
     }
 }

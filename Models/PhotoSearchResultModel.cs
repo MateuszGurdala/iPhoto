@@ -35,7 +35,7 @@ namespace iPhoto.Models
             {
                 //_fullPath = "https://drive.google.com/uc?id=" + ImageData.Source;
                 //PreviewImage = DataHandler.LoadBitmapImageAsync(_fullPath, 140);
-                PreviewImage = GoogleDriveHandler.GetBitmapImage(ImageData.Source, 140);
+                PreviewImage = GoogleDriveHandler.GetBitmapImage(ImageData.Source, ImageData.RemoteImageData, 140);
             }
         }
         public BitmapImage GetImage()
@@ -44,7 +44,7 @@ namespace iPhoto.Models
             {
                 if (!PhotoData.IsLocal)
                 {
-                    _image = GoogleDriveHandler.GetBitmapImage(ImageData.Source, null);
+                    _image = GoogleDriveHandler.GetBitmapImage(ImageData.Source, ImageData.RemoteImageData, null);
                 }
                 else
                 {

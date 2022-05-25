@@ -16,13 +16,7 @@ namespace iPhoto.ViewModels.SearchPage
 
         public AddPhotoPopupView ParentView { get; set; }
         public BitmapImage Image { get; set; }
-        public PhotoAdder 
-            
-            
-            
-            
-            
-            PhotoAdder { get; set; }
+        public PhotoAdder PhotoAdder { get; set; }
         public ObservableCollection<string> AlbumList { get; set; }
 
         public AddPhotoPopupViewModel()

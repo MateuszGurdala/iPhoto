@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 using iPhoto.DataBase;
+using iPhoto.RemoteDatabase;
+using iPhoto.ViewModels;
 using iPhoto.ViewModels.SearchPage;
 using iPhoto.Views.SearchPage;
 using iPhoto.Views.AlbumPage;
@@ -17,6 +19,7 @@ namespace iPhoto.UtilityClasses
     {
         //Miscellaneous
         private readonly DatabaseHandler _databaseHandler;
+        private readonly RemoteDatabaseHandler _remoteHandler;
         private BitmapImage _bitmapImage;
         private readonly string _fullPath;
         public AddPhotoPopupView Popup;
@@ -44,6 +47,10 @@ namespace iPhoto.UtilityClasses
                 GetImageData();
             }
         }
+        public PhotoAdder(DatabaseHandler databaseHandler,RemoteDatabaseHandler remoteDatabase, string? fileName) : this(databaseHandler, fileName)
+        {
+            _remoteHandler = remoteDatabase;
+        }
 
         private void GetImageData()
         {
@@ -61,10 +68,23 @@ namespace iPhoto.UtilityClasses
         {
             if (album == null || albumVm == null)
             {
+                var accountViewModel = (App.Current.MainWindow.DataContext as MainWindowViewModel).AccountViewModel;
+
+                var albums = _databaseHandler.GetAlbumList(false);
+
+                if (accountViewModel.CurrentViewModel == accountViewModel.LoggedInViewModel)
+                {
+                    var remoteAlbums = _remoteHandler.GetAlbumList(false);
+                    foreach (var remoteAlbum in remoteAlbums)
+                    {
+                        albums.Add(remoteAlbum);
+                    }
+                }
+
                 var dataContext = new AddPhotoPopupViewModel()
                 {
                     Image = _bitmapImage,
-                    AlbumList = _databaseHandler.GetAlbumList(false)
+                    AlbumList = albums
                 };
                 dataContext.PhotoAdder = this;
                 Popup = new AddPhotoPopupView(dataContext);
@@ -81,22 +101,32 @@ namespace iPhoto.UtilityClasses
         }
         public void AddPhoto(string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
-            CheckData(title, album, rawTags, creationDateString, placeTaken);
-            ParseData(title, album, rawTags, creationDateString, placeTaken);
-
-            //MG 04.05 NIE TYKAĆ BO SIĘ WYWALI RESZTA
-            //await Task.Run(() =>
-            //{
-            _databaseHandler.AddImage(_fileName, _width, _height, _size);
-            _image = _databaseHandler.Images.First(e => e.Source == _fileName);
-            _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _image.Id, _image.Size);
-
-            MoveFileToDatabaseDirectory(); // BUG throws error if same fale in DataBaseDirectory TODO
-            //});
             if (Popup != null)
                 Popup.IsOpen = false;
             else
                 PopupForAlbums.IsOpen = false;
+
+            if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
+            {
+                var source = RemotePhotoAdder.UploadImage(_fileName, _fullPath);
+                var addImageTask = RemotePhotoAdder.AddImage(source, _size, _width, _height);
+                RemotePhotoAdder.AddPhoto(title, album, source, rawTags, creationDateString, placeTaken, addImageTask);
+            }
+            else
+            {
+                CheckData(title, album, rawTags, creationDateString, placeTaken);
+                ParseData(title, album, rawTags, creationDateString, placeTaken);
+
+                //MG 04.05 NIE TYKAĆ BO SIĘ WYWALI RESZTA
+                //await Task.Run(() =>
+                //{
+                _databaseHandler.AddImage(_fileName, _width, _height, _size);
+                _image = _databaseHandler.Images.First(e => e.Source == _fileName);
+                _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _image.Id, _image.Size);
+
+                MoveFileToDatabaseDirectory(); // BUG throws error if same fale in DataBaseDirectory TODO
+                //});
+            }
         }
         public void UpdatePhoto(int id, string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
