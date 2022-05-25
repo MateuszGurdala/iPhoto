@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iPhoto.UtilityClasses;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -327,6 +328,7 @@ namespace iPhoto.DataBase
                 if (imageToDelete != null)
                 {
                     Images.Remove(imageToDelete);
+                    File.Delete(DataHandler.GetDatabaseImageDirectory() + "\\" + imageToDelete.Source);
                     db.ImageEntities.Remove(imageToDelete.GetEntity());
                 }
                 db.PhotoEntities.Remove(photo.GetEntity());

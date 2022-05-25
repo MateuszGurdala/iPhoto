@@ -28,6 +28,12 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <uc:CustomButton
+                              x:Name="AddMarker"
+                              Margin="5"
+                              Command="{Binding SwitchPlacesPanelCommand}"
+                              CommandParameter="{Binding Path=., ElementName=root}"
+                              ImageSource="../../Graphics/Icons/Extend.png" Height="80" Width="80"/>
         <ContentControl  Content="{Binding MainMap}"
                          Name="Map"
                          Margin="10 10 20 20"
