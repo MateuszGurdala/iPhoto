@@ -20,17 +20,22 @@
                 <vs:PlacesListView />
             </DataTemplate>
         </Grid.Resources>
-            
-            <Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <ContentControl  Content="{Binding MainMap}"
                          Name="Map"
                          Margin="10 10 20 20"
                          Grid.Column="1"
+                         Grid.RowSpan="2"
                          MouseLeftButtonDown="MainMap_MouseLeftButtonDown"/>
         <ContentControl Content="{Binding SidePlaceViewModel}"
-                        Grid.Row="0"/>
+                        Grid.Row="1"
+                        Grid.Column="0"/>
     </Grid>
 </UserControl>

@@ -52,7 +52,7 @@ namespace iPhoto.ViewModels.PlacesPage
             longtitudeText = "LONG...";
             _placesViewModel = placesViewModel;
             AddMapMarkerCommand = new AddMapMarkerCommand(placesViewModel, databaseHandler);
-            FindMarkerOnMapCommand = new FindMarkerOnMapCommand();
+            FindMarkerOnMapCommand = new FindMarkerOnMapCommand(placesViewModel);
 
         }
     }

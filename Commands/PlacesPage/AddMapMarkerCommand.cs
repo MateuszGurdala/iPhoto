@@ -46,9 +46,9 @@ namespace iPhoto.Commands.PlacesPage
                     Height = 10,
                     Stroke = Brushes.Black,
                     StrokeThickness = 1.5,
-                    Fill = markerColor,
-                    Tag = name
+                    Fill = markerColor
                 };
+                markerToAdd.Tag = name;
                 markerToAdd.Offset = new Point(-5, -5);
                 markerToAdd.ZIndex = int.MaxValue;
                 _placesViewModel.MainMap.Markers.Add(markerToAdd);

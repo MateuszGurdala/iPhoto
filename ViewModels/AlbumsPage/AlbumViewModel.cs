@@ -67,7 +67,10 @@ namespace iPhoto.ViewModels
             AlbumSearchResultsCollection.Clear();
             foreach (Album album in DatabaseHandler.Albums)
             {
-                AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler,_photoDetailsWindow, album, null, _mainWindowViewModel, this));
+                App.Current.Dispatcher.BeginInvoke((Action)delegate ()
+                {
+                    AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel, this));
+                });
             }
         }
 
