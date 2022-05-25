@@ -18,7 +18,9 @@ namespace iPhoto.ViewModels.PlacesPage
         {
             get
             {
-                return "Photos here: " + 0.ToString();
+                return "Photos here: " + _databaseHandler.Photos
+                    .Where(e=> e.PlaceId == _databaseHandler.Places.FirstOrDefault(b => b.Name == (string)_marker.Tag).Id)
+                    .Count();
             }
         }
         public string LatitudeText => "Lat: " + _marker.Position.Lat.ToString();
