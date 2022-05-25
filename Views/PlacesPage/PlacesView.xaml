@@ -6,7 +6,7 @@
              xmlns:map="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
              xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
              xmlns:vms ="clr-namespace:iPhoto.ViewModels.PlacesPage"
-             xmlns:vs ="clr-namespace:iPhoto.Views.PlacesPage"
+             xmlns:vs ="clr-namespace:iPhoto.Views.PlacesPage" xmlns:viewmodels="clr-namespace:iPhoto.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:PlacesViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -22,15 +22,13 @@
         </Grid.Resources>
             
             <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <map:GMapControl Margin="10 10 20 20"
+        <ContentControl  Content="{Binding MainMap}"
+                         Name="Map"
+                         Margin="10 10 20 20"
                          Grid.Column="1"
-                         x:Name="MainMap" 
-                         Zoom="9" 
-                         MaxZoom="22" 
-                         MinZoom="6"
                          MouseLeftButtonDown="MainMap_MouseLeftButtonDown"/>
         <ContentControl Content="{Binding SidePlaceViewModel}"
                         Grid.Row="0"/>

@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:iPhoto.Views.PlacesPage"
              xmlns:uc="clr-namespace:iPhoto.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="300"
+             Name="root">
     <StackPanel>
             <StackPanel.Resources>
                 <!-- Style for TextBox-->
@@ -82,18 +83,22 @@
                           Margin="20"
                           >
                 <Rectangle x:Name="Green" Fill="Green"  Margin="5" Width="180" Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Lime" Fill="Lime" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                 <Rectangle x:Name="Blue" Fill="Blue" Margin="5" Width="180" Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                 <Rectangle x:Name="Red" Fill="Red" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                 <Rectangle x:Name="Aqua" Fill="Aqua" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                 <Rectangle x:Name="DarkBlue" Fill="DarkBlue" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
-                <Rectangle x:Name="Generic" Fill="LightGray" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="LightGray" Fill="LightGray" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                 <Rectangle x:Name="Orange" Fill="Orange" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                 <Rectangle x:Name="Pink" Fill="Pink" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                 <Rectangle x:Name="Violet" Fill="Purple" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                 <Rectangle x:Name="Yellow" Fill="Yellow" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
-            </ComboBox>
+                <Rectangle x:Name="Black" Fill="Black" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+                <Rectangle x:Name="Magenta" Fill="Magenta" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
+
+        </ComboBox>
             <!--Add Album-->
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             
         
             <uc:CustomButton
@@ -105,7 +110,7 @@
             <uc:CustomButton
                               x:Name="DeleteMarker"
                               Margin="35"
-                              Command="{Binding FindMarkerOnMap}"
+                              Command="{Binding FindMarkerOnMapCommand}"
                               CommandParameter="{Binding Path=., ElementName=root}"
                               ImageSource="../../Graphics/Icons/Search.png" Height="80" Width="80"/>
         </StackPanel>

@@ -48,24 +48,10 @@ namespace iPhoto.Views
         public PlacesView()
         {
             InitializeComponent();
-            MainMap.MapProvider = GMapProviders.GoogleMap;
-            MainMap.Position = new PointLatLng(54.6961334816182, 25.2985095977783);
-            MainMap.ShowCenter = false;
-            mainMarker = new GMapMarker(MainMap.Position);
-                mainMarker.Shape = new Ellipse
-                {
-                    Width = 10,
-                    Height = 10,
-                    Stroke = Brushes.Black,
-                    StrokeThickness = 1.5
-                };
-                mainMarker.Offset = new Point(-5, -5);
-                mainMarker.ZIndex = int.MaxValue;
-                MainMap.Markers.Add(mainMarker);
             
 
 
-            PointLatLng point = new PointLatLng(52.2297, 21.0122);
+/*            PointLatLng point = new PointLatLng(52.2297, 21.0122);
             GMapMarker test_marker = new GMapMarker(point);
             test_marker.Shape = new Ellipse
             {
@@ -78,24 +64,23 @@ namespace iPhoto.Views
             };
             test_marker.Offset = new Point(-5, -5);
             test_marker.ZIndex = int.MaxValue;
-            MainMap.Markers.Add(test_marker);
+            MainMap.Markers.Add(test_marker);*/
 
         }
 
         private void MainMap_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point position = e.GetPosition(MainMap);
+            Point position = e.GetPosition(Map);
             if (GetMapPositionCommand != null)
-           {    
-                GetMapPositionCommand.Execute(MainMap.FromLocalToLatLng((int)position.X, (int)position.Y));
-           }
-           mainMarker.Position = MainMap.FromLocalToLatLng((int)position.X, (int)position.Y);
-
-            var markerToRemove = MainMap.Markers.SingleOrDefault(e => ((FrameworkElement)e.Shape).Name == "MyMarker");
-            if (markerToRemove != null)
             {
-                MainMap.Markers.Remove(markerToRemove);
+                GetMapPositionCommand.Execute(position);
             }
+            /*
+                        var markerToRemove = MainMap.Markers.SingleOrDefault(e => ((FrameworkElement)e.Shape).Name == "MyMarker");
+                        if (markerToRemove != null)
+                        {
+                            MainMap.Markers.Remove(markerToRemove);
+                        }*/
         }
     }
 }
