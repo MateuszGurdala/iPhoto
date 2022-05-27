@@ -461,6 +461,8 @@ namespace iPhoto.DataBase
                     tagsToAdd.Add(tag);
                 }
             }
+            if (tagsToAdd.Count == 0)
+                tagsToAdd.Add("#none");
             album.Tags = tagsToAdd;
             UpdateAlbum(album.Id, null, null, album.Tags);
         }
