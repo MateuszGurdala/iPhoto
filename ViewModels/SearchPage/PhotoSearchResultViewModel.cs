@@ -42,8 +42,13 @@ namespace iPhoto.ViewModels
             }
         }
         public DatabaseHandler Database => SearchViewModel.DatabaseHandler;
-        public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection =>
-            SearchViewModel.PhotoSearchResultsCollection;
+        public ObservableCollection<PhotoSearchResultViewModel> PhotoSearchResultsCollection
+        {
+            get
+            {
+                return SearchViewModel.PhotoSearchResultsCollection;
+            }
+        }
         public ICommand ClickSearchResultCommand { get; }
         public ICommand ClickSearchResultOptionsCommand { get; }
         public ICommand PreviewPhotoCommand { get; }

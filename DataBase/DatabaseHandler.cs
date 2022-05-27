@@ -413,7 +413,13 @@ namespace iPhoto.DataBase
             {
                 throw new InvalidDataException("Wrong place Id.");
             }
-
+            using var db = new DatabaseContext();
+            if (Albums.FirstOrDefault(e => e.Id == photo.AlbumId).CoverPhotoId == photo.ImageId)
+            {
+                var albumObj = Albums.FirstOrDefault(e => e.Id == photo.AlbumId);
+                albumObj.CoverPhotoId = null;
+                db.AlbumEntities.Update(albumObj.GetEntity());
+            }
             RemovePhotoFromAlbum(Albums.FirstOrDefault(e => e.Id == photo.AlbumId), photo);
             photo.Title = title ?? photo.Title;
             photo.AlbumId = Albums.FirstOrDefault(e => e.Name == album) != null ? Albums.FirstOrDefault(e => e.Name == album).Id : photo.AlbumId;
@@ -421,7 +427,6 @@ namespace iPhoto.DataBase
             photo.DateTaken = date ?? photo.DateTaken;
             photo.PlaceId = Places.FirstOrDefault(e => e.Name == place) != null ? Places.FirstOrDefault(e => e.Name == place).Id : photo.PlaceId;
             AddPhotoToAlbum(Albums.FirstOrDefault(e => e.Id == photo.AlbumId), photo);
-            using var db = new DatabaseContext();
             db.PhotoEntities.Update(photo.GetEntity());
             db.SaveChanges();
         }

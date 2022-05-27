@@ -67,8 +67,13 @@ namespace iPhoto.ViewModels
             AlbumSearchResultsCollection.Clear();
             foreach (Album album in DatabaseHandler.Albums)
             {
-                    AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel, this));
-                    await Task.Delay(10);
+                if(album.CoverPhotoId == null && album.PhotoCount > 0)
+                {
+                    album.CoverPhotoId = album.PhotoEntities[0].ImageId;
+                    DatabaseHandler.UpdateAlbum(album.Id, null, null, null, null, null, null, album.CoverPhotoId);
+                }
+                AlbumSearchResultsCollection.Add(new AlbumSearchResultViewModel(DatabaseHandler, _photoDetailsWindow, album, null, _mainWindowViewModel, this));
+                await Task.Delay(10);
             }
         }
 

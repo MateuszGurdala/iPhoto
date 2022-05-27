@@ -12,6 +12,10 @@ namespace iPhoto.Commands.SearchPage
         {
             var viewModel = parameter as PhotoSearchResultViewModel;
             File.Delete(DataHandler.GetDatabaseImageDirectory() + "\\" + viewModel!.GetImageSource());
+            if(viewModel.Database.Albums.FirstOrDefault(e => e.CoverPhotoId == viewModel.GetImageId()) != null)
+            {
+                viewModel.Database.Albums.FirstOrDefault(e => e.CoverPhotoId == viewModel.GetImageId()).CoverPhotoId = null;
+            }
             viewModel!.Database.RemovePhoto(viewModel.GetPhotoId());
             viewModel.Database.RemoveImage(viewModel.GetImageId());
             viewModel.PhotoSearchResultsCollection.Remove(viewModel);           

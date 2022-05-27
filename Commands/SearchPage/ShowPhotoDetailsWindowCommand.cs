@@ -28,8 +28,6 @@ namespace iPhoto.Commands.SearchPage
         }
         private SearchView GetSearchView(PhotoDetailsSideView photoDetailsView)
         {
-            //MG 27.04 Wiem że abominacja, ale żeby to zrobić inaczej trzeba zrobić ogólną refaktoryzację kodu
-            //Kiedyś może to zmienię, póki co działa więc NIE TYKAĆ
             var parentGrid = VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(photoDetailsView)) as Grid;
             var searchView = VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(parentGrid))) as SearchView;
             return searchView;

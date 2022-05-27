@@ -103,6 +103,8 @@ namespace iPhoto.ViewModels.AlbumsPage
             {
                 VM.SearchViewModel.PhotoSearchResultsCollection = PhotoSearchResultsCollection;
             }
+            SearchEngine.LoadParams(new SearchParams(CurrentAlbum));
+            SearchEngine.GetSearchResults(true, true);
         }
     }
 }
