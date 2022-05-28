@@ -19,7 +19,7 @@ namespace iPhoto
         {
             MainWindow = new MainWindow();
 
-            //MG 26.04 Added window object, it will be moved to different model after I solve datacontext override bug
+
             var photoDetailsWindow = new PhotoDetailsWindowView();
 
             _databaseHandler = new DatabaseHandler();   //MG 15.04

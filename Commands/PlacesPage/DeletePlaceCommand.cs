@@ -24,6 +24,13 @@ namespace iPhoto.Commands.PlacesPage
 
         public override void Execute(object parameter)
         {
+            foreach (Photo photo in _databaseHandler.Photos)
+            {
+                if (photo.PlaceId == _databaseHandler.Places.FirstOrDefault(e => e.Name == (string)_placesListElementsViewModel.Marker.Tag).Id)
+                {
+                    _databaseHandler.UpdatePhoto(photo.Id, null, null, null, null, "NoPlace");
+                }
+            }
             _placesViewModel.PlacesListViewModel.RemoveMarkerFromList(_placesListElementsViewModel.Marker);
             _placesViewModel.MainMap.Markers.Remove(_placesListElementsViewModel.Marker);
             _databaseHandler.RemovePlace(_databaseHandler.Places.FirstOrDefault(e => e.Name == (string)_placesListElementsViewModel.Marker.Tag).Id);
