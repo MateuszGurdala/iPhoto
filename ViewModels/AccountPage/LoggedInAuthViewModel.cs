@@ -72,6 +72,11 @@ namespace iPhoto.ViewModels.AccountPage
             _remoteDatabase.LoadAllData();
         }
 
+        public void SetHandler()
+        {
+            _remoteDatabase.SetHandler();
+        }
+
         public void Clear()
         {
             _remoteDatabase.Clear();

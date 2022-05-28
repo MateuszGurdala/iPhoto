@@ -1,5 +1,4 @@
-﻿using System.Security;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using iPhoto.Commands.AccountPage;
 
 namespace iPhoto.ViewModels.AccountPage
@@ -10,7 +9,7 @@ namespace iPhoto.ViewModels.AccountPage
         public ICommand LogInCommand { get; set; }
 
         public string UsernameText { get; set; }
-        public SecureString SecurePassword { get; set; }
+        public string SecurePassword { get; set; }
         public AccountViewModel AccountViewModel;
 
         public LogInViewModel(AccountViewModel accountView)

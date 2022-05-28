@@ -1,4 +1,5 @@
-﻿using iPhoto.ViewModels.AccountPage;
+﻿using iPhoto.UtilityClasses;
+using iPhoto.ViewModels.AccountPage;
 
 namespace iPhoto.Commands.AccountPage
 {
@@ -11,9 +12,14 @@ namespace iPhoto.Commands.AccountPage
             var username = viewModel.UsernameText;
             var password = viewModel.SecurePassword;
 
-            viewModel.AccountViewModel.CurrentViewModel = viewModel.AccountViewModel.LoggedInViewModel;
-            viewModel.AccountViewModel.LoggedInViewModel.LoadAlbums();
+            ApiAuthorizationHandler.Authorize(username, password);
 
+            if (ApiAuthorizationHandler.IsLoggedIn == true)
+            {
+                viewModel.AccountViewModel.LoggedInViewModel.SetHandler();
+                viewModel.AccountViewModel.CurrentViewModel = viewModel.AccountViewModel.LoggedInViewModel;
+                viewModel.AccountViewModel.LoggedInViewModel.LoadAlbums();
+            }
             //Process.Start(new ProcessStartInfo
             //{
             //    FileName = "http://weiti.pl",
