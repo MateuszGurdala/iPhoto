@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iPhoto.UtilityClasses;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -24,7 +25,7 @@ namespace iPhoto.DataBase
             //Delete if loading all data immediately is unnecessary
             LoadAllData();
             //MG 16.04
-            //CreateBaseAlbum();
+            CreateBaseAlbum();
             CreateBasePlace();
             //~MG 16.04
         }
@@ -32,16 +33,16 @@ namespace iPhoto.DataBase
         //MG 16.04
         private void CreateBaseAlbum()
         {
-            if (Albums.FirstOrDefault(e => e.Id == 1) == null)
+            if (Albums.Count == 0)
             {
-                AddAlbum("OtherPhotos", 0, null, null, true, null);
+                AddAlbum("OtherPhotos", 0, null, null, true, "Generic");
             }
         }
         private void CreateBasePlace()
         {
-            if (Places.FirstOrDefault(e => e.Id == 1) == null)
+            if (Places.FirstOrDefault(e => e.Name == "NoPlace") == null)
             {
-                AddPlace("NoPlace", null, null);
+                AddPlace("NoPlace", null, null, null);
             }
         }
         //~MG 16.04
@@ -191,7 +192,7 @@ namespace iPhoto.DataBase
             db.ImageEntities.Add(image.GetEntity());
             db.SaveChanges();
         }
-        public void AddPlace(string name, double? lat, double? lon)
+        public void AddPlace(string name, double? lat, double? lon, string? markerColor)
         {
             var id = Places.Count == 0 ? 0 : Places.OrderByDescending(e => e.Id).FirstOrDefault()!.Id;
 
@@ -200,7 +201,7 @@ namespace iPhoto.DataBase
                 throw new InvalidDataException("Place is already in database.");
             }
 
-            var place = new Place(id + 1, name, lat, lon);
+            var place = new Place(id + 1, name, lat, lon, markerColor);
             Places.Add(place);
 
             using var db = new DatabaseContext();
@@ -327,6 +328,7 @@ namespace iPhoto.DataBase
                 if (imageToDelete != null)
                 {
                     Images.Remove(imageToDelete);
+                    File.Delete(DataHandler.GetDatabaseImageDirectory() + "\\" + imageToDelete.Source);
                     db.ImageEntities.Remove(imageToDelete.GetEntity());
                 }
                 db.PhotoEntities.Remove(photo.GetEntity());

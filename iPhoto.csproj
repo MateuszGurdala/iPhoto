@@ -54,6 +54,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="GMap.NET.Core" Version="2.1.2" />
+    <PackageReference Include="GMap.NET.WinPresentation" Version="2.1.2" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.57.0.2684" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.4" />

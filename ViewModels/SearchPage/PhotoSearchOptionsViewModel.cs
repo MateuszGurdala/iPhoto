@@ -10,10 +10,5 @@ namespace iPhoto.ViewModels.SearchPage
 {
     public class PhotoSearchOptionsViewModel : ViewModelBase
     {
-/*        public ICommand ClearSearchParamsCommand { get; }
-        public PhotoSearchOptionsViewModel()
-        {
-            ClearSearchParamsCommand = new ClearSearchParamsCommand();
-        }*/
     }
 }

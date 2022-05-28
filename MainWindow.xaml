@@ -60,7 +60,8 @@
                     <vsa:AlbumsView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vms:PlacesViewModel}">
-                    <vs:PlacesView />
+                    <vs:PlacesView GetMapPositionCommand="{Binding GetMapPositionCommand}"
+                                   AddMapMarkerCommand="{Binding AddMapMarkerCommand}"/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vms:AccountViewModel}">
                     <accountPage:AccountView />

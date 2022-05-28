@@ -30,17 +30,25 @@ namespace iPhoto.DataBase
             set => _placeEntity.Longitude = value;
         }
 
+        public string? MapMarkerColor
+        {
+            get => _placeEntity.MapMarkerColor;
+            set => _placeEntity.MapMarkerColor = value;
+        }
+
+
         public Place(PlaceEntity placeEntity)
         {
             _placeEntity = placeEntity;
         }
-        public Place(int id, string name, double? lat, double? lon)
+        public Place(int id, string name, double? lat, double? lon, string? markerColor)
         {
             _placeEntity = new PlaceEntity();
             Id = id;
             Name = name;
             Latitude = lat;
             Longitude = lon;
+            MapMarkerColor = markerColor;
         }
 
         public PlaceEntity GetEntity()
