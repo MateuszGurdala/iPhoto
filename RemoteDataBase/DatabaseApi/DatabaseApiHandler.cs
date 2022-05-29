@@ -48,6 +48,7 @@ namespace GoogleDriveHandlerDemo.ApiHandler
         {
             var cookieContainer = new CookieContainer();
             cookieContainer.Add(ApiAuthorizationHandler.GetAuthCookie());
+            cookieContainer.Add(ApiAuthorizationHandler.GetCSRFCookie());
 
             var handler = new HttpClientHandler()
             {
@@ -59,8 +60,9 @@ namespace GoogleDriveHandlerDemo.ApiHandler
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            
+            _httpClient.DefaultRequestHeaders.Add("X-CSRFToken", ApiAuthorizationHandler.CSRF);
         }
+
         public async Task<string> PostImage(string source, double size, int width, int height)
         {
             var image = new ApiImageObject

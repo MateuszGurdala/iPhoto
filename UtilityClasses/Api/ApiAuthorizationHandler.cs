@@ -13,6 +13,7 @@ namespace iPhoto.UtilityClasses
         private static HttpClient _httpClient = new HttpClient();
         public static string SessionCookie { get; set; }
         public static bool IsLoggedIn { get; set; } = false;
+        public static string CSRF { get; set; }
 
         private static void SetHandler()
         {
@@ -40,6 +41,7 @@ namespace iPhoto.UtilityClasses
             {
                 var headers = result.Headers.ToString().Split("\r\n");
                 var cookies = headers[7].Split(';');
+                CSRF = cookies[0].Split('=')[1];
                 SessionCookie = cookies[4].Split(", ")[1];
                 IsLoggedIn = true;
             }
@@ -50,6 +52,18 @@ namespace iPhoto.UtilityClasses
             var name = "sessionid";
             var value = SessionCookie.Split('=')[1];
             var cookie =  new Cookie
+            {
+                Name = name,
+                Value = value,
+                Domain = "iphotos-pap.herokuapp.com"
+            };
+            return cookie;
+        }
+        public static Cookie GetCSRFCookie()
+        {
+            var name = "csrftoken";
+            var value = CSRF;
+            var cookie = new Cookie
             {
                 Name = name,
                 Value = value,
