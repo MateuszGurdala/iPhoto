@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using GoogleDriveHandlerDemo.ApiHandler.ApiResponseObjects;
+using iPhoto.UtilityClasses;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -11,17 +13,13 @@ namespace GoogleDriveHandlerDemo.ApiHandler
 {
     public class DatabaseApiHandler
     {
-        private static readonly HttpClient _httpClient = new HttpClient();
+        private static HttpClient _httpClient = new HttpClient();
         private readonly string _apiUrl = @"http://iphotos-pap.herokuapp.com/api/";
         private List<ApiPhotoObject> _apiPhotoObjects;
         private List<ApiAlbumObject> _apiAlbumObjects;
         private List<ApiPlaceObject> _apiPlaceObjects;
         private List<ApiImageObject> _apiImageObjects;
 
-        public DatabaseApiHandler()
-        {
-            SetHandler();
-        }
         public async Task<List<ApiPhotoObject>> GetPhotos()
         {
             var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "photos");
@@ -46,12 +44,25 @@ namespace GoogleDriveHandlerDemo.ApiHandler
             _apiImageObjects = JsonSerializer.Deserialize<List<ApiImageObject>>(photosApiResult);
             return _apiImageObjects;
         }
-        private void SetHandler()
+        public void SetHandler()
         {
+            var cookieContainer = new CookieContainer();
+            cookieContainer.Add(ApiAuthorizationHandler.GetAuthCookie());
+            cookieContainer.Add(ApiAuthorizationHandler.GetCSRFCookie());
+
+            var handler = new HttpClientHandler()
+            {
+                CookieContainer = cookieContainer
+            };
+
+            _httpClient = new HttpClient(handler);
+
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.Add("X-CSRFToken", ApiAuthorizationHandler.CSRF);
         }
+
         public async Task<string> PostImage(string source, double size, int width, int height)
         {
             var image = new ApiImageObject

@@ -116,5 +116,9 @@ namespace iPhoto.RemoteDatabase
             await LoadPhotos();
         }
 
+        public void SetHandler()
+        {
+            _apiHandler.SetHandler();
+        }
     }
 }

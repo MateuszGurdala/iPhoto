@@ -1,4 +1,5 @@
-﻿using iPhoto.ViewModels.AccountPage;
+﻿using iPhoto.UtilityClasses;
+using iPhoto.ViewModels.AccountPage;
 
 namespace iPhoto.Commands.AccountPage
 {
@@ -10,6 +11,10 @@ namespace iPhoto.Commands.AccountPage
 
             viewModel.AccountViewModel.CurrentViewModel = viewModel.AccountViewModel.LogInViewModel;
             viewModel.AccountViewModel.LoggedInViewModel.Clear();
+
+            ApiAuthorizationHandler.LogOut();
+            ApiAuthorizationHandler.IsLoggedIn = false;
+            ApiAuthorizationHandler.SessionCookie = null;
         }
     }
 }
