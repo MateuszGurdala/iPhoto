@@ -37,7 +37,7 @@
                                FontWeight="Bold" />
                     <TextBlock Text="Albums Online"
                                FontWeight="Bold" />
-                    <TextBlock Text="Last Logged On"
+                    <TextBlock Text="Joined Date"
                                FontWeight="Bold" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical"

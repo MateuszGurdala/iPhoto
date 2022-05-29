@@ -39,15 +39,7 @@ namespace iPhoto.ViewModels.AccountPage
             RecentChanges = new ObservableCollection<RecentChangesInfo>();
             OnlineAlbums = new ObservableCollection<OnlineAlbumViewModel>();
 
-            AccountData = new AccountDataModel()
-            {
-                Account = "Admin",
-                AlbumCount = "2",
-                Email = "igor.potezny@gmail.com",
-                LastLoggedOn = "16.05.2022",
-                Name = "Igor",
-                Surname = "Kraszor"
-            };
+            GetUserData();
 
             RecentChanges.Add(new RecentChangesInfo()
             {
@@ -71,17 +63,20 @@ namespace iPhoto.ViewModels.AccountPage
             }
             _remoteDatabase.LoadAllData();
         }
-
         public void SetHandler()
         {
             _remoteDatabase.SetHandler();
         }
-
         public void Clear()
         {
             _remoteDatabase.Clear();
             RecentChanges.Clear();
             OnlineAlbums.Clear();
+        }
+
+        public async void GetUserData()
+        {
+            AccountData = await _remoteDatabase.GetUserData();
         }
     }
 }

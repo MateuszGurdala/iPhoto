@@ -92,9 +92,9 @@ namespace GoogleDriveHandlerDemo
 
             return request.ResponseBody.Id;
         }
-        public static void DeleteFile(GoogleDatabaseFile file)
+        public static void DeleteFile(string stringId)
         {
-            var command = _driveService.Files.Delete(file.StringId);
+            var command = _driveService.Files.Delete(stringId);
             var result = command.Execute();
         }
         private static string CreateFolder(string folderName)
