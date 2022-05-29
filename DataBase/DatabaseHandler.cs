@@ -450,6 +450,15 @@ namespace iPhoto.DataBase
             }
             return albumCollection;
         }
+        public ObservableCollection<string> GetPlacesList()
+        {
+            var placesCollection = new ObservableCollection<string>();
+            foreach (var place in Places)
+            {
+                placesCollection.Add(place.Name);
+            }
+            return placesCollection;
+        }
         private void AddAlbumTags(Album album, Photo photo)
         {
             List<string> tagsToAdd = new List<string>(album.Tags);

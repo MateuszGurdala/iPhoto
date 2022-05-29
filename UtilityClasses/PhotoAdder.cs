@@ -84,7 +84,8 @@ namespace iPhoto.UtilityClasses
                 var dataContext = new AddPhotoPopupViewModel()
                 {
                     Image = _bitmapImage,
-                    AlbumList = albums
+                    AlbumList = albums,
+                    PlacesList = _databaseHandler.GetPlacesList()
                 };
                 dataContext.PhotoAdder = this;
                 Popup = new AddPhotoPopupView(dataContext);

@@ -24,7 +24,10 @@ namespace iPhoto.Commands.AlbumPage
         }
         public override void Execute(object parameter)
         {
-            var _ = new EditAlbumPopupView(new EditAlbumPopupViewModel(_album, _albumViewModel), _albumViewModel.DatabaseHandler);
+            if (_album.Name != "OtherPhotos")
+            {
+                var _ = new EditAlbumPopupView(new EditAlbumPopupViewModel(_album, _albumViewModel), _albumViewModel.DatabaseHandler);
+            }
         }
     }
 }

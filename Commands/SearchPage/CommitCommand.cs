@@ -8,7 +8,6 @@ namespace iPhoto.Commands.SearchPage
 {
     public class CommitCommand : CommandBase
     {
-        //TODO: ADD DATA VERIFICATION
         private readonly bool _update;
         public CommitCommand(bool update)
         {
@@ -25,7 +24,7 @@ namespace iPhoto.Commands.SearchPage
                 var album = viewModel!.ParentView.Album.Text;
                 var rawTags = viewModel!.ParentView.RawTags.ContentTextBox.Text;
                 var creationDateString = viewModel!.ParentView.CreationDateString.Text;
-                var placeTaken = viewModel!.ParentView.PlaceTaken.ContentTextBox.Text;
+                var placeTaken = viewModel!.ParentView.PlaceTaken.Text;
 
                 viewModel.PhotoAdder.UpdatePhoto(id,title, album, rawTags, creationDateString, placeTaken);
                 viewModel.ParentView.IsOpen = false;
@@ -43,7 +42,7 @@ namespace iPhoto.Commands.SearchPage
                 var album = viewModel!.ParentView.Album.Text;
                 var rawTags = viewModel!.ParentView.RawTags.ContentTextBox.Text;
                 var creationDateString = viewModel!.ParentView.CreationDateString.Text;
-                var placeTaken = viewModel!.ParentView.PlaceTaken.ContentTextBox.Text;
+                var placeTaken = viewModel!.ParentView.PlaceTaken.Text;
 
                 viewModel.PhotoAdder.AddPhoto(title, album, rawTags, creationDateString, placeTaken);
             }

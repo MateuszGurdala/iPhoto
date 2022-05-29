@@ -22,7 +22,7 @@ namespace iPhoto.Models
             _startDate = searchOptions.StartDate.Text;
             //_endDate = searchOptions.EndDate.ContentTextBox.Text;
             _endDate = searchOptions.EndDate.Text;
-            _location = searchOptions.Location.ContentTextBox.Text;
+            _location = searchOptions.Location.Text;
 
             CheckForNull();
         }

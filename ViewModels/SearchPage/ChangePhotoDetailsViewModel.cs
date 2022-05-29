@@ -20,6 +20,8 @@ namespace iPhoto.ViewModels.SearchPage
         public PhotoAdder PhotoAdder { get; set; }
         public int PhotoId { get; set; }
 
+        public ObservableCollection<string> PlacesList { get; set;}
+
 
         public ChangePhotoDetailsViewModel(PhotoSearchResultViewModel photoSearchResultViewModel)
         {
@@ -30,6 +32,7 @@ namespace iPhoto.ViewModels.SearchPage
 
             Image = SearchResultViewModel.Image;
             AlbumList = SearchResultViewModel.Database.GetAlbumList(false);
+            PlacesList = SearchResultViewModel.Database.GetPlacesList();
             PhotoId = SearchResultViewModel.GetPhotoId();
             PhotoAdder = new PhotoAdder(SearchResultViewModel.Database, null);
             PhotoAdder.Popup = ParentView;
@@ -41,7 +44,7 @@ namespace iPhoto.ViewModels.SearchPage
             ParentView.Album.Text = SearchResultViewModel.GetPhotoData().AlbumData.Name;
             ParentView.RawTags.ContentTextBox.Text = SearchResultViewModel.GetPhotoData().PhotoData.RawTags;
             ParentView.CreationDateString.Text = SearchResultViewModel.GetPhotoData().PhotoData.DateTaken.ToString();
-            ParentView.PlaceTaken.ContentTextBox.Text = SearchResultViewModel.GetPhotoData().PlaceData.Name;
+            ParentView.PlaceTaken.Text = SearchResultViewModel.GetPhotoData().PlaceData.Name;
 
             if (ParentView.Title.ContentTextBox.Text != ParentView.Title.EntryText)
             {
@@ -51,10 +54,10 @@ namespace iPhoto.ViewModels.SearchPage
             {
                 ParentView.RawTags.ContentTextBox.Opacity = 1;
             }
-            if (ParentView.PlaceTaken.ContentTextBox.Text != ParentView.PlaceTaken.EntryText)
+/*            if (ParentView.PlaceTaken.ContentTextBox.Text != ParentView.PlaceTaken.EntryText)
             {
                 ParentView.PlaceTaken.ContentTextBox.Opacity = 1;
-            }
+            }*/
         }
     }
 }

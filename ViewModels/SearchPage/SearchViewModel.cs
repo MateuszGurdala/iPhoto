@@ -36,6 +36,13 @@ namespace iPhoto.ViewModels
                 return albums;
             }
         }
+        public ObservableCollection<string> PlacesList
+        {
+            get
+            {
+                return DatabaseHandler.GetPlacesList();
+            }
+        }
         public DatabaseHandler DatabaseHandler { get; } //MG 15.04 added db handler class
         public RemoteDatabaseHandler RemoteDatabaseHandler { get; set; }
         public SearchEngine SearchEngine { get; } //MG 27.04 Added

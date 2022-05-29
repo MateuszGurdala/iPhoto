@@ -139,9 +139,24 @@
                                 </Grid>
                                 <Grid>
                                     <TextBlock Text="Place Taken" />
-                                    <userControls:TextBoxWithTitle x:Name="PlaceTaken"
-                                                                   TextWidth="200"
-                                                                   EntryText="NoPlace" />
+                                    <ComboBox x:Name="PlaceTaken"
+                                              Style="{StaticResource ComboBoxStyle1}"
+                                              Width="200"
+                                              Height="35"
+                                              HorizontalAlignment="Right"
+                                              FontSize="25"
+                                              ItemContainerStyle="{StaticResource ComboBoxItem1}"
+                                              ItemsSource="{Binding PlacesList}"
+                                              SelectedItem="NoPlace">
+                                        <ComboBox.Resources>
+                                            <Style TargetType="ScrollViewer">
+                                                <Setter Property="Background"
+                                                        Value="Transparent" />
+                                                <Setter Property="Padding"
+                                                        Value="0" />
+                                            </Style>
+                                        </ComboBox.Resources>
+                                    </ComboBox>
                                 </Grid>
                             </StackPanel>
                         </Border>
