@@ -46,6 +46,7 @@
     <None Remove="Graphics\ChromeButtons\Resize.png" />
     <None Remove="Graphics\Icons\Test.jpg" />
     <None Remove="Graphics\Icons\Undo.png" />
+    <None Remove="Graphics\Logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -105,6 +106,7 @@
     <Resource Include="Graphics\ChromeButtons\Resize.png" />
     <Resource Include="Graphics\Icons\Test.jpg" />
     <Resource Include="Graphics\Icons\Undo.png" />
+    <Resource Include="Graphics\Logo.png" />
   </ItemGroup>
 
   <ItemGroup>

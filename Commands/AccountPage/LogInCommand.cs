@@ -5,27 +5,26 @@ namespace iPhoto.Commands.AccountPage
 {
     public class LogInCommand : CommandBase
     {
+        private LogInViewModel _viewModel;
         public override void Execute(object parameter)
         {
-            var viewModel = parameter as LogInViewModel;
+            _viewModel = parameter as LogInViewModel;
 
-            var username = viewModel.UsernameText;
-            var password = viewModel.SecurePassword;
+            var username = _viewModel.UsernameText;
+            var password = _viewModel.SecurePassword;
 
-            ApiAuthorizationHandler.Authorize(username, password);
+            ApiAuthorizationHandler.Authorize(username, password, this);
+        }
 
+        public void StartSession()
+        {
             if (ApiAuthorizationHandler.IsLoggedIn == true)
             {
-                viewModel.AccountViewModel.LoggedInViewModel.SetHandler();
-                viewModel.AccountViewModel.CurrentViewModel = viewModel.AccountViewModel.LoggedInViewModel;
-                viewModel.AccountViewModel.LoggedInViewModel.LoadAlbums();
-                viewModel.AccountViewModel.LoggedInViewModel.GetUserData();
+                _viewModel.AccountViewModel.LoggedInViewModel.SetHandler();
+                _viewModel.AccountViewModel.CurrentViewModel = _viewModel.AccountViewModel.LoggedInViewModel;
+                _viewModel.AccountViewModel.LoggedInViewModel.LoadAlbums();
+                _viewModel.AccountViewModel.LoggedInViewModel.GetUserData();
             }
-            //Process.Start(new ProcessStartInfo
-            //{
-            //    FileName = "http://weiti.pl",
-            //    UseShellExecute = true
-            //});
         }
     }
 }

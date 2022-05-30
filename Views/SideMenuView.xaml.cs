@@ -9,7 +9,8 @@ namespace iPhoto.Views
         public SideMenuView()
         {
             InitializeComponent();
-            SideMenuButton[] ButtonsList = { HomeButton, SearchButton, SearchButton, AccountButton, PlacesButton,SettingsButton, AlbumButton };
+            //SideMenuButton[] ButtonsList = { HomeButton, SearchButton, SearchButton, AccountButton, PlacesButton,SettingsButton, AlbumButton };
+            SideMenuButton[] ButtonsList = { HomeButton, SearchButton, SearchButton, AccountButton, PlacesButton, AlbumButton };
             DataContext = new SideMenuViewModel(this, ButtonsList);
             //MG 16.04 made home button clicked on startup
             HomeButton.Button_MouseEnter(HomeButton, null);

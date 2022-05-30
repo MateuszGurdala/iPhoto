@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using GoogleDriveHandlerDemo.ApiHandler.ApiResponseObjects;
+using iPhoto.Commands.AccountPage;
 using iPhoto.UtilityClasses.Api;
 using Newtonsoft.Json;
 
@@ -22,7 +23,7 @@ namespace iPhoto.UtilityClasses
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public static async void Authorize(string username, string password)
+        public static async void Authorize(string username, string password, LogInCommand logInCommand)
         {
             SetHandler();
             var credentials = new ApiAuthObject()
@@ -44,6 +45,8 @@ namespace iPhoto.UtilityClasses
                 CSRF = cookies[0].Split('=')[1];
                 SessionCookie = cookies[4].Split(", ")[1];
                 IsLoggedIn = true;
+
+                logInCommand.StartSession();
             }
         }
 

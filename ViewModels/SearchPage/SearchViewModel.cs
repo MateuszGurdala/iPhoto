@@ -59,16 +59,16 @@ namespace iPhoto.ViewModels
             DatabaseHandler = database;
             RemoteDatabaseHandler = remoteDatabase;
 
-
-            PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
-            photoDetailsWindow.DataContext = PhotoDetails;
-
             SearchEngine = new SearchEngine(DatabaseHandler,RemoteDatabaseHandler, this);
             SearchCommand = new SearchCommand(SearchEngine);
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
             AddPhotoCommand = new AddPhotoCommand(DatabaseHandler, RemoteDatabaseHandler);
             ClearSearchParamsCommand = new ClearSearchParamsCommand(false);
+
+
+            PhotoDetails = new PhotoDetailsViewModel(photoDetailsWindow, ExtendPhotoDetailsCommand as ExtendPhotoDetailsCommand);
+            photoDetailsWindow.DataContext = PhotoDetails;
         }
     }
 }
