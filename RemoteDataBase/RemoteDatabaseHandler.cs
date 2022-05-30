@@ -134,7 +134,6 @@ namespace iPhoto.RemoteDatabase
 
             GoogleDriveHandler.DeleteFile(source);
         }
-
         public async Task<AccountDataModel> GetUserData()
         {
             var apiUserObject = await _apiHandler.GetUserData();

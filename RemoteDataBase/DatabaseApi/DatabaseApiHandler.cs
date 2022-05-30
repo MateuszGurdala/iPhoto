@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -37,6 +38,11 @@ namespace GoogleDriveHandlerDemo.ApiHandler
         {
             var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "places");
             _apiPlaceObjects = JsonSerializer.Deserialize<List<ApiPlaceObject>>(photosApiResult);
+            if (_apiPlaceObjects.Count == 0)
+            {
+                AddBasePlace();
+                await GetPlaces();
+            }
             return _apiPlaceObjects;
         }
         public async Task<List<ApiImageObject>> GetImages()
@@ -48,8 +54,8 @@ namespace GoogleDriveHandlerDemo.ApiHandler
         public async Task<ApiUserObject> GetUserData()
         {
             var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "users");
-            var apiUserObject = JsonSerializer.Deserialize<ApiUserObject>(photosApiResult);
-            return apiUserObject;
+            var apiUserObject = JsonSerializer.Deserialize<List<ApiUserObject>>(photosApiResult);
+            return apiUserObject[0];
         }
         public void SetHandler()
         {
@@ -94,7 +100,7 @@ namespace GoogleDriveHandlerDemo.ApiHandler
                 album = albumId,
                 date_taken = creationDate,
                 image = imageId,
-                place = 1,
+                place = _apiPlaceObjects.FirstOrDefault(e => e.name == "NoPlace").id,
                 tags = tags
             };
 
@@ -104,6 +110,19 @@ namespace GoogleDriveHandlerDemo.ApiHandler
 
             var result = await _httpClient.PostAsync(@"http://iphotos-pap.herokuapp.com/api/photos", content);
             return await result.Content.ReadAsStringAsync();
+        }
+        public async void AddBasePlace()
+        {
+            var place = new ApiPlaceObject()
+            {
+                name = "NoPlace"
+            };
+
+            string json = JsonConvert.SerializeObject(place);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var result = await _httpClient.PostAsync(@"http://iphotos-pap.herokuapp.com/api/places", content);
         }
         public async void RemoveImage(int id)
         {

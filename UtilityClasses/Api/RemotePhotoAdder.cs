@@ -55,10 +55,10 @@ namespace iPhoto.UtilityClasses
             {
                 throw new InvalidDataException("Invalid album name.");
             }
-            if (_databaseHandler.Places.FirstOrDefault(e => e.Name == placeTaken) == null)
-            {
-                throw new InvalidDataException("Invalid place name.");
-            }
+            //if (_databaseHandler.Places.FirstOrDefault(e => e.Name == placeTaken) == null)
+            //{
+            //    throw new InvalidDataException("Invalid place name.");
+            //}
             if (tags != null && tags[0] != '#')
             {
                 throw new InvalidDataException("Invalid tags format.");

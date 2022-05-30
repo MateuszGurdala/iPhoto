@@ -39,8 +39,6 @@ namespace iPhoto.ViewModels.AccountPage
             RecentChanges = new ObservableCollection<RecentChangesInfo>();
             OnlineAlbums = new ObservableCollection<OnlineAlbumViewModel>();
 
-            GetUserData();
-
             RecentChanges.Add(new RecentChangesInfo()
             {
                 DateAndTime = "16.05.2022 16:58",
@@ -72,8 +70,8 @@ namespace iPhoto.ViewModels.AccountPage
             _remoteDatabase.Clear();
             RecentChanges.Clear();
             OnlineAlbums.Clear();
+            AccountData = null;
         }
-
         public async void GetUserData()
         {
             AccountData = await _remoteDatabase.GetUserData();

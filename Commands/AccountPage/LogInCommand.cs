@@ -19,6 +19,7 @@ namespace iPhoto.Commands.AccountPage
                 viewModel.AccountViewModel.LoggedInViewModel.SetHandler();
                 viewModel.AccountViewModel.CurrentViewModel = viewModel.AccountViewModel.LoggedInViewModel;
                 viewModel.AccountViewModel.LoggedInViewModel.LoadAlbums();
+                viewModel.AccountViewModel.LoggedInViewModel.GetUserData();
             }
             //Process.Start(new ProcessStartInfo
             //{
