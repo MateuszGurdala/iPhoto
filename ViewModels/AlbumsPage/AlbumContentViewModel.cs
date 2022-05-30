@@ -84,7 +84,21 @@ namespace iPhoto.ViewModels.AlbumsPage
         ///  Diplay in GUI all photos that are in given album. 
         /// </summary>
         public async void LoadAllAlbumPhotos()
-        { 
+        {
+            var task = FillPhotoSearchResultCollection();
+            await task;
+            task.Wait();
+
+            foreach (var VM in PhotoSearchResultsCollection)
+            {
+                VM.SearchViewModel.PhotoSearchResultsCollection = PhotoSearchResultsCollection;
+            }
+            SearchEngine.LoadParams(new SearchParams(CurrentAlbum));
+            SearchEngine.GetSearchResults(true, true);
+        }
+
+        private async Task FillPhotoSearchResultCollection()
+        {
             foreach (Photo photo in CurrentAlbum.PhotoEntities)
             {
                 if (PhotoSearchResultsCollection.All(y => y.GetImageId() != photo.ImageId))
@@ -94,16 +108,10 @@ namespace iPhoto.ViewModels.AlbumsPage
                         DatabaseHandler.Albums.FirstOrDefault(y => y.Id == CurrentAlbum.Id),
                         DatabaseHandler.Places.FirstOrDefault(y => y.Id == photo.PlaceId),
                         new SearchViewModel(DatabaseHandler, RemoteDatabaseHandler, _photoDetailsWindow)
-                        ));
+                    ));
+                    await Task.Delay(10);
                 }
-                await Task.Delay(10);
             }
-            foreach (var VM in PhotoSearchResultsCollection)
-            {
-                VM.SearchViewModel.PhotoSearchResultsCollection = PhotoSearchResultsCollection;
-            }
-            SearchEngine.LoadParams(new SearchParams(CurrentAlbum));
-            SearchEngine.GetSearchResults(true, true);
         }
     }
 }
