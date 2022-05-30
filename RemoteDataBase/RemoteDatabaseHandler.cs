@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography.Pkcs;
 using System.Threading.Tasks;
 using System.Xml.Schema;
 using GoogleDriveHandlerDemo;
 using GoogleDriveHandlerDemo.ApiHandler;
 using iPhoto.DataBase;
+using iPhoto.Models;
 
 namespace iPhoto.RemoteDatabase
 {
@@ -115,10 +117,27 @@ namespace iPhoto.RemoteDatabase
             var data = _apiHandler.PostPhoto(title, albumId, imageId, tags, dateTaken);
             await LoadPhotos();
         }
-
         public void SetHandler()
         {
             _apiHandler.SetHandler();
+        }
+        public void DeletePhoto(int photoId)
+        {
+            var imageId = Photos.FirstOrDefault(e => e.Id == photoId).ImageId;
+            var source = Images.FirstOrDefault(e => e.Id == imageId).Source;
+
+            photoId -= 1000;
+            imageId -= 1000;
+
+            _apiHandler.RemoveImage(imageId);
+            _apiHandler.RemovePhoto(photoId);
+
+            GoogleDriveHandler.DeleteFile(source);
+        }
+        public async Task<AccountDataModel> GetUserData()
+        {
+            var apiUserObject = await _apiHandler.GetUserData();
+            return new AccountDataModel(apiUserObject);
         }
     }
 }

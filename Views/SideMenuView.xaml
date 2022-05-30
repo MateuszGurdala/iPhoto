@@ -20,8 +20,7 @@
                            Image="{Binding ExtendImage}"
                            Command="{Binding ExtendCommand}"/>-->
 
-        <StackPanel VerticalAlignment="Top"
-                    Margin="0, 100, 0, 0">
+        <StackPanel VerticalAlignment="Center">
             <uc:SideMenuButton x:Name="HomeButton"
                                Text="Home"
                                Image="{Binding HomeImage}">
@@ -73,9 +72,6 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </uc:SideMenuButton>
-        </StackPanel>
-
-        <StackPanel VerticalAlignment="Bottom">
             <uc:SideMenuButton x:Name="AccountButton"
                                Text="Account"
                                Image="{Binding AccountImage}">
@@ -89,7 +85,13 @@
                 </i:Interaction.Triggers>
 
             </uc:SideMenuButton>
-            <uc:SideMenuButton x:Name="SettingsButton"
+        </StackPanel>
+
+        <!--<StackPanel VerticalAlignment="Bottom"
+                    Margin="0, 0, 0, 30">-->
+
+
+            <!--<uc:SideMenuButton x:Name="SettingsButton"
                                Text="Settings"
                                Image="{Binding SettingsImage}"
                                Command="{Binding NavigateCommand}"
@@ -102,7 +104,7 @@
                                                CommandParameter="{Binding ElementName=SettingsButton}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-            </uc:SideMenuButton>
-        </StackPanel>
+            </uc:SideMenuButton>-->
+        <!--</StackPanel>-->
     </Grid>
 </UserControl>

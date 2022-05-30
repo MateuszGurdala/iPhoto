@@ -34,6 +34,8 @@
                                         Command="{Binding LogOutCommand}"
                                         CommandParameter="{Binding .}"/>
             <userControls:CustomButton  ImageSource="../../Graphics/Icons/Online.png" />
+            <userControls:CustomButton  ImageSource="../../Graphics/Icons/Refresh.png"
+                                        Command="{Binding RefreshCommand}"/>
         </StackPanel>
 
         <Grid Row="1"

@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using GoogleDriveHandlerDemo.ApiHandler.ApiResponseObjects;
+using iPhoto.RemoteDataBase.DatabaseApi.ApiResponseObjects;
 using iPhoto.UtilityClasses;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -36,6 +38,11 @@ namespace GoogleDriveHandlerDemo.ApiHandler
         {
             var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "places");
             _apiPlaceObjects = JsonSerializer.Deserialize<List<ApiPlaceObject>>(photosApiResult);
+            if (_apiPlaceObjects.Count == 0)
+            {
+                AddBasePlace();
+                await GetPlaces();
+            }
             return _apiPlaceObjects;
         }
         public async Task<List<ApiImageObject>> GetImages()
@@ -43,6 +50,12 @@ namespace GoogleDriveHandlerDemo.ApiHandler
             var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "images");
             _apiImageObjects = JsonSerializer.Deserialize<List<ApiImageObject>>(photosApiResult);
             return _apiImageObjects;
+        }
+        public async Task<ApiUserObject> GetUserData()
+        {
+            var photosApiResult = await _httpClient.GetStringAsync(_apiUrl + "users");
+            var apiUserObject = JsonSerializer.Deserialize<List<ApiUserObject>>(photosApiResult);
+            return apiUserObject[0];
         }
         public void SetHandler()
         {
@@ -62,7 +75,6 @@ namespace GoogleDriveHandlerDemo.ApiHandler
                 new MediaTypeWithQualityHeaderValue("application/json"));
             _httpClient.DefaultRequestHeaders.Add("X-CSRFToken", ApiAuthorizationHandler.CSRF);
         }
-
         public async Task<string> PostImage(string source, double size, int width, int height)
         {
             var image = new ApiImageObject
@@ -88,7 +100,7 @@ namespace GoogleDriveHandlerDemo.ApiHandler
                 album = albumId,
                 date_taken = creationDate,
                 image = imageId,
-                place = 1,
+                place = _apiPlaceObjects.FirstOrDefault(e => e.name == "NoPlace").id,
                 tags = tags
             };
 
@@ -98,6 +110,27 @@ namespace GoogleDriveHandlerDemo.ApiHandler
 
             var result = await _httpClient.PostAsync(@"http://iphotos-pap.herokuapp.com/api/photos", content);
             return await result.Content.ReadAsStringAsync();
+        }
+        public async void AddBasePlace()
+        {
+            var place = new ApiPlaceObject()
+            {
+                name = "NoPlace"
+            };
+
+            string json = JsonConvert.SerializeObject(place);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var result = await _httpClient.PostAsync(@"http://iphotos-pap.herokuapp.com/api/places", content);
+        }
+        public async void RemoveImage(int id)
+        {
+            var result = await _httpClient.DeleteAsync(@"http://iphotos-pap.herokuapp.com/api/images/" + id.ToString());
+        }
+        public async void RemovePhoto(int id)
+        {
+            var result = await _httpClient.DeleteAsync(@"http://iphotos-pap.herokuapp.com/api/photos/" + id.ToString());
         }
     }
 }

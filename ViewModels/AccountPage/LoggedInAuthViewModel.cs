@@ -28,26 +28,18 @@ namespace iPhoto.ViewModels.AccountPage
         public ObservableCollection<OnlineAlbumViewModel> OnlineAlbums { get; }
         public AccountViewModel AccountViewModel;
         public ICommand LogOutCommand { get; }
+        public ICommand RefreshCommand { get; }
         
-
         public LoggedInAuthViewModel(AccountViewModel accountViewModel,RemoteDatabaseHandler remoteDatabase)
         {
             AccountViewModel = accountViewModel;
             _remoteDatabase = remoteDatabase;
 
             LogOutCommand = new LogOutCommand();
+            RefreshCommand = new RefreshCommand(this);
+
             RecentChanges = new ObservableCollection<RecentChangesInfo>();
             OnlineAlbums = new ObservableCollection<OnlineAlbumViewModel>();
-
-            AccountData = new AccountDataModel()
-            {
-                Account = "Admin",
-                AlbumCount = "2",
-                Email = "igor.potezny@gmail.com",
-                LastLoggedOn = "16.05.2022",
-                Name = "Igor",
-                Surname = "Kraszor"
-            };
 
             RecentChanges.Add(new RecentChangesInfo()
             {
@@ -58,6 +50,7 @@ namespace iPhoto.ViewModels.AccountPage
         public async void LoadAlbums()
         {
             var albums = await _remoteDatabase.LoadAlbums();
+            OnlineAlbums.Clear();
             foreach (var album in albums)
             {
                 OnlineAlbums.Add(new OnlineAlbumViewModel()
@@ -71,17 +64,26 @@ namespace iPhoto.ViewModels.AccountPage
             }
             _remoteDatabase.LoadAllData();
         }
-
         public void SetHandler()
         {
             _remoteDatabase.SetHandler();
         }
-
         public void Clear()
         {
             _remoteDatabase.Clear();
             RecentChanges.Clear();
             OnlineAlbums.Clear();
+            AccountData = null;
+        }
+        public async void GetUserData()
+        {
+            AccountData = await _remoteDatabase.GetUserData();
+            UpdateAlbumCount();
+        }
+        public void UpdateAlbumCount()
+        {
+            AccountData.AlbumCount = _remoteDatabase.Albums.Count.ToString();
+
         }
     }
 }
