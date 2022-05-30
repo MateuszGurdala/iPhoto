@@ -49,7 +49,6 @@ namespace iPhoto.UtilityClasses
                 logInCommand.StartSession();
             }
         }
-
         public static Cookie GetAuthCookie()
         {
             var name = "sessionid";
@@ -74,7 +73,6 @@ namespace iPhoto.UtilityClasses
             };
             return cookie;
         }
-
         public static async void LogOut()
         {
             var cookieContainer = new CookieContainer();

@@ -78,6 +78,12 @@ namespace iPhoto.ViewModels.AccountPage
         public async void GetUserData()
         {
             AccountData = await _remoteDatabase.GetUserData();
+            UpdateAlbumCount();
+        }
+        public void UpdateAlbumCount()
+        {
+            AccountData.AlbumCount = _remoteDatabase.Albums.Count.ToString();
+
         }
     }
 }

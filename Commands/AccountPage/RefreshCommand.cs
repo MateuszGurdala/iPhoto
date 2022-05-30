@@ -17,6 +17,7 @@ namespace iPhoto.Commands.AccountPage
         public override void Execute(object parameter)
         {
             _inAuthViewModel.LoadAlbums();
+            _inAuthViewModel.UpdateAlbumCount();
         }
     }
 }

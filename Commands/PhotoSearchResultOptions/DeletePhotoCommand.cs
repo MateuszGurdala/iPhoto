@@ -19,12 +19,12 @@ namespace iPhoto.Commands.SearchPage
                 File.Delete(DataHandler.GetDatabaseImageDirectory() + "\\" + viewModel!.GetImageSource());
                 viewModel!.Database.RemovePhoto(viewModel.GetPhotoId());
                 viewModel.Database.RemoveImage(viewModel.GetImageId());
-                viewModel.PhotoSearchResultsCollection.Remove(viewModel);
             }
             else if (searchViewModel.RemoteDatabaseHandler.Photos.FirstOrDefault(e => e.Id == id) != null)
             {
                 searchViewModel.RemoteDatabaseHandler.DeletePhoto(id);
             }
+            viewModel.PhotoSearchResultsCollection.Remove(viewModel);
         }
     }
 }

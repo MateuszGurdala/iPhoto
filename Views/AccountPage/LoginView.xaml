@@ -49,7 +49,7 @@
                         <Setter Property="Foreground"
                                 Value="{StaticResource PastelWhiteGradient}" />
                         <Setter Property="FontSize"
-                                Value="50" />
+                                Value="40" />
                     </Style>
                     <Style TargetType="PasswordBox">
                         <Setter Property="Width"
