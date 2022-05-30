@@ -37,6 +37,11 @@ namespace iPhoto.Commands.PlacesPage
                 double lon = double.Parse(view.Longtitude.Text);
                 string color = ((Rectangle)view.AlbumColorsComboBox.SelectedValue).Name;
                 string name = view.PlaceName.Text;
+                if(_databaseHandler.Places.FirstOrDefault(e => e.Name == name) != null)
+                {
+                    MessageBox.Show("Unable to add place. Place with that name already exists. Try again.", "Place Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 SolidColorBrush markerColor = (SolidColorBrush)new BrushConverter().ConvertFromString(color);
                 PointLatLng point = new PointLatLng(lat, lon);
                 GMapMarker markerToAdd = new GMapMarker(point);

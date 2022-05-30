@@ -26,7 +26,7 @@ namespace iPhoto.Commands.SearchPage
                 var creationDateString = viewModel!.ParentView.CreationDateString.Text;
                 var placeTaken = viewModel!.ParentView.PlaceTaken.Text;
 
-                viewModel.PhotoAdder.UpdatePhoto(id,title, album, rawTags, creationDateString, placeTaken);
+                viewModel.PhotoAdder.UpdatePhoto(id,title, album, rawTags, creationDateString, placeTaken, viewModel);
                 viewModel.ParentView.IsOpen = false;
 
                 if (id <= 1000)

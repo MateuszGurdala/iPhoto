@@ -12,6 +12,7 @@ using iPhoto.ViewModels;
 using iPhoto.ViewModels.SearchPage;
 using iPhoto.Views.SearchPage;
 using iPhoto.Views.AlbumPage;
+using System.Windows;
 
 namespace iPhoto.UtilityClasses
 {
@@ -115,60 +116,88 @@ namespace iPhoto.UtilityClasses
             }
             else
             {
-                CheckData(title, album, rawTags, creationDateString, placeTaken);
-                ParseData(title, album, rawTags, creationDateString, placeTaken);
+                if (CheckData(title, album, rawTags, creationDateString, placeTaken))
+                {
+                    ParseData(title, album, rawTags, creationDateString, placeTaken);
 
-                //MG 04.05 NIE TYKAĆ BO SIĘ WYWALI RESZTA
-                //await Task.Run(() =>
-                //{
-                _databaseHandler.AddImage(_fileName, _width, _height, _size);
-                _image = _databaseHandler.Images.First(e => e.Source == _fileName);
-                _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _image.Id, _image.Size);
 
-                MoveFileToDatabaseDirectory(); // BUG throws error if same fale in DataBaseDirectory TODO
-                //});
+                    _databaseHandler.AddImage(_fileName, _width, _height, _size);
+                    _image = _databaseHandler.Images.First(e => e.Source == _fileName);
+                    _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _image.Id, _image.Size);
+
+                    MoveFileToDatabaseDirectory();
+                }
             }
         }
-        public void UpdatePhoto(int id, string title, string album, string rawTags, string? creationDateString, string placeTaken)
+        public void UpdatePhoto(int id, string title, string album, string rawTags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm)
         {
-            CheckUpdateData(title, album, rawTags, creationDateString, placeTaken);
-            ParseData(title, album, rawTags, creationDateString, placeTaken);
 
-            _databaseHandler.UpdatePhoto(id, title, album, rawTags, DateTime.Parse(creationDateString), placeTaken);
+            if (CheckUpdateData(title, album, rawTags, creationDateString, placeTaken, vm))
+            {
+                ParseData(title, album, rawTags, creationDateString, placeTaken);
+
+                _databaseHandler.UpdatePhoto(id, title, album, rawTags, DateTime.Parse(creationDateString), placeTaken);
+            }
         }
-        private void CheckData(string title, string album, string? tags, string? creationDateString, string placeTaken)
+        private bool CheckData(string title, string album, string? tags, string? creationDateString, string placeTaken)
         {
             if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
             {
-                throw new InvalidDataException("Title is already taken");
+                MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Title is already taken");
+                return false;
             }
             if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
             {
-                throw new InvalidDataException("Invalid album name.");
+                MessageBox.Show("Unable to add photo. Album name is invalid. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Invalid album name.");
+                return false;
             }
             if (_databaseHandler.Places.FirstOrDefault(e => e.Name == placeTaken) == null)
             {
-                throw new InvalidDataException("Invalid place name.");
+                MessageBox.Show("Unable to add photo. Place does not exist. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Invalid place name.");
+                return false;
             }
             if (tags != null && tags[0] != '#')
             {
-                throw new InvalidDataException("Invalid tags format.");
+                MessageBox.Show("Unable to add photo. Tags format is invalid. Try again, use '#' before name of a tag.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                // throw new InvalidDataException("Invalid tags format.");
+                return false;
             }
+            return true;
         }
-        private void CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken)
+        private bool CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm)
         {
+            if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+            {
+                vm.ParentView.IsOpen = false;
+                MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Title is already taken");
+                return false;
+            }
             if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
             {
-                throw new InvalidDataException("Invalid album name.");
+                vm.ParentView.IsOpen = false;
+                MessageBox.Show("Unable to add photo. Album name is invalid. Try again.", "Photo Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Invalid album name.");
+                return false;
             }
             if (_databaseHandler.Places.FirstOrDefault(e => e.Name == placeTaken) == null)
             {
-                throw new InvalidDataException("Invalid place name.");
+                vm.ParentView.IsOpen = false;
+                MessageBox.Show("Unable to update photo. Place does not exist. Try again.", "Photo Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Invalid place name.");
+                return false;
             }
             if (tags != null && tags[0] != '#')
             {
-                throw new InvalidDataException("Invalid tags format.");
+                vm.ParentView.IsOpen = false;
+                MessageBox.Show("Unable to update photo. Tags format is invalid. Try again use '#' before name of tag", "Photo Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Invalid tags format.");
+                return false;
             }
+            return true;
         }
         private void ParseData(string title, string album, string rawTags, string? creationDateString, string placeTaken)
         {
@@ -176,7 +205,7 @@ namespace iPhoto.UtilityClasses
             _dateCreated = creationDateString == "" ? DateTime.Now : DateTime.ParseExact(creationDateString, "dd.MM.yyyy", null);
             _title = title == "Default" ? GenerateDefaultTitle() : title;
             _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
-            _albumId = album == "OtherPhotos" ? _databaseHandler.Albums[0].Id : _databaseHandler.Albums.First(e => e.Name == album).Id; // change this after implementing Photo Add checker TODO
+            _albumId = album == "OtherPhotos" ? _databaseHandler.Albums[0].Id : _databaseHandler.Albums.First(e => e.Name == album).Id;
         }
         private void MoveFileToDatabaseDirectory()
         {

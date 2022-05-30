@@ -33,8 +33,10 @@ namespace iPhoto.Commands.AlbumPage
 
             string albumColor = ((Rectangle)view.AlbumColorsComboBox.SelectedItem).Name;
             string albumName = view.AlbumName.Text;
-            _databaseHandler.AddAlbum(albumName, 0, null, DateTime.Now, true, albumColor);
-            _albumViewModel.AddAlbumToView(_databaseHandler.Albums.Last());
+            if(_databaseHandler.AddAlbum(albumName, 0, null, DateTime.Now, true, albumColor))
+            {
+                _albumViewModel.AddAlbumToView(_databaseHandler.Albums.Last());
+            }
         }
     }
 }

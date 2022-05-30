@@ -55,7 +55,7 @@ namespace iPhoto.ViewModels
                 ShowCenter = false,
                 Zoom = 9,
                 MaxZoom = 22,
-                MinZoom = 6
+                MinZoom = 3
             };
             // Marker for previewing location
             GMapMarker mainMarker = new GMapMarker(MainMap.Position);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Windows;
 
 namespace iPhoto.DataBase
 {
@@ -160,21 +161,24 @@ namespace iPhoto.DataBase
         }
 
         //Adding new records
-        public void AddAlbum(string name, int count, List<string>? tags, DateTime? date, bool isLocal, string? colorGroup)
+        public bool AddAlbum(string name, int count, List<string>? tags, DateTime? date, bool isLocal, string? colorGroup)
         {
             var id = Albums.Count == 0 ? 0 : Albums.OrderByDescending(e => e.Id).FirstOrDefault()!.Id;
 
             if (Albums.FirstOrDefault(e => e.Name.Equals(name)) != null)
             {
-                throw new InvalidDataException("Album with that name already exists.");
+                MessageBox.Show("Unable to add album. Album with that name already exists. Try again.", "Add Album Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Album with that name already exists.");
+                return false;
             }
-
+         
             var album = new Album(id + 1, name, count, tags, date, isLocal, colorGroup);
             Albums.Add(album);
 
             using var db = new DatabaseContext();
             db.AlbumEntities.Add(album.GetEntity());
             db.SaveChanges();
+            return true;
         }
         public void AddImage(string source, int width, int height, double size)
         {
@@ -182,7 +186,8 @@ namespace iPhoto.DataBase
 
             if (Images.FirstOrDefault(e => e.Source.Equals(source)) != null)
             {
-                throw new InvalidDataException("Image source is already in database.");
+                MessageBox.Show("Unable to add photo. Image source is already in database. Try again.", "Photo Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Image source is already in database.");
             }
 
             var image = new Image(id + 1, source, width, height, size);
