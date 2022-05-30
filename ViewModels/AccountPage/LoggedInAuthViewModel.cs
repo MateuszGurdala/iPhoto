@@ -28,14 +28,16 @@ namespace iPhoto.ViewModels.AccountPage
         public ObservableCollection<OnlineAlbumViewModel> OnlineAlbums { get; }
         public AccountViewModel AccountViewModel;
         public ICommand LogOutCommand { get; }
+        public ICommand RefreshCommand { get; }
         
-
         public LoggedInAuthViewModel(AccountViewModel accountViewModel,RemoteDatabaseHandler remoteDatabase)
         {
             AccountViewModel = accountViewModel;
             _remoteDatabase = remoteDatabase;
 
             LogOutCommand = new LogOutCommand();
+            RefreshCommand = new RefreshCommand(this);
+
             RecentChanges = new ObservableCollection<RecentChangesInfo>();
             OnlineAlbums = new ObservableCollection<OnlineAlbumViewModel>();
 
@@ -48,6 +50,7 @@ namespace iPhoto.ViewModels.AccountPage
         public async void LoadAlbums()
         {
             var albums = await _remoteDatabase.LoadAlbums();
+            OnlineAlbums.Clear();
             foreach (var album in albums)
             {
                 OnlineAlbums.Add(new OnlineAlbumViewModel()

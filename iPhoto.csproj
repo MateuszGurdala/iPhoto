@@ -120,7 +120,7 @@
     <Page Update="Views\AlbumPage\AlbumsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\HomePageView.xaml">
+    <Page Update="Views\HomePage\HomePageView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SearchPage\PhotoSearchOptionsView.xaml">
