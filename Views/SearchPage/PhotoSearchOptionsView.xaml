@@ -98,8 +98,15 @@
                 </StackPanel>
                 <!--Location-->
                 <TextBlock Text="Location" />
-                <uc:TextBoxWithTitle EntryText="*Any"
-                                     x:Name="Location" />
+                <ComboBox x:Name="Location"
+                          Style="{StaticResource ComboBoxStyle1}"
+                          Width="230"
+                          Height="35"
+                          HorizontalAlignment="Left"
+                          FontSize="25"
+                          ItemContainerStyle="{StaticResource ComboBoxItem1}"
+                          ItemsSource="{Binding PlacesList}"
+                          SelectedIndex="0"/>
 
                 <uc:CustomButton  ImageSource="../../Graphics/Icons/Undo.png"
                                   Margin="0, 40, 15, 0"

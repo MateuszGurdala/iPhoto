@@ -22,9 +22,12 @@ namespace iPhoto.Commands.AlbumPage
 
         public override void Execute(object parameter)
         {
-            _albumViewModel.DeleteAlbumFromView(_album);
-            _albumViewModel.DatabaseHandler.RemoveAllAlbumPhotos(_album.Id);
-            _albumViewModel.DatabaseHandler.RemoveAlbum(_album.Id);
+            if (_album.Name != "OtherPhotos")
+            {
+                _albumViewModel.DeleteAlbumFromView(_album);
+                _albumViewModel.DatabaseHandler.RemoveAllAlbumPhotos(_album.Id);
+                _albumViewModel.DatabaseHandler.RemoveAlbum(_album.Id);
+            }
         }
     }
 }

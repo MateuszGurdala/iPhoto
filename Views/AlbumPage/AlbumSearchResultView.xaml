@@ -155,7 +155,7 @@
                     <uc:CustomButton  ImageSource="../../Graphics/Icons/Delete.png"
                               Margin="0, 12, 0, 0"
                               Command="{Binding DeleteAlbumCommand}"/>
-                    <uc:CustomButton  ImageSource="../../Graphics/Icons/Search.png"
+                    <uc:CustomButton  ImageSource="../../Graphics/Icons/ExtendMenu.png"
                               Margin="0, 12, 0, 0"
                               Command="{Binding EditAlbumCommand}"/>
                 </StackPanel>

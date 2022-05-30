@@ -21,7 +21,7 @@ namespace iPhoto.Models
         public AlbumSearchParams(AlbumSearchView searchView)
         {
                 Name = searchView.Name.ContentTextBox.Text;
-                if (searchView.Tags.ContentTextBox.Text != "*")
+                if (searchView.Tags.ContentTextBox.Text != "*All")
                 {
                     Tags = ParseTags(searchView.Tags.ContentTextBox.Text);
                 }

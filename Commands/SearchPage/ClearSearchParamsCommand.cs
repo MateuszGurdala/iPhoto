@@ -22,11 +22,10 @@ namespace iPhoto.Commands.SearchPage
             view.Tags.ContentTextBox.Clear();
             view.StartDate.Text = "";
             view.EndDate.Text = "";
-            view.Location.ContentTextBox.Clear();
+            view.Location.SelectedIndex = 0;
 
             view.Title.TextBox_LostFocus(view.Title.ContentTextBox, new System.Windows.RoutedEventArgs());
             view.Tags.TextBox_LostFocus(view.Tags.ContentTextBox, new System.Windows.RoutedEventArgs());
-            view.Location.TextBox_LostFocus(view.Location.ContentTextBox, new System.Windows.RoutedEventArgs());
         }
     }
 }

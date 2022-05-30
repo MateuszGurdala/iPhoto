@@ -89,9 +89,13 @@ namespace iPhoto.ViewModels.AlbumsPage
                 {
                     output += tag;
                     output += ", ";
+                    if (output.Length > 20)
+                        break;
                 }
                 output = output.Trim(' ');
                 output = output.Trim(',');
+                if (output.Length > 20)
+                    return string.Concat(output, "...");
                 return output;
             }
         }

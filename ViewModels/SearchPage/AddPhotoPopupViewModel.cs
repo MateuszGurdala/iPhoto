@@ -19,10 +19,12 @@ namespace iPhoto.ViewModels.SearchPage
         public PhotoAdder PhotoAdder { get; set; }
         public ObservableCollection<string> AlbumList { get; set; }
 
+        public ObservableCollection<string> PlacesList { get; set; }
+
         public AddPhotoPopupViewModel()
-        {
-            DiscardCommand = new DiscardCommand();
+        {            DiscardCommand = new DiscardCommand();
             CommitCommand = new CommitCommand(false);
+
         }
     }
 }
