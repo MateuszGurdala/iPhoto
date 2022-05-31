@@ -140,12 +140,12 @@ namespace iPhoto.UtilityClasses
         }
         private bool CheckData(string title, string album, string? tags, string? creationDateString, string placeTaken)
         {
-            if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
-            {
-                MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                //throw new InvalidDataException("Title is already taken");
-                return false;
-            }
+            //if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+            //{
+            //    MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    //throw new InvalidDataException("Title is already taken");
+            //    return false;
+            //}
             if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
             {
                 MessageBox.Show("Unable to add photo. Album name is invalid. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -168,13 +168,13 @@ namespace iPhoto.UtilityClasses
         }
         private bool CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm)
         {
-            if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
-            {
-                vm.ParentView.IsOpen = false;
-                MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                //throw new InvalidDataException("Title is already taken");
-                return false;
-            }
+            //if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+            //{
+            //    vm.ParentView.IsOpen = false;
+            //    MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    //throw new InvalidDataException("Title is already taken");
+            //    return false;
+            //}
             if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
             {
                 vm.ParentView.IsOpen = false;
@@ -202,9 +202,21 @@ namespace iPhoto.UtilityClasses
         {
             _rawTags = rawTags == "#none" ? null : rawTags;
             _dateCreated = creationDateString == "" ? DateTime.Now : DateTime.ParseExact(creationDateString, "dd.MM.yyyy", null);
-            _title = title == "Default" ? GenerateDefaultTitle() : title;
             _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
             _albumId = album == "OtherPhotos" ? _databaseHandler.Albums[0].Id : _databaseHandler.Albums.First(e => e.Name == album).Id;
+
+            var newTitle = title;
+
+            if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+            {
+                var number = 0;
+                while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == newTitle) != null)
+                {
+                    number += 1;
+                    newTitle = title + "(" + number + ")";
+                }
+            }
+            _title = title == "Default" ? GenerateDefaultTitle() : newTitle;
         }
         private void MoveFileToDatabaseDirectory()
         {
@@ -238,7 +250,6 @@ namespace iPhoto.UtilityClasses
                 number += 1;
                 title = DateTime.Now.Date.ToShortDateString() + "photo" + number;
             }
-
             return title;
         }
     }
