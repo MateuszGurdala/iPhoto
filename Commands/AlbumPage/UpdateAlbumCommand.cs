@@ -25,12 +25,13 @@ namespace iPhoto.Commands.AlbumPage
 
             string newColorGroup = ((Rectangle)view.ColorsComboBox.SelectedItem).Name;
             string newName = view.Name.ContentTextBox.Text;
-            if(_albumViewModel.DatabaseHandler.Albums.FirstOrDefault(e => e.Name == newName) != null)
+            if(_albumViewModel.DatabaseHandler.Albums.FirstOrDefault(e => e.Name == newName) != null && _album.Name != newName)
             {
                 view.IsOpen = false;
                 MessageBox.Show("Unable to add photo. Album with that name already exists. Try again.", "Album Edit Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 return;
+                
             }
             int? imageId;
             if (_albumViewModel.DatabaseHandler.Photos.FirstOrDefault(e => e.Title == (string)view.PhotosComboBox.SelectedItem) != null)

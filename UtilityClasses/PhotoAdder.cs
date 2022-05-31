@@ -116,17 +116,16 @@ namespace iPhoto.UtilityClasses
             }
             else
             {
-                if (CheckData(title, album, rawTags, creationDateString, placeTaken))
-                {
-                    ParseData(title, album, rawTags, creationDateString, placeTaken);
+                if (!CheckData(title, album, rawTags, creationDateString, placeTaken))
+                    return;
+                ParseData(title, album, rawTags, creationDateString, placeTaken);
+                if(!_databaseHandler.AddImage(_fileName, _width, _height, _size))
+                    return;
+                _image = _databaseHandler.Images.First(e => e.Source == _fileName);
+                _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _image.Id, _image.Size);
 
-
-                    _databaseHandler.AddImage(_fileName, _width, _height, _size);
-                    _image = _databaseHandler.Images.First(e => e.Source == _fileName);
-                    _databaseHandler.AddPhoto(_title, _albumId, _rawTags, _dateCreated, _placeId, _image.Id, _image.Size);
-
-                    MoveFileToDatabaseDirectory();
-                }
+                MoveFileToDatabaseDirectory();
+                
             }
         }
         public void UpdatePhoto(int id, string title, string album, string rawTags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm)

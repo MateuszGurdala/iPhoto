@@ -180,7 +180,7 @@ namespace iPhoto.DataBase
             db.SaveChanges();
             return true;
         }
-        public void AddImage(string source, int width, int height, double size)
+        public bool AddImage(string source, int width, int height, double size)
         {
             var id = Images.Count == 0 ? 0 : Images.OrderByDescending(e => e.Id).FirstOrDefault()!.Id;
 
@@ -188,6 +188,7 @@ namespace iPhoto.DataBase
             {
                 MessageBox.Show("Unable to add photo. Image source is already in database. Try again.", "Photo Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 //throw new InvalidDataException("Image source is already in database.");
+                return false;
             }
 
             var image = new Image(id + 1, source, width, height, size);
@@ -196,6 +197,7 @@ namespace iPhoto.DataBase
             using var db = new DatabaseContext();
             db.ImageEntities.Add(image.GetEntity());
             db.SaveChanges();
+            return true;
         }
         public void AddPlace(string name, double? lat, double? lon, string? markerColor)
         {
