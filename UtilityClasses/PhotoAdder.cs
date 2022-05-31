@@ -135,7 +135,7 @@ namespace iPhoto.UtilityClasses
             {
                 ParseData(title, album, rawTags, creationDateString, placeTaken);
 
-                _databaseHandler.UpdatePhoto(id, title, album, rawTags, DateTime.Parse(creationDateString), placeTaken);
+                _databaseHandler.UpdatePhoto(id, _title, album, _rawTags, DateTime.Parse(creationDateString), placeTaken);
             }
         }
         private bool CheckData(string title, string album, string? tags, string? creationDateString, string placeTaken)
