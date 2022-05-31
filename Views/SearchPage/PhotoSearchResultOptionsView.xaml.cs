@@ -19,9 +19,8 @@ namespace iPhoto.Views
         public PhotoSearchResultViewModel ViewModel { get; set; }
         public ICommand PreviewCommand { get; }
         public ICommand ChangeDetailsCommand { get; }
-        public ICommand AddToAlbumCommand { get; }
-        public ICommand RenameCommand { get; }
         public ICommand DeleteCommand { get; }
+        public bool CanEditDetails { get; set; }
 
         public PhotoSearchResultOptionsView(PhotoSearchResultViewModel viewModel)
         {
@@ -30,7 +29,17 @@ namespace iPhoto.Views
 
             PreviewCommand = new PreviewPhotoCommand();
             DeleteCommand = new DeletePhotoCommand();
-            ChangeDetailsCommand = new ChangePhotoDetailsCommand(viewModel);
+
+            if (ViewModel.GetPhotoId() >= 1000)
+            {
+                ChangeDetailsCommand = new NullCommand();
+                CanEditDetails = false;
+            }
+            else
+            {
+                ChangeDetailsCommand = new ChangePhotoDetailsCommand(viewModel);
+                CanEditDetails = true;
+            }
         }
 
         private void AnimateEntrance(object sender, EventArgs e)
@@ -119,7 +128,7 @@ namespace iPhoto.Views
         private void ChangeDetails(object sender, MouseButtonEventArgs e)
         {
             ChangeDetailsCommand.Execute(null);
-            AnimateLeave(sender, e);
+            //AnimateLeave(sender, e);
         }
     }
 }

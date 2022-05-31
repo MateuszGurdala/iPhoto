@@ -123,14 +123,23 @@ namespace iPhoto.RemoteDatabase
         }
         public void DeletePhoto(int photoId)
         {
-            var imageId = Photos.FirstOrDefault(e => e.Id == photoId).ImageId;
-            var source = Images.FirstOrDefault(e => e.Id == imageId).Source;
+            var photo = Photos.FirstOrDefault(e => e.Id == photoId);
+            var image = Images.FirstOrDefault(e => e.Id == photo.ImageId);
+
+            var imageId = photo.ImageId;
+            var source = image.Source;
+
 
             photoId -= 1000;
             imageId -= 1000;
 
             _apiHandler.RemoveImage(imageId);
             _apiHandler.RemovePhoto(photoId);
+
+            Images.Remove(image);
+            Photos.Remove(photo);
+
+            LoadAllData();
 
             GoogleDriveHandler.DeleteFile(source);
         }

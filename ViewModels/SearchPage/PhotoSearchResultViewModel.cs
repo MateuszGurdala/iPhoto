@@ -11,7 +11,6 @@ namespace iPhoto.ViewModels
     {
         public IPhotoSearchVM SearchViewModel { get; }
         private readonly PhotoSearchResultModel _photoData;
-
         public BitmapImage ImagePreviewSource
         {
             get
@@ -24,7 +23,6 @@ namespace iPhoto.ViewModels
                 OnPropertyChanged(nameof(ImagePreviewSource));
             }
         }
-            
         public BitmapImage Image => _photoData.GetImage();
         //MG 26.04 Fixed title display settings
         public string PhotoTitle

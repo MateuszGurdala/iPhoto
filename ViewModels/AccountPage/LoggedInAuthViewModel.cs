@@ -29,6 +29,7 @@ namespace iPhoto.ViewModels.AccountPage
         public AccountViewModel AccountViewModel;
         public ICommand LogOutCommand { get; }
         public ICommand RefreshCommand { get; }
+        public ICommand ToWebPageCommand { get; }
         
         public LoggedInAuthViewModel(AccountViewModel accountViewModel,RemoteDatabaseHandler remoteDatabase)
         {
@@ -37,6 +38,7 @@ namespace iPhoto.ViewModels.AccountPage
 
             LogOutCommand = new LogOutCommand();
             RefreshCommand = new RefreshCommand(this);
+            ToWebPageCommand = new ToWebPageCommand();
 
             RecentChanges = new ObservableCollection<RecentChangesInfo>();
             OnlineAlbums = new ObservableCollection<OnlineAlbumViewModel>();
