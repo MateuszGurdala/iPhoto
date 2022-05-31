@@ -19,7 +19,7 @@ namespace iPhoto.ViewModels
         private ObservableCollection<AlbumSearchResultViewModel> _albumSearchResultsCollection;
         public SearchAlbumsCommand SearchAlbumsCommand { get; }
         private readonly MainWindowViewModel _mainWindowViewModel;
-        public DatabaseHandler DatabaseHandler;
+        public DatabaseHandler DatabaseHandler { get; }
         private readonly PhotoDetailsWindowView _photoDetailsWindow;
         public AddAlbumViewModel AddAlbumViewModel { get; }
 
@@ -33,9 +33,11 @@ namespace iPhoto.ViewModels
             get { return _albumSearchResultsCollection; }
             set { _albumSearchResultsCollection = value; }
         }
+
         public AlbumViewModel(DatabaseHandler DataBase, MainWindowViewModel mainWindowViewModel, PhotoDetailsWindowView photoDetailsWindow)
         {
             DatabaseHandler = DataBase;
+            
             _mainWindowViewModel = mainWindowViewModel;
             _photoDetailsWindow = photoDetailsWindow;
             _albumSearchResultsCollection = new ObservableCollection<AlbumSearchResultViewModel>();
@@ -44,6 +46,7 @@ namespace iPhoto.ViewModels
             DisplayAllAlbums();
             SearchAlbumEngine = new SearchAlbumEngine(DataBase);
             SearchAlbumsCommand = new SearchAlbumsCommand(this);
+            
         }
 
         public void AddAlbumToView(Album album)

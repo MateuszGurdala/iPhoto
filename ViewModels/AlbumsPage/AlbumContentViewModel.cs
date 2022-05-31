@@ -53,6 +53,8 @@ namespace iPhoto.ViewModels.AlbumsPage
         public RemoteDatabaseHandler RemoteDatabaseHandler { get;}
         public PhotoDetailsViewModel PhotoDetails { get; }
         public SearchEngine SearchEngine { get; }
+        public ObservableCollection<string> PlacesList => DatabaseHandler.GetPlacesList();
+
 
         public AlbumContentViewModel(DatabaseHandler database,RemoteDatabaseHandler remoteDatabase, PhotoDetailsWindowView photoDetailsWindow, MainWindowViewModel mainWindowVM, Album currentAlbum, AlbumViewModel albumViewModel)
         {
@@ -65,9 +67,8 @@ namespace iPhoto.ViewModels.AlbumsPage
             SearchEngine = new SearchEngine(DatabaseHandler, remoteDatabase , this);      
             CurrentAlbum = currentAlbum;
 
-
-                // COMMANDS
-                SearchCommand = new SearchCommand(SearchEngine, this);
+            // COMMANDS
+            SearchCommand = new SearchCommand(SearchEngine, this);
             ExtendSearchMenuCommand = new ExtendSearchMenuCommand();
             ExtendPhotoDetailsCommand = new ExtendPhotoDetailsCommand(photoDetailsWindow);
             AddPhotoToAlbumCommand = new AddPhotoToAlbumCommand(DatabaseHandler, currentAlbum, this);

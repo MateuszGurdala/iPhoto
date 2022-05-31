@@ -80,7 +80,7 @@
                           HorizontalAlignment="Center"
                           SelectedIndex="0"
                           ItemContainerStyle="{StaticResource ComboBoxItem1}"
-                          Margin="20"
+                          Margin="10"
                           >
                 <Rectangle x:Name="Green" Fill="Green"  Margin="5" Width="180" Height="30" RadiusX="10" RadiusY="10"></Rectangle>
                 <Rectangle x:Name="Lime" Fill="Lime" Margin="5" Width="180"  Height="30" RadiusX="10" RadiusY="10"></Rectangle>
