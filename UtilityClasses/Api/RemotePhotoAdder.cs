@@ -62,12 +62,12 @@ namespace iPhoto.UtilityClasses
                 return false;
                 //throw new InvalidDataException("Invalid album name.");
             }
-            if (_databaseHandler.Places.FirstOrDefault(e => e.Name == placeTaken) == null)
+/*            if (_databaseHandler.Places.FirstOrDefault(e => e.Name == placeTaken) == null)
             {
                 MessageBox.Show("Unable to add photo. Place does not exist. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
                 //throw new InvalidDataException("Invalid place name.");
-            }
+            }*/
             if (tags != null && tags[0] != '#')
             {
                 MessageBox.Show("Unable to add photo. Tags format is invalid. Try again, use '#' before name of a tag.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -84,11 +84,11 @@ namespace iPhoto.UtilityClasses
 
                 //throw new InvalidDataException("Invalid album name.");
             }
-            if (_databaseHandler.Places.FirstOrDefault(e => e.Name == placeTaken) == null)
+/*            if (_databaseHandler.Places.FirstOrDefault(e => e.Name == placeTaken) == null)
             {
                 MessageBox.Show("Unable to update photo. Place does not exist. Try again.", "Photo Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 // throw new InvalidDataException("Invalid place name.");
-            }
+            }*/
             if (tags != null && tags[0] != '#')
             {
                 MessageBox.Show("Unable to update photo. Tags format is invalid. Try again, use '#' before name of tag.", "Photo Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
