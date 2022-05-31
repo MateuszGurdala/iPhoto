@@ -205,17 +205,18 @@ namespace iPhoto.UtilityClasses
             _placeId = _databaseHandler.Places.First(e => e.Name == placeTaken).Id;
             _albumId = album == "OtherPhotos" ? _databaseHandler.Albums[0].Id : _databaseHandler.Albums.First(e => e.Name == album).Id;
 
+            var newTitle = title;
+
             if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
             {
                 var number = 0;
-                while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+                while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == newTitle) != null)
                 {
                     number += 1;
-                    title = title + "(" + number + ")";
+                    newTitle = title + "(" + number + ")";
                 }
             }
-
-            _title = title == "Default" ? GenerateDefaultTitle() : title;
+            _title = title == "Default" ? GenerateDefaultTitle() : newTitle;
         }
         private void MoveFileToDatabaseDirectory()
         {
