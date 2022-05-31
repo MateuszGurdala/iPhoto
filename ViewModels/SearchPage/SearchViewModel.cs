@@ -40,7 +40,7 @@ namespace iPhoto.ViewModels
         {
             get
             {
-                return DatabaseHandler.GetPlacesList();
+                return DatabaseHandler.GetPlacesList(true);
             }
         }
         public DatabaseHandler DatabaseHandler { get; } //MG 15.04 added db handler class

@@ -32,7 +32,7 @@ namespace iPhoto.ViewModels.SearchPage
 
             Image = SearchResultViewModel.Image;
             AlbumList = SearchResultViewModel.Database.GetAlbumList(false);
-            PlacesList = SearchResultViewModel.Database.GetPlacesList();
+            PlacesList = SearchResultViewModel.Database.GetPlacesList(false);
             PhotoId = SearchResultViewModel.GetPhotoId();
             PhotoAdder = new PhotoAdder(SearchResultViewModel.Database, null);
             PhotoAdder.Popup = ParentView;

@@ -53,7 +53,7 @@ namespace iPhoto.Commands.AlbumPage
         /// <param name="fileDialog"> file Dialog handler</param>
         private void ConfigureDialog(OpenFileDialog fileDialog)
         {
-            fileDialog.Filter = "Image files (*.png;)|*.png;";
+            fileDialog.Filter = "Image files (*.png; *.jpg; *.jpeg;)|*.png; *.jpg; *.jpeg;";
             fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             fileDialog.Multiselect = true;
         }

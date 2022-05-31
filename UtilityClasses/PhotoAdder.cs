@@ -89,7 +89,7 @@ namespace iPhoto.UtilityClasses
                 {
                     Image = _bitmapImage,
                     AlbumList = albums,
-                    PlacesList = _databaseHandler.GetPlacesList()
+                    PlacesList = _databaseHandler.GetPlacesList(false)
                 };
                 dataContext.PhotoAdder = this;
                 Popup = new AddPhotoPopupView(dataContext);
@@ -212,7 +212,7 @@ namespace iPhoto.UtilityClasses
 
             if (Update && _databaseHandler.Photos.FirstOrDefault(e => e.Id == _id).Title != title)
             {
-                if (title == "Default" && _databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+                if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
                 {
                     var number = 0;
                     while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == newTitle) != null)
@@ -224,7 +224,7 @@ namespace iPhoto.UtilityClasses
             }
             else if (!Update)
             {
-                if (title == "Default" && _databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+                if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
                 {
                     var number = 0;
                     while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == newTitle) != null)

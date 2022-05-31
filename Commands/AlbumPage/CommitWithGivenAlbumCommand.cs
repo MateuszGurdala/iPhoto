@@ -25,6 +25,8 @@ namespace iPhoto.Commands.AlbumPage
             var creationDateString = viewModel!.ParentView.CreationDateString.Text;
             var placeTaken = viewModel!.ParentView.PlaceTaken.Text;
 
+            viewModel.PhotoAdder.Update = false;
+
             viewModel.PhotoAdder.AddPhoto(title, album, rawTags, creationDateString, placeTaken);
             _albumVm.LoadAllAlbumPhotos();
         }

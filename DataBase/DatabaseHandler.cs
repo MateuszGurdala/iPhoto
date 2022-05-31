@@ -461,9 +461,13 @@ namespace iPhoto.DataBase
             }
             return albumCollection;
         }
-        public ObservableCollection<string> GetPlacesList()
+        public ObservableCollection<string> GetPlacesList(bool addStar)
         {
             var placesCollection = new ObservableCollection<string>();
+            if (addStar)
+            {
+                placesCollection.Add("*");
+            }
             foreach (var place in Places)
             {
                 placesCollection.Add(place.Name);
