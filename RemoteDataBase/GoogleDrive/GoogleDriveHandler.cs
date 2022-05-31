@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Windows.Media.Imaging;
@@ -95,7 +96,14 @@ namespace GoogleDriveHandlerDemo
         public static void DeleteFile(string stringId)
         {
             var command = _driveService.Files.Delete(stringId);
-            var result = command.Execute();
+            try
+            {
+                var result = command.Execute();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
         private static string CreateFolder(string folderName)
         {

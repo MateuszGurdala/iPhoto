@@ -26,6 +26,8 @@ namespace iPhoto.Commands.SearchPage
                 var creationDateString = viewModel!.ParentView.CreationDateString.Text;
                 var placeTaken = viewModel!.ParentView.PlaceTaken.Text;
 
+                viewModel.PhotoAdder.Update = true;
+
                 viewModel.PhotoAdder.UpdatePhoto(id,title, album, rawTags, creationDateString, placeTaken, viewModel);
                 viewModel.ParentView.IsOpen = false;
 
@@ -44,7 +46,10 @@ namespace iPhoto.Commands.SearchPage
                 var creationDateString = viewModel!.ParentView.CreationDateString.Text;
                 var placeTaken = viewModel!.ParentView.PlaceTaken.Text;
 
+                viewModel.PhotoAdder.Update = false;
+
                 viewModel.PhotoAdder.AddPhoto(title, album, rawTags, creationDateString, placeTaken);
+                viewModel.ParentView.IsOpen = false;
             }
         }
     }
