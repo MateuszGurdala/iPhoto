@@ -131,7 +131,7 @@ namespace iPhoto.UtilityClasses
         public void UpdatePhoto(int id, string title, string album, string rawTags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm)
         {
 
-            if (CheckUpdateData(title, album, rawTags, creationDateString, placeTaken, vm))
+            if (CheckUpdateData(title, album, rawTags, creationDateString, placeTaken, vm, id))
             {
                 ParseData(title, album, rawTags, creationDateString, placeTaken);
 
@@ -166,15 +166,15 @@ namespace iPhoto.UtilityClasses
             }
             return true;
         }
-        private bool CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm)
+        private bool CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm, int photoId)
         {
-            //if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
-            //{
-            //    vm.ParentView.IsOpen = false;
-            //    MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    //throw new InvalidDataException("Title is already taken");
-            //    return false;
-            //}
+            if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null && title != _databaseHandler.Photos.FirstOrDefault(e => e.Id == photoId).Title)
+            {
+                vm.ParentView.IsOpen = false;
+                MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //throw new InvalidDataException("Title is already taken");
+                return false;
+            }
             if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
             {
                 vm.ParentView.IsOpen = false;
