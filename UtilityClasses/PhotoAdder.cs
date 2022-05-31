@@ -210,9 +210,9 @@ namespace iPhoto.UtilityClasses
 
             var newTitle = title;
 
-            if (_databaseHandler.Photos.FirstOrDefault(e => e.Id == _id).Title != title)
+            if (Update && _databaseHandler.Photos.FirstOrDefault(e => e.Id == _id).Title != title)
             {
-                if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+                if (title == "Default" && _databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
                 {
                     var number = 0;
                     while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == newTitle) != null)
@@ -222,6 +222,19 @@ namespace iPhoto.UtilityClasses
                     }
                 }
             }
+            else if (!Update)
+            {
+                if (title == "Default" && _databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+                {
+                    var number = 0;
+                    while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == newTitle) != null)
+                    {
+                        number += 1;
+                        newTitle = title + "(" + number + ")";
+                    }
+                }
+            }
+
             _title = title == "Default" ? GenerateDefaultTitle() : newTitle;
         }
         private void MoveFileToDatabaseDirectory()
