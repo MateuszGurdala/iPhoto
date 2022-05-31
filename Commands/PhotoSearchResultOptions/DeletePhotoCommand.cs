@@ -25,6 +25,7 @@ namespace iPhoto.Commands.SearchPage
                 searchViewModel.RemoteDatabaseHandler.DeletePhoto(id);
             }
             viewModel.PhotoSearchResultsCollection.Remove(viewModel);
+            searchViewModel.PhotoSearchResultsCollection.Clear();
         }
     }
 }
