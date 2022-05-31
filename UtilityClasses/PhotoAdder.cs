@@ -25,6 +25,8 @@ namespace iPhoto.UtilityClasses
         private readonly string _fullPath;
         public AddPhotoPopupView Popup;
         public AddPhotoToAlbumPopupView PopupForAlbums;
+        public bool Update { get; set; } = false;
+
         //Image
         private string _fileName;
         private int _width;
@@ -32,6 +34,7 @@ namespace iPhoto.UtilityClasses
         private double _size;
 
         //Photo
+        private int _id;
         private string _title;
         private string? _rawTags;
         private DateTime? _dateCreated;
@@ -130,8 +133,8 @@ namespace iPhoto.UtilityClasses
         }
         public void UpdatePhoto(int id, string title, string album, string rawTags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm)
         {
-
-            if (CheckUpdateData(title, album, rawTags, creationDateString, placeTaken, vm, id))
+            _id = id;
+            if (CheckUpdateData(title, album, rawTags, creationDateString, placeTaken, vm))
             {
                 ParseData(title, album, rawTags, creationDateString, placeTaken);
 
@@ -166,15 +169,15 @@ namespace iPhoto.UtilityClasses
             }
             return true;
         }
-        private bool CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm, int photoId)
+        private bool CheckUpdateData(string title, string album, string? tags, string? creationDateString, string placeTaken, ChangePhotoDetailsViewModel vm)
         {
-            if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null && title != _databaseHandler.Photos.FirstOrDefault(e => e.Id == photoId).Title)
-            {
-                vm.ParentView.IsOpen = false;
-                MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                //throw new InvalidDataException("Title is already taken");
-                return false;
-            }
+            //if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null && title != _databaseHandler.Photos.FirstOrDefault(e => e.Id == photoId).Title)
+            //{
+            //    vm.ParentView.IsOpen = false;
+            //    MessageBox.Show("Unable to add photo. Title is already taken. Try again.", "Photo Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    //throw new InvalidDataException("Title is already taken");
+            //    return false;
+            //}
             if (_databaseHandler.Albums.FirstOrDefault(e => e.Name == album) == null)
             {
                 vm.ParentView.IsOpen = false;
@@ -207,13 +210,16 @@ namespace iPhoto.UtilityClasses
 
             var newTitle = title;
 
-            if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
+            if (_databaseHandler.Photos.FirstOrDefault(e => e.Id == _id).Title != title)
             {
-                var number = 0;
-                while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == newTitle) != null)
+                if (_databaseHandler.Photos.FirstOrDefault(e => e.Title == title) != null)
                 {
-                    number += 1;
-                    newTitle = title + "(" + number + ")";
+                    var number = 0;
+                    while (_databaseHandler.Photos.FirstOrDefault(e => e.Title == newTitle) != null)
+                    {
+                        number += 1;
+                        newTitle = title + "(" + number + ")";
+                    }
                 }
             }
             _title = title == "Default" ? GenerateDefaultTitle() : newTitle;
