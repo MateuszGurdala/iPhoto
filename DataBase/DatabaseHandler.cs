@@ -263,6 +263,10 @@ namespace iPhoto.DataBase
         //Removing records
         private void RemovePhotoFromAlbum(Album album, Photo photo)
         {
+            if(album.CoverPhotoId == photo.Id)
+            {
+                album.CoverPhotoId = null;
+            }
             album.PhotoEntities.Remove(photo);
             album.PhotoCount--;
             UpdateAlbum(album.Id, null, album.PhotoCount);
