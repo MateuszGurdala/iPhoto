@@ -53,7 +53,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         public RemoteDatabaseHandler RemoteDatabaseHandler { get;}
         public PhotoDetailsViewModel PhotoDetails { get; }
         public SearchEngine SearchEngine { get; }
-        public ObservableCollection<string> PlacesList => DatabaseHandler.GetPlacesList();
+        public ObservableCollection<string> PlacesList => DatabaseHandler.GetPlacesList(true);
 
 
         public AlbumContentViewModel(DatabaseHandler database,RemoteDatabaseHandler remoteDatabase, PhotoDetailsWindowView photoDetailsWindow, MainWindowViewModel mainWindowVM, Album currentAlbum, AlbumViewModel albumViewModel)

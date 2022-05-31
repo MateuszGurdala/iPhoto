@@ -20,7 +20,7 @@ namespace iPhoto.ViewModels.AlbumsPage
         public ObservableCollection<string> PlacesList { get; }
         public AddPhotoToAlbumPopupViewModel(Album currentAlbum, AlbumContentViewModel albumVm)
         {
-            PlacesList = albumVm.DatabaseHandler.GetPlacesList();
+            PlacesList = albumVm.DatabaseHandler.GetPlacesList(false);
             DiscardCommand = new DiscardCommand();
             CommitWithGivenAlbumCommand = new CommitWithGivenAlbumCommand(albumVm);
             CurrentAlbum = currentAlbum;
