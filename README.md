@@ -1,10 +1,20 @@
-# PAP21L-Z01
+# IPhotos
 
-## Aplikacja desktopowa
+# Table of contents
 
-### Uruchomienie
 
-Do działania aplikacji wymagane są następujące Nuget Packages:
+- [Requirements](#requirements)
+- [Project description](#project-description)
+- [Possible future improvements](#possible-future-improvements)
+- [Screenshots](#screenshots)
+- [License](#license)
+
+
+## Requirements
+
+[(Back to top)](#table-of-contents)
+
+Application uses and requires following Nuget packages:
 - Microsoft.EntityFrameworkCore 6.0.4
 - Microsoft.EntityFrameworkCore.Sqlite 6.0.4
 - Microsoft.EntityFrameworkCore.Tools 6.0.4
@@ -13,10 +23,25 @@ Do działania aplikacji wymagane są następujące Nuget Packages:
 - GMap.NET.WinPresentation
 - Google.Apis.Drive.v3
 
-Aplikacje można włączyć za pomomocą pliku .exe znajdującego się pod podaną ścieżką repozytorium:
+Aplication can be run using .exe file provided in repo under this path:
 iPhoto\bin\Debug\net6.0-windows\iPhoto.exe
 
-### Podstawowe Funkcjonalności Aplikacji desktopowej
+## Project description
+
+[(Back to top)](#table-of-contents)
+
+iPhotos is an group project which main purspose is to simplify management of photos. The project consist of two subprojects:
+Desktop application in .NET using WPF Framework, with use of SQLite as offline database and 
+web application written in Python framework - Django. Web application can be found [here](https://github.com/kraszor/Iphotos).
+
+Authors of desktop application:
+
+[Krystian Grela](https://github.com/GreysonKrystian/),
+[Mateusz Gurdała](https://github.com/MateuszGurdala/)
+
+Author of web application:
+
+[Igor Kraszewski](https://github.com/kraszor/)
 
 Program dzieli się na podstrony oznaczone odpowiednimi ikonami:
 
@@ -46,7 +71,54 @@ Program dzieli się na podstrony oznaczone odpowiednimi ikonami:
 - Profil - Zawiera informacje o części online naszej aplikacji. Posiada informacje o albumach stworzonych
         online dla grup użytkowników. Umożliwia też przeniesienie na stronę rejestracji w webowej części
         aplikacji.
+        
+## Possible future improvements
   
+[(Back to top)](#table-of-contents)
+
+- Add automated tests - project does not contain any automated tests, therefore there still could be some bugs
+- test desktop application with attention to performance
+- expand functionalities - 
+- create now web application - there are plans to rewrite django application in ASP.NET MVC.
+
+
+## Screenshots
+
+[(Back to top)](#table-of-contents)
+
+[(Back to top)](#table-of-contents)
+
+<strong></strong>:
+<br>
+<p align="center" width="100%">
+<img alt="Screenshot from menu" src="https://raw.github.com/GreysonKrystian/Minesweeper/master/Example%20Photos/Menu_1.png" width=800 height= auto>
+<br>
+<br>
+<img alt="Screenshot from menu" src="https://raw.github.com/GreysonKrystian/Minesweeper/master/Example%20Photos/Menu_2.png" width=800 height= auto>
+</p>
+
+<strong></strong>:
+<br>
+<p align="center" width="100%">
+<img alt="Screenshot of gameplay" src="https://raw.github.com/GreysonKrystian/Minesweeper/master/Example%20Photos/Gameplay_1.png" width=800 height= auto>
+ <br>
+ <br>
+<img alt="Screenshot of gameplay" src="https://raw.github.com/GreysonKrystian/Minesweeper/master/Example%20Photos/Gameplay_Won.png" width=800 height= auto> 
+<br>
+<br>
+<img alt="Screenshot of gameplay" src="https://raw.github.com/GreysonKrystian/Minesweeper/master/Example%20Photos/Game_Ended.png" width=800 height= auto>
+<br>
+<br>
+</p>
+
+## License
+
+[(Back to top)](#table-of-contents)
+
+
+The MIT License (MIT) 2022 - [Krystian Grela](https://github.com/GreysonKrystian/), [Mateusz Gurdała](https://github.com/MateuszGurdala/), [Igor Kraszewski](https://github.com/kraszor/) . Please have a look at the [LICENSE.md](LICENSE.md) for more details.
+
+
 
 
 
