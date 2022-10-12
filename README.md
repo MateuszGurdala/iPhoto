@@ -80,30 +80,30 @@ Project contains a few main tabs with functionalities:
 
 [(Back to top)](#table-of-contents)
 
-#### Below are some screenshot from final version of desktop application. In project files you can also find some screenshot from prototipe version of appliaction, prototipe of web application and validations.  
+#### Below are some screenshot from final version of desktop application. In screenshots folder you can also find more images from prototipe version of application, web application prototipe and validations.  
 
 <strong>TABS</strong>:
 <br>
 <p align="center" width="100%">
-<img alt="Screenshot of logo" src="https://raw.github.com/GreysonKrystian/iPhoto/master/iphotos_logo.png" width=1000 height= auto>
+<img alt="Screenshot of logo" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_logo.png" width=1000 height= auto>
 <br>
 <br>
-<img alt="Screenshot of albums" src="https://raw.github.com/GreysonKrystian/iPhoto/master/iphotos_albumy.png" width=1000 height= auto>
+<img alt="Screenshot of albums" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_albumy.png" width=1000 height= auto>
 <br>
 <br>
-<img alt="Screenshot of account" src="https://raw.github.com/GreysonKrystian/iPhoto/master/iphotos_konto.png" width=1000 height= auto>
+<img alt="Screenshot of account" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_konto.png" width=1000 height= auto>
 <br>
 <br>
-<img alt="Screenshot of places" src="https://raw.github.com/GreysonKrystian/iPhoto/master/iphotos_miejsca.png" width=1000 height= auto>
+<img alt="Screenshot of places" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_miejsca.png" width=1000 height= auto>
 <br>
 <br>
-<img alt="Screenshot of all photos" src="https://raw.github.com/GreysonKrystian/iPhoto/master/iphotos_zdjecie.png" width=1000 height= auto>
+<img alt="Screenshot of all photos" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_zdjecie.png" width=1000 height= auto>
 </p>
 
 <strong>LOCAL DATABASE</strong>:
 <br>
 <p align="center" width="100%">
-<img alt="Screenshot of db diagram" src="https://raw.github.com/GreysonKrystian/iPhoto/master/Diagram_.png" width=800 height= auto>
+<img alt="Screenshot of db diagram" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/Diagram_.png" width=800 height= auto>
  <br>
  <br>
 </p>
