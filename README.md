@@ -1,10 +1,20 @@
-# PAP21L-Z01
+# IPhotos
 
-## Aplikacja desktopowa
+# Table of contents
 
-### Uruchomienie
 
-Do działania aplikacji wymagane są następujące Nuget Packages:
+- [Requirements](#requirements)
+- [Project description](#project-description)
+- [Possible future improvements](#possible-future-improvements)
+- [Screenshots](#screenshots)
+- [License](#license)
+
+
+## Requirements
+
+[(Back to top)](#table-of-contents)
+
+Application uses and requires following Nuget packages:
 - Microsoft.EntityFrameworkCore 6.0.4
 - Microsoft.EntityFrameworkCore.Sqlite 6.0.4
 - Microsoft.EntityFrameworkCore.Tools 6.0.4
@@ -13,40 +23,99 @@ Do działania aplikacji wymagane są następujące Nuget Packages:
 - GMap.NET.WinPresentation
 - Google.Apis.Drive.v3
 
-Aplikacje można włączyć za pomomocą pliku .exe znajdującego się pod podaną ścieżką repozytorium:
+Aplication can be run using .exe file provided in repo under this path:
 iPhoto\bin\Debug\net6.0-windows\iPhoto.exe
 
-### Podstawowe Funkcjonalności Aplikacji desktopowej
+## Project description
 
-Program dzieli się na podstrony oznaczone odpowiednimi ikonami:
+[(Back to top)](#table-of-contents)
 
-- Strona startowa - strona zawierająca ...
+iPhotos is an group project which main purspose is to simplify management of photos. The project consist of two subprojects:
+Desktop application in .NET using WPF Framework, with use of SQLite as offline database and 
+web application written in Python framework - Django. Web application can be found [here](https://github.com/kraszor/Iphotos).
 
-- Albumy - strona zawierająca listę albumów, użytkownik może dodawać albumy z wybraną przez
-        siebie nazwą i kolorem. Albumy można edytować i usuwać po utworzeniu. Album wyświetla
-        informacje o ilości zdjęć, rozmiarze i hashtagach jakie posiadają zdjęcia wewnątrz albumu.
-        Zawartość albumu posiada taką samą funkcjonalność jak wyszukiwarka zdjęć opisania poniżej
-        z tą różnicą że wyszukiwanie występuje w obrębie albumu.
+Authors of desktop application:
 
-- Wyszukiwarka zdjęć - główny element naszej aplikacji desktopowej. Odpowiada za CRUD zdjęć.
-        Do dodania zdjęć do lokalnej bazy danych służy przycisk kartki z plusem
-        znajdująca się w prawym górnym rogu ekranu. W celu wypisania wszystkich zdjęć
-        należy w polu *Title wpisać %ALL i nacisnąć przyicsk lupy powyżej.
-        Powiekszyć zdjęcie można poprzez podwójne naciśnięcie na zdjęcie.
-        Po kliknięciu przycisku listy w prawym górnym rogu i wybraniu zdjęcia jest możliwość
-        sprawdzenia szczegółów zdjęcia. Kliknięcie prawym przyciskiem na zdjęcie umożliwia
-        zmianę szczegółów zdjęcia lub jego usunięcie. Z prawej strony można rozwinąć panel odpowiedzialny
-        za informowanie użytkownika o szczegółach zdjęcia.
+[Krystian Grela](https://github.com/GreysonKrystian/),
+[Mateusz Gurdała](https://github.com/MateuszGurdala/)
 
-- Miejsca - zawiera mapę na której można tworzyć miejsca w których zostały utworzone miejsca. Każde miejsce
-        posiada informacje o ilości zdjęć tam wykonanych. Zmianę widoku z dodawania miejsc do listy miejsc
-        można wykonać za pomocą przycisku strzałki w górnej części aplikacji.
+Author of web application:
 
+[Igor Kraszewski](https://github.com/kraszor/)
 
-- Profil - Zawiera informacje o części online naszej aplikacji. Posiada informacje o albumach stworzonych
-        online dla grup użytkowników. Umożliwia też przeniesienie na stronę rejestracji w webowej części
-        aplikacji.
+Project contains a few main tabs with functionalities: 
+
+- Albums - page containing a list of albums. User is able to add albums with custom name and color.
+           Albums can be then edited or deleted. Album can display info such as: total size, amount of photos,
+           and hashtags of photos inside the album.
+
+- Photo browser - there user can search for any photo he added in application. Browser can also be accessed inside certain album.
+        By pushing button with plus icon in top right corner user can choose and add photo.
+        Before adding photo user can change its details. To display all photos from all albums type
+        %ALL in *Title form. By double clicking on photo user can desplay it in full scale.
+        With right clicking on photo user is able to edit or delete it. On the right user can 
+        expand panel which inform about photo details.
+        
+- Places - contatins map where user can create places where user took pictures. Every created place
+           contains information about how many photos were took there. User can switch to list of places
+           by using arrow button.
+
+- Profile - contains information about online functionalities of application. User can display 
+            online albums created and shared among group of users. Users can create online albums and register
+            only using website.
+
+        
+## Possible future improvements
   
+[(Back to top)](#table-of-contents)
+
+- Add automated tests - project does not contain any automated tests, therefore there still could be some bugs
+- test desktop application with attention to performance
+- expand functionalities - one of functionalities which was in plans, but was not included in final release are
+                favourite albums and photos.
+- create now web application - there are plans to rewrite django application in ASP.NET MVC.
+
+
+## Screenshots
+
+[(Back to top)](#table-of-contents)
+
+#### Below are some screenshot from final version of desktop application. In screenshots folder you can also find more images from prototipe version of application, web application prototipe and validations.  
+
+<strong>TABS</strong>:
+<br>
+<p align="center" width="100%">
+<img alt="Screenshot of logo" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_logo.png" width=1000 height= auto>
+<br>
+<br>
+<img alt="Screenshot of albums" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_albumy.png" width=1000 height= auto>
+<br>
+<br>
+<img alt="Screenshot of account" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_konto.png" width=1000 height= auto>
+<br>
+<br>
+<img alt="Screenshot of places" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_miejsca.png" width=1000 height= auto>
+<br>
+<br>
+<img alt="Screenshot of all photos" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/iphotos_zdjecie.png" width=1000 height= auto>
+</p>
+
+<strong>LOCAL DATABASE</strong>:
+<br>
+<p align="center" width="100%">
+<img alt="Screenshot of db diagram" src="https://raw.github.com/GreysonKrystian/iPhoto/master/screenshots/Diagram_.png" width=800 height= auto>
+ <br>
+ <br>
+</p>
+
+## License
+
+[(Back to top)](#table-of-contents)
+
+
+The MIT License (MIT) 2022 - [Krystian Grela](https://github.com/GreysonKrystian/), [Mateusz Gurdała](https://github.com/MateuszGurdala/), [Igor Kraszewski](https://github.com/kraszor/) . Please have a look at the [LICENSE.md](LICENSE.md) for more details.
+
+
 
 
 
